@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Clash Display Light";
+  src: url(./../assets/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Light.woff);
+}
+
+@font-face {
+  font-family: "Clash Display Semibold";
+  src: url(./../assets/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Semibold.ttf);
+}
+
+@font-face {
+  font-family: "Satoshi Light";
+  src: url(./../assets/Satoshi/Fonts/WEB/fonts/Satoshi-Light.woff);
+}
+
+@font-face {
+  font-family: "Satoshi Bold";
+  src: url(./../assets/Satoshi/Fonts/WEB/fonts/Satoshi-Bold.woff2);
+}
+
+
+@font-face {
+  font-family: "Satoshi Regular";
+  src: url(./../assets/Satoshi/Fonts/WEB/fonts/Satoshi-Regular.woff);
+}
+
+@font-face {
+  font-family: "Satoshi Black";
+  src: url(./../assets/Satoshi/Fonts/WEB/fonts/Satoshi-Black.ttf);
+}
+@font-face {
+  font-family: 'Clash Display ExtraLight';
+  src: url(./../assets/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Extralight.woff);
+}
+
+@font-face {
+  font-family: 'Clash Display SemiBold';
+  src: url(./../assets/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Semibold.woff);
+}

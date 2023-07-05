@@ -1,0 +1,46 @@
+.signinContainer {
+    display: flex;
+    height: 100vh;
+}
+
+.signinLeftWrapper {
+    width: 50%;
+    padding: 150px;
+}
+
+.signinRightWrapper {
+    width: 50%;
+}
+
+.forgotPasswordText {
+    font-size: 14px;
+    line-height: 16px;
+    font-family: 'Satoshi Regular';
+    margin-bottom: 12px;
+    color:  #101828;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 50px;
+}
+.createText {
+    font-size: 16px;
+    line-height: 16px;
+    font-family: 'Satoshi Regular';
+    color: #101828;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.createAccount{
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signinRightWrapper {
+    background-image: url("../../assets/images/AuthImage.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

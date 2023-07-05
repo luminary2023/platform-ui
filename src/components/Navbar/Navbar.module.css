@@ -1,0 +1,24 @@
+.NavbarContainer {
+  width: 100%;
+  position: sticky;
+  top: 0px;
+  height: 70px;
+  border: 1px solid white;
+  border-radius: 36px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  color: #ffff;
+  background-color: #081630;
+}
+.Links {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Satoshi";
+}
+
+.Content {
+  text-align: center;
+}
