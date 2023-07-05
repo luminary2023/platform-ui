@@ -6,7 +6,7 @@ import { Props } from "../../services/interfaces";
 const SidebarContainer: FC<PropsWithChildren<Props>> = ({
   children,
   title,
-  subtitle,
+  subtitle='',
 }) => {
   return (
     <Box

@@ -17,7 +17,7 @@ interface Props {
   subtitle: string;
 }
 
-const Header: FC<Props> = ({ title, subtitle }) => {
+const Header: FC<Props> = ({ title, subtitle='' }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
