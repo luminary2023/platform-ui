@@ -15,6 +15,8 @@ const Input: React.FC<InputProps> = ({
     setVisible(!visible);
   };
 
+  console.log('here')
+
   return (
     <div>
       <p className={styles.label}>{label}</p>
