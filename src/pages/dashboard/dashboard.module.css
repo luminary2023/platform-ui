@@ -1,0 +1,291 @@
+.profile {
+  padding: 16px 16px 16px 16px;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.profile h1 {
+  color: #000;
+  font-family: "Satoshi Bold";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.64px;
+  margin-bottom: 10px;
+}
+.profile p {
+  color: #667085;
+  font-family: "Satoshi Light";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.profileSecurity {
+  padding: 16px 16px 16px 16px;
+  background-color: #fff;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+  align-items: center;
+  margin-bottom: 24px;
+}
+.profileSecurity h3 {
+  color: #000;
+  font-family: "Satoshi Bold";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 24px;
+  cursor: pointer;
+}
+.profileSecurity p {
+  color: #667085;
+  font-family: "Satoshi Light";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.dashboardSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.dashboardTransactionAnalysis {
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+  height: 100%;
+}
+.dashboardAnalysis {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 17px;
+}
+.portfolioBalance {
+  padding: 16px;
+  width: 48%;
+  border-radius: 8px;
+  background: #fff;
+}
+.transactionDone {
+  padding: 16px;
+  width: 48%;
+  border-radius: 8px;
+  background: #fff;
+}
+.portfolioBg {
+  width: 100%;
+  background: #ecfce5;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 13px;
+}
+
+.portfolioBg h2 {
+  color: #333;
+  font-family: "Clash Display Semibold";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.portfolioBg p {
+  color: #000;
+  font-family: "Satoshi Bold";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.75px;
+  margin-bottom: 16px;
+}
+.transactionBg {
+  width: 100%;
+  background: #ffefd7;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 13px;
+}
+.transactionBg h2 {
+  color: #333;
+  font-family: "Clash Display Semibold";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.transactionBg p {
+  color: #000;
+  font-family: "Satoshi Bold";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.75px;
+  margin-bottom: 16px;
+}
+.totalBalance {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.dashboardQuickBuy {
+  width: 100%;
+  background: #fff;
+  padding: 24px 24px 24px 24px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+.totalBalance select {
+  border: none;
+  outline: none;
+  color: #404446;
+  font-family: "Satoshi Bold";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.75px;
+}
+.seeAll {
+  display: flex;
+  padding: 4px 8px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: rgba(228, 240, 101, 0.2);
+  font-family: "Satoshi Bold";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.75px;
+  color: #090a0a;
+}
+.transactionAnaly {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.transactionAnaly h1 {
+  color: #000;
+  font-family: "Clash Display SemiBold";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.75px;
+}
+.transactionAnaly select {
+  border: none;
+  outline: none;
+  color: #6c757d;
+  font-family: "Satoshi Bold";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.75px;
+}
+.analysis {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.crytoList {
+  width: 45%;
+  /* padding: 0px 0px 24px 24px; */
+}
+.crytoAnalysis {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+.crytoAnalysis h4 {
+  color: #000;
+  font-family: "Satoshi Bold";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.75px;
+}
+.crytoAnalysis h5 {
+  color: #6c757d;
+  font-family: "Satoshi Light";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.75px;
+}
+.cryptoCircleList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.circleBlue {
+  background: #4880ff;
+  width: 13px;
+  height: 13px;
+  border-radius: 10px;
+  margin-right: 11px;
+}
+.circleYellow {
+  background: #ffc400;
+  width: 13px;
+  height: 13px;
+  border-radius: 10px;
+  margin-right: 11px;
+}
+.circleRed {
+  background: #fc555f;
+  width: 13px;
+  height: 13px;
+  border-radius: 10px;
+  margin-right: 11px;
+}
+.quickBuy {
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+  height: 100%;
+}
+.dashboardQuickBuy h3 {
+  color: #000;
+  font-family: "Clash Display SemiBold";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  margin-bottom: 17px;
+}
+.dashboardQuickBuy p {
+  color: #081630;
+  font-family: "Satoshi Regular";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: 0.16px;
+}

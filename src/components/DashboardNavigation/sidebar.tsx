@@ -25,6 +25,7 @@ const Sidebar = () => {
         height: "100vh",
         background: "#081630",
         padding: "53px",
+        // position: "fixed",
       }}
     >
       <Typography

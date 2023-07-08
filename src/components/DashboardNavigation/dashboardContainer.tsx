@@ -6,7 +6,7 @@ import { Props } from "../../services/interfaces";
 const SidebarContainer: FC<PropsWithChildren<Props>> = ({
   children,
   title,
-  subtitle='',
+  subtitle = "",
 }) => {
   return (
     <Box
@@ -28,7 +28,6 @@ const SidebarContainer: FC<PropsWithChildren<Props>> = ({
             flexDirection: "column",
             background: "#F6F6F6",
             width: "100%",
-
             padding: "38px 36px 36px 38px",
           }}
         >
