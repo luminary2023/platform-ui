@@ -9,7 +9,7 @@ import { Button } from "@mui/material";
 import BankDetailsModal from "./bankDetailsModal";
 import Dashboard from "./dashboard";
 
-const index = () => {
+const Index = () => {
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -81,4 +81,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
