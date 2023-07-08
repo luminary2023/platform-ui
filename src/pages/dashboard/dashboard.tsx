@@ -8,9 +8,6 @@ import Bitcoins from "../../assets/images/Bitcoins.svg";
 import Analysis from "../../assets/images/Analysis.svg";
 
 const Dashboard = () => {
-  const [value, setValue] = React.useState(0);
-
-  const [crypto, setCrypto] = useState("Bit");
   const [currency, setCurrency] = useState("Usd");
 
   const handleCurrency = (e: any) => {
@@ -57,7 +54,6 @@ const Dashboard = () => {
           </div>
           <div className={styles.analysis}>
             <Image src={Analysis} alt="analysis" />
-            {/* <div className={styles.transactionCards}> */}
             <div className={styles.crytoList}>
               <div className={styles.crytoAnalysis}>
                 <div className={styles.cryptoCircleList}>
@@ -81,7 +77,6 @@ const Dashboard = () => {
                 <h5>15%</h5>
               </div>
             </div>
-            {/* </div> */}
           </div>
         </div>
       </div>

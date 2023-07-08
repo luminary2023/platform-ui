@@ -76,11 +76,7 @@ const index = () => {
       ) : (
         <Dashboard />
       )}
-      <BankDetailsModal
-        open={open}
-        onClose={() => setOpen(false)}
-        // handleClose={false}
-      />
+      <BankDetailsModal open={open} onClose={() => setOpen(false)} />
     </DashboardContainer>
   );
 };

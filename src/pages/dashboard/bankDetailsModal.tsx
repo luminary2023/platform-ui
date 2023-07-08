@@ -43,10 +43,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
     const {
       target: { value },
     } = event;
-    setBank(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    setBank(typeof value === "string" ? value.split(",") : value);
   };
   return (
     <Modal
