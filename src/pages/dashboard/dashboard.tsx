@@ -170,49 +170,41 @@ const Dashboard = () => {
           </Button>
         </div>
         <div className={styles.dashboardQuickBuy}>
-          <marquee>
-            <div className={styles.crytoRate}>
-              <div className={styles.cryptoBTC}>
-                <div className={styles.cryptoName}>
-                  <p>BTC</p>
-                  <Image
-                    src={ICN}
-                    alt="icn"
-                    style={{ marginRight: "14.3px" }}
-                  />
-                  <p>USD</p>
-                  <p>5.23%</p>
-                  <Image
-                    src={Line}
-                    alt="line"
-                    style={{ marginRight: "14.3px" }}
-                  />
+          {/* <marquee> */}
+          <div className={styles.crytoRate}>
+            <div className={styles.cryptoBTC}>
+              <div className={styles.cryptoName}>
+                <p>BTC</p>
+                <Image src={ICN} alt="icn" style={{ marginRight: "14.3px" }} />
+                <p>USD</p>
+                <p>5.23%</p>
+                <Image
+                  src={Line}
+                  alt="line"
+                  style={{ marginRight: "14.3px" }}
+                />
 
-                  <p>ETH</p>
-                  <Image
-                    src={ICN}
-                    alt="icn"
-                    style={{ marginRight: "14.3px" }}
-                  />
-                  <p>USD</p>
-                  <p>5.23%</p>
-                  <Image
-                    src={Line}
-                    alt="line"
-                    style={{ marginRight: "14.3px" }}
-                  />
-                  <p>BTC</p>
-                  <p>USD</p>
-                  <p>5.23%</p>
-                </div>
+                <p>ETH</p>
+                <Image src={ICN} alt="icn" style={{ marginRight: "14.3px" }} />
+                <p>USD</p>
+                <p>5.23%</p>
+                <Image
+                  src={Line}
+                  alt="line"
+                  style={{ marginRight: "14.3px" }}
+                />
+                <p>BTC</p>
+                <p>USD</p>
+                <p>5.23%</p>
               </div>
             </div>
-            <div className={styles.cryptoName}>
-              <h3>7.356,67</h3>
-              <h3>7.356,67</h3>
-              <h3>7.356,67</h3>
-            </div>
-          </marquee>
+          </div>
+          <div className={styles.cryptoName}>
+            <h3>7.356,67</h3>
+            <h3>7.356,67</h3>
+            <h3>7.356,67</h3>
+          </div>
+          {/* </marquee> */}
         </div>
       </div>
     </div>
