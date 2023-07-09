@@ -29,7 +29,7 @@
 .profileSecurity {
   padding: 16px 16px 16px 16px;
   background-color: #fff;
-  width: 50%;
+  width: 65%;
   display: flex;
   flex-direction: row;
   /* justify-content: space-evenly; */
@@ -73,14 +73,14 @@
   margin-bottom: 17px;
 }
 .portfolioBalance {
-  padding: 16px;
-  width: 48%;
+  padding: 10px;
+  width: 49%;
   border-radius: 8px;
   background: #fff;
 }
 .transactionDone {
-  padding: 16px;
-  width: 48%;
+  padding: 10px;
+  width: 49%;
   border-radius: 8px;
   background: #fff;
 }
@@ -105,12 +105,12 @@
 .portfolioBg p {
   color: #000;
   font-family: "Satoshi Bold";
-  font-size: 16px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
   letter-spacing: 0.75px;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 .transactionBg {
   width: 100%;
@@ -132,17 +132,26 @@
 .transactionBg p {
   color: #000;
   font-family: "Satoshi Bold";
-  font-size: 16px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
   letter-spacing: 0.75px;
-  margin-bottom: 16px;
 }
 .totalBalance {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.percentage {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  margin-top: 16px;
+}
+.percentage p {
+  color: #219653;
+  margin-left: 4px;
 }
 .dashboardQuickBuy {
   width: 100%;
@@ -288,4 +297,33 @@
   font-weight: 500;
   line-height: 140%;
   letter-spacing: 0.16px;
+}
+.crytoRate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.crytoRate p {
+  color: #4c4c66;
+  text-align: right;
+  font-family: "Satoshi Bold";
+  font-size: 11.761px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding-right: 14.3px;
+}
+.cryptoName {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+.cryptoName h3 {
+  color: var(--dark-1, #4c4c66);
+  font-family: "Satoshi Bold";
+  font-size: 16.661px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

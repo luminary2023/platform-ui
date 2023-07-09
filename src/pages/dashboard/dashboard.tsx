@@ -6,6 +6,9 @@ import { Button } from "../../components/Button/Button";
 import Image from "next/image";
 import Bitcoins from "../../assets/images/Bitcoins.svg";
 import Analysis from "../../assets/images/Analysis.svg";
+import TreadingUp from "../../assets/images/trendingUp.svg";
+import ICN from "../../assets/images/Icn.svg";
+import Line from "../../assets/images/BarLine.svg";
 
 const Dashboard = () => {
   const [currency, setCurrency] = useState("Usd");
@@ -21,26 +24,52 @@ const Dashboard = () => {
             <div className={styles.portfolioBg}>
               <h2>$107,216</h2>
               <p>Total Portfolio Balance</p>
-              <p>16.5%</p>
+              <div className={styles.percentage}>
+                <Image src={TreadingUp} alt="percent" />
+
+                <p>16.5%</p>
+              </div>
             </div>
             <div className={styles.totalBalance}>
               <select>
                 <option className={styles.option}>Today</option>
               </select>
-              <div className={styles.seeAll}>See All</div>
+              <div className={styles.seeAll}>
+                See All{" "}
+                <EastIcon
+                  style={{
+                    color: "#000",
+                    width: "16px",
+                    height: "16px",
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className={styles.transactionDone}>
             <div className={styles.transactionBg}>
               <h2>$107,216</h2>
-              <p>Total Portfolio Balance</p>
-              <p>16.5%</p>
+              <p>Total Transaction Done</p>
+              <div className={styles.percentage}>
+                <Image src={TreadingUp} alt="percent" />
+
+                <p>16.5%</p>
+              </div>
             </div>
             <div className={styles.totalBalance}>
               <select>
                 <option className={styles.option}>Today</option>
               </select>
-              <div className={styles.seeAll}>See All</div>
+              <div className={styles.seeAll}>
+                See All{" "}
+                <EastIcon
+                  style={{
+                    color: "#000",
+                    width: "16px",
+                    height: "16px",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -137,10 +166,54 @@ const Dashboard = () => {
               marginTop: "14px",
             }}
           >
-            Buy <EastIcon style={{ marginLeft: 9, color: "#848484" }} />
+            Buy <EastIcon style={{ marginLeft: 9, color: "#fff" }} />
           </Button>
         </div>
-        <div className={styles.dashboardQuickBuy}>3487</div>
+        <div className={styles.dashboardQuickBuy}>
+          <marquee>
+            <div className={styles.crytoRate}>
+              <div className={styles.cryptoBTC}>
+                <div className={styles.cryptoName}>
+                  <p>BTC</p>
+                  <Image
+                    src={ICN}
+                    alt="icn"
+                    style={{ marginRight: "14.3px" }}
+                  />
+                  <p>USD</p>
+                  <p>5.23%</p>
+                  <Image
+                    src={Line}
+                    alt="line"
+                    style={{ marginRight: "14.3px" }}
+                  />
+
+                  <p>ETH</p>
+                  <Image
+                    src={ICN}
+                    alt="icn"
+                    style={{ marginRight: "14.3px" }}
+                  />
+                  <p>USD</p>
+                  <p>5.23%</p>
+                  <Image
+                    src={Line}
+                    alt="line"
+                    style={{ marginRight: "14.3px" }}
+                  />
+                  <p>BTC</p>
+                  <p>USD</p>
+                  <p>5.23%</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.cryptoName}>
+              <h3>7.356,67</h3>
+              <h3>7.356,67</h3>
+              <h3>7.356,67</h3>
+            </div>
+          </marquee>
+        </div>
       </div>
     </div>
   );

@@ -66,7 +66,7 @@ const Index = () => {
             variant="contained"
             sx={{
               textTransform: "initial",
-              width: "10%",
+              width: "12%",
             }}
             onClick={() => setProfile(false)}
           >
