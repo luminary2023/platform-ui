@@ -7,14 +7,17 @@ import {
   Typography,
   Modal,
   SelectChangeEvent,
+  TextField,
 } from "@mui/material";
+import Input from "@/components/InputField";
+import { Button } from "@/components/Button/Button";
 
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 450,
   bgcolor: " #fff",
   border: "none",
   borderRadius: "24px",
@@ -88,42 +91,79 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             fontStyle: "normal",
             fontWeight: 400,
             lineHeight: "20px",
+            marginBottom: "8px",
           }}
         >
           Bank name
         </Typography>
-        <FormControl sx={{ m: 1, width: 300 }}>
-          <Select
-            displayEmpty
-            value={bank}
-            onChange={handleChange}
-            renderValue={(selected) => {
-              if (selected.length === 0) {
-                return <em>Chose a bank</em>;
-              }
-
-              return selected.join(", ");
-            }}
-          >
-            {banks.map((bank, index) => (
-              <MenuItem key={index} value={bank}>
-                {bank}
-              </MenuItem>
-            ))}
-          </Select>
-          <Typography
+        <Select
+          value={bank}
+          onChange={handleChange}
+          placeholder="Choose a bank"
+          sx={{ height: "40px", width: "100%", marginBottom: "24px" }}
+        >
+          {banks.map((bank, index) => (
+            <MenuItem key={index} value={bank}>
+              {bank}
+            </MenuItem>
+          ))}
+        </Select>
+        <Typography
+          sx={{
+            color: "#344054",
+            fontFamily: "Satoshi Light",
+            fontSize: "14px",
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "20px",
+            marginBottom: "8px",
+          }}
+        >
+          Bank account number
+        </Typography>
+        <Input type="number" placeholder={"Account number"} />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: "40px",
+          }}
+        >
+          <Button
+            color="secondary"
+            variant={"contained"}
+            onClick={onClose}
             sx={{
-              color: "#344054",
-              fontFamily: "Satoshi Light",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "20px",
+              textTransform: "initial",
+              color: "#000",
+              fontFamily: " Satoshi Light",
+              fontSize: "13px",
+              borderRadius: "29px",
+              border: "1px solid  #000",
+              width: "155px",
+              height: "38px",
             }}
           >
-            Bank name
-          </Typography>
-        </FormControl>
+            Cancle
+          </Button>
+          <Button
+            color="primary"
+            variant={"contained"}
+            sx={{
+              textTransform: "initial",
+              color: "#fff",
+              fontFamily: " Satoshi Light",
+              fontSize: "13px",
+              borderRadius: "29px",
+              width: "160px",
+              height: "38px",
+              background: "#505050",
+            }}
+          >
+            Save account details
+          </Button>
+        </Box>
       </Box>
     </Modal>
   );

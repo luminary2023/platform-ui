@@ -7,8 +7,8 @@ interface ButtonProps {
   onClick?: () => {};
   variant?: any | undefined;
   width?: string;
-  size: string;
-  fullWidth: boolean;
+  size?: string;
+  fullWidth?: boolean;
   //   children: ReactNode;
 }
 

@@ -2,10 +2,10 @@ import DashboardContainer from "@/components/DashboardNavigation/dashboardContai
 import styles from "./dashboard.module.css";
 import Security from "../../assets/images/security.svg";
 import KYC from "../../assets/images/KYC.svg";
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import Bank from "../../assets/images/banks.svg";
 import Image from "next/image";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import BankDetailsModal from "./bankDetailsModal";
 import Dashboard from "./dashboard";
 
@@ -28,7 +28,6 @@ const Index = () => {
                 cryto without limits.
               </p>
             </div>
-            <div>loading</div>
           </div>
 
           <div className={styles.profileSecurity}>
