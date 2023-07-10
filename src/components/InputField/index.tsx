@@ -10,6 +10,8 @@ const Input: React.FC<InputProps> = ({
   label,
   marginBottom,
   bgColor,
+  labelColor,
+  labelSize,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const handleTogglePassword = () => {
@@ -18,7 +20,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div>
-      <p className={styles.label}>{label}</p>
+      <p className={styles.label} style={{color: labelColor, fontSize: labelSize}}>{label}</p>
       <div style={{ position: "relative" }}>
         <input
           type={visible ? 'text' : type}

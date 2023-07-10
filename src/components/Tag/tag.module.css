@@ -1,0 +1,24 @@
+.TagContainer {
+    border-radius: 23px;
+    background: rgba(40, 167, 69, 0.10);
+    height: 25px;
+    padding: 10px;
+    color: #28A745;
+    font-size: 12px;
+    font-family: 'Satoshi Regular';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.MoreDetailsContainer {
+    border-radius: 8px;
+    background: rgba(228, 240, 101, 0.20);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 4px 8px;
+}

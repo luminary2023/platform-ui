@@ -5,7 +5,7 @@ import React from "react";
 import { Button } from "@/components/Button/Button";
 import Input from "@/components/InputField";
 import { Select, SelectChangeEvent, MenuItem } from "@mui/material";
-import { bankData } from "../../services/data";
+import { bankData, quickActionsData } from "../../services/data";
 import EastIcon from "@mui/icons-material/East";
 import AppTable from "@/components/Table";
 
@@ -20,13 +20,14 @@ const Wallet = () => {
   };
 
   const tableHeaderData = [
-    'Date',
-    'Beneficiary',
-    'Bank',
-    'Country',
-    'Amount',
-    'Status'
-  ]
+    "Date",
+    "Beneficiary",
+    "Bank",
+    "Country",
+    "Amount",
+    "Status",
+    "",
+  ];
 
   return (
     <div style={{ background: "#F6F6F6" }}>
@@ -60,16 +61,30 @@ const Wallet = () => {
             </div>
             <div className={styles.transactionsContainer}>
               <h2 className={styles.transactionsTitle}>Quick Actions</h2>
-              <p className={styles.transactionsSubtitle}>Use the quick action to perform basic transactions. You can buy data and pay bills</p>
+              <p className={styles.transactionsSubtitle}>
+                Use the quick action to perform basic transactions. You can buy
+                data and pay bills
+              </p>
+              <div className={styles.quickActionsWrapper}>
+                {quickActionsData.map((item) => (
+                  <div key={item.id}>
+                    <div className={styles.quickActionsContainer} style={{background: item.background}}>
+                      <p>Coming soon...</p>
+                    </div>
+                    <p className={styles.quickActionsText}>{item.text}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className={styles.withdrawContainer}>
-            <h3>Withdraw Funds</h3>
+            <h3 className={styles.tableTitle}>Withdraw Funds</h3>
+            <p className={styles.inputLabel}>Select Bank</p>
             <Select
               value={bank}
               onChange={handleChange}
               placeholder="Choose a bank"
-              sx={{ height: "40px", width: "100%", marginBottom: "24px" }}
+              sx={{ height: "40px", width: "100%", marginBottom: "13px" }}
             >
               {bankData.map((bank, index) => (
                 <MenuItem key={index} value={bank}>
@@ -83,6 +98,8 @@ const Wallet = () => {
               label="Account Number"
               // bgColor={"#FAFCE0"}
               marginBottom={"8px"}
+              labelColor={"#081630"}
+              labelSize={"16px"}
             />
             <Input
               placeholder={"0123456789"}
@@ -90,6 +107,8 @@ const Wallet = () => {
               label="Amount"
               bgColor={"#F5F5F5"}
               marginBottom={"8px"}
+              labelColor={"#081630"}
+              labelSize={"16px"}
             />
             <Button
               color="primary"
@@ -106,7 +125,7 @@ const Wallet = () => {
             </Button>
           </div>
         </div>
-        <div>
+        <div className={styles.tableContainer }>
           <h1 className={styles.tableTitle}>History</h1>
           <AppTable tableHeaderData={tableHeaderData} />
         </div>
