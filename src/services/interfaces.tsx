@@ -14,6 +14,9 @@ export interface InputProps {
   type: string;
   label?: string;
   marginBottom?: string;
+  bgColor?: string;
+  labelColor?: string
+  labelSize?: string
 }
 
 export interface EmailVerifiedProps {
