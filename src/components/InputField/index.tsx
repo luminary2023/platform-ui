@@ -20,10 +20,15 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div>
-      <p className={styles.label} style={{color: labelColor, fontSize: labelSize}}>{label}</p>
+      <p
+        className={styles.label}
+        style={{ color: labelColor, fontSize: labelSize }}
+      >
+        {label}
+      </p>
       <div style={{ position: "relative" }}>
         <input
-          type={visible ? 'text' : type}
+          type={visible ? "text" : type}
           placeholder={placeholder}
           required
           className={styles.inputForm}
@@ -37,11 +42,7 @@ const Input: React.FC<InputProps> = ({
             className={styles.InputIconWrapper}
             onClick={handleTogglePassword}
           >
-            {visible ? (
-              <VisibilityIcon />
-            ) : (
-              <VisibilityOffIcon />
-            )}
+            {visible ? <VisibilityIcon /> : <VisibilityOffIcon />}
           </div>
         )}
       </div>

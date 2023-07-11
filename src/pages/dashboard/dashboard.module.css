@@ -43,7 +43,6 @@
   font-style: normal;
   font-weight: bold;
   line-height: 24px;
-  cursor: pointer;
 }
 .profileSecurity p {
   color: #667085;
@@ -287,7 +286,6 @@
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
-  margin-bottom: 17px;
 }
 .dashboardQuickBuy p {
   color: #081630;
@@ -316,14 +314,27 @@
 .cryptoName {
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 12px;
 }
-.cryptoName h3 {
+.figures {
+  display: flex;
+  flex-direction: column;
+}
+.figures h3 {
   color: var(--dark-1, #4c4c66);
-  font-family: "Satoshi Bold";
+  font-family: "Satoshi Light";
   font-size: 16.661px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
+  line-height: normal;
+}
+.cryptoName p {
+  color: var(--dark-1, #4c4c66);
+  font-family: "Satoshi Bold";
+  font-size: 11.761px;
+  font-style: bold;
+  font-weight: 700;
   line-height: normal;
 }

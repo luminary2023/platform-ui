@@ -5,7 +5,7 @@ import KYC from "../../assets/images/KYC.svg";
 import React, { useState, FC } from "react";
 import Bank from "../../assets/images/banks.svg";
 import Image from "next/image";
-import { Button, CircularProgress } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import BankDetailsModal from "./bankDetailsModal";
 import Dashboard from "./dashboard";
 
@@ -37,7 +37,33 @@ const Index = () => {
               style={{ marginRight: "40px" }}
             />
             <div>
-              <h3>More security</h3>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <h3>More security</h3>
+
+                <Box
+                  sx={{
+                    background:
+                      "var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))",
+                    paddingRight: "8px",
+                    paddingLeft: "8px",
+                    color: "#fff",
+                    borderRadius: 5,
+                    marginLeft: "7px",
+                    fontSize: "10px",
+                    textAlign: "center",
+                    alignItems: "center",
+                    display: "flex",
+                    height: "25px",
+                  }}
+                >
+                  Coming soon
+                </Box>
+              </Box>
               <p>
                 keep your account more secure by entering your phone number.
               </p>
@@ -46,7 +72,33 @@ const Index = () => {
           <div className={styles.profileSecurity}>
             <Image src={KYC} alt="secure" style={{ marginRight: "40px" }} />
             <div>
-              <h3>KYC verification</h3>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <h3>KYC verification</h3>
+
+                <Box
+                  sx={{
+                    background:
+                      "var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))",
+                    paddingRight: "8px",
+                    paddingLeft: "8px",
+                    color: "#fff",
+                    borderRadius: 5,
+                    marginLeft: "7px",
+                    fontSize: "10px",
+                    textAlign: "center",
+                    alignItems: "center",
+                    display: "flex",
+                    height: "25px",
+                  }}
+                >
+                  Coming soon
+                </Box>
+              </Box>
               <p>
                 Submit your Identification documents and increase your P3 wallet
                 limits.
@@ -56,7 +108,7 @@ const Index = () => {
           <div className={styles.profileSecurity}>
             <Image src={Bank} alt="secure" style={{ marginRight: "40px" }} />
             <div onClick={() => setOpen(true)}>
-              <h3>Bank details</h3>
+              <h3 style={{ cursor: "pointer" }}>Bank details</h3>
               <p>Recieve money into your prefered bank account.</p>
             </div>
           </div>
