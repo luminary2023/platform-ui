@@ -154,6 +154,7 @@
 }
 .dashboardQuickBuy {
   width: 100%;
+  height: 100%;
   background: #fff;
   padding: 24px 24px 24px 24px;
   border-radius: 16px;
@@ -216,6 +217,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 35px;
 }
 .crytoList {
   width: 45%;

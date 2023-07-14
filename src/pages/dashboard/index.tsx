@@ -5,13 +5,31 @@ import KYC from "../../assets/images/KYC.svg";
 import React, { useState, FC } from "react";
 import Bank from "../../assets/images/banks.svg";
 import Image from "next/image";
-import { Button, Box } from "@mui/material";
+import { Button, CircularProgress, Box, Typography } from "@mui/material";
 import BankDetailsModal from "./bankDetailsModal";
 import Dashboard from "./dashboard";
+// import CircularProgressWithLabel from "../../services/dashboardProgress";
 
-const Index = () => {
+interface ProgressProps {
+  thickness: number;
+}
+
+const Index: FC<ProgressProps> = ({ thickness }) => {
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
+  const [progress, setProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) =>
+        prevProgress >= 100 ? 0 : prevProgress + 35
+      );
+    }, 800);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <DashboardContainer
@@ -28,6 +46,42 @@ const Index = () => {
                 cryto without limits.
               </p>
             </div>
+            {/* <CircularProgressWithLabel /> */}
+            <Box
+              sx={{
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  marginLeft: "107px",
+                  position: "absolute",
+                  fontFamily: "Satoshi Bold",
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                }}
+              >
+                0/3
+              </Typography>
+              <CircularProgress
+                variant="determinate"
+                value={100}
+                thickness={8}
+                size={80}
+                sx={{
+                  color: "#F2F4FC",
+                  width: "100px",
+                  height: "100px",
+                  position: "relative",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "0px",
+                  marginRight: "80px",
+                }}
+              />
+            </Box>
           </div>
 
           <div className={styles.profileSecurity}>
@@ -37,33 +91,8 @@ const Index = () => {
               style={{ marginRight: "40px" }}
             />
             <div>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                }}
-              >
-                <h3>More security</h3>
+              <h3>More security</h3>
 
-                <Box
-                  sx={{
-                    background:
-                      "var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))",
-                    paddingRight: "8px",
-                    paddingLeft: "8px",
-                    color: "#fff",
-                    borderRadius: 5,
-                    marginLeft: "7px",
-                    fontSize: "10px",
-                    textAlign: "center",
-                    alignItems: "center",
-                    display: "flex",
-                    height: "25px",
-                  }}
-                >
-                  Coming soon
-                </Box>
-              </Box>
               <p>
                 keep your account more secure by entering your phone number.
               </p>
@@ -72,33 +101,8 @@ const Index = () => {
           <div className={styles.profileSecurity}>
             <Image src={KYC} alt="secure" style={{ marginRight: "40px" }} />
             <div>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                }}
-              >
-                <h3>KYC verification</h3>
+              <h3>KYC verification</h3>
 
-                <Box
-                  sx={{
-                    background:
-                      "var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))",
-                    paddingRight: "8px",
-                    paddingLeft: "8px",
-                    color: "#fff",
-                    borderRadius: 5,
-                    marginLeft: "7px",
-                    fontSize: "10px",
-                    textAlign: "center",
-                    alignItems: "center",
-                    display: "flex",
-                    height: "25px",
-                  }}
-                >
-                  Coming soon
-                </Box>
-              </Box>
               <p>
                 Submit your Identification documents and increase your P3 wallet
                 limits.
@@ -117,7 +121,7 @@ const Index = () => {
             variant="contained"
             sx={{
               textTransform: "initial",
-              width: "12%",
+              width: "120px",
             }}
             onClick={() => setProfile(false)}
           >

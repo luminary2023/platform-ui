@@ -9,6 +9,7 @@ import Analysis from "../../assets/images/Analysis.svg";
 import TreadingUp from "../../assets/images/trendingUp.svg";
 import ICN from "../../assets/images/Icn.svg";
 import Line from "../../assets/images/BarLine.svg";
+import PieChart from "../../services/pieChart";
 
 const Dashboard = () => {
   const [currency, setCurrency] = useState("Usd");
@@ -82,7 +83,7 @@ const Dashboard = () => {
             </select>
           </div>
           <div className={styles.analysis}>
-            <Image src={Analysis} alt="analysis" />
+            <PieChart />
 
             <div className={styles.crytoList}>
               <div className={styles.crytoAnalysis}>
