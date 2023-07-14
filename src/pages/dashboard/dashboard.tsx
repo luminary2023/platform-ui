@@ -5,7 +5,6 @@ import EastIcon from "@mui/icons-material/East";
 import { Button } from "../../components/Button/Button";
 import Image from "next/image";
 import Bitcoins from "../../assets/images/Bitcoins.svg";
-import Analysis from "../../assets/images/Analysis.svg";
 import TreadingUp from "../../assets/images/trendingUp.svg";
 import ICN from "../../assets/images/Icn.svg";
 import Line from "../../assets/images/BarLine.svg";
