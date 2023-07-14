@@ -35,7 +35,7 @@ function PieChart() {
   }, []);
   return (
     <Box position="relative">
-      <canvas id="myChart" style={{ width: "100%", height: "100%" }}></canvas>
+      <canvas id="myChart" style={{ width: "150px", height: "150px" }}></canvas>
     </Box>
   );
 }
