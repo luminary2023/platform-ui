@@ -5,10 +5,10 @@ import EastIcon from "@mui/icons-material/East";
 import { Button } from "../../components/Button/Button";
 import Image from "next/image";
 import Bitcoins from "../../assets/images/Bitcoins.svg";
-import Analysis from "../../assets/images/Analysis.svg";
 import TreadingUp from "../../assets/images/trendingUp.svg";
 import ICN from "../../assets/images/Icn.svg";
 import Line from "../../assets/images/BarLine.svg";
+import PieChart from "../../services/pieChart";
 
 const Dashboard = () => {
   const [currency, setCurrency] = useState("Usd");
@@ -82,7 +82,8 @@ const Dashboard = () => {
             </select>
           </div>
           <div className={styles.analysis}>
-            <Image src={Analysis} alt="analysis" />
+            <PieChart />
+
             <div className={styles.crytoList}>
               <div className={styles.crytoAnalysis}>
                 <div className={styles.cryptoCircleList}>
@@ -112,7 +113,30 @@ const Dashboard = () => {
 
       <div className={styles.quickBuy}>
         <div className={styles.dashboardQuickBuy}>
-          <h3>Quick Buy</h3>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              marginBottom: "17px",
+            }}
+          >
+            <Box>
+              <h3>Quick Buy</h3>
+            </Box>
+            <Box
+              sx={{
+                background:
+                  "var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))",
+                padding: 1,
+                color: "#fff",
+                borderRadius: 5,
+                marginLeft: "7px",
+                fontSize: "14px",
+              }}
+            >
+              Coming soon
+            </Box>
+          </Box>
           <p style={{ marginBottom: "8px" }}>Select Asset</p>
 
           <Select
@@ -128,11 +152,12 @@ const Dashboard = () => {
               marginBottom: "8px",
               border: "1px solid #E8E8E8",
             }}
+            disabled
           >
             <MenuItem value="Usd">
               <Box display="flex" flexDirection="row" alignItems={"center"}>
                 <Image src={Bitcoins} alt="bitcoin" />
-                <Typography marginLeft={"11px"}> Naira</Typography>
+                <Typography marginLeft={"11px"}> USDT</Typography>
               </Box>
             </MenuItem>
             <MenuItem value="Pound">
@@ -154,6 +179,7 @@ const Dashboard = () => {
               border: "1px solid #E8E8E8",
             }}
             type="number"
+            disabled
           />
           <Button
             color="primary"
@@ -170,41 +196,37 @@ const Dashboard = () => {
           </Button>
         </div>
         <div className={styles.dashboardQuickBuy}>
-          {/* <marquee> */}
           <div className={styles.crytoRate}>
-            <div className={styles.cryptoBTC}>
+            <div className={styles.figures}>
               <div className={styles.cryptoName}>
                 <p>BTC</p>
                 <Image src={ICN} alt="icn" style={{ marginRight: "14.3px" }} />
                 <p>USD</p>
-                <p>5.23%</p>
-                <Image
-                  src={Line}
-                  alt="line"
-                  style={{ marginRight: "14.3px" }}
-                />
-
+                <p style={{ color: "#E3507A", fontSize: "10px" }}>5.23%</p>
+              </div>
+              <h3>7.356,67</h3>
+            </div>
+            <Image src={Line} alt="line" style={{ marginRight: "14.3px" }} />
+            <div className={styles.figures}>
+              <div className={styles.cryptoName}>
                 <p>ETH</p>
                 <Image src={ICN} alt="icn" style={{ marginRight: "14.3px" }} />
                 <p>USD</p>
-                <p>5.23%</p>
-                <Image
-                  src={Line}
-                  alt="line"
-                  style={{ marginRight: "14.3px" }}
-                />
-                <p>BTC</p>
-                <p>USD</p>
-                <p>5.23%</p>
+                <p style={{ color: "#2BB596", fontSize: "10px" }}>5.23%</p>
               </div>
+              <h3>7.356,67</h3>
+            </div>
+            <Image src={Line} alt="line" style={{ marginRight: "14.3px" }} />
+            <div className={styles.figures}>
+              <div className={styles.cryptoName}>
+                <p>ETH</p>
+                <Image src={ICN} alt="icn" style={{ marginRight: "14.3px" }} />
+                <p>USD</p>
+                <p style={{ color: "#E3507A", fontSize: "10px" }}>5.23%</p>
+              </div>
+              <h3>7.356,67</h3>
             </div>
           </div>
-          <div className={styles.cryptoName}>
-            <h3>7.356,67</h3>
-            <h3>7.356,67</h3>
-            <h3>7.356,67</h3>
-          </div>
-          {/* </marquee> */}
         </div>
       </div>
     </div>

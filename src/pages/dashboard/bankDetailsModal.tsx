@@ -87,7 +87,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
           sx={{
             color: "#344054",
             fontFamily: "Satoshi Light",
-            fontSize: "14px",
+            fontSize: "16px",
             fontStyle: "normal",
             fontWeight: 400,
             lineHeight: "20px",
@@ -108,20 +108,14 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             </MenuItem>
           ))}
         </Select>
-        <Typography
-          sx={{
-            color: "#344054",
-            fontFamily: "Satoshi Light",
-            fontSize: "14px",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "20px",
-            marginBottom: "8px",
-          }}
-        >
-          Bank account number
-        </Typography>
-        <Input type="number" placeholder={"Account number"} />
+        <Input
+          type={"0123456789"}
+          placeholder={"Account number"}
+          label="Bank account number"
+          marginBottom={"8px"}
+          labelColor={"#081630"}
+          labelSize={"16px"}
+        />
         <Box
           sx={{
             display: "flex",
