@@ -5,12 +5,21 @@ import Input from "@/components/InputField";
 import { useForm } from "react-hook-form";
 import AuthFooter from "@/components/AuthFooter/authFooter";
 import { useRouter } from "next/router";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SignUp } from "@/services/schemaVarification";
+import { SignupProps } from "../../services/interfaces";
 
 export default function Index() {
   const router = useRouter();
-  const { handleSubmit, register } = useForm();
-  const handleMessage = () => {
-    console.log("good");
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<SignupProps>({
+    resolver: zodResolver(SignUp),
+  });
+  const handleRegistration = (data: any) => {
+    console.log(data);
   };
 
   return (
@@ -21,7 +30,7 @@ export default function Index() {
             <h1 className={styles.title} style={{ marginBottom: "24px" }}>
               Create account
             </h1>
-            <form onSubmit={handleSubmit(handleMessage)}>
+            <form onSubmit={handleSubmit(handleRegistration)}>
               <div
                 className={styles.groupForm}
                 style={{ marginBottom: "24px" }}
@@ -31,7 +40,8 @@ export default function Index() {
                     placeholder="First"
                     type="text"
                     label="First name*"
-                    {...register("firstName")}
+                    register={{ ...register("firstName") }}
+                    borderColor={errors?.firstName?.message ? "#DF1111" : ""}
                   />
                 </div>
                 <div className={styles.inputNames}>
@@ -39,7 +49,8 @@ export default function Index() {
                     placeholder="Last"
                     type={"text"}
                     label="Last name*"
-                    {...register("lastName")}
+                    register={{ ...register("lastName") }}
+                    borderColor={errors?.lastName?.message ? "#DF1111" : ""}
                   />
                 </div>
               </div>
@@ -51,7 +62,8 @@ export default function Index() {
                   placeholder="Enter your email"
                   type={"email"}
                   label="Email*"
-                  {...register("email")}
+                  register={{ ...register("email") }}
+                  borderColor={errors?.email?.message ? "#DF1111" : ""}
                 />
               </div>
               <div
@@ -62,8 +74,10 @@ export default function Index() {
                   placeholder="Create a password"
                   type="password"
                   label="Password*"
-                  {...register("phoneNumber")}
+                  register={{ ...register("password") }}
+                  borderColor={errors?.password?.message ? "#DF1111" : ""}
                 />
+
                 <p
                   style={{
                     color: " #667085",
