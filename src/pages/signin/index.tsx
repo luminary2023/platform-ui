@@ -5,6 +5,7 @@ import Input from "@/components/InputField";
 import PageTitleStyles from '@/components/PageTitle/PageTitle.module.css'
 import { Button } from "@/components/Button/Button";
 import { useRouter } from "next/router";
+// import Toast from "@/components/Toast";
 
 const SignIn = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const SignIn = () => {
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signinLeftWrapper}>
+      {/* <Toast text="Password or email is incorrect please try again" marginBottom={40}/> */}
         <div style={{ marginBottom: 32 }}>
           <PageTitle
             title={"Welcome back"}
