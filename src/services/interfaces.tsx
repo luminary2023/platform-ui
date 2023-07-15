@@ -15,8 +15,10 @@ export interface InputProps {
   label?: string;
   marginBottom?: string;
   bgColor?: string;
-  labelColor?: string
-  labelSize?: string
+  labelColor?: string;
+  labelSize?: string;
+  register?: any;
+  borderColor?: string;
 }
 
 export interface EmailVerifiedProps {
@@ -27,6 +29,13 @@ export interface EmailVerifiedProps {
   routerPath: string;
   btnOnClick: any;
   icon: string;
+}
+
+export interface SignupProps {
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
 }
 
 export interface Props extends React.PropsWithChildren {
