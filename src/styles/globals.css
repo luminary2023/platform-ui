@@ -15,6 +15,11 @@
 }
 
 @font-face {
+  font-family: "Clash Display Medium";
+  src: url(./../assets/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Medium.woff2);
+}
+
+@font-face {
   font-family: "Satoshi Light";
   src: url(./../assets/Satoshi/Fonts/WEB/fonts/Satoshi-Light.woff);
 }
@@ -39,7 +44,3 @@
   src: url(./../assets/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Extralight.woff);
 }
 
-@font-face {
-  font-family: 'Clash Display SemiBold';
-  src: url(./../assets/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Semibold.woff);
-}

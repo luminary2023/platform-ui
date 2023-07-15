@@ -4,13 +4,24 @@ import styles from "./wallet.module.css";
 import React from "react";
 import { Button } from "@/components/Button/Button";
 import Input from "@/components/InputField";
-import { Select, SelectChangeEvent, MenuItem } from "@mui/material";
+import { Select, SelectChangeEvent, MenuItem, Menu, Fade,} from "@mui/material";
 import { bankData, quickActionsData } from "../../services/data";
 import EastIcon from "@mui/icons-material/East";
 import AppTable from "@/components/Table";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Image from "next/image";
 
 const Wallet = () => {
   const [bank, setBank] = React.useState<string[]>([]);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const open = Boolean(anchorEl);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleChange = (event: SelectChangeEvent<typeof bank>) => {
     const {
@@ -77,56 +88,83 @@ const Wallet = () => {
               </div>
             </div>
           </div>
-          <div className={styles.withdrawContainer}>
-            <h3 className={styles.tableTitle}>Withdraw Funds</h3>
-            <p className={styles.inputLabel}>Select Bank</p>
-            <Select
-              value={bank}
-              onChange={handleChange}
-              placeholder="Choose a bank"
-              sx={{ height: "40px", width: "100%", marginBottom: "13px" }}
-            >
-              {bankData.map((bank, index) => (
-                <MenuItem key={index} value={bank}>
-                  {bank}
-                </MenuItem>
-              ))}
-            </Select>
-            <Input
-              placeholder={"0123456789"}
-              type={"text"}
-              label="Account Number"
-              // bgColor={"#FAFCE0"}
-              marginBottom={"8px"}
-              labelColor={"#081630"}
-              labelSize={"16px"}
-            />
-            <Input
-              placeholder={"0123456789"}
-              type={"NGN 15,000"}
-              label="Amount"
-              bgColor={"#F5F5F5"}
-              marginBottom={"8px"}
-              labelColor={"#081630"}
-              labelSize={"16px"}
-            />
-            <Button
-              color="primary"
-              variant="contained"
-              fullWidth
-              sx={{
-                borderRadius: "10px",
-                textTransform: "capitalize",
-                height: "61px",
-              }}
-              // onClick={() => router.push("/signup")}
-            >
-              Withdraw <EastIcon style={{ marginLeft: 9, color: "#ffff" }} />
-            </Button>
+          <div style={{width: '50%'}}>
+            <div className={styles.withdrawContainer}>
+              <h3 className={styles.tableTitle}>Withdraw Funds</h3>
+              <p className={styles.inputLabel}>Select Bank</p>
+              <Select
+                value={bank}
+                onChange={handleChange}
+                placeholder="Choose a bank"
+                sx={{ 
+                  height: "40px", 
+                  width: "100%", 
+                  marginBottom: "13px",
+                  backgroundColor: "#F6F6F6"
+                }}
+              >
+                {bankData.map((bank, index) => (
+                  <MenuItem key={index} value={bank}>
+                    {bank}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Input
+                placeholder={"0123456789"}
+                type={"text"}
+                label="Account Number"
+                bgColor={"#F6F6F6"}
+                marginBottom={"8px"}
+                labelColor={"#081630"}
+                labelSize={"16px"}
+              />
+              <Input
+                placeholder={"0123456789"}
+                type={"NGN 15,000"}
+                label="Amount"
+                bgColor={"#F6F6F6"}
+                marginBottom={"8px"}
+                labelColor={"#081630"}
+                labelSize={"16px"}
+              />
+              <Button
+                color="primary"
+                variant="contained"
+                fullWidth
+                sx={{
+                  borderRadius: "10px",
+                  textTransform: "capitalize",
+                  height: "61px",
+                }}
+              >
+                Withdraw <EastIcon style={{ marginLeft: 9, color: "#ffff" }} />
+              </Button>
+            </div>
           </div>
         </div>
         <div className={styles.tableContainer }>
-          <h1 className={styles.tableTitle}>History</h1>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <h1 className={styles.tableTitle}>History</h1>
+            <div className={styles.filterWrapper}>
+            <p>All</p>
+            <div onClick={handleClick} style={{cursor: 'pointer'}}>
+              <KeyboardArrowDownIcon />
+            </div>
+            <Menu
+              id="fade-menu"
+              MenuListProps={{
+                "aria-labelledby": "fade-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Fade}
+            >
+              <MenuItem onClick={handleClose}>Newest</MenuItem>
+              <MenuItem onClick={handleClose}>Oldest</MenuItem>
+            </Menu>
+            </div>
+          </div>
           <AppTable tableHeaderData={tableHeaderData} />
         </div>
       </DashboardContainer>
