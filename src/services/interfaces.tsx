@@ -1,4 +1,3 @@
-import { ChangeEvent } from "react";
 export interface CardProps {
   image: string;
   title: string;
