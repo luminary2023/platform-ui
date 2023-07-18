@@ -20,9 +20,6 @@ export interface InputProps {
   labelSize?: string;
   register?: any;
   borderColor?: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  name: string
-  inputValue: any
 }
 
 export interface EmailVerifiedProps {

@@ -14,9 +14,6 @@ const Input: React.FC<InputProps> = ({
   labelSize,
   register,
   borderColor,
-  onChange,
-  name,
-  inputValue,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const handleTogglePassword = () => {
@@ -35,11 +32,8 @@ const Input: React.FC<InputProps> = ({
         <input
           type={visible ? "text" : type}
           placeholder={placeholder}
-          name={name}
-          value={inputValue}
           className={styles.inputForm}
           {...register}
-          onChange={onChange}
           style={{
             marginBottom: marginBottom,
             background: bgColor,
