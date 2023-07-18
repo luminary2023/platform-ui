@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./Signin.module.css";
 import PageTitle from "@/components/PageTitle";
 import Input from "@/components/InputField";
@@ -8,13 +8,20 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { Login } from "@/services/schemaVarification";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Password } from "@mui/icons-material";
 
 interface LoginProps {
   password: string;
   email: string;
 }
+
 const SignIn = () => {
   const router = useRouter();
+  const [email, setEmail] = useState<string>('')
+  const [inputs, setInputs] = useState<LoginProps>({
+    email: '',
+    password: '',
+  })
 
   const {
     handleSubmit,
@@ -27,6 +34,17 @@ const SignIn = () => {
   const handleLogin = (data: any) => {
     console.log(data);
   };
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+
+  console.log(inputs, 'inputs')
 
   return (
     <div className={styles.signinContainer}>
@@ -42,7 +60,10 @@ const SignIn = () => {
           <Input
             placeholder="Jondoe@mail"
             type="text"
+            inputValue={inputs.email}
             label="Email"
+            name="email"
+            onChange={handleInputChange}
             register={{ ...register("email") }}
             marginBottom="24px"
             borderColor={errors?.email?.message ? "#DF1111" : ""}
@@ -52,6 +73,9 @@ const SignIn = () => {
             placeholder=""
             type="password"
             label="Password"
+            name="password"
+            inputValue={inputs.password}
+            onChange={handleInputChange}
             marginBottom="24px"
             register={{ ...register("password") }}
             borderColor={errors?.password?.message ? "#DF1111" : ""}

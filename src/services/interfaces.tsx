@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 export interface CardProps {
   image: string;
   title: string;
@@ -19,6 +20,9 @@ export interface InputProps {
   labelSize?: string;
   register?: any;
   borderColor?: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  name: string
+  inputValue: any
 }
 
 export interface EmailVerifiedProps {
