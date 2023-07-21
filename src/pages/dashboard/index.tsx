@@ -38,57 +38,66 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
     >
       {profile ? (
         <>
-          <div className={styles.profile}>
-            <div>
-              <h1>Complete your profile</h1>
-              <p>
-                Finish setting up your P3 Wallet To buy, sell <br /> and recieve
-                cryto without limits.
-              </p>
-            </div>
-            {/* <CircularProgressWithLabel /> */}
-            <Box
-              sx={{
-                position: "relative",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Typography
+          <div className={styles.completeProfile}>
+            <h1>Complete your profile</h1>
+
+            <div className={styles.profile}>
+              <div>
+                <p>
+                  Finish setting up your P3 Wallet To buy, sell <br /> and
+                  recieve cryto without limits.
+                </p>
+              </div>
+
+              <Box
                 sx={{
-                  marginLeft: "107px",
-                  position: "absolute",
-                  fontFamily: "Satoshi Bold",
-                  fontSize: "16px",
-                  fontWeight: "bold",
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
                 }}
               >
-                0/3
-              </Typography>
-              <CircularProgress
-                variant="determinate"
-                value={100}
-                thickness={8}
-                size={80}
-                sx={{
-                  color: "#F2F4FC",
-                  width: "100px",
-                  height: "100px",
-                  position: "relative",
-                  top: "50%",
-                  left: "50%",
-                  marginTop: "0px",
-                  marginRight: "80px",
-                }}
-              />
-            </Box>
+                <Typography
+                  sx={{
+                    marginLeft: "107px",
+                    position: "absolute",
+                    fontFamily: "Satoshi Bold",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  0/3
+                </Typography>
+                <CircularProgress
+                  variant="determinate"
+                  value={100}
+                  thickness={8}
+                  size={80}
+                  sx={{
+                    color: "#F2F4FC",
+                    width: { xs: "20px", sm: "20px", lg: "100px", xl: "100px" },
+                    height: {
+                      xs: "20px",
+                      sm: "20px",
+                      lg: "100px",
+                      xl: "100px",
+                    },
+                    position: "relative",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "0px",
+                    marginRight: "80px",
+                  }}
+                />
+              </Box>
+            </div>
           </div>
 
           <div className={styles.profileSecurity}>
             <Image
               src={Security}
               alt="secure"
-              style={{ marginRight: "40px" }}
+              // style={{ marginRight: "40px" }}
+              className={styles.profileSecurityImg}
             />
             <div>
               <h3>More security</h3>
@@ -99,7 +108,11 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
             </div>
           </div>
           <div className={styles.profileSecurity}>
-            <Image src={KYC} alt="secure" style={{ marginRight: "40px" }} />
+            <Image
+              src={KYC}
+              alt="secure"
+              className={styles.profileSecurityImg}
+            />
             <div>
               <h3>KYC verification</h3>
 
@@ -110,7 +123,11 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
             </div>
           </div>
           <div className={styles.profileSecurity}>
-            <Image src={Bank} alt="secure" style={{ marginRight: "40px" }} />
+            <Image
+              src={Bank}
+              alt="secure"
+              className={styles.profileSecurityImg}
+            />
             <div onClick={() => setOpen(true)}>
               <h3 style={{ cursor: "pointer" }}>Bank details</h3>
               <p>Recieve money into your prefered bank account.</p>

@@ -17,11 +17,16 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 450,
+  width: { xs: "95%", sm: "95%", lg: 450, xl: 450 },
   bgcolor: " #fff",
   border: "none",
   borderRadius: "24px",
-  padding: "40px 60px 40px 60px",
+  padding: {
+    xs: "40px 40px 40px 40px",
+    sm: "40px 40px 40px 40px",
+    lg: "40px 60px 40px 60px",
+    xl: "40px 60px 40px 60px",
+  },
   outline: "none",
 };
 const banks = [
@@ -62,7 +67,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
           component="h1"
           sx={{
             fontFamily: "Satoshi Bold",
-            fontSize: "24px",
+            fontSize: { xs: "20px", sm: "22px", lg: "24px", xl: "24px" },
             fontStyle: "normal",
             fontWeight: 600,
             lineHeight: "28px;",
@@ -74,7 +79,8 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
           sx={{
             color: "#667085",
             fontFamily: "Satoshi Light",
-            fontSize: "16px",
+            fontSize: { xs: "14px", sm: "14px", lg: "16px", xl: "16px" },
+
             fontStyle: "normal",
             fontWeight: 400,
             lineHeight: "24px",
@@ -119,9 +125,11 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: { xs: "column", sm: "column", lg: "row", xl: "row" },
             justifyContent: "space-between",
             marginTop: "40px",
+            alignItems: "center",
+            gap: "15px",
           }}
         >
           <Button

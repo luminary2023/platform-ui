@@ -1,22 +1,37 @@
 .profile {
-  padding: 16px 16px 16px 16px;
-  background-color: #fff;
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
 }
-.profile h1 {
+@media screen and (max-width: 992px) {
+  .profile {
+    width: 100%;
+  }
+}
+
+.completeProfile {
   color: #000;
+  padding: 16px 16px 16px 16px;
   font-family: "Satoshi Bold";
-  font-size: 32px;
+  background-color: #fff;
+  margin-bottom: 40px;
   font-style: normal;
   font-weight: 700;
   line-height: 36px;
   letter-spacing: -0.64px;
   margin-bottom: 10px;
+  width: 100%;
+}
+@media screen and (max-width: 992px) {
+  .completeProfile {
+    width: 99%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .completeProfile h1 {
+    font-size: 20px;
+  }
 }
 .profile p {
   color: #667085;
@@ -36,6 +51,19 @@
   align-items: center;
   margin-bottom: 24px;
 }
+@media screen and (max-width: 992px) {
+  .profileSecurity {
+    width: 99%;
+  }
+}
+.profileSecurityImg {
+  margin-right: 40px;
+}
+@media screen and (max-width: 992px) {
+  .profileSecurityImg {
+    margin-right: 8px;
+  }
+}
 .profileSecurity h3 {
   color: #000;
   font-family: "Satoshi Bold";
@@ -44,6 +72,7 @@
   font-weight: bold;
   line-height: 24px;
 }
+
 .profileSecurity p {
   color: #667085;
   font-family: "Satoshi Light";
@@ -51,6 +80,11 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+}
+@media screen and (max-width: 992px) {
+  .profileSecurity p {
+    font-size: 14px;
+  }
 }
 
 .dashboardSection {

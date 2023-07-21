@@ -17,7 +17,7 @@ interface Props {
   subtitle: string;
 }
 
-const Header: FC<Props> = ({ title, subtitle='' }) => {
+const Header: FC<Props> = ({ title, subtitle = "" }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -39,7 +39,12 @@ const Header: FC<Props> = ({ title, subtitle='' }) => {
         <Typography
           sx={{
             color: "#081630",
-            fontSize: "30px",
+            fontSize: {
+              xs: "18px",
+              sm: "18px",
+              lg: "30px",
+              xl: "30px",
+            },
             fontFamily: "Clash Display Semibold",
             fontStyle: "normal",
             fontWeight: 600,
@@ -67,14 +72,18 @@ const Header: FC<Props> = ({ title, subtitle='' }) => {
           <Box
             sx={{
               display: "inline-flex",
-              padding: "6px 12px 6px 9px",
+              padding: {
+                xs: "3.375px 6.5px 2.625px 5.063px",
+                sm: "3.375px 6.5px 2.625px 5.063px",
+                lg: "6px 12px 6px 9px",
+                xl: "6px 12px 6px 9px",
+              },
               justifyContent: "center",
               alignItems: "center",
               gap: "5px",
               marginLeft: "15px",
               borderRadius: "14px",
               cursor: "pointer",
-
               background:
                 "var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))",
             }}
@@ -100,9 +109,9 @@ const Header: FC<Props> = ({ title, subtitle='' }) => {
             alt="Remy Sharp"
             src="/static/images/avatar/1.jpg"
             sx={{
-              width: "30px",
-              height: "30px",
-              marginLeft: "15px",
+              width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
+              height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
+              marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
               cursor: "pointer",
             }}
           />
@@ -113,12 +122,22 @@ const Header: FC<Props> = ({ title, subtitle='' }) => {
               fontFamily: "Satoshi Light",
               fontStyle: "normal",
               fontWeight: 500,
-              marginLeft: "15px",
+              marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
+              display: {
+                xs: "none",
+                sm: "none",
+                lg: "block",
+                xl: "block",
+              },
             }}
           >
             Pixelz Warrios
           </Typography>
-          <Box sx={{ marginLeft: "15px" }}>
+          <Box
+            sx={{
+              marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
+            }}
+          >
             <Image
               src={DownArrow}
               alt="arrow"
@@ -150,7 +169,12 @@ const Header: FC<Props> = ({ title, subtitle='' }) => {
       <Typography
         sx={{
           color: "#6C757D",
-          fontSize: "16px",
+          fontSize: {
+            xs: "12px",
+            sm: "12px",
+            lg: "16px",
+            xl: "16px",
+          },
           fontFamily: "Satoshi Light",
           fontStyle: "normal",
           fontWeight: 500,
