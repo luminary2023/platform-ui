@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { Login } from "@/services/schemaVarification";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { loginRequest } from "@/api/login";
 interface LoginProps {
   password: string;
   email: string;
@@ -26,7 +26,7 @@ const SignIn = () => {
   });
 
   const handleLogin = (data: any) => {
-    console.log(data);
+    loginRequest(data);
   };
 
   return (

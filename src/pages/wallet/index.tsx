@@ -45,7 +45,7 @@ const Wallet = () => {
       <DashboardContainer title="Wallet">
         <div className={styles.topContent}>
           <div
-            style={{ display: "flex", flexDirection: "column", width: "45%" }}
+            className={styles.topContentOne}
           >
             <div className={styles.walletBalanceContainer}>
               <div>
@@ -88,7 +88,7 @@ const Wallet = () => {
               </div>
             </div>
           </div>
-          <div style={{width: '50%'}}>
+          <div className={styles.withdrawContainerWrapper} >
             <div className={styles.withdrawContainer}>
               <h3 className={styles.tableTitle}>Withdraw Funds</h3>
               <p className={styles.inputLabel}>Select Bank</p>

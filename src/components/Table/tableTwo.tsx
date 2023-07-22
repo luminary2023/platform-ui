@@ -25,7 +25,7 @@ const singleData =
     status: "completed"
   }
 
-const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
+const DashboardTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
   return (
     <>
       <TableContainer component={Paper}>
@@ -34,7 +34,6 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
             sx={{
               borderRadius: "8px 8px 0px 0px",
               background: "#F6F6F6",
-              // width: '100%'
             }}
           >
             <TableRow>
@@ -129,6 +128,5 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
   );
 };
 
-export default AppTable;
+export default DashboardTable;
 
-// const singleData = ["6/9/14", "Cameron", "gt", "Nigeria", "120,000", "completed"];
