@@ -1,13 +1,13 @@
-import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
-import styles from "./wallet.module.css";
+import DashboardContainer from "../../components/DashboardNavigation/dashboardContainer";
+import styles from "./wallet.module.css"
 
 import React from "react";
-import { Button } from "@/components/Button/Button";
-import Input from "@/components/InputField";
+import { Button } from "../../components/Button/Button";
+import Input from "../../components/InputField";
 import { Select, SelectChangeEvent, MenuItem, Menu, Fade,} from "@mui/material";
 import { bankData, quickActionsData } from "../../services/data";
 import EastIcon from "@mui/icons-material/East";
-import AppTable from "@/components/Table";
+import AppTable from "../../components/Table";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Image from "next/image";
 

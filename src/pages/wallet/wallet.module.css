@@ -99,6 +99,7 @@
 @media screen and (max-width: 800px) {
     .topContent {
         flex-direction: column;
+        /* width: 80%; */
     }
     .topContentOne {
         width: 100%;
@@ -121,5 +122,8 @@
     }
     .walletBalance {
         margin-bottom: 16px;
+    }
+    .tableContainer {
+        display: none;
     }
 }
