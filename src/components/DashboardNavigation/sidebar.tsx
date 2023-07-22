@@ -21,16 +21,44 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
-        width: "20%",
-        height: "100vh",
+        width: {
+          xs: "20%",
+          sm: "25%",
+          lg: "20%",
+          xl: "20%",
+        },
+        height: {
+          xs: "175vh",
+          sm: "175vh",
+          lg: "100vh",
+          xl: "100vh",
+        },
         background: "#081630",
-        padding: "53px",
+        paddingLeft: {
+          xs: "1px",
+          sm: "12px",
+        },
+        paddingRight: {
+          xs: "12px",
+          sm: "12px",
+        },
       }}
     >
       <Typography
         sx={{
           color: "#FFF",
-          fontSize: "24px",
+          fontSize: {
+            xs: "14px",
+            sm: "16px",
+            lg: "24px",
+            xl: "24px",
+          },
+          marginTop: {
+            xs: "24px",
+            sm: "24px",
+            lg: "53px",
+            xl: "53px",
+          },
           fontFamily: "Clash Display Light",
           fontStyle: " normal",
           fontWeight: "bold",
@@ -49,6 +77,12 @@ const Sidebar = () => {
             flexDirection: "row",
             alignItems: "center",
             marginBottom: "29px",
+            marginLeft: {
+              xs: "20px",
+              sm: "26px",
+              lg: "44px",
+              xl: "44px",
+            },
           }}
           onClick={() => handleClick(link.path)}
         >
@@ -77,6 +111,12 @@ const Sidebar = () => {
               lineHeight: "normal",
               letterSpacing: "0.5px",
               cursor: "pointer",
+              display: {
+                xs: "none",
+                sm: "none",
+                lg: "block",
+                xl: "block",
+              },
             }}
           >
             {link.title}

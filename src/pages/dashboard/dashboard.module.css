@@ -1,22 +1,37 @@
 .profile {
-  padding: 16px 16px 16px 16px;
-  background-color: #fff;
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
 }
-.profile h1 {
+@media screen and (max-width: 992px) {
+  .profile {
+    width: 100%;
+  }
+}
+
+.completeProfile {
   color: #000;
+  padding: 16px 16px 16px 16px;
   font-family: "Satoshi Bold";
-  font-size: 32px;
+  background-color: #fff;
+  margin-bottom: 40px;
   font-style: normal;
   font-weight: 700;
   line-height: 36px;
   letter-spacing: -0.64px;
   margin-bottom: 10px;
+  width: 100%;
+}
+@media screen and (max-width: 992px) {
+  .completeProfile {
+    width: 99%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .completeProfile h1 {
+    font-size: 20px;
+  }
 }
 .profile p {
   color: #667085;
@@ -36,6 +51,19 @@
   align-items: center;
   margin-bottom: 24px;
 }
+@media screen and (max-width: 992px) {
+  .profileSecurity {
+    width: 99%;
+  }
+}
+.profileSecurityImg {
+  margin-right: 40px;
+}
+@media screen and (max-width: 992px) {
+  .profileSecurityImg {
+    margin-right: 8px;
+  }
+}
 .profileSecurity h3 {
   color: #000;
   font-family: "Satoshi Bold";
@@ -44,6 +72,7 @@
   font-weight: bold;
   line-height: 24px;
 }
+
 .profileSecurity p {
   color: #667085;
   font-family: "Satoshi Light";
@@ -52,17 +81,36 @@
   font-weight: 400;
   line-height: 24px;
 }
+@media screen and (max-width: 992px) {
+  .profileSecurity p {
+    font-size: 14px;
+  }
+}
 
 .dashboardSection {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+@media screen and (max-width: 992px) {
+  .dashboardSection {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .dashboardTransactionAnalysis {
   display: flex;
   flex-direction: column;
   width: 49%;
   height: 100%;
+}
+@media screen and (max-width: 992px) {
+  .dashboardTransactionAnalysis {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
 }
 .dashboardAnalysis {
   display: flex;
@@ -71,17 +119,41 @@
   width: 100%;
   margin-bottom: 17px;
 }
+@media screen and (max-width: 992px) {
+  .dashboardAnalysis {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 17px;
+  }
+}
 .portfolioBalance {
   padding: 10px;
   width: 49%;
   border-radius: 8px;
   background: #fff;
 }
+@media screen and (max-width: 992px) {
+  .portfolioBalance {
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    background: #fff;
+  }
+}
 .transactionDone {
   padding: 10px;
   width: 49%;
   border-radius: 8px;
   background: #fff;
+}
+@media screen and (max-width: 992px) {
+  .transactionDone {
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    background: #fff;
+  }
 }
 .portfolioBg {
   width: 100%;
@@ -219,8 +291,21 @@
   align-items: center;
   margin-top: 35px;
 }
+@media screen and (max-width: 992px) {
+  .analysis {
+    display: flex;
+    flex-direction: column;
+    /* align-items: left; */
+    margin-top: 35px;
+  }
+}
 .crytoList {
   width: 45%;
+}
+@media screen and (max-width: 992px) {
+  .crytoList {
+    width: 100%;
+  }
 }
 .crytoAnalysis {
   display: flex;
@@ -279,6 +364,14 @@
   flex-direction: column;
   width: 49%;
   height: 100%;
+}
+@media screen and (max-width: 992px) {
+  .quickBuy {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
 }
 .dashboardQuickBuy h3 {
   color: #000;

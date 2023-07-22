@@ -195,7 +195,7 @@ const Dashboard = () => {
             Buy <EastIcon style={{ marginLeft: 9, color: "#fff" }} />
           </Button>
         </div>
-        <div className={styles.dashboardQuickBuy}>
+        {/* <div className={styles.dashboardQuickBuy}>
           <div className={styles.crytoRate}>
             <div className={styles.figures}>
               <div className={styles.cryptoName}>
@@ -227,7 +227,7 @@ const Dashboard = () => {
               <h3>7.356,67</h3>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

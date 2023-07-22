@@ -12,9 +12,7 @@ const EmailCodeVarification = () => {
     <div className={styles.emailSection}>
       <Image src={EmailLogo} alt="email" width="56" height="56" />
       <h1>Check your email</h1>
-      <p>
-        We sent a verification link to <br /> olivia@untitledui.com
-      </p>
+      <p>We sent a verification link to olivia@untitledui.com</p>
       <div className={styles.emailCodeVarify}>
         <div className={styles.code}>3</div>
         <div className={styles.code}>0</div>

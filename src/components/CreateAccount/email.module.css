@@ -7,6 +7,7 @@
   align-items: center;
   padding-top: 90px;
 }
+
 .emailSection h1 {
   color: var(--gray-900, #101828);
   text-align: center;
@@ -16,12 +17,14 @@
   margin-top: 18px;
   margin-bottom: 12px;
 }
+
 .emailSection p {
   color: var(--gray-500, #667085);
   text-align: center;
   font-family: "Satoshi Light";
   font-size: 14px;
 }
+
 .emailCodeVarify {
   display: flex;
   flex-direction: row;
@@ -83,4 +86,23 @@
   letter-spacing: 0.14px;
   margin-left: 8px;
   cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+  .emailSection {
+    padding-top: 50px;
+    width: 90%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .emailSection {
+    padding-top: 50px;
+    width: 55%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .emailSection h1 {
+    font-size: 20px;
+    font-family: "Satoshi Bold";
+    font-weight: bold;
+  }
 }
