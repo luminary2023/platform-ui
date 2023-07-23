@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./dashboard.module.css";
-import { Box, Select, MenuItem, Typography, TextField } from "@mui/material";
+import { Box, Select, MenuItem, Typography, TextField, Menu, Fade, } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
 import { Button } from "../../components/Button/Button";
 import Image from "next/image";
@@ -9,15 +9,40 @@ import TreadingUp from "../../assets/images/trendingUp.svg";
 import ICN from "../../assets/images/Icn.svg";
 import Line from "../../assets/images/BarLine.svg";
 import PieChart from "../../services/pieChart";
+import DashboardTable from '../../components/Table/tableTwo'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import tableStyles from "../wallet/wallet.module.css"
 
 const Dashboard = () => {
   const [currency, setCurrency] = useState("Usd");
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const open = Boolean(anchorEl);
 
   const handleCurrency = (e: any) => {
     setCurrency(e.target.value as string);
   };
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const tableHeaderData = [
+    "Date",
+    "Type",
+    "Asset",
+    "Description",
+    "Amount",
+    "Status",
+  ];
+
   return (
-    <div className={styles.dashboardSection}>
+    <div>
+      <div className={styles.dashboardSection}>
       <div className={styles.dashboardTransactionAnalysis}>
         <div className={styles.dashboardAnalysis}>
           <div className={styles.portfolioBalance}>
@@ -229,6 +254,32 @@ const Dashboard = () => {
           </div>
         </div> */}
       </div>
+    </div>
+        <div className={tableStyles.tableContainer }>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <h1 className={tableStyles.tableTitle}>History</h1>
+            <div className={tableStyles.filterWrapper}>
+            <p>All</p>
+            <div onClick={handleClick} style={{cursor: 'pointer'}}>
+              <KeyboardArrowDownIcon />
+            </div>
+            <Menu
+              id="fade-menu"
+              MenuListProps={{
+                "aria-labelledby": "fade-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Fade}
+            >
+              <MenuItem onClick={handleClose}>Newest</MenuItem>
+              <MenuItem onClick={handleClose}>Oldest</MenuItem>
+            </Menu>
+            </div>
+          </div>
+          <DashboardTable tableHeaderData={tableHeaderData} />
+        </div>
     </div>
   );
 };

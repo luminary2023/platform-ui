@@ -2,6 +2,11 @@
     display: flex;
     justify-content: space-around;
 }
+.topContentOne {
+    display: flex; 
+    flex-direction: column; 
+    width: 45%
+}
 .walletBalanceContainer {
     display: flex;
     flex-direction: row;
@@ -28,6 +33,9 @@
     border-radius: 16px;
     border-radius: 16px;
     background: #ffff;
+}
+.withdrawContainerWrapper {
+    width: 50%;
 }
 .transactionsTitle {
     font-family: 'Clash Display SemiBold';
@@ -86,4 +94,36 @@
     align-items: center;
     color: #6C757D;
     font-family: 'Clash Display Regular';
+}
+
+@media screen and (max-width: 800px) {
+    .topContent {
+        flex-direction: column;
+        /* width: 80%; */
+    }
+    .topContentOne {
+        width: 100%;
+    }
+    .walletBalanceContainer {
+        flex-direction: column;
+        height: fit-content;
+        align-items: flex-start;
+    }
+    .quickActionsContainer {
+        width: 80px;
+        text-align: center;
+    }
+    .quickActionsText {
+        font-size: 12px;
+    }
+    .withdrawContainerWrapper {
+        width: 100%;
+        margin-top: 24px;
+    }
+    .walletBalance {
+        margin-bottom: 16px;
+    }
+    .tableContainer {
+        display: none;
+    }
 }

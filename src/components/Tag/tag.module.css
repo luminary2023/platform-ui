@@ -22,3 +22,14 @@
     width: fit-content;
     padding: 4px 8px;
 }
+.TagTwoContainer {
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    background-color: red;
+    left: -9px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}

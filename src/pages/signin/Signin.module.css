@@ -43,4 +43,20 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
+}
+
+@media screen and (max-width: 800px) {
+    .signinRightWrapper {
+        display: none;
+    }
+    .signinLeftWrapper {
+        width: 100%;
+        padding: 100px 50px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .createAccount {
+        flex-direction: column;
+    }
+}

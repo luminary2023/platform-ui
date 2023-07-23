@@ -8,6 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
+import ReceiveIcon from '../../assets/images/receive.svg'
+import SendIcon from '../../assets/images/send.svg'
+import styles from '../Tag/tag.module.css'
 
 import Tag from "../Tag";
 
@@ -15,17 +18,52 @@ interface AppTableProps {
   tableHeaderData: any;
 }
 
-const singleData = 
+interface AppTableTagProps {
+  text: string;
+}
+
+const singleData = [
   {
     date: "6/19/14",
-    beneficiary: "Cameron Williamson",
-    bank: "Guaranty Trust Bank",
-    country: "Nigeria",
+    type: "Recieve",
+    assest: "Apple Gift card",
+    description: "the description of the transaction",
+    amount: "120,000",
+    status: "completed"
+  },
+  {
+    date: "6/19/14",
+    type: "Send",
+    assest: "Apple Gift card",
+    description: "the description of the transaction",
+    amount: "120,000",
+    status: "completed"
+  },
+  {
+    date: "6/19/14",
+    type: "Recieve",
+    assest: "Apple Gift card",
+    description: "the description of the transaction",
+    amount: "120,000",
+    status: "completed"
+  },
+  {
+    date: "6/19/14",
+    type: "Send",
+    assest: "Apple Gift card",
+    description: "the description of the transaction",
     amount: "120,000",
     status: "completed"
   }
+]
 
-const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
+const TableTag: React.FC<AppTableTagProps> = ({text}) => (
+  <div className={styles.TagTwoContainer} style={{background:  text === "Recieve" ? "rgb(204 244 233)" : "rgba(220, 53, 69, 0.20)"}}>
+    <Image src={text === 'Recieve' ? ReceiveIcon : SendIcon} alt='icon' />
+  </div>
+)
+
+const DashboardTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
   return (
     <>
       <TableContainer component={Paper}>
@@ -34,7 +72,6 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
             sx={{
               borderRadius: "8px 8px 0px 0px",
               background: "#F6F6F6",
-              // width: '100%'
             }}
           >
             <TableRow>
@@ -52,7 +89,7 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[...Array(10).fill(singleData)].map((row) => (
+            {(singleData).map((row) => (
               <TableRow
                 key={row.date}
               >
@@ -68,16 +105,21 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
                   sx={{
                     color: "#787389",
                     fontFamily: "Satoshi Regular",
+                    position: "relative",
+                    textAlighn: "center !important",
                   }}
                 >
-                  {row.beneficiary}
+                  <>
+                  <TableTag text={row.type}/>
+                  {row.type}
+                  </>
                 </TableCell>
                 <TableCell
                   sx={{
                     fontFamily: "Satoshi Regular",
                   }}
                 >
-                  {row.bank}
+                  {row.assest}
                 </TableCell>
                 <TableCell
                   sx={{
@@ -85,7 +127,7 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
                     fontFamily: "Satoshi Regular",
                   }}
                 >
-                  {row.country}
+                  {row.description}
                 </TableCell>
                 <TableCell
                   sx={{
@@ -97,9 +139,6 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
                 </TableCell>
                 <TableCell>
                   <Tag text={row.status} />
-                </TableCell>
-                <TableCell>
-                  <Tag type="link" />
                 </TableCell>
               </TableRow>
             ))}
@@ -129,6 +168,5 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
   );
 };
 
-export default AppTable;
+export default DashboardTable;
 
-// const singleData = ["6/9/14", "Cameron", "gt", "Nigeria", "120,000", "completed"];

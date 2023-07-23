@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Signin.module.css";
 import PageTitle from "@/components/PageTitle";
 import Input from "@/components/InputField";
@@ -8,14 +8,31 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { Login } from "@/services/schemaVarification";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { loginRequest } from "@/api/login";
+import Loading from "@/components/Loading";
+import Toast from "../../components/Toast";
 
 interface LoginProps {
   password: string;
   email: string;
 }
 
+interface ErrorProps {
+  status: string;
+  message: string;
+  statusCode: number;
+}
+
 const SignIn = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [errs, setErrs] = useState<ErrorProps>({
+    status: '',
+    message: '',
+    statusCode: 0,
+  })
+
 
   const {
     handleSubmit,
@@ -25,14 +42,23 @@ const SignIn = () => {
     resolver: zodResolver(Login),
   });
 
-  const handleLogin = (data: any) => {
-    console.log(data);
+
+  const handleLogin = async (data: LoginProps) => {
+    setLoading(true)
+    const res = await loginRequest(data);
+    setLoading(false)
+    if(res?.statusCode === 200 && res.status === "Success"){
+      router.push('/dashboard')
+      setError(false)
+    }
+    setErrs(res)
+    setError(true)
   };
 
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signinLeftWrapper}>
-        {/* <Toast text="Password or email is incorrect please try again" marginBottom={40}/> */}
+        {error && <Toast text={errs?.message} marginBottom={40}/>}
         <div style={{ marginBottom: 32 }}>
           <PageTitle
             title={"Welcome back"}
@@ -73,7 +99,7 @@ const SignIn = () => {
               textTransform: "capitalize",
             }}
           >
-            Sign-In
+            {loading ? <Loading /> : 'Sign-In'}
           </Button>
         </form>
         <p className={`${PageTitleStyles.subtitle} ${styles.createAccount}`}>

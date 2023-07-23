@@ -1,13 +1,13 @@
-import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
-import styles from "./wallet.module.css";
+import DashboardContainer from "../../components/DashboardNavigation/dashboardContainer";
+import styles from "./wallet.module.css"
 
 import React from "react";
-import { Button } from "@/components/Button/Button";
-import Input from "@/components/InputField";
+import { Button } from "../../components/Button/Button";
+import Input from "../../components/InputField";
 import { Select, SelectChangeEvent, MenuItem, Menu, Fade,} from "@mui/material";
 import { bankData, quickActionsData } from "../../services/data";
 import EastIcon from "@mui/icons-material/East";
-import AppTable from "@/components/Table";
+import AppTable from "../../components/Table";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Image from "next/image";
 
@@ -45,7 +45,7 @@ const Wallet = () => {
       <DashboardContainer title="Wallet">
         <div className={styles.topContent}>
           <div
-            style={{ display: "flex", flexDirection: "column", width: "45%" }}
+            className={styles.topContentOne}
           >
             <div className={styles.walletBalanceContainer}>
               <div>
@@ -88,7 +88,7 @@ const Wallet = () => {
               </div>
             </div>
           </div>
-          <div style={{width: '50%'}}>
+          <div className={styles.withdrawContainerWrapper} >
             <div className={styles.withdrawContainer}>
               <h3 className={styles.tableTitle}>Withdraw Funds</h3>
               <p className={styles.inputLabel}>Select Bank</p>
