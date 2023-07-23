@@ -17,11 +17,21 @@ interface LoginProps {
   email: string;
 }
 
+interface ErrorProps {
+  status: string;
+  message: string;
+  statusCode: number;
+}
+
 const SignIn = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-  const [errs, setErrs] = useState({})
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [errs, setErrs] = useState<ErrorProps>({
+    status: '',
+    message: '',
+    statusCode: 0,
+  })
 
 
   const {
