@@ -1,0 +1,108 @@
+.emailSection {
+  height: 478px;
+  width: 360px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 90px;
+}
+
+.emailSection h1 {
+  color: var(--gray-900, #101828);
+  text-align: center;
+  font-size: 32px;
+  font-family: "Satoshi Regular";
+  font-weight: 900;
+  margin-top: 18px;
+  margin-bottom: 12px;
+}
+
+.emailSection p {
+  color: var(--gray-500, #667085);
+  text-align: center;
+  font-family: "Satoshi Light";
+  font-size: 14px;
+}
+
+.emailCodeVarify {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  width: 100%;
+}
+.code {
+  border-radius: 8px;
+  border: 1px solid #1e1e1e;
+  background: var(--white, #fff);
+  height: 80px;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+
+  width: 80px;
+  text-align: center;
+  font-size: 48px;
+  font-family: "Satoshi Regular";
+  font-weight: bold;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+.emailSection Button {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  text-transform: initial;
+  width: 100%;
+  height: 50px;
+}
+.sent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.resend {
+  color: #1e1e1e;
+  font-size: 14px;
+  font-family: "Satoshi Light";
+  font-weight: bold;
+
+  margin-left: 5px;
+}
+.goBack {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.goBack p {
+  color: var(--gray-500, #667085);
+  font-size: 14px;
+  font-family: "Satoshi Light";
+  font-weight: bold;
+  letter-spacing: 0.14px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+  .emailSection {
+    padding-top: 50px;
+    width: 90%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .emailSection {
+    padding-top: 50px;
+    width: 30%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .emailSection h1 {
+    font-size: 20px;
+    font-family: "Satoshi Bold";
+    font-weight: bold;
+  }
+}

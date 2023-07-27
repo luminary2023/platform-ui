@@ -2,7 +2,7 @@ import React from "react";
 import EmailLogo from "../../assets/images/EmailIcon.svg";
 import styles from "./email.module.css";
 import Image from "next/image";
-import { Button } from "../Button/Button";
+import { Button } from "../../components/Button/Button";
 import BackArrow from "../../assets/images/arrow-left.svg";
 import { useRouter } from "next/router";
 
@@ -29,7 +29,7 @@ const EmailCodeVarification = () => {
         <h6 className={styles.resend}>Click to resend</h6>
       </div>
 
-      <div className={styles.goBack} onClick={() => router.push("/")}>
+      <div className={styles.goBack} onClick={() => router.push("/signup")}>
         <Image src={BackArrow} alt="backArrow" />
         <p>Back to create account</p>
       </div>

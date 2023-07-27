@@ -29,7 +29,7 @@ export default function Index() {
     statusCode: 0,
     errors: "",
   });
-
+  console.log(errs);
   const {
     handleSubmit,
     register,
@@ -43,7 +43,7 @@ export default function Index() {
     const res = await RegisterRequest(data);
     setLoading(false);
     if (res?.statusCode === 201 && res.status === "Created") {
-      router.push("/dashboard");
+      router.push("/emailVerification");
       setError(false);
     }
     setErrs(res);
@@ -56,7 +56,10 @@ export default function Index() {
         <div className={styles.createAccount}>
           <div className={styles.formContent}>
             {error && (
-              <Toast text={errs?.errors?.[0].message} marginBottom={40} />
+              <Toast
+                text={errs?.errors?.[0].message || errs?.message}
+                marginBottom={40}
+              />
             )}
 
             <h1 className={styles.title} style={{ marginBottom: "24px" }}>
