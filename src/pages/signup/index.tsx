@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SignUp.module.css";
 import { Button } from "@/components/Button/Button";
 import Input from "@/components/InputField";
@@ -8,9 +8,28 @@ import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUp } from "@/services/schemaVarification";
 import { SignupProps } from "../../services/interfaces";
+import { RegisterRequest } from "@/api/register";
+import Toast from "../../components/Toast";
+import Loading from "@/components/Loading";
+
+interface ErrorProps {
+  status: string;
+  message: string;
+  statusCode: number;
+  errors: any;
+}
 
 export default function Index() {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errs, setErrs] = useState<ErrorProps>({
+    status: "",
+    message: "",
+    statusCode: 0,
+    errors: "",
+  });
+
   const {
     handleSubmit,
     register,
@@ -18,8 +37,17 @@ export default function Index() {
   } = useForm<SignupProps>({
     resolver: zodResolver(SignUp),
   });
-  const handleRegistration = (data: any) => {
-    console.log(data);
+
+  const handleRegistration = async (data: SignupProps) => {
+    setLoading(true);
+    const res = await RegisterRequest(data);
+    setLoading(false);
+    if (res?.statusCode === 201 && res.status === "Created") {
+      router.push("/dashboard");
+      setError(false);
+    }
+    setErrs(res);
+    setError(true);
   };
 
   return (
@@ -27,6 +55,10 @@ export default function Index() {
       <div className={styles.heroSection}>
         <div className={styles.createAccount}>
           <div className={styles.formContent}>
+            {error && (
+              <Toast text={errs?.errors?.[0].message} marginBottom={40} />
+            )}
+
             <h1 className={styles.title} style={{ marginBottom: "24px" }}>
               Create account
             </h1>
@@ -97,7 +129,7 @@ export default function Index() {
                 sx={{ textTransform: "initial", marginBottom: "32px" }}
                 type="submit"
               >
-                Create account
+                {loading ? <Loading /> : "Create account"}
               </Button>
             </form>
             <div className={styles.accountUser}>
