@@ -12,6 +12,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DownArrow from "../../assets/images/DownArrow.svg";
 import Image from "next/image";
+import { useRouter } from "next/router";
 interface Props {
   title: string;
   subtitle: string;
@@ -26,6 +27,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const router = useRouter();
   return (
     <>
       <Box
@@ -159,9 +161,11 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               onClose={handleClose}
               TransitionComponent={Fade}
             >
-              <MenuItem onClick={handleClose}>Wallet</MenuItem>
-              <MenuItem onClick={handleClose}>Gift Card</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={() => router.push("/wallet")}>Wallet</MenuItem>
+              <MenuItem onClick={() => router.push("/giftCard")}>
+                Gift Card
+              </MenuItem>
+              <MenuItem onClick={() => router.push("/")}>Logout</MenuItem>
             </Menu>
           </Box>
         </Box>
