@@ -12,6 +12,7 @@ import { emailVerificationRequest } from "@/api/emailVerification";
 import { setCookie } from "cookies-next";
 import Toast from "@/components/Toast";
 import Loading from "@/components/Loading";
+import { resendVerificationCodeRequest } from "@/api/resendCodeVerification";
 
 interface ErrorProps {
   status: string;
@@ -39,6 +40,10 @@ const EmailCodeVarification = () => {
   const handleEmailVerification = () => {
     router.push("/dashboard");
   };
+
+  const handleResendCode = (data: any) => {
+    resendVerificationCodeRequest(data);
+  };
   return (
     <>
       {verification ? (
@@ -62,7 +67,9 @@ const EmailCodeVarification = () => {
           <div className={styles.sent}>
             <p>Didn’t receive the email?</p>
 
-            <h6 className={styles.resend}>Click to resend</h6>
+            <h6 className={styles.resend} onClick={handleResendCode}>
+              Click to resend
+            </h6>
           </div>
 
           <div className={styles.goBack} onClick={() => router.push("/signup")}>
