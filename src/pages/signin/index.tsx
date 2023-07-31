@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginRequest } from "@/api/login";
 import Loading from "@/components/Loading";
 import Toast from "../../components/Toast";
+import { setCookie } from "cookies-next";
 
 interface LoginProps {
   password: string;
@@ -25,14 +26,13 @@ interface ErrorProps {
 
 const SignIn = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [errs, setErrs] = useState<ErrorProps>({
-    status: '',
-    message: '',
+    status: "",
+    message: "",
     statusCode: 0,
-  })
-
+  });
 
   const {
     handleSubmit,
@@ -42,23 +42,23 @@ const SignIn = () => {
     resolver: zodResolver(Login),
   });
 
-
   const handleLogin = async (data: LoginProps) => {
-    setLoading(true)
+    setLoading(true);
     const res = await loginRequest(data);
-    setLoading(false)
-    if(res?.statusCode === 200 && res.status === "Success"){
-      router.push('/dashboard')
-      setError(false)
+    setLoading(false);
+    if (res?.statusCode === 200 && res.status === "Success") {
+      setCookie("logged", "true");
+      router.push("/dashboard");
+      setError(false);
     }
-    setErrs(res)
-    setError(true)
+    setErrs(res);
+    setError(true);
   };
 
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signinLeftWrapper}>
-        {error && <Toast text={errs?.message} marginBottom={40}/>}
+        {error && <Toast text={errs?.message} marginBottom={40} />}
         <div style={{ marginBottom: 32 }}>
           <PageTitle
             title={"Welcome back"}
@@ -99,7 +99,7 @@ const SignIn = () => {
               textTransform: "capitalize",
             }}
           >
-            {loading ? <Loading /> : 'Sign-In'}
+            {loading ? <Loading /> : "Sign-In"}
           </Button>
         </form>
         <p className={`${PageTitleStyles.subtitle} ${styles.createAccount}`}>

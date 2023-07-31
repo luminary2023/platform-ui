@@ -11,6 +11,8 @@ import { SignupProps } from "../../services/interfaces";
 import { RegisterRequest } from "@/api/register";
 import Toast from "../../components/Toast";
 import Loading from "@/components/Loading";
+import { setCookie } from "cookies-next";
+import { emailVerificationRequest } from "@/api/emailVerification";
 
 interface ErrorProps {
   status: string;
@@ -29,7 +31,6 @@ export default function Index() {
     statusCode: 0,
     errors: "",
   });
-  console.log(errs);
   const {
     handleSubmit,
     register,
@@ -43,6 +44,8 @@ export default function Index() {
     const res = await RegisterRequest(data);
     setLoading(false);
     if (res?.statusCode === 201 && res.status === "Created") {
+      setCookie("logged", "true");
+      emailVerificationRequest(data);
       router.push("/emailVerification");
       setError(false);
     }

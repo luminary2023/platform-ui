@@ -67,8 +67,12 @@
   font-size: 14px;
   font-family: "Satoshi Light";
   font-weight: bold;
-
+  cursor: pointer;
   margin-left: 5px;
+}
+.resend:hover {
+  text-decoration: underline;
+  color: #101828;
 }
 .goBack {
   margin-top: 32px;

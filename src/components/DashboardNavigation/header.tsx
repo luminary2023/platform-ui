@@ -13,6 +13,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DownArrow from "../../assets/images/DownArrow.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { deleteCookie } from "cookies-next";
 interface Props {
   title: string;
   subtitle: string;
@@ -28,6 +29,11 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     setAnchorEl(null);
   };
   const router = useRouter();
+
+  const logout = () => {
+    deleteCookie("logged");
+    router.push("/");
+  };
   return (
     <>
       <Box
@@ -165,7 +171,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               <MenuItem onClick={() => router.push("/giftCard")}>
                 Gift Card
               </MenuItem>
-              <MenuItem onClick={() => router.push("/")}>Logout</MenuItem>
+              <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
           </Box>
         </Box>
