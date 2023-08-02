@@ -371,6 +371,7 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
+    display: none;
   }
 }
 .dashboardQuickBuy h3 {
@@ -425,7 +426,7 @@
   line-height: normal;
 }
 .cryptoName p {
-  color: var(--dark-1, #4c4c66);
+  color: #4c4c66;
   font-family: "Satoshi Bold";
   font-size: 11.761px;
   font-style: bold;
