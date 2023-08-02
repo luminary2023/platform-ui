@@ -12,7 +12,8 @@ import { RegisterRequest } from "@/api/register";
 import Toast from "../../components/Toast";
 import Loading from "@/components/Loading";
 import { setCookie } from "cookies-next";
-import { emailVerificationRequest } from "@/api/emailVerification";
+
+import { codeVerificationRequest } from "@/api/codeVerification";
 
 interface ErrorProps {
   status: string;
@@ -45,7 +46,7 @@ export default function Index() {
     setLoading(false);
     if (res?.statusCode === 201 && res.status === "Created") {
       setCookie("logged", "true");
-      emailVerificationRequest(data);
+      sessionStorage.setItem("email", data.email);
       router.push("/emailVerification");
       setError(false);
     }

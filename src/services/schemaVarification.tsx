@@ -25,3 +25,8 @@ export const Login = z.object({
   email: z.string().email({ message: "Email is required" }),
   password: z.string().min(8, { message: "Password required" }).max(24),
 });
+
+export const codeValidation = z.object({
+  // email: z.string().email({ message: "Email is required" }),
+  verificationCode: z.string().min(8, { message: "code required" }).max(24),
+});

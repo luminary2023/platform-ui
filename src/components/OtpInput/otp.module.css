@@ -1,0 +1,6 @@
+.optGroup {
+  display: flex;
+  width: 100%;
+  /* max-width: 360px; */
+  column-gap: 10px;
+}
