@@ -13,6 +13,7 @@ import Toast from "@/components/Toast";
 import Loading from "@/components/Loading";
 import OtpInput from "@/components/OtpInput/otpInput";
 import { codeVerificationRequest } from "@/api/codeVerification";
+import { resendVerificationCodeRequest } from "@/api/resendCodeVerification";
 
 interface ErrorProps {
   status: string;
@@ -70,6 +71,16 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
     setError(true);
   };
 
+  const handleResendOtp = async (e: any) => {
+    e.preventDefault();
+    const res = await resendVerificationCodeRequest({ email });
+    if (res?.statusCode === 200 && res.status === "Success") {
+      setError(false);
+    }
+    setErrs(res);
+    setError(true);
+  };
+
   return (
     <>
       {verification ? (
@@ -97,7 +108,9 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
           <div className={styles.sent}>
             <p>Didn’t receive the email?</p>
 
-            <h6 className={styles.resend}>Click to resend</h6>
+            <h6 className={styles.resend} onClick={handleResendOtp}>
+              Click to resend
+            </h6>
           </div>
 
           <div className={styles.goBack} onClick={() => router.push("/signup")}>
