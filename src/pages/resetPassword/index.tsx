@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect} from "react";
 import { useRouter } from "next/router";
 
 import ForgotPasswordIcon from "../../assets/images/forgot.svg";
@@ -17,6 +17,14 @@ const ResetPassword = () => {
     
   const router = useRouter();
   const [resetSuccess, setResetSuccess] = useState<boolean>(false)
+  const [email, setEmail] = useState<any>("")
+
+  console.log(email, '----------')
+
+  useEffect(() => {
+    const a = sessionStorage.getItem("email")
+    setEmail(a)
+  }, [])
 
   return (
     <>
