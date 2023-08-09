@@ -12,16 +12,11 @@ import { loginRequest } from "@/api/login";
 import Loading from "@/components/Loading";
 import Toast from "../../components/Toast";
 import { setCookie } from "cookies-next";
+import { ErrorProps } from "@/services/interfaces";
 
 interface LoginProps {
   password: string;
   email: string;
-}
-
-interface ErrorProps {
-  status: string;
-  message: string;
-  statusCode: number;
 }
 
 const SignIn = () => {

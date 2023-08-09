@@ -42,3 +42,9 @@ export interface Props extends React.PropsWithChildren {
   title: string;
   subtitle?: string;
 }
+
+export interface ErrorProps {
+  status: string;
+  message: string;
+  statusCode: number;
+}
