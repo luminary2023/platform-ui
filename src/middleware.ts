@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
 
-  let isLogin = request.cookies.get("logged");
+  let isLogin = request.cookies.get("token");
 
   if (!isLogin) {
     if (request.nextUrl.pathname.startsWith("/dashboard")) {
@@ -13,9 +13,10 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/", request.url));
     } else if (request.nextUrl.pathname.startsWith("/giftCard")) {
       return NextResponse.redirect(new URL("/", request.url));
-    } else if (request.nextUrl.pathname.startsWith("/emailVerification")) {
-      return NextResponse.redirect(new URL("/", request.url));
     }
+    // else if (request.nextUrl.pathname.startsWith("/emailVerification")) {
+    //   return NextResponse.redirect(new URL("/", request.url));
+    // }
   } else {
     if (url.pathname === "/") {
       return NextResponse.redirect(url);
