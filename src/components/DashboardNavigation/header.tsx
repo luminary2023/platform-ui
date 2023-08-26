@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Box,
   Avatar,
@@ -14,12 +14,29 @@ import DownArrow from "../../assets/images/DownArrow.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { deleteCookie } from "cookies-next";
+import { profileRequest } from "@/api/profile";
+
 interface Props {
   title: string;
   subtitle: string;
 }
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
+  const [profileData, setProfileData] = useState<any>("");
+  const [error, setError] = useState<boolean>(false);
+
+  const fetchProfile = async () => {
+    try {
+      const res = await profileRequest();
+      setProfileData(res);
+    } catch (err) {
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,8 +49,10 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
 
   const logout = () => {
     deleteCookie("logged");
+    deleteCookie("token");
     router.push("/");
   };
+
   return (
     <>
       <Box
@@ -114,15 +133,19 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
           </Box>
 
           <Avatar
-            alt="Remy Sharp"
-            src="/static/images/avatar/1.jpg"
+            src=""
             sx={{
               width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
               height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
               marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
+              fontSize: { xs: "13px", sm: "13px", md: "15px", lg: "17px" },
               cursor: "pointer",
+              display: "flex",
             }}
-          />
+          >
+            {profileData?.results?.firstName[0]}
+            {profileData?.results?.lastName[0]}
+          </Avatar>
           <Typography
             sx={{
               color: " #6F6C99",
@@ -139,7 +162,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               },
             }}
           >
-            Pixelz Warrios
+            {profileData.results?.firstName} {profileData.results?.lastName}
           </Typography>
           <Box
             sx={{

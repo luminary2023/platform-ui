@@ -42,7 +42,7 @@ const SignIn = () => {
     const res = await loginRequest(data);
     setLoading(false);
     if (res?.statusCode === 200 && res.status === "Success") {
-      setCookie("logged", "true");
+      setCookie("token", res.token.token);
       router.push("/dashboard");
       setError(false);
     }

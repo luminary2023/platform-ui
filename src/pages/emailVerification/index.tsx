@@ -7,8 +7,6 @@ import BackArrow from "../../assets/images/arrow-left.svg";
 import { useRouter } from "next/router";
 import EmailVerified from "@/components/CreateAccount/emailVerified";
 import Icon from "../../assets/images/emailVerifiedIcon.svg";
-import Input from "@/components/InputField";
-import { setCookie } from "cookies-next";
 import Toast from "@/components/Toast";
 import Loading from "@/components/Loading";
 import OtpInput from "@/components/OtpInput/otpInput";
@@ -43,16 +41,16 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
   const [otp, setOtp] = useState("");
   const onChange = (value: string) => setOtp(value);
   const router = useRouter();
-  const fromForgotPasswordPage = router.query.from === 'forgot-password'
+  const fromForgotPasswordPage = router.query.from === "forgot-password";
 
   const handleEmailVerification = () => {
-    if(fromForgotPasswordPage) {
-      router.push("resetPassword")
+    if (fromForgotPasswordPage) {
+      router.push("resetPassword");
     } else {
-      router.push("/dashboard");
+      router.push("/signin");
     }
   };
-  
+
   useEffect(() => {
     const emailValue = sessionStorage.getItem("email");
     if (emailValue) {
@@ -65,19 +63,19 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
   const codeVerification = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    const res = fromForgotPasswordPage ?
-    await verifyPasswordCodeRequest({
-      email,
-      resetPasswordCode: otp
-    }) : await codeVerificationRequest({
-      verificationCode: otp,
-      email,
-    });
+    const res = fromForgotPasswordPage
+      ? await verifyPasswordCodeRequest({
+          email,
+          resetPasswordCode: otp,
+        })
+      : await codeVerificationRequest({
+          verificationCode: otp,
+          email,
+        });
 
     setLoading(false);
 
     if (res?.statusCode === 200 && res.status === "Success") {
-      setCookie("logged", "true");
       setVerification(false);
       setError(false);
     }
@@ -138,7 +136,9 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
           subTitle={
             "Your password has been successfully reset. Click below to log in magically."
           }
-          backToText={`Back to ${fromForgotPasswordPage ? "forgot password" : "create account"}`}
+          backToText={`Back to ${
+            fromForgotPasswordPage ? "forgot password" : "create account"
+          }`}
           routerPath={""}
           btnOnClick={handleEmailVerification}
           icon={Icon}
