@@ -44,7 +44,8 @@ const ForgotPassword = () => {
     resolver: zodResolver(forgotPassword),
   });
 
-  const handleLogin = async (data: ForgotPasswordProps) => {
+
+  const handleForgortPassword = async (data: ForgotPasswordProps) => {
     setLoading(true);
     const res = await forgotPasswordRequest(data);
     setLoading(false);
@@ -72,7 +73,7 @@ const ForgotPassword = () => {
             title={"Forgot password?"}
             subtitle={"No worries, we’ll send you reset instructions."}
           />
-          <form onSubmit={handleSubmit(handleLogin)}>
+          <form onSubmit={handleSubmit(handleForgortPassword)}>
             <div className={styles.forgotPasswordInput}>
               <Input
                 placeholder="Enter your email "
