@@ -1,13 +1,20 @@
+"use client";
 import React, { FC } from "react";
 import { useRouter } from "next/router";
 
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
+import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
 import { Typography, Box } from "@mui/material";
 
 const links = [
-  { path: "/dashboard", title: "Dashboard" },
-  { path: "/wallet", title: "Wallet" },
-  { path: "/giftCard", title: "Gift Cards" },
+  { path: "/dashboard", title: "Dashboard", icon: <DashboardOutlinedIcon /> },
+  { path: "/wallet", title: "Wallet", icon: <WalletOutlinedIcon /> },
+  {
+    path: "/giftCard",
+    title: "Gift Cards",
+    icon: <CardGiftcardOutlinedIcon />,
+  },
 ];
 
 const Sidebar = () => {
@@ -86,12 +93,14 @@ const Sidebar = () => {
           }}
           onClick={() => handleClick(link.path)}
         >
-          <DashboardOutlinedIcon
+          <span
             style={{
               color: currentRoute === link.path ? "#FD6E6A" : "#ffff",
             }}
-          />
-          ;
+          >
+            {link.icon}
+          </span>
+
           <Typography
             color={
               currentRoute === link.path
