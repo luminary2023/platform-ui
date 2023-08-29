@@ -9,7 +9,7 @@ import {
   Fade,
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+// import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DownArrow from "../../assets/images/DownArrow.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -87,7 +87,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
             alignItems: "center",
           }}
         >
-          <SearchOutlinedIcon
+          {/* <SearchOutlinedIcon
             style={{
               color: "#6F6C99",
               width: "31px",
@@ -95,7 +95,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               flexShrink: "0",
               cursor: "pointer",
             }}
-          />
+          /> */}
           <Box
             sx={{
               display: "inline-flex",

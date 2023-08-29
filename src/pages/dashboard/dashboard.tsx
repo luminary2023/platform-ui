@@ -1,18 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./dashboard.module.css";
-import {
-  Box,
-  Select,
-  MenuItem,
-  Typography,
-  TextField,
-  Menu,
-  Fade,
-} from "@mui/material";
+import { Box, MenuItem, Menu, Fade } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
 import { Button } from "../../components/Button/Button";
 import Image from "next/image";
-import Bitcoins from "../../assets/images/Bitcoins.svg";
 import TreadingUp from "../../assets/images/trendingUp.svg";
 import ICN from "../../assets/images/Icn.svg";
 import Line from "../../assets/images/BarLine.svg";
@@ -23,6 +14,7 @@ import tableStyles from "../wallet/wallet.module.css";
 import AmazonCard from "../../assets/images/Amazon.svg";
 import AmericanCard from "../../assets/images/americanCard.svg";
 import MediaCard from "../../assets/images/mediaCard.svg";
+import { profileRequest } from "@/api/profile";
 
 const giftCards = [
   {
@@ -41,6 +33,22 @@ const giftCards = [
 
 const Dashboard = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [profileData, setProfileData] = useState<any>("");
+  const [error, setError] = useState<boolean>(false);
+
+  const fetchProfile = async () => {
+    try {
+      const res = await profileRequest();
+      setProfileData(res);
+      console.log(profileData);
+    } catch (err) {
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
   const open = Boolean(anchorEl);
 
@@ -68,7 +76,7 @@ const Dashboard = () => {
           <div className={styles.dashboardAnalysis}>
             <div className={styles.portfolioBalance}>
               <div className={styles.portfolioBg}>
-                <h2>$107,216</h2>
+                <h2>N{profileData.results?.wallet.balance}</h2>
                 <p>Total Portfolio Balance</p>
                 <div className={styles.percentage}>
                   <Image src={TreadingUp} alt="percent" />
