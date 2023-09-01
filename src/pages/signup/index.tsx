@@ -4,7 +4,6 @@ import styles from "./SignUp.module.css";
 import { Button } from "@/components/Button/Button";
 import Input from "@/components/InputField";
 import { useForm } from "react-hook-form";
-import AuthFooter from "@/components/AuthFooter/authFooter";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUp } from "@/services/schemaVarification";
@@ -148,7 +147,6 @@ export default function Index() {
               </div>
             </div>
           </div>
-          <AuthFooter />
         </div>
 
         <div className={styles.createimg}></div>
