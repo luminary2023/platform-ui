@@ -1,3 +1,4 @@
+"use client";
 import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
 import React from "react";
 

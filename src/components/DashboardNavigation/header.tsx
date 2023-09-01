@@ -1,3 +1,4 @@
+"use client";
 import React, { FC, useEffect, useState } from "react";
 import {
   Box,
@@ -156,7 +157,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
               display: {
                 xs: "none",
-                sm: "none",
+                sm: "block",
                 lg: "block",
                 xl: "block",
               },

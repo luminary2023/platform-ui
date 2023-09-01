@@ -1,3 +1,4 @@
+"use client";
 import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
 import styles from "./dashboard.module.css";
 import Security from "../../assets/images/security.svg";
