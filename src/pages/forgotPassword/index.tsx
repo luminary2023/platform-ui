@@ -33,6 +33,7 @@ const ForgotPassword = () => {
     status: "",
     message: "",
     statusCode: 0,
+    errors: "",
   });
 
   const {
