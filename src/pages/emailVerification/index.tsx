@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import EmailLogo from "../../assets/images/EmailIcon.svg";
 import styles from "./email.module.css";

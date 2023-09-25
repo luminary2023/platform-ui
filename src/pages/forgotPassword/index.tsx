@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -32,6 +33,7 @@ const ForgotPassword = () => {
     status: "",
     message: "",
     statusCode: 0,
+    errors: "",
   });
 
   const {
@@ -42,7 +44,6 @@ const ForgotPassword = () => {
     resolver: zodResolver(forgotPassword),
   });
 
-
   const handleLogin = async (data: ForgotPasswordProps) => {
     setLoading(true);
     const res = await forgotPasswordRequest(data);
@@ -51,7 +52,7 @@ const ForgotPassword = () => {
       sessionStorage.setItem("email", data.email);
       router.push({
         pathname: "/emailVerification",
-        query: { from: 'forgot-password' }
+        query: { from: "forgot-password" },
       });
       setError(false);
     }
@@ -59,12 +60,11 @@ const ForgotPassword = () => {
     setError(true);
   };
 
-
   return (
     <>
       <div className={styles.forgotPasswordContainer}>
         <div className={styles.forgotPasswordContent}>
-        {error && <Toast text={errs?.message} marginBottom={40} />}
+          {error && <Toast text={errs?.message} marginBottom={40} />}
           <div style={{ marginBottom: 24 }}>
             <Image src={ForgotPasswordIcon} alt="Forgot Password Icon" />
           </div>

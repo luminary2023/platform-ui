@@ -1,6 +1,6 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
 import ForgotPasswordIcon from "../../assets/images/forgot.svg";
 import VerifiedIcon from "../../assets/images/emailVerifiedIcon.svg";
 import Image from "next/image";

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import styles from "./Signin.module.css";
 import PageTitle from "@/components/PageTitle";
@@ -27,6 +28,7 @@ const SignIn = () => {
     status: "",
     message: "",
     statusCode: 0,
+    errors: "",
   });
 
   const {

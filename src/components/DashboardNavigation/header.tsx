@@ -1,3 +1,4 @@
+"use client";
 import React, { FC, useEffect, useState } from "react";
 import {
   Box,
@@ -52,6 +53,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     deleteCookie("token");
     router.push("/");
   };
+
+  // console.log(profileData);
 
   return (
     <>
@@ -133,7 +136,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
           </Box>
 
           <Avatar
-            src=""
+            // src={}
             sx={{
               width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
               height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
@@ -143,8 +146,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               display: "flex",
             }}
           >
-            {profileData?.results?.firstName[0]}
-            {profileData?.results?.lastName[0]}
+            {profileData?.firstName?.charAt(0) +
+              profileData?.lastName?.charAt(0)}
           </Avatar>
           <Typography
             sx={{
@@ -156,13 +159,13 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
               display: {
                 xs: "none",
-                sm: "none",
+                sm: "block",
                 lg: "block",
                 xl: "block",
               },
             }}
           >
-            {profileData.results?.firstName} {profileData.results?.lastName}
+            {profileData?.firstName} {profileData?.lastName}
           </Typography>
           <Box
             sx={{

@@ -19,6 +19,8 @@ export interface InputProps {
   labelSize?: string;
   register?: any;
   borderColor?: string;
+  marginTop?: string;
+  inputMode?: string;
 }
 
 export interface EmailVerifiedProps {
@@ -38,6 +40,11 @@ export interface SignupProps {
   email: string;
 }
 
+export interface BankDetailsProps {
+  bankId: string;
+  accountNumber: string;
+}
+
 export interface Props extends React.PropsWithChildren {
   title: string;
   subtitle?: string;
@@ -47,4 +54,5 @@ export interface ErrorProps {
   status: string;
   message: string;
   statusCode: number;
+  errors: any;
 }

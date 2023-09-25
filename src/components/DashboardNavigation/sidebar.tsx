@@ -30,21 +30,17 @@ const Sidebar = () => {
       sx={{
         width: {
           xs: "20%",
-          sm: "25%",
-          lg: "20%",
-          xl: "20%",
+          sm: "22%",
+          lg: "22%",
+          xl: "22%",
         },
         height: {
-          xs: "175vh",
-          sm: "175vh",
+          xs: "100wh",
+          sm: "100vh",
           lg: "100vh",
           xl: "100vh",
         },
         background: "#081630",
-        paddingLeft: {
-          xs: "1px",
-          sm: "12px",
-        },
         paddingRight: {
           xs: "12px",
           sm: "12px",
@@ -56,7 +52,7 @@ const Sidebar = () => {
           color: "#FFF",
           fontSize: {
             xs: "14px",
-            sm: "16px",
+            sm: "24px",
             lg: "24px",
             xl: "24px",
           },
@@ -86,9 +82,7 @@ const Sidebar = () => {
             marginBottom: "29px",
             marginLeft: {
               xs: "20px",
-              sm: "26px",
               lg: "44px",
-              xl: "44px",
             },
           }}
           onClick={() => handleClick(link.path)}
@@ -112,7 +106,7 @@ const Sidebar = () => {
                 : "#ffff"
             }
             sx={{
-              marginLeft: "27px",
+              marginLeft: { xs: "10px", sm: "13px", lg: "27px" },
               fontSize: "16px",
               fontFamily: "Satoshi Light",
               fontStyle: "normal",
@@ -122,7 +116,8 @@ const Sidebar = () => {
               cursor: "pointer",
               display: {
                 xs: "none",
-                sm: "none",
+                sm: "block",
+                md: "block",
                 lg: "block",
                 xl: "block",
               },

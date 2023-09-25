@@ -9,6 +9,7 @@ interface ButtonProps {
   width?: string;
   size?: string;
   fullWidth?: boolean;
+
   //   children: ReactNode;
 }
 
