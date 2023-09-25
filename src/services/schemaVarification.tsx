@@ -34,3 +34,11 @@ export const codeValidation = z.object({
 export const forgotPassword = z.object({
   email: z.string().email({ message: "Email is required" }),
 });
+
+export const bankDetails = z.object({
+  // bankId: z.string().min(3, { message: "Bank name is required" }).max(10),
+  accountNumber: z
+    .string()
+    .min(10, { message: "Account number is required" })
+    .max(12),
+});

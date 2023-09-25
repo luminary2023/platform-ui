@@ -28,6 +28,7 @@ const SignIn = () => {
     status: "",
     message: "",
     statusCode: 0,
+    errors: "",
   });
 
   const {

@@ -1,16 +1,15 @@
-import React, { FC } from "react";
-import {
-  Box,
-  Select,
-  MenuItem,
-  FormControl,
-  Typography,
-  Modal,
-  SelectChangeEvent,
-  TextField,
-} from "@mui/material";
+import { FC, useEffect, useState, memo } from "react";
+import { Box, Typography, Modal, Alert } from "@mui/material";
 import Input from "@/components/InputField";
 import { Button } from "@/components/Button/Button";
+import { bankRequest } from "@/api/bank";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { BankDetailsProps } from "@/services/interfaces";
+import { saveBankDetails } from "@/api/saveBankDetails";
+import { bankDetails } from "@/services/schemaVarification";
+import Toast from "@/components/Toast";
+import Loading from "@/components/Loading";
 
 const style = {
   position: "absolute" as "absolute",
@@ -29,30 +28,55 @@ const style = {
   },
   outline: "none",
 };
-const banks = [
-  "Gtb",
-  "Uba",
-  "First Bank",
-  "Access",
-  "Fidelity",
-  "Unity",
-  "Zenith",
-];
 
 interface Props {
   open: boolean;
   onClose: () => void;
 }
 
-const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
-  const [bank, setBank] = React.useState<string[]>([]);
+interface ErrorProps {
+  status: string;
+  message: string;
+  statusCode: number;
+  errors: any;
+}
 
-  const handleChange = (event: SelectChangeEvent<typeof bank>) => {
-    const {
-      target: { value },
-    } = event;
-    setBank(typeof value === "string" ? value.split(",") : value);
+const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [banks, setBanks] = useState<[]>([]);
+  const [error, setError] = useState<boolean>(false);
+  const [errs, setErrs] = useState<ErrorProps>({
+    status: "",
+    message: "",
+    statusCode: 0,
+    errors: "",
+  });
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<BankDetailsProps>({
+    resolver: zodResolver(bankDetails),
+  });
+  const SaveAccountDetails = async (data: BankDetailsProps) => {
+    console.log("This is not working", data);
   };
+
+  const fetchBankDetails = async () => {
+    try {
+      setLoading(true);
+      const res = await bankRequest();
+      setBanks(res);
+      setLoading(false);
+    } catch (err) {
+      setError(true);
+    }
+  };
+  useEffect(() => {
+    fetchBankDetails();
+  }, []);
+
   return (
     <Modal
       open={open}
@@ -89,6 +113,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
         >
           Add your bank details{" "}
         </Typography>
+
         <Typography
           sx={{
             color: "#344054",
@@ -102,70 +127,95 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
         >
           Bank name
         </Typography>
-        <Select
-          value={bank}
-          onChange={handleChange}
-          placeholder="Choose a bank"
-          sx={{ height: "40px", width: "100%", marginBottom: "24px" }}
-        >
-          {banks.map((bank, index) => (
-            <MenuItem key={index} value={bank}>
-              {bank}
-            </MenuItem>
-          ))}
-        </Select>
-        <Input
-          type={"0123456789"}
-          placeholder={"Account number"}
-          label="Bank account number"
-          marginBottom={"8px"}
-          labelColor={"#081630"}
-          labelSize={"16px"}
-        />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "column", lg: "row", xl: "row" },
-            justifyContent: "space-between",
-            marginTop: "40px",
-            alignItems: "center",
-            gap: "15px",
-          }}
-        >
-          <Button
-            color="secondary"
-            variant={"contained"}
-            onClick={onClose}
-            sx={{
-              textTransform: "initial",
-              color: "#000",
-              fontFamily: " Satoshi Light",
-              fontSize: "13px",
-              borderRadius: "29px",
-              border: "1px solid  #000",
-              width: "155px",
-              height: "38px",
+        <form onSubmit={handleSubmit(SaveAccountDetails)}>
+          <select
+            {...register("bankId")}
+            style={{
+              width: "100%",
+              height: "45px",
+              borderRadius: "10px",
+              paddingLeft: "8px",
+              paddingRight: "8px",
+              borderColor: "gray",
             }}
           >
-            Cancle
-          </Button>
-          <Button
-            color="primary"
-            variant={"contained"}
+            {banks?.map((bank: any) => (
+              <>
+                <option
+                  value={bank.id}
+                  key={bank.id}
+                  placeholder="Choose a bank"
+                  // {...register("bankId")}
+                >
+                  {bank.name}
+                </option>
+              </>
+            ))}
+          </select>
+
+          <Input
+            type="number"
+            inputMode={"numeric"}
+            placeholder={"Account number"}
+            label="Bank account number"
+            marginBottom={"8px"}
+            labelColor={"#081630"}
+            labelSize={"16px"}
+            marginTop={"12px"}
+            register={{ ...register("accountNumber") }}
+            borderColor={errors.accountNumber?.message ? "#DF1111" : ""}
+          />
+          <Box
             sx={{
-              textTransform: "initial",
-              color: "#fff",
-              fontFamily: " Satoshi Light",
-              fontSize: "13px",
-              borderRadius: "29px",
-              width: "160px",
-              height: "38px",
-              background: "#505050",
+              display: "flex",
+              flexDirection: {
+                xs: "column",
+                sm: "column",
+                lg: "row",
+                xl: "row",
+              },
+              justifyContent: "space-between",
+              marginTop: "40px",
+              alignItems: "center",
+              gap: "15px",
             }}
           >
-            Save account details
-          </Button>
-        </Box>
+            <Button
+              color="secondary"
+              variant={"contained"}
+              onClick={onClose}
+              sx={{
+                textTransform: "initial",
+                color: "#000",
+                fontFamily: " Satoshi Light",
+                fontSize: "13px",
+                borderRadius: "29px",
+                border: "1px solid  #000",
+                width: "155px",
+                height: "38px",
+              }}
+            >
+              Cancle
+            </Button>
+            <Button
+              color="primary"
+              variant={"contained"}
+              sx={{
+                textTransform: "initial",
+                color: "#fff",
+                fontFamily: " Satoshi Light",
+                fontSize: "13px",
+                borderRadius: "29px",
+                width: "160px",
+                height: "38px",
+                background: "#505050",
+              }}
+              type="submit"
+            >
+              Save account details
+            </Button>
+          </Box>
+        </form>
       </Box>
     </Modal>
   );

@@ -7,7 +7,7 @@ export const profileRequest = async () => {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/profile`,
       { headers: { Authorization: `Bearer ${getCookie("token")}` } }
     );
-    return res.data;
+    return res.data?.results || [];
   } catch (error: any) {
     return error?.response?.data;
   }

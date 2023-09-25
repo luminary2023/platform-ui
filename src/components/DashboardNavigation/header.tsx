@@ -54,6 +54,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     router.push("/");
   };
 
+  // console.log(profileData);
+
   return (
     <>
       <Box
@@ -134,7 +136,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
           </Box>
 
           <Avatar
-            src=""
+            // src={}
             sx={{
               width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
               height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
@@ -144,8 +146,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               display: "flex",
             }}
           >
-            {profileData?.results?.firstName[0]}
-            {profileData?.results?.lastName[0]}
+            {profileData?.firstName?.charAt(0) +
+              profileData?.lastName?.charAt(0)}
           </Avatar>
           <Typography
             sx={{
@@ -163,7 +165,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               },
             }}
           >
-            {profileData.results?.firstName} {profileData.results?.lastName}
+            {profileData?.firstName} {profileData?.lastName}
           </Typography>
           <Box
             sx={{
