@@ -36,9 +36,9 @@ export const forgotPassword = z.object({
 });
 
 export const bankDetails = z.object({
-  // bankId: z.string().min(3, { message: "Bank name is required" }).max(10),
+  bankId: z.string().min(3, { message: "Bank name is required" }),
   accountNumber: z
     .string()
-    .min(10, { message: "Account number is required" })
+    .min(4, { message: "Account number is required" })
     .max(12),
 });

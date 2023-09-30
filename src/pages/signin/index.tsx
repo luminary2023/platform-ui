@@ -30,7 +30,6 @@ const SignIn = () => {
     statusCode: 0,
     errors: "",
   });
-
   const {
     handleSubmit,
     register,
@@ -55,7 +54,20 @@ const SignIn = () => {
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signinLeftWrapper}>
-        {error && <Toast text={errs?.message} marginBottom={40} />}
+        {error && (
+          <Toast
+            text={errs?.message}
+            marginBottom={40}
+            color={
+              errs.message === "Logged In Successfully." ? "green" : "DF1111"
+            }
+            border={
+              errs.message === "Logged In Successfully."
+                ? "1px solid green"
+                : "1px solid #DF1111"
+            }
+          />
+        )}
         <div style={{ marginBottom: 32 }}>
           <PageTitle
             title={"Welcome back"}
