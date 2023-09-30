@@ -128,8 +128,8 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
           Bank name
         </Typography>
         <form onSubmit={handleSubmit(SaveAccountDetails)}>
-          <select
-            {...register("bankId")}
+          {/* <select
+            // {...register("bankId")}
             style={{
               width: "100%",
               height: "45px",
@@ -140,22 +140,20 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             }}
           >
             {banks?.map((bank: any) => (
-              <>
-                <option
-                  value={bank.id}
-                  key={bank.id}
-                  placeholder="Choose a bank"
-                  // {...register("bankId")}
-                >
-                  {bank.name}
-                </option>
-              </>
+              <option
+                value={bank.id}
+                key={bank.id}
+                placeholder="Choose a bank"
+                {...register("bankId")}
+              >
+                {bank.name}
+              </option>
             ))}
-          </select>
+          </select> */}
 
           <Input
-            type="number"
-            inputMode={"numeric"}
+            type="text"
+            inputmode="numeric"
             placeholder={"Account number"}
             label="Bank account number"
             marginBottom={"8px"}

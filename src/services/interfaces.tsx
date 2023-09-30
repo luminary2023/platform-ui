@@ -20,7 +20,7 @@ export interface InputProps {
   register?: any;
   borderColor?: string;
   marginTop?: string;
-  inputMode?: string;
+  inputmode?: string;
 }
 
 export interface EmailVerifiedProps {
