@@ -10,7 +10,7 @@ export interface PageTitleProps {
 }
 
 export interface InputProps {
-  placeholder: string;
+  placeholder?: string;
   type: string;
   label?: string;
   marginBottom?: string;
@@ -20,7 +20,8 @@ export interface InputProps {
   register?: any;
   borderColor?: string;
   marginTop?: string;
-  inputmode?: string;
+  readOnly?: boolean;
+  value?: string;
 }
 
 export interface EmailVerifiedProps {
@@ -43,6 +44,7 @@ export interface SignupProps {
 export interface BankDetailsProps {
   bankId: string;
   accountNumber: string;
+  accountName: string;
 }
 
 export interface Props extends React.PropsWithChildren {

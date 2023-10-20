@@ -15,7 +15,8 @@ const Input: React.FC<InputProps> = ({
   register,
   borderColor,
   marginTop,
-  inputmode,
+  readOnly,
+  value,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const handleTogglePassword = () => {
@@ -34,9 +35,10 @@ const Input: React.FC<InputProps> = ({
         <input
           type={visible ? "text" : type}
           placeholder={placeholder}
-          inputmode={inputmode}
           className={styles.inputForm}
           {...register}
+          readOnly={readOnly}
+          value={value}
           style={{
             marginBottom: marginBottom,
             background: bgColor,
