@@ -137,6 +137,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
 
           <Avatar
             // src={}
+            onClick={handleClick}
+            style={{ cursor: "pointer" }}
             sx={{
               width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
               height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
@@ -150,6 +152,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               profileData?.lastName?.charAt(0)}
           </Avatar>
           <Typography
+            onClick={handleClick}
+            style={{ cursor: "pointer" }}
             sx={{
               color: " #6F6C99",
               fontSize: " 13px",

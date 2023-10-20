@@ -123,14 +123,18 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
               </p>
             </div>
           </div>
-          <div className={styles.profileSecurity}>
+          <div
+            className={styles.profileSecurity}
+            style={{ cursor: "pointer" }}
+            onClick={() => setOpen(true)}
+          >
             <Image
               src={Bank}
               alt="secure"
               className={styles.profileSecurityImg}
             />
-            <div onClick={() => setOpen(true)}>
-              <h3 style={{ cursor: "pointer" }}>Bank details</h3>
+            <div>
+              <h3>Bank details</h3>
               <p>Recieve money into your prefered bank account.</p>
             </div>
           </div>

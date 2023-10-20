@@ -6,10 +6,11 @@ import { bankRequest } from "@/api/bank";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BankDetailsProps } from "@/services/interfaces";
-import { saveBankDetails } from "@/api/saveBankDetails";
 import { bankDetails } from "@/services/schemaVarification";
 import Toast from "@/components/Toast";
 import Loading from "@/components/Loading";
+import { addBankAccount } from "@/api/addBankAccount";
+import { resolveAccount } from "@/api/resolveAccountNumber";
 
 const style = {
   position: "absolute" as "absolute",
@@ -44,6 +45,7 @@ interface ErrorProps {
 const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [banks, setBanks] = useState<[]>([]);
+  const [accountBankName, setAccountBankName] = useState<BankDetailsProps>();
   const [error, setError] = useState<boolean>(false);
   const [errs, setErrs] = useState<ErrorProps>({
     status: "",
@@ -55,12 +57,22 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
   const {
     handleSubmit,
     register,
+    reset,
+    watch,
+    getValues,
     formState: { errors },
   } = useForm<BankDetailsProps>({
     resolver: zodResolver(bankDetails),
   });
+
   const SaveAccountDetails = async (data: BankDetailsProps) => {
-    console.log("This is not working", data);
+    setLoading(true);
+    const res = await addBankAccount(data);
+    setLoading(false);
+    reset();
+    setError(false);
+    setErrs(res);
+    setError(true);
   };
 
   const fetchBankDetails = async () => {
@@ -73,9 +85,24 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
       setError(true);
     }
   };
+  const accountNumber = watch("accountNumber");
+  const bankId = watch("bankId");
   useEffect(() => {
-    fetchBankDetails();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const data = { accountNumber, bankId };
+        const parseResult = bankDetails.safeParse(data);
+        if (parseResult.success) {
+          const response = await resolveAccount(data);
+          setAccountBankName(response);
+        }
+      } catch (err) {
+        setError(true);
+      }
+    };
+
+    fetchData();
+  }, [accountNumber, bankId]);
 
   return (
     <Modal
@@ -113,23 +140,39 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
         >
           Add your bank details{" "}
         </Typography>
+        {error && (
+          <Toast
+            text={errs?.errors?.[0].message || errs?.message}
+            marginBottom={40}
+            color={
+              errs.message === "Bank account added successfully."
+                ? "green"
+                : "DF1111"
+            }
+            border={
+              errs.message === "Bank account added successfully."
+                ? "1px solid green"
+                : "1px solid #DF1111"
+            }
+          />
+        )}
 
-        <Typography
-          sx={{
-            color: "#344054",
-            fontFamily: "Satoshi Light",
-            fontSize: "16px",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "20px",
-            marginBottom: "8px",
-          }}
-        >
-          Bank name
-        </Typography>
         <form onSubmit={handleSubmit(SaveAccountDetails)}>
-          {/* <select
-            // {...register("bankId")}
+          <Typography
+            sx={{
+              color: "#344054",
+              fontFamily: "Satoshi Light",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "20px",
+              marginBottom: "8px",
+            }}
+          >
+            Bank name
+          </Typography>
+
+          <select
             style={{
               width: "100%",
               height: "45px",
@@ -137,23 +180,22 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
               paddingLeft: "8px",
               paddingRight: "8px",
               borderColor: "gray",
+              color: "#667085",
             }}
+            {...register("bankId")}
+            placeholder="Choose a bank"
+            onClick={fetchBankDetails}
           >
+            <option value="">Choose bank</option>
             {banks?.map((bank: any) => (
-              <option
-                value={bank.id}
-                key={bank.id}
-                placeholder="Choose a bank"
-                {...register("bankId")}
-              >
+              <option value={bank.id} key={bank.id} placeholder="Choose a bank">
                 {bank.name}
               </option>
             ))}
-          </select> */}
+          </select>
 
           <Input
             type="text"
-            inputmode="numeric"
             placeholder={"Account number"}
             label="Bank account number"
             marginBottom={"8px"}
@@ -163,6 +205,21 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             register={{ ...register("accountNumber") }}
             borderColor={errors.accountNumber?.message ? "#DF1111" : ""}
           />
+          {accountNumber && bankId ? (
+            <Input
+              type="text"
+              value={accountBankName?.accountName}
+              readOnly={true}
+              label="Account name"
+              marginBottom={"8px"}
+              labelColor={"#081630"}
+              labelSize={"16px"}
+              marginTop={"12px"}
+            />
+          ) : (
+            ""
+          )}
+
           <Box
             sx={{
               display: "flex",
@@ -181,7 +238,9 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             <Button
               color="secondary"
               variant={"contained"}
-              onClick={onClose}
+              onClick={() => {
+                onClose(), reset();
+              }}
               sx={{
                 textTransform: "initial",
                 color: "#000",
@@ -198,6 +257,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             <Button
               color="primary"
               variant={"contained"}
+              disabled={!accountBankName?.accountName}
               sx={{
                 textTransform: "initial",
                 color: "#fff",
@@ -210,7 +270,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
               }}
               type="submit"
             >
-              Save account details
+              {loading ? <Loading /> : "Save account details"}
             </Button>
           </Box>
         </form>
