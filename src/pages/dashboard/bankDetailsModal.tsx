@@ -59,7 +59,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
     register,
     reset,
     watch,
-    getValues,
+    unregister,
     formState: { errors },
   } = useForm<BankDetailsProps>({
     resolver: zodResolver(bankDetails),
@@ -87,6 +87,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
   };
   const accountNumber = watch("accountNumber");
   const bankId = watch("bankId");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,6 +104,9 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
 
     fetchData();
   }, [accountNumber, bankId]);
+  const handleAccountBankName = (data: BankDetailsProps) => {
+    setAccountBankName(data);
+  };
 
   return (
     <Modal
@@ -186,7 +190,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             placeholder="Choose a bank"
             onClick={fetchBankDetails}
           >
-            <option value="">Choose bank</option>
+            <option value="">{loading ? "loading... " : "Choose bank"}</option>
             {banks?.map((bank: any) => (
               <option value={bank.id} key={bank.id} placeholder="Choose a bank">
                 {bank.name}
@@ -197,6 +201,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
           <Input
             type="text"
             placeholder={"Account number"}
+            maxlength="10"
             label="Bank account number"
             marginBottom={"8px"}
             labelColor={"#081630"}
@@ -205,8 +210,9 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             register={{ ...register("accountNumber") }}
             borderColor={errors.accountNumber?.message ? "#DF1111" : ""}
           />
-          {accountNumber && bankId ? (
+          {accountNumber && accountNumber.length === 10 && bankId ? (
             <Input
+              placeholder={"Account name"}
               type="text"
               value={accountBankName?.accountName}
               readOnly={true}
@@ -215,6 +221,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
               labelColor={"#081630"}
               labelSize={"16px"}
               marginTop={"12px"}
+              bgColor="#EBEDF2"
             />
           ) : (
             ""
@@ -239,7 +246,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
               color="secondary"
               variant={"contained"}
               onClick={() => {
-                onClose(), reset();
+                onClose(), unregister(), handleAccountBankName;
               }}
               sx={{
                 textTransform: "initial",
@@ -257,7 +264,9 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             <Button
               color="primary"
               variant={"contained"}
-              disabled={!accountBankName?.accountName}
+              disabled={
+                !accountNumber || accountNumber?.length != 10 || !bankId
+              }
               sx={{
                 textTransform: "initial",
                 color: "#fff",

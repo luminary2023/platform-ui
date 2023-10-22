@@ -22,6 +22,7 @@ export interface InputProps {
   marginTop?: string;
   readOnly?: boolean;
   value?: string;
+  maxlength?: string;
 }
 
 export interface EmailVerifiedProps {
