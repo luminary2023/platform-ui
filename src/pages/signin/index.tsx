@@ -59,10 +59,10 @@ const SignIn = () => {
             text={errs?.message}
             marginBottom={40}
             color={
-              errs.message === "Logged In Successfully." ? "green" : "DF1111"
+              errs?.message === "Logged In Successfully." ? "green" : "DF1111"
             }
             border={
-              errs.message === "Logged In Successfully."
+              errs?.message === "Logged In Successfully."
                 ? "1px solid green"
                 : "1px solid #DF1111"
             }

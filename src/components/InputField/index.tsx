@@ -17,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   marginTop,
   readOnly,
   value,
+  maxlength,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const handleTogglePassword = () => {
@@ -27,7 +28,11 @@ const Input: React.FC<InputProps> = ({
     <div>
       <p
         className={styles.label}
-        style={{ color: labelColor, fontSize: labelSize, marginTop: marginTop }}
+        style={{
+          color: labelColor,
+          fontSize: labelSize,
+          marginTop: marginTop,
+        }}
       >
         {label}
       </p>
@@ -39,6 +44,7 @@ const Input: React.FC<InputProps> = ({
           {...register}
           readOnly={readOnly}
           value={value}
+          maxlength={maxlength}
           style={{
             marginBottom: marginBottom,
             background: bgColor,
