@@ -77,6 +77,7 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
     setLoading(false);
 
     if (res?.statusCode === 200 && res.status === "Success") {
+      fromForgotPasswordPage &&  sessionStorage.setItem("forgotpasswordOtp", otp);
       setVerification(false);
       setError(false);
     }

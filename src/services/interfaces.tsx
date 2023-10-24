@@ -57,5 +57,5 @@ export interface ErrorProps {
   status: string;
   message: string;
   statusCode: number;
-  errors: any;
+  errors?: any;
 }
