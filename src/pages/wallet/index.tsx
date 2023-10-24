@@ -232,38 +232,50 @@ const Wallet = () => {
                 <Box
                   sx={{
                     display: { lg: "flex", md: "flex", xs: "" },
-                    justifyContent: "space-between",
-                    // width: "100%",
-                    // gap: 4,
+                    // justifyContent: "space-between",
+                    width: "100%",
+                    gap: 1,
                   }}
                 >
-                  <Input
-                    type={"text"}
-                    label="Account Number"
-                    bgColor={"#F6F6F6"}
-                    marginBottom={"8px"}
-                    labelColor={"#081630"}
-                    labelSize={"16px"}
-                    readOnly={true}
-                    value={selectedBankDetails?.accountNumber}
-                    width="100%"
-                    // register={{ ...register("accountNumber") }}
-                    borderColor={errors.accountNumber?.message ? "#DF1111" : ""}
-                  />
+                  <Box
+                    sx={{
+                      width: "100%",
+                    }}
+                  >
+                    <Input
+                      type={"text"}
+                      label="Account Number"
+                      bgColor={"#F6F6F6"}
+                      marginBottom={"8px"}
+                      labelColor={"#081630"}
+                      labelSize={"16px"}
+                      readOnly={true}
+                      value={selectedBankDetails?.accountNumber}
+                      // register={{ ...register("accountNumber") }}
+                      borderColor={
+                        errors.accountNumber?.message ? "#DF1111" : ""
+                      }
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      width: "100%",
+                    }}
+                  >
+                    <Input
+                      readOnly={true}
+                      type={"NGN 15,000"}
+                      label="Account Name"
+                      bgColor={"#F6F6F6"}
+                      marginBottom={"8px"}
+                      labelColor={"#081630"}
+                      labelSize={"16px"}
+                      value={selectedBankDetails?.accountName}
+                      // register={{ ...register("accountName") }}
 
-                  <Input
-                    readOnly={true}
-                    type={"NGN 15,000"}
-                    label="Account Name"
-                    bgColor={"#F6F6F6"}
-                    marginBottom={"8px"}
-                    labelColor={"#081630"}
-                    labelSize={"16px"}
-                    value={selectedBankDetails?.accountName}
-                    // register={{ ...register("accountName") }}
-                    width="100%"
-                    borderColor={errors.accountName?.message ? "#DF1111" : ""}
-                  />
+                      borderColor={errors.accountName?.message ? "#DF1111" : ""}
+                    />
+                  </Box>
                 </Box>
                 <Input
                   placeholder={"NGN"}
