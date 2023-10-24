@@ -32,7 +32,7 @@ const Navbar = () => {
       <div className={NavbarContainer}>
         <p>LumiApp</p>
         <div className={Links}>
-          {links.map((link, index) => {
+          {links.map((link) => {
             const style = {
               color: currentRoute === link.path ? "#FFC600" : "#ffff",
               marginLeft: "24px",
@@ -41,11 +41,10 @@ const Navbar = () => {
               fontFamily: "Satoshi Light",
             };
             return (
-              <div key={index}>
+              <div key={link.title}>
                 <a
                   // href={link.path}
                   onClick={() => handleClick(link.path)}
-                  key={index}
                   style={style}
                 >
                   {link.title}
