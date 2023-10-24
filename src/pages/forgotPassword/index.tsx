@@ -44,7 +44,8 @@ const ForgotPassword = () => {
     resolver: zodResolver(forgotPassword),
   });
 
-  const handleLogin = async (data: ForgotPasswordProps) => {
+
+  const handleForgortPassword = async (data: ForgotPasswordProps) => {
     setLoading(true);
     const res = await forgotPasswordRequest(data);
     setLoading(false);
@@ -64,7 +65,13 @@ const ForgotPassword = () => {
     <>
       <div className={styles.forgotPasswordContainer}>
         <div className={styles.forgotPasswordContent}>
-          {error && <Toast text={errs?.message} marginBottom={40} />}
+          {error && <Toast 
+            success={errs?.statusCode === 200}
+            text={errs?.message} 
+            marginBottom={40} 
+            border={errs?.statusCode === 200 ? "1px solid green" : "1px solid #DF1111"} 
+            color={errs?.statusCode === 200 ? "green" :"#DF1111"}
+          />}
           <div style={{ marginBottom: 24 }}>
             <Image src={ForgotPasswordIcon} alt="Forgot Password Icon" />
           </div>
@@ -72,7 +79,7 @@ const ForgotPassword = () => {
             title={"Forgot password?"}
             subtitle={"No worries, we’ll send you reset instructions."}
           />
-          <form onSubmit={handleSubmit(handleLogin)}>
+          <form onSubmit={handleSubmit(handleForgortPassword)}>
             <div className={styles.forgotPasswordInput}>
               <Input
                 placeholder="Enter your email "

@@ -57,6 +57,7 @@ const SignIn = () => {
         {error && (
           <Toast
             text={errs?.message}
+            success={errs?.message === "Logged In Successfully."}
             marginBottom={40}
             color={
               errs?.message === "Logged In Successfully." ? "green" : "DF1111"
