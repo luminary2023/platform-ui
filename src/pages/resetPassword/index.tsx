@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import ForgotPasswordIcon from "../../assets/images/forgot.svg";
 import VerifiedIcon from "../../assets/images/emailVerifiedIcon.svg";
 import Image from "next/image";
@@ -71,6 +70,10 @@ const ResetPassword = () => {
       setErrs(res);
       setError(true);
     }
+  };
+
+  const handleResetSuccess = () => {
+    router.push("/signin");
   };
 
   useEffect(() => {
@@ -151,7 +154,7 @@ const ResetPassword = () => {
           backToText={"Back to log in"}
           actionType={"reset password"}
           routerPath={"/signin"}
-          btnOnClick={() => {}}
+          btnOnClick={handleResetSuccess}
           icon={VerifiedIcon}
         />
       )}

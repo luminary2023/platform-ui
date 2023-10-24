@@ -65,7 +65,13 @@ const ForgotPassword = () => {
     <>
       <div className={styles.forgotPasswordContainer}>
         <div className={styles.forgotPasswordContent}>
-          {error && <Toast text={errs?.message} marginBottom={40} />}
+          {error && <Toast 
+            success={errs?.statusCode === 200}
+            text={errs?.message} 
+            marginBottom={40} 
+            border={errs?.statusCode === 200 ? "1px solid green" : "1px solid #DF1111"} 
+            color={errs?.statusCode === 200 ? "green" :"#DF1111"}
+          />}
           <div style={{ marginBottom: 24 }}>
             <Image src={ForgotPasswordIcon} alt="Forgot Password Icon" />
           </div>
