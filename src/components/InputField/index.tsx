@@ -18,6 +18,7 @@ const Input: React.FC<InputProps> = ({
   readOnly,
   value,
   maxlength,
+  width,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const handleTogglePassword = () => {
@@ -49,6 +50,7 @@ const Input: React.FC<InputProps> = ({
             marginBottom: marginBottom,
             background: bgColor,
             borderColor: borderColor,
+            width: "100%",
           }}
         />
         {type === "password" && (

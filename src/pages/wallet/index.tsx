@@ -1,15 +1,13 @@
 import DashboardContainer from "../../components/DashboardNavigation/dashboardContainer";
 import styles from "./wallet.module.css";
-
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC, useMemo } from "react";
 import { Button } from "../../components/Button/Button";
 import Input from "../../components/InputField";
-import { Select, SelectChangeEvent, MenuItem, Menu, Fade } from "@mui/material";
+import { MenuItem, Menu, Fade, Box } from "@mui/material";
 import { quickActionsData } from "../../services/data";
 import EastIcon from "@mui/icons-material/East";
 import AppTable from "../../components/Table";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
 import { userAccountDetails } from "@/api/userAccountDetails";
 import { Typography } from "@mui/material";
 import BankDetailsModal from "../dashboard/bankDetailsModal";
@@ -19,17 +17,31 @@ import { withdrawDetails } from "@/services/schemaVarification";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileRequest } from "@/api/profile";
 
+interface WithdrawProps {
+  accountNumber: string;
+  accountName: string;
+}
+
 const Wallet = () => {
   const router = useRouter();
 
-  const [bank, setBank] = React.useState<string[]>([]);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [bankDetails, setBankDetails] = useState<[]>([]);
+  const [bankDetails, setBankDetails] = useState<WithdrawProps | any | []>([]);
   const [show, setShow] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [walletBalance, setWalletBalance] = useState<any>({});
   const [error, setError] = useState<null | string>(null);
+  const [selectedBank, setSelectedBank] = useState<any>(null);
 
+  const selectedBankDetails = useMemo(() => {
+    if (!selectedBank || (bankDetails?.length || 0) <= 0) {
+      return {};
+    }
+
+    return (
+      bankDetails?.find((b: any) => b.accountNumber === selectedBank) || {}
+    );
+  }, [selectedBank, bankDetails]);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -39,11 +51,11 @@ const Wallet = () => {
     setAnchorEl(null);
   };
 
-  const handleChange = (event: SelectChangeEvent<typeof bank>) => {
+  const handleChange = (event: any) => {
     const {
       target: { value },
     } = event;
-    setBank(typeof value === "string" ? value.split(",") : value);
+    setSelectedBank(value);
   };
 
   const tableHeaderData = [
@@ -60,7 +72,6 @@ const Wallet = () => {
     register,
     reset,
     watch,
-    unregister,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(withdrawDetails),
@@ -71,7 +82,7 @@ const Wallet = () => {
       const response = await userAccountDetails();
       setBankDetails(response);
     } catch (error) {
-      setError(error ? "error" : "");
+      setError(error ? "error" : null);
     }
   };
   const profile = async () => {
@@ -79,7 +90,7 @@ const Wallet = () => {
       const response = await profileRequest();
       setWalletBalance(response);
     } catch (error) {
-      setError(error ? "error" : "");
+      setError(error ? "error" : null);
     }
   };
   useEffect(() => {
@@ -87,8 +98,15 @@ const Wallet = () => {
     profile();
   }, []);
 
+  const bank = watch("bank");
+  const amount = watch("amount");
+  // const accountNumber = watch("accountNumber");
+  // const accountName = watch("accountName");
+
   const handleWithdraw = () => {
-    router.push("/withdraw");
+    const data = { bank, amount };
+    const parseResult = withdrawDetails?.safeParse(data);
+    if (parseResult.success) router.push("/withdraw");
   };
 
   return (
@@ -103,7 +121,7 @@ const Wallet = () => {
                 </p>
                 {show ? (
                   <p className={styles.walletBalance}>
-                    {walletBalance?.wallet?.balance}
+                    NGN {walletBalance?.wallet?.balance}
                   </p>
                 ) : (
                   <p className={styles.walletBalance}>**********</p>
@@ -163,10 +181,10 @@ const Wallet = () => {
                   }}
                   onClick={() => setOpenModal(true)}
                 >
-                  + Add Account
+                  {bankDetails ? " + Add Another Account" : " + Add Account"}
                 </div>
               </div>
-              {/* <p className={styles.inputLabel}>Select Bank</p> */}
+
               <form onSubmit={handleSubmit(handleWithdraw)}>
                 <Typography
                   sx={{
@@ -189,52 +207,76 @@ const Wallet = () => {
                     borderRadius: "10px",
                     paddingLeft: "8px",
                     paddingRight: "8px",
-                    border: "1px solid var(--Line, #E8E8E8)",
+                    // borderBlock: "none",
+                    border: `${
+                      errors.bank?.message ? "1px solid  #DF1111" : "none"
+                    } `,
                     color: "#667085",
                     background: "#F5F5F5",
                     marginBottom: "8px",
                   }}
+                  {...register("bank")}
+                  onChange={handleChange}
                 >
-                  {/* {bankDetails?.map((account: any) => (
-                    <option key={account.accountName}>
+                  <option value="">Choose bank</option>
+                  {(bankDetails || [])?.map((account: any) => (
+                    <option
+                      key={account.accountNumber}
+                      value={account.accountNumber}
+                    >
                       {account?.bank?.name}
                     </option>
-                  ))} */}
+                  ))}
                 </select>
-                {/* {bankDetails && ( */}
-                <Input
-                  placeholder={"0123456789"}
-                  type={"text"}
-                  label="Account Number"
-                  bgColor={"#F6F6F6"}
-                  marginBottom={"8px"}
-                  labelColor={"#081630"}
-                  labelSize={"16px"}
-                  readOnly={true}
-                  // value={bankDetails.}
-                />
-                {/* )} */}
-                <Input
-                  readOnly={true}
-                  placeholder={"0123456789"}
-                  type={"NGN 15,000"}
-                  label="Account Name"
-                  bgColor={"#F6F6F6"}
-                  marginBottom={"8px"}
-                  labelColor={"#081630"}
-                  labelSize={"16px"}
-                />
+
+                <Box
+                  sx={{
+                    display: { lg: "flex", md: "flex", xs: "" },
+                    justifyContent: "space-between",
+                    // width: "100%",
+                    // gap: 4,
+                  }}
+                >
+                  <Input
+                    type={"text"}
+                    label="Account Number"
+                    bgColor={"#F6F6F6"}
+                    marginBottom={"8px"}
+                    labelColor={"#081630"}
+                    labelSize={"16px"}
+                    readOnly={true}
+                    value={selectedBankDetails?.accountNumber}
+                    width="100%"
+                    // register={{ ...register("accountNumber") }}
+                    borderColor={errors.accountNumber?.message ? "#DF1111" : ""}
+                  />
+
+                  <Input
+                    readOnly={true}
+                    type={"NGN 15,000"}
+                    label="Account Name"
+                    bgColor={"#F6F6F6"}
+                    marginBottom={"8px"}
+                    labelColor={"#081630"}
+                    labelSize={"16px"}
+                    value={selectedBankDetails?.accountName}
+                    // register={{ ...register("accountName") }}
+                    width="100%"
+                    borderColor={errors.accountName?.message ? "#DF1111" : ""}
+                  />
+                </Box>
                 <Input
                   placeholder={"NGN"}
-                  type={"NGN 15,000"}
+                  type={"number"}
                   label="Amount"
                   bgColor={"#F6F6F6"}
-                  marginBottom={"8px"}
+                  marginBottom={"18px"}
                   labelColor={"#081630"}
                   labelSize={"16px"}
                   register={{ ...register("amount") }}
                   borderColor={errors.amount?.message ? "#DF1111" : ""}
                 />
+
                 <Button
                   color="primary"
                   variant="contained"
@@ -245,6 +287,7 @@ const Wallet = () => {
                     borderRadius: "10px",
                     textTransform: "capitalize",
                     height: "61px",
+                    margintTop: "8px",
                   }}
                 >
                   Withdraw{" "}

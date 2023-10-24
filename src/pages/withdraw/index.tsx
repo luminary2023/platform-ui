@@ -256,7 +256,7 @@ export default function Index() {
           sx={{
             margin: "auto",
             marginTop: "5px",
-            width: { lg: "50%", md: "50%", xs: "100%" },
+            width: { lg: "35%", md: "50%", xs: "100%" },
             borderRadius: "16px",
             padding: "16px",
           }}
