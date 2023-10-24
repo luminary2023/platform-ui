@@ -23,6 +23,7 @@ export interface InputProps {
   readOnly?: boolean;
   value?: string;
   maxlength?: string;
+  width?: string;
 }
 
 export interface EmailVerifiedProps {

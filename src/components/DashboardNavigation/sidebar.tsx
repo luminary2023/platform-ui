@@ -72,9 +72,9 @@ const Sidebar = () => {
       >
         LumiApp
       </Typography>
-      {links.map((link, index) => (
+      {links.map((link) => (
         <Box
-          key={index}
+          key={link.path}
           sx={{
             display: "flex",
             flexDirection: "row",

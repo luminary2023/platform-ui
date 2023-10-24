@@ -40,7 +40,6 @@ const Dashboard = () => {
     try {
       const res = await profileRequest();
       setProfileData(res);
-      console.log(profileData);
     } catch (err) {
       setError(true);
     }

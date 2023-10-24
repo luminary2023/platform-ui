@@ -40,7 +40,17 @@ export const bankDetails = z.object({
   accountNumber: z.string().min(10, { message: "Account number is required" }),
   // accountName: z.string().min(21, { message: "Account name is required" }),
 });
+export const withdrawDetails = z.object({
+  amount: z.string().min(3, { message: "Amount" }),
+  bank: z.string().min(3, { message: "Select bank" }),
+  // accountName: z.string().min(3, { message: "Account name is required" }),
+  // accountNumber: z.string().min(3, { message: "Account number is required" }),
+  // accountName: z.string().min(21, { message: "Account name is required" }),
+});
 export const resetPassword = z.object({
   password: z.string().min(8, { message: "Password is required" }).max(24),
-  confirmPassword: z.string().min(8, { message: "Password is required" }).max(24),
+  confirmPassword: z
+    .string()
+    .min(8, { message: "Password is required" })
+    .max(24),
 });

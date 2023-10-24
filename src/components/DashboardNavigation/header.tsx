@@ -54,8 +54,6 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     router.push("/");
   };
 
-  // console.log(profileData);
-
   return (
     <>
       <Box

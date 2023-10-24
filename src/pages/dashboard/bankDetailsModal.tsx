@@ -259,7 +259,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
                 height: "38px",
               }}
             >
-              Cancle
+              Cancel
             </Button>
             <Button
               color="primary"
