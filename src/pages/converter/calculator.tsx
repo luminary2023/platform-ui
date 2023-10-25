@@ -152,7 +152,7 @@ const Calculator = () => {
             <Select
               value={crypto}
               onChange={handleCrypto}
-              defaultValue={"Bit"}
+              // defaultValue={"Bit"}
               sx={{
                 background: "#F5F5F5",
                 border: "none",
@@ -226,7 +226,7 @@ const Calculator = () => {
             <Select
               value={currency}
               onChange={handleCurrency}
-              defaultValue={"Bit"}
+              // defaultValue={"Bit"}
               sx={{
                 background: "#F5F5F5",
                 border: "none",

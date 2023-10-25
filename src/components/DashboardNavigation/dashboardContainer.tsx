@@ -14,6 +14,8 @@ const SidebarContainer: FC<PropsWithChildren<Props>> = ({
       sx={{
         display: "flex",
         flexDirection: "row",
+
+        position: "relative",
       }}
     >
       <Sidebar />
@@ -22,13 +24,14 @@ const SidebarContainer: FC<PropsWithChildren<Props>> = ({
           display: "flex",
           flexDirection: "column",
           background: "#F6F6F6",
+          // position: "relative",
 
           width: "100%",
           padding: {
             xs: "18px 6px 6px 8px",
-            sm: "18px 6px 6px 8px",
-            lg: "38px 36px 36px 38px",
-            xl: "38px 36px 36px 38px",
+            sm: "18px 6px 6px 240px",
+            lg: "38px 36px 36px 300px",
+            xl: "38px 36px 36px 300px",
           },
         }}
       >

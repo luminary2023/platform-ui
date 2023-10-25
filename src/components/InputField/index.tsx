@@ -17,7 +17,7 @@ const Input: React.FC<InputProps> = ({
   marginTop,
   readOnly,
   value,
-  maxlength,
+  maxLength,
   width,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -45,7 +45,7 @@ const Input: React.FC<InputProps> = ({
           {...register}
           readOnly={readOnly}
           value={value}
-          maxlength={maxlength}
+          maxLength={maxLength}
           style={{
             marginBottom: marginBottom,
             background: bgColor,
