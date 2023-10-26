@@ -43,20 +43,19 @@ const BankInformation = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const [bankDetails, setBankDetails] = useState<any | []>([]);
-
-  useEffect(() => {
-    handleBankDetails();
-  }, []);
+  const [bankDetails, setBankDetails] = useState<[]>([]);
 
   const handleBankDetails = async () => {
     try {
       const response = await userAccountDetails();
       setBankDetails(response);
-    } catch (error) {
-      // setError(error ? "error" : null);
+    } catch (error: any) {
+      return error?.response?.data;
     }
   };
+  useEffect(() => {
+    handleBankDetails();
+  }, []);
 
   const handleDeleteAccount = async (userBankId: any) => {
     try {
