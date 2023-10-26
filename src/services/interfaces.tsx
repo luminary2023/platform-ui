@@ -22,7 +22,7 @@ export interface InputProps {
   marginTop?: string;
   readOnly?: boolean;
   value?: string;
-  maxlength?: string;
+  maxLength?: string;
   width?: string;
 }
 

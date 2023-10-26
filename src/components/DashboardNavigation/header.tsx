@@ -23,7 +23,7 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
-  const [profileData, setProfileData] = useState<any>("");
+  const [profileData, setProfileData] = useState<any | string>("");
   const [error, setError] = useState<boolean>(false);
 
   const fetchProfile = async () => {
@@ -62,6 +62,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+
+          position: "relative",
         }}
       >
         <Typography
@@ -136,7 +138,6 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
           <Avatar
             // src={}
             onClick={handleClick}
-            style={{ cursor: "pointer" }}
             sx={{
               width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
               height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },

@@ -48,7 +48,7 @@ const Testimonial = ({ testimonial, onArrowClick }: any) => {
       <p className={styles.quote}>{testimonial.quote}</p>
       <div className={styles.customerInfoWrapper}>
         <div className={styles.customerInfo}>
-          <Avatar alt="Katherine Moss" src={Customer} />
+          {/* <Avatar alt="Katherine Moss" src={Customer} /> */}
           <div style={{ marginLeft: 16 }}>
             <p className={styles.customerName}> {testimonial.name}</p>
             <p className={styles.customerRole}> {testimonial.role}</p>

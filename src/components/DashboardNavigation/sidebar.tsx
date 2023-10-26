@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
 import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { Typography, Box } from "@mui/material";
 
 const links = [
@@ -14,6 +15,11 @@ const links = [
     path: "/giftCard",
     title: "Gift Cards",
     icon: <CardGiftcardOutlinedIcon />,
+  },
+  {
+    path: "/settings",
+    title: "Settings",
+    icon: <SettingsIcon />,
   },
 ];
 
@@ -31,8 +37,8 @@ const Sidebar = () => {
         width: {
           xs: "20%",
           sm: "22%",
-          lg: "22%",
-          xl: "22%",
+          lg: "20%",
+          xl: "20%",
         },
         height: {
           xs: "100wh",
@@ -45,6 +51,7 @@ const Sidebar = () => {
           xs: "12px",
           sm: "12px",
         },
+        position: { xs: "relative", sm: "fixed", lg: "fixed", xl: "fixed" },
       }}
     >
       <Typography

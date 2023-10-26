@@ -201,7 +201,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
           <Input
             type="text"
             placeholder={"Account number"}
-            maxlength="10"
+            maxLength="10"
             label="Bank account number"
             marginBottom={"8px"}
             labelColor={"#081630"}
