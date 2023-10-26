@@ -24,7 +24,6 @@ const SidebarContainer: FC<PropsWithChildren<Props>> = ({
           display: "flex",
           flexDirection: "column",
           background: "#F6F6F6",
-          // position: "relative",
 
           width: "100%",
           padding: {
@@ -33,6 +32,7 @@ const SidebarContainer: FC<PropsWithChildren<Props>> = ({
             lg: "38px 36px 36px 300px",
             xl: "38px 36px 36px 300px",
           },
+          paddingLeft: { lg: "300px" },
         }}
       >
         <Header title={title} subtitle={subtitle} />
