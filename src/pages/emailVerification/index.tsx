@@ -59,7 +59,7 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
     } else {
       router.replace("/signup");
     }
-  }, []);
+  });
 
   const codeVerification = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -77,7 +77,8 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
     setLoading(false);
 
     if (res?.statusCode === 200 && res.status === "Success") {
-      fromForgotPasswordPage &&  sessionStorage.setItem("forgotpasswordOtp", otp);
+      fromForgotPasswordPage &&
+        sessionStorage.setItem("forgotpasswordOtp", otp);
       setVerification(false);
       setError(false);
     }

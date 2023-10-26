@@ -54,3 +54,11 @@ export const resetPassword = z.object({
     .min(8, { message: "Password is required" })
     .max(24),
 });
+
+export const getInTouch = z.object({
+  firstName: z.string().min(3, { message: " required" }),
+  lastName: z.string().min(3, { message: " required" }),
+  email: z.string().min(3, { message: "required" }),
+  phoneNumber: z.string().min(3, { message: " required" }),
+  messages: z.string().min(3, { message: " required" }),
+});

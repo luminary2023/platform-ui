@@ -3,12 +3,29 @@ import React from "react";
 import styles from "./About.module.css";
 import Image from "next/image";
 import UpperArrow from "../../assets/images/upDropDownArrow.svg";
-import Input from "@/components/InputField";
+// import Input from "@/components/InputField";
 import { Button } from "@/components/Button/Button";
 import { useForm } from "react-hook-form";
+import Input from "@/components/InputField";
+import { getInTouch } from "@/services/schemaVarification";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+interface getInTouchProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: number;
+  messages: string;
+}
 
 const GetInTouch = () => {
-  const { handleSubmit, register } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<getInTouchProps>({
+    resolver: zodResolver(getInTouch),
+  });
 
   const handleMessage = () => {
     console.log("good");
@@ -31,46 +48,46 @@ const GetInTouch = () => {
         <form onSubmit={handleSubmit(handleMessage)}>
           <div className={styles.groupForm}>
             <div>
-              <label className={styles.formLabel}>First name</label>
               <Input
+                label="First name"
                 placeholder="First name"
                 type="text"
-                {...register("firstName")}
+                register={{ ...register("firstName") }}
+                borderColor={errors?.firstName?.message ? "#DF1111" : ""}
               />
             </div>
             <div className={styles.formInputBox}>
-              <label className={styles.formLabel}>Last name</label>
               <Input
                 placeholder="Last name"
+                label="Last name"
                 type={"text"}
-                {...register("lastName")}
+                register={{ ...register("lastName") }}
+                borderColor={errors?.lastName?.message ? "#DF1111" : ""}
               />
             </div>
           </div>
           <div className={styles.formInputBox}>
-            <label className={styles.formLabel}>Email</label>
             <Input
+              label="Email"
               placeholder="you@company.com"
               type={"email"}
-              {...register("email")}
+              register={{ ...register("email") }}
+              borderColor={errors?.email?.message ? "#DF1111" : ""}
             />
           </div>
           <div className={styles.formInputBox}>
-            <label className={styles.formLabel}>Phone number</label>
             <Input
+              label="Phone number"
               placeholder="+1 (555) 000-0000"
               type="number"
-              {...register("phoneNumber")}
+              register={{ ...register("phoneNumber") }}
+              borderColor={errors?.phoneNumber?.message ? "#DF1111" : ""}
             />
           </div>
           <div className={styles.formInputBox}>
             <label className={styles.formLabel}>Message</label>
             <br />
-            <textarea
-              className={styles.textarea}
-              {...register("messages")}
-              required
-            ></textarea>
+            <textarea className={styles.textarea}></textarea>
           </div>
           <Button
             fullWidth={true}
