@@ -1,24 +1,14 @@
 "use client";
 import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
 import { Avatar, Box, Button, Typography } from "@mui/material";
-// import React, { Children } from "react";
-// import { Props } from "../../services/interfaces";
-import React, { PropsWithChildren, FC } from "react";
-// import SidebarSettings from "./settingSidebar";
-
+import React, { FC } from "react";
 import SettingSidebar from "./settingSidebar";
-import backArrow from "../../assets/images/arrow-left.svg";
-import Image from "next/image";
-import { useRouter } from "next/router";
 
 interface Props {
   children?: React.ReactNode;
-  // title: string;
 }
 
 const ProfileSettings: FC<Props> = ({ children }) => {
-  const router = useRouter();
-
   return (
     <div style={{ background: "#F6F6F6", height: "100vh" }}>
       <DashboardContainer title="Settings">
@@ -60,25 +50,6 @@ const ProfileSettings: FC<Props> = ({ children }) => {
               pr: "5%",
             }}
           >
-            {/* <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                mb: "30px",
-              }}
-            >
-              <Image
-                src={backArrow}
-                alt="back"
-                onClick={() => router.back()}
-                style={{ cursor: "pointer" }}
-              />
-              <Typography sx={{ fontWeight: "700", color: "#13111F" }}>
-                {title}
-              </Typography>
-            </Box> */}
-
             {children}
           </Box>
         </Box>

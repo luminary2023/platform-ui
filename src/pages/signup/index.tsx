@@ -60,6 +60,7 @@ export default function Index() {
             {error && (
               <Toast
                 text={errs?.errors?.[0].message || errs?.message}
+                success={errs?.message === "Registered successfully."}
                 marginBottom={40}
               />
             )}

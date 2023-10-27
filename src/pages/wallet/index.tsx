@@ -81,16 +81,16 @@ const Wallet = () => {
     try {
       const response = await userAccountDetails();
       setBankDetails(response);
-    } catch (error) {
-      setError(error ? "error" : null);
+    } catch (error: any) {
+      return error?.response?.data;
     }
   };
   const profile = async () => {
     try {
       const response = await profileRequest();
       setWalletBalance(response);
-    } catch (error) {
-      setError(error ? "error" : null);
+    } catch (error: any) {
+      return error?.response?.data;
     }
   };
   useEffect(() => {

@@ -34,14 +34,14 @@ const giftCards = [
 const Dashboard = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [profileData, setProfileData] = useState<any>("");
-  const [error, setError] = useState<boolean>(false);
+  // const [error, setError] = useState<boolean>(false);
 
   const fetchProfile = async () => {
     try {
       const res = await profileRequest();
       setProfileData(res);
-    } catch (err) {
-      setError(true);
+    } catch (error: any) {
+      return error?.response?.data;
     }
   };
 

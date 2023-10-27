@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
-import Settingss from "..";
+import { useEffect, useState, FC } from "react";
 import ProfileSettings from "../index";
 import {
   Box,
@@ -28,22 +27,31 @@ const style = {
   borderRadius: "10px",
   p: 4,
 };
-
-const BankInformation = () => {
+interface Props {
+  id: any;
+}
+const BankInformation: FC<Props> = ({ id }) => {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openModal, setOpenModal] = useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
+
+  const [bankId, setBankId] = useState("");
+  const [bankDetails, setBankDetails] = useState<any[]>([]);
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleClose = () => {
+    setBankId("");
+    setOpenModal(false);
+  };
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>, id: any) => {
+    setBankId(id);
     setAnchorEl(event.currentTarget);
   };
-
-  const [bankDetails, setBankDetails] = useState<[]>([]);
 
   const handleBankDetails = async () => {
     try {
@@ -57,10 +65,13 @@ const BankInformation = () => {
     handleBankDetails();
   }, []);
 
-  const handleDeleteAccount = async (userBankId: any) => {
+  const handleDeleteAccount = async () => {
     try {
-      const response = await DeleteAccount(userBankId);
-      console.log(response);
+      const response = await DeleteAccount(bankId);
+      setBankDetails(response);
+      await handleBankDetails();
+      await handleClose();
+      await handleCloseMenu();
     } catch (error: any) {
       return error?.response?.data;
     }
@@ -90,7 +101,7 @@ const BankInformation = () => {
 
         {bankDetails.map((bank: any) => (
           <Box
-            key={bank.accountNumber}
+            key={bank.id}
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -133,7 +144,7 @@ const BankInformation = () => {
                   aria-controls={open ? "long-menu" : undefined}
                   aria-expanded={open ? "true" : undefined}
                   aria-haspopup="true"
-                  onClick={handleClick}
+                  onClick={(event) => handleClick(event, bank.id)}
                 >
                   <MoreVertIcon />
                 </IconButton>
@@ -168,7 +179,7 @@ const BankInformation = () => {
             Are you sure you want to delete this bank details
           </Typography>
           <Button
-            onClick={handleDeleteAccount}
+            onClick={() => handleDeleteAccount()}
             color="success"
             variant="contained"
             type="submit"

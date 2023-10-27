@@ -59,7 +59,7 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
     } else {
       router.replace("/signup");
     }
-  });
+  }, [router]);
 
   const codeVerification = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

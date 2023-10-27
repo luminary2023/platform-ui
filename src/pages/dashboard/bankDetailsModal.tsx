@@ -69,10 +69,14 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
     setLoading(true);
     const res = await addBankAccount(data);
     setLoading(false);
-    reset();
     setError(false);
     setErrs(res);
     setError(true);
+    reset();
+
+    setTimeout(async () => {
+      onClose();
+    }, 1500);
   };
 
   const fetchBankDetails = async () => {
@@ -97,8 +101,8 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
           const response = await resolveAccount(data);
           setAccountBankName(response);
         }
-      } catch (err) {
-        setError(true);
+      } catch (error: any) {
+        error?.response?.data;
       }
     };
 
@@ -147,6 +151,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
         {error && (
           <Toast
             text={errs?.errors?.[0].message || errs?.message}
+            success={errs?.message === "Bank account added successfully."}
             marginBottom={40}
             color={
               errs.message === "Bank account added successfully."
