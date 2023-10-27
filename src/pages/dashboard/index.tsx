@@ -3,12 +3,14 @@ import DashboardContainer from "@/components/DashboardNavigation/dashboardContai
 import styles from "./dashboard.module.css";
 import Security from "../../assets/images/security.svg";
 import KYC from "../../assets/images/KYC.svg";
-import React, { useState, FC } from "react";
+import React, { useState, useEffect, FC } from "react";
 import Bank from "../../assets/images/banks.svg";
 import Image from "next/image";
 import { Button, CircularProgress, Box, Typography } from "@mui/material";
 import BankDetailsModal from "./bankDetailsModal";
 import Dashboard from "./dashboard";
+import { userAccountDetails } from "@/api/userAccountDetails";
+import CheckIcon from "@mui/icons-material/Check";
 // import CircularProgressWithLabel from "../../services/dashboardProgress";
 
 interface ProgressProps {
@@ -19,17 +21,19 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [progress, setProgress] = React.useState(0);
+  const [bankDetails, setBankDetails] = useState<[]>([]);
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) =>
-        prevProgress >= 100 ? 0 : prevProgress + 35
-      );
-    }, 800);
+  const handleBankDetails = async () => {
+    try {
+      const response = await userAccountDetails();
+      setBankDetails(response);
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
 
-    return () => {
-      clearInterval(timer);
-    };
+  useEffect(() => {
+    handleBankDetails();
   }, []);
 
   return (
@@ -66,7 +70,7 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
                     fontWeight: "bold",
                   }}
                 >
-                  0/3
+                  {bankDetails.length === null ? "0" : "1"}/3
                 </Typography>
                 <CircularProgress
                   variant="determinate"
@@ -134,7 +138,13 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
               className={styles.profileSecurityImg}
             />
             <div>
-              <h3>Bank details</h3>
+              <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                {" "}
+                <h3>Bank details</h3>{" "}
+                {bankDetails.length > 0 && (
+                  <CheckIcon sx={{ color: "green" }} />
+                )}
+              </Box>
               <p>Recieve money into your prefered bank account.</p>
             </div>
           </div>

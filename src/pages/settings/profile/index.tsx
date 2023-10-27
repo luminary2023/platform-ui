@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Settingss from "..";
 import ProfileSettings from "../index";
 import { Box, Typography } from "@mui/material";
 import Input from "@/components/InputField";

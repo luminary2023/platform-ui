@@ -25,19 +25,18 @@ interface Props {
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
   const [profileData, setProfileData] = useState<any | string>("");
   const [error, setError] = useState<boolean>(false);
-
+  useEffect(() => {
+    fetchProfile();
+  }, []);
   const fetchProfile = async () => {
     try {
       const res = await profileRequest();
       setProfileData(res);
-    } catch (err) {
-      setError(true);
+    } catch (error) {
+      // error?.response?.data;
     }
   };
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
