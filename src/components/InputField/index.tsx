@@ -3,6 +3,7 @@ import styles from "./InputField.module.css";
 import { InputProps } from "@/services/interfaces";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Input: React.FC<InputProps> = ({
   placeholder,
@@ -18,6 +19,8 @@ const Input: React.FC<InputProps> = ({
   readOnly,
   value,
   maxLength,
+  searchInput,
+  inputStyles,
   width,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -38,6 +41,16 @@ const Input: React.FC<InputProps> = ({
         {label}
       </p>
       <div style={{ position: "relative" }}>
+        {searchInput && (
+          <SearchIcon
+            style={{
+              color: "#6F6C99",
+              position: "absolute",
+              top: 17,
+              left: 10,
+            }}
+          />
+        )}
         <input
           type={visible ? "text" : type}
           placeholder={placeholder}
@@ -51,6 +64,7 @@ const Input: React.FC<InputProps> = ({
             background: bgColor,
             borderColor: borderColor,
             width: "100%",
+            ...inputStyles,
           }}
         />
         {type === "password" && (

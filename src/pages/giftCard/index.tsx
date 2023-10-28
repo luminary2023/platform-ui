@@ -5,11 +5,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import styles from '../wallet/wallet.module.css'
-import giftcardStyles from './giftcard.module.css'
 import SellGiftcard from "./sellGiftcard";
 import GiftcardHome from "./giftcardHome";
-
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -58,11 +55,9 @@ const GiftCard = () => {
               value={value}
               onChange={handleChange}
               aria-label="giftcard tab"
-              // textColor="#FD6E6A"
-              // indicatorColor="#FD6E6A"
             >
-              <Tab label="Home" {...a11yProps(0)} />
-              <Tab label="Sell Giftcards" {...a11yProps(1)} />
+              <Tab label="Home" {...a11yProps(0)} style={{textTransform: "capitalize"}}/>
+              <Tab label="Sell Giftcards" {...a11yProps(1)} style={{textTransform: "capitalize"}}/>
             </Tabs>
           </Box>
           <GiftcardTabPanel value={value} index={0}>
