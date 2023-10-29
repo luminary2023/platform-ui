@@ -25,7 +25,7 @@ interface AppTableTagProps {
 const singleData = [
   {
     date: "6/19/14",
-    type: "Recieve",
+    type: "Received",
     assest: "Apple Gift card",
     description: "the description of the transaction",
     amount: "120,000",
@@ -41,7 +41,7 @@ const singleData = [
   },
   {
     date: "6/19/14",
-    type: "Recieve",
+    type: "Received",
     assest: "Apple Gift card",
     description: "the description of the transaction",
     amount: "120,000",
@@ -57,15 +57,15 @@ const singleData = [
   },
 ];
 
-const TableTag: React.FC<AppTableTagProps> = ({ text }) => (
+export const TableTag: React.FC<AppTableTagProps> = ({ text }) => (
   <div
     className={styles.TagTwoContainer}
     style={{
       background:
-        text === "Recieve" ? "rgb(204 244 233)" : "rgba(220, 53, 69, 0.20)",
+        text === "Received" ? "rgb(204 244 233)" : "rgba(220, 53, 69, 0.20)",
     }}
   >
-    <Image src={text === "Recieve" ? ReceiveIcon : SendIcon} alt="icon" />
+    <Image src={text === "Received" ? ReceiveIcon : SendIcon} alt="icon" />
   </div>
 );
 

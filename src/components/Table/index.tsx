@@ -34,7 +34,6 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
             sx={{
               borderRadius: "8px 8px 0px 0px",
               background: "#F6F6F6",
-              // width: '100%'
             }}
           >
             <TableRow>

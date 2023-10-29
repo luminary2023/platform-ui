@@ -1,0 +1,128 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+.container {
+  display: flex;
+  height: 150px;
+  padding: 32px 39px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: #FFF;
+}
+.sectionWrapper {
+  display: flex;
+  gap: 24px;
+}
+.homeSectionOne {
+  display: flex;
+  width: 40%;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 16px;
+  background: var(--base-0, #FFF);
+  height: fit-content;
+}
+.homeSectionTwo {
+  display: flex;
+  width: 60%;
+  padding: 53px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--base-0, #FFF);
+  border-radius: 16px;
+}
+.giftCardAmount {
+  display: flex;
+  gap: 15px;
+  font-family: "Clash Display Medium";
+  font-size: 36px;
+  color: #081630;
+  align-items: center;
+
+  .giftCardAmountSub {
+    font-size: 16px;
+    font-family: "Satoshi Light";
+  }
+}
+.action {
+  color: #6C757D;
+  font-family: "Satoshi Light";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+.actionWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+}
+.actionBox {
+  display: flex;
+  height: 113px;
+  width: 180px;
+  padding: 15px 35px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--Linear-1, #FD6E6A);
+  background: #FEF4E6;
+  cursor: pointer;
+}
+.tableTitle {
+  color: #111;
+  font-family: "Clash Display Medium";
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.22px;
+}
+.tableHead {
+  color: #111;
+  font-family: "Satoshi Bold";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.15px;
+}
+.tableData {
+  color: #111;
+  font-family: "Satoshi Regular";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 24px;
+}
+.statusTag {
+  display: flex;
+  width: 82px;
+  height: 33px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+}
+
+.pending {
+  background: #F4F0FF;
+  color: #6338DC;
+}
+.completed {
+  background: #E8FFDD;
+  color: #5FDA24;
+}
+.error {
+  color: #E73434;
+  background: #FFE9E9;
+}
