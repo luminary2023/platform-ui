@@ -11,6 +11,8 @@ import BankDetailsModal from "./bankDetailsModal";
 import Dashboard from "./dashboard";
 import { userAccountDetails } from "@/api/userAccountDetails";
 import CheckIcon from "@mui/icons-material/Check";
+import PhoneNumberModal from "./phoneNumberModal";
+import TransactionPinModal from "./transactionPinModal";
 // import CircularProgressWithLabel from "../../services/dashboardProgress";
 
 interface ProgressProps {
@@ -20,6 +22,8 @@ interface ProgressProps {
 const Index: FC<ProgressProps> = ({ thickness }) => {
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
+  const [openPhoneModal, setOpenPhoneModal] = useState<boolean>(false);
+  const [openTransactionPin, setOpenTransactionPin] = useState<boolean>(false);
   const [progress, setProgress] = React.useState(0);
   const [bankDetails, setBankDetails] = useState<[]>([]);
 
@@ -99,31 +103,51 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
 
           <div className={styles.profileSecurity}>
             <Image
-              src={Security}
+              src={KYC}
               alt="secure"
-              // style={{ marginRight: "40px" }}
               className={styles.profileSecurityImg}
             />
             <div>
-              <h3>More security</h3>
+              <h3>KYC Verification</h3>
 
               <p>
-                keep your account more secure by entering your phone number.
+                Submit your Identification documents and increase your P3 wallet
+                limits.
               </p>
             </div>
           </div>
-          <div className={styles.profileSecurity}>
+          <div
+            className={styles.profileSecurity}
+            onClick={() => setOpenTransactionPin(true)}
+            style={{ cursor: "pointer" }}
+          >
             <Image
               src={KYC}
               alt="secure"
               className={styles.profileSecurityImg}
             />
             <div>
-              <h3>KYC verification</h3>
+              <h3>Create Transaction Pin</h3>
+
+              <p>To be able to transact create transaction pin</p>
+            </div>
+          </div>
+
+          <div
+            className={styles.profileSecurity}
+            style={{ cursor: "pointer" }}
+            onClick={() => setOpenPhoneModal(true)}
+          >
+            <Image
+              src={KYC}
+              alt="secure"
+              className={styles.profileSecurityImg}
+            />
+            <div>
+              <h3>Verify Phone number</h3>
 
               <p>
-                Submit your Identification documents and increase your P3 wallet
-                limits.
+                keep your account more secure by entering your phone number.
               </p>
             </div>
           </div>
@@ -140,7 +164,7 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
             <div>
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 {" "}
-                <h3>Bank details</h3>{" "}
+                <h3>Bank Details</h3>{" "}
                 {bankDetails.length > 0 && (
                   <CheckIcon sx={{ color: "green" }} />
                 )}
@@ -164,6 +188,14 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
         <Dashboard />
       )}
       <BankDetailsModal open={open} onClose={() => setOpen(false)} />
+      <PhoneNumberModal
+        open={openPhoneModal}
+        onClose={() => setOpenPhoneModal(false)}
+      />
+      <TransactionPinModal
+        open={openTransactionPin}
+        onClose={() => setOpenTransactionPin(false)}
+      />
     </DashboardContainer>
   );
 };

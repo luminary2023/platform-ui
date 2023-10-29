@@ -62,3 +62,44 @@ export const getInTouch = z.object({
   phoneNumber: z.string().min(3, { message: " required" }),
   messages: z.string().min(3, { message: " required" }),
 });
+
+export const verifyPhoneNumber = z.object({
+  phoneNumber: z.string().min(11, { message: " required" }),
+});
+
+export const transactionPin = z
+  .object({
+    pin: z.string().min(4, { message: "Password is required" }).max(4),
+    confirmPin: z.string().min(4, { message: "Password is required" }).max(4),
+  })
+  .refine((data) => data.pin === data.confirmPin, {
+    message: "Passwords don't match",
+    path: ["confirmPin"],
+  });
+export const changeTransactionPinValidation = z
+  .object({
+    newPin: z.string().min(4, { message: "Password is required" }).max(4),
+    currentPin: z.string().min(4, { message: "Password is required" }).max(4),
+    confirmPin: z.string().min(4, { message: "Password is required" }).max(4),
+  })
+  .refine((data) => data.newPin === data.confirmPin, {
+    message: "Passwords don't match",
+    path: ["confirmPin"],
+  });
+
+export const changePasswordPinValidation = z
+  .object({
+    newPassword: z.string().min(4, { message: "Password is required" }).max(4),
+    currentPassword: z
+      .string()
+      .min(4, { message: "Password is required" })
+      .max(4),
+    confirmPassword: z
+      .string()
+      .min(4, { message: "Password is required" })
+      .max(4),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });

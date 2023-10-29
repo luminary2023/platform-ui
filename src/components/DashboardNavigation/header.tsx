@@ -23,21 +23,22 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
-  const [profileData, setProfileData] = useState<any | string>("");
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
   const [error, setError] = useState<boolean>(false);
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+  const [profileData, setProfileData] = useState<any>();
+
   const fetchProfile = async () => {
     try {
       const res = await profileRequest();
       setProfileData(res);
-    } catch (error) {
-      // error?.response?.data;
+    } catch (error: any) {
+      error?.response?.data;
     }
   };
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -110,7 +111,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               justifyContent: "center",
               alignItems: "center",
               gap: "5px",
-              marginLeft: "15px",
+              marginRight: "15px",
               borderRadius: "14px",
               cursor: "pointer",
               background:
@@ -133,74 +134,82 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               15
             </Typography>
           </Box>
-
-          <Avatar
-            // src={}
-            onClick={handleClick}
-            sx={{
-              width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
-              height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
-              marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
-              fontSize: { xs: "13px", sm: "13px", md: "15px", lg: "17px" },
-              cursor: "pointer",
-              display: "flex",
-            }}
-          >
-            {profileData?.firstName?.charAt(0) +
-              profileData?.lastName?.charAt(0)}
-          </Avatar>
-          <Typography
-            onClick={handleClick}
-            style={{ cursor: "pointer" }}
-            sx={{
-              color: " #6F6C99",
-              fontSize: " 13px",
-              fontFamily: "Satoshi Light",
-              fontStyle: "normal",
-              fontWeight: 500,
-              marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
-              display: {
-                xs: "none",
-                sm: "block",
-                lg: "block",
-                xl: "block",
-              },
-            }}
-          >
-            {profileData?.firstName} {profileData?.lastName}
-          </Typography>
           <Box
-            sx={{
-              marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
-            }}
+            sx={{ display: "flex", alignItems: "center", gap: 1 }}
+            // onClick={handleClick}
           >
-            <Image
-              src={DownArrow}
-              alt="arrow"
-              id="fade-button"
-              aria-controls={open ? "fade-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+            <Avatar
+              // src={}
+              onClick={handleClick}
+              sx={{
+                width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
+                height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
+                // marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
+                fontSize: { xs: "13px", sm: "13px", md: "15px", lg: "17px" },
+                cursor: "pointer",
+                display: "flex",
+              }}
+            >
+              {profileData?.firstName?.charAt(0) +
+                profileData?.lastName?.charAt(0)}
+            </Avatar>
+            <Typography
               onClick={handleClick}
               style={{ cursor: "pointer" }}
-            />
-
-            <Menu
-              id="fade-menu"
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
+              sx={{
+                color: " #6F6C99",
+                fontSize: " 13px",
+                fontFamily: "Satoshi Light",
+                fontStyle: "normal",
+                fontWeight: 500,
+                // marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
+                display: {
+                  xs: "none",
+                  sm: "block",
+                  lg: "block",
+                  xl: "block",
+                },
               }}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              TransitionComponent={Fade}
             >
-              <MenuItem onClick={() => router.push("/wallet")}>Wallet</MenuItem>
-              <MenuItem onClick={() => router.push("/giftCard")}>
-                Gift Card
-              </MenuItem>
-              <MenuItem onClick={logout}>Logout</MenuItem>
-            </Menu>
+              {profileData?.firstName} {profileData?.lastName}
+            </Typography>
+            <Box
+              sx={
+                {
+                  // marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
+                }
+              }
+            >
+              <Image
+                src={DownArrow}
+                alt="arrow"
+                id="fade-button"
+                aria-controls={open ? "fade-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                style={{ cursor: "pointer" }}
+              />
+
+              <Menu
+                id="fade-menu"
+                MenuListProps={{
+                  "aria-labelledby": "fade-button",
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={Fade}
+              >
+                <MenuItem onClick={() => router.push("/wallet")}>
+                  Wallet
+                </MenuItem>
+                <MenuItem onClick={() => router.push("/giftCard")}>
+                  Gift Card
+                </MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
+              </Menu>
+            </Box>
           </Box>
         </Box>
       </Box>

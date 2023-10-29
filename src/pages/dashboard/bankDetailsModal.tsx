@@ -17,7 +17,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { xs: "95%", sm: "95%", lg: 450, xl: 450 },
+  width: { xs: "95%", sm: "50%", lg: 450, xl: 450 },
   bgcolor: " #fff",
   border: "none",
   borderRadius: "24px",
@@ -43,6 +43,7 @@ interface ErrorProps {
 }
 
 const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
+  const reload = () => window.location.reload();
   const [loading, setLoading] = useState<boolean>(false);
   const [banks, setBanks] = useState<[]>([]);
   const [accountBankName, setAccountBankName] = useState<BankDetailsProps>();
@@ -75,8 +76,11 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
     reset();
 
     setTimeout(async () => {
+      setError(false);
       onClose();
-    }, 1500);
+    }, 2000);
+
+    // reload();
   };
 
   const fetchBankDetails = async () => {
@@ -108,8 +112,9 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
 
     fetchData();
   }, [accountNumber, bankId]);
-  const handleAccountBankName = (data: BankDetailsProps) => {
-    setAccountBankName(data);
+  const handleAccountBankName = () => {
+    setError(false);
+    onClose();
   };
 
   return (
@@ -250,9 +255,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             <Button
               color="secondary"
               variant={"contained"}
-              onClick={() => {
-                onClose(), unregister(), handleAccountBankName;
-              }}
+              onClick={handleAccountBankName}
               sx={{
                 textTransform: "initial",
                 color: "#000",

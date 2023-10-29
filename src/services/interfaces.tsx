@@ -3,6 +3,11 @@ export interface CardProps {
   title: string;
   description: string;
 }
+export interface ChangeTransactionPinProps {
+  newPin: number;
+  currentPin: number;
+  confirmPin: number;
+}
 
 export interface PageTitleProps {
   title: string;
@@ -49,6 +54,11 @@ export interface BankDetailsProps {
   accountName: string;
 }
 
+export interface TransactionPinProps {
+  pin: number;
+  confirmPin: number;
+}
+
 export interface Props extends React.PropsWithChildren {
   title: string;
   subtitle?: string;
@@ -59,4 +69,8 @@ export interface ErrorProps {
   message: string;
   statusCode: number;
   errors?: any;
+}
+
+export interface phoneNumberProps {
+  phoneNumber: string;
 }
