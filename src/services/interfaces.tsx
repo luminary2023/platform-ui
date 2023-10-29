@@ -29,6 +29,8 @@ export interface InputProps {
   value?: string;
   maxLength?: string;
   width?: string;
+  searchInput?: boolean
+  inputStyles?: any
 }
 
 export interface EmailVerifiedProps {

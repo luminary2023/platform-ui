@@ -44,3 +44,9 @@
   src: url(./../assets/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Extralight.woff);
 }
 
+.css-1piowx7-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: #FD6E6A;
+}
+.css-17pjhi7-MuiTabs-indicator {
+  background: var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%));
+}

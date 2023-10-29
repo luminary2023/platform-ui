@@ -1,13 +1,3 @@
-export const bankData = [
-  "Gtb",
-  "Uba",
-  "First Bank",
-  "Access",
-  "Fidelity",
-  "Unity",
-  "Zenith",
-];
-
 export const quickActionsData = [
   {
     id: 1,
@@ -25,3 +15,11 @@ export const quickActionsData = [
     text: "Pay Bill",
   },
 ];
+
+export const giftcardTableHead = [
+  "Type",
+  "Giftcard",
+  "Amount",
+  "NGN",
+  "Status"
+]
