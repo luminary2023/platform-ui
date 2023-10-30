@@ -14,18 +14,18 @@ import CheckIcon from "@mui/icons-material/Check";
 import PhoneNumberModal from "./phoneNumberModal";
 import TransactionPinModal from "./transactionPinModal";
 // import CircularProgressWithLabel from "../../services/dashboardProgress";
+import { createTransactionPin } from "@/api/createTransactionPin";
+import { TransactionPinProps } from "@/services/interfaces";
+import { number } from "zod";
 
-interface ProgressProps {
-  thickness: number;
-}
-
-const Index: FC<ProgressProps> = ({ thickness }) => {
+const Index = () => {
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [openPhoneModal, setOpenPhoneModal] = useState<boolean>(false);
   const [openTransactionPin, setOpenTransactionPin] = useState<boolean>(false);
-  const [progress, setProgress] = React.useState(0);
+
   const [bankDetails, setBankDetails] = useState<[]>([]);
+  const [createPin, setCreatePin] = useState<any>({});
 
   const handleBankDetails = async () => {
     try {
@@ -36,6 +36,12 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
     }
   };
 
+  const handleBankDetailsModal = () => {
+    if (bankDetails.length < 1) {
+      setOpen(true);
+    } else setOpen(false);
+  };
+  // const data: TransactionPinProps;
   useEffect(() => {
     handleBankDetails();
   }, []);
@@ -154,7 +160,7 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
           <div
             className={styles.profileSecurity}
             style={{ cursor: "pointer" }}
-            onClick={() => setOpen(true)}
+            onClick={handleBankDetailsModal}
           >
             <Image
               src={Bank}
@@ -199,5 +205,4 @@ const Index: FC<ProgressProps> = ({ thickness }) => {
     </DashboardContainer>
   );
 };
-
 export default Index;

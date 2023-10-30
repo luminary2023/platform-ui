@@ -56,6 +56,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
   });
 
   const handlePhoneNumber = async (data: phoneNumberProps) => {
+    setLoading(true);
     setPhoneNumberVerification(false);
   };
 
@@ -102,7 +103,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
 
             <form onSubmit={handleSubmit(handlePhoneNumber)}>
               <Input
-                type="number"
+                type="text"
                 placeholder={"Enter phone number"}
                 maxLength={"11"}
                 aria-label="Demo number input"
@@ -113,6 +114,11 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
                 marginTop={"12px"}
                 register={{ ...register("phoneNumber") }}
                 borderColor={errors.phoneNumber?.message ? "#DF1111" : ""}
+                onKeyPress={(event: any) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
               />
 
               <Button

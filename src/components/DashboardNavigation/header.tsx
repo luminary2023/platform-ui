@@ -24,7 +24,6 @@ interface Props {
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
   const [error, setError] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>();
 
@@ -136,11 +135,9 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
           </Box>
           <Box
             sx={{ display: "flex", alignItems: "center", gap: 1 }}
-            // onClick={handleClick}
+            onClick={handleClick}
           >
             <Avatar
-              // src={}
-              onClick={handleClick}
               sx={{
                 width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
                 height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
@@ -154,7 +151,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
                 profileData?.lastName?.charAt(0)}
             </Avatar>
             <Typography
-              onClick={handleClick}
+              // onClick={handleClick}
               style={{ cursor: "pointer" }}
               sx={{
                 color: " #6F6C99",
@@ -162,7 +159,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
                 fontFamily: "Satoshi Light",
                 fontStyle: "normal",
                 fontWeight: 500,
-                // marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
+
                 display: {
                   xs: "none",
                   sm: "block",
@@ -173,13 +170,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
             >
               {profileData?.firstName} {profileData?.lastName}
             </Typography>
-            <Box
-              sx={
-                {
-                  // marginLeft: { xs: "10px", sm: "10px", lg: "15px", xl: "15px" },
-                }
-              }
-            >
+            <Box>
               <Image
                 src={DownArrow}
                 alt="arrow"
@@ -187,30 +178,26 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
                 aria-controls={open ? "fade-menu" : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
                 style={{ cursor: "pointer" }}
               />
-
-              <Menu
-                id="fade-menu"
-                MenuListProps={{
-                  "aria-labelledby": "fade-button",
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Fade}
-              >
-                <MenuItem onClick={() => router.push("/wallet")}>
-                  Wallet
-                </MenuItem>
-                <MenuItem onClick={() => router.push("/giftCard")}>
-                  Gift Card
-                </MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
-              </Menu>
             </Box>
           </Box>
+          <Menu
+            id="fade-menu"
+            MenuListProps={{
+              "aria-labelledby": "fade-button",
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Fade}
+          >
+            <MenuItem onClick={() => router.push("/wallet")}>Wallet</MenuItem>
+            <MenuItem onClick={() => router.push("/giftCard")}>
+              Gift Card
+            </MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
+          </Menu>
         </Box>
       </Box>
       <Typography

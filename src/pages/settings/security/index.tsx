@@ -135,6 +135,11 @@ const Security = () => {
                   labelSize={"16px"}
                   register={{ ...register("currentPin") }}
                   borderColor={errors.currentPin?.message ? "#DF1111" : ""}
+                  onKeyPress={(event: any) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
                 />
 
                 <Input
@@ -147,6 +152,11 @@ const Security = () => {
                   labelSize={"16px"}
                   register={{ ...register("newPin") }}
                   borderColor={errors.newPin?.message ? "#DF1111" : ""}
+                  onKeyPress={(event: any) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
                 />
 
                 <Input
@@ -159,6 +169,11 @@ const Security = () => {
                   labelSize={"16px"}
                   register={{ ...register("confirmPin") }}
                   borderColor={errors.confirmPin?.message ? "#DF1111" : ""}
+                  onKeyPress={(event: any) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
                 />
                 <Button
                   color="primary"
