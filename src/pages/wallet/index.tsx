@@ -225,7 +225,6 @@ const Wallet = () => {
                           key={account.accountNumber}
                           value={account.accountNumber}
                         >
-                          {console.log(bankDetails)}
                           {account?.bank?.name}
                         </option>
                       ))
@@ -282,7 +281,7 @@ const Wallet = () => {
                 </Box>
                 <Input
                   placeholder={"NGN"}
-                  type={"number"}
+                  type={"text"}
                   label="Amount"
                   bgColor={"#F6F6F6"}
                   marginBottom={"18px"}
@@ -290,6 +289,11 @@ const Wallet = () => {
                   labelSize={"16px"}
                   register={{ ...register("amount") }}
                   borderColor={errors.amount?.message ? "#DF1111" : ""}
+                  onKeyPress={(event: any) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
                 />
 
                 <Button

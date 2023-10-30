@@ -53,8 +53,7 @@ const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
     handleSubmit,
     register,
     reset,
-    watch,
-    unregister,
+
     formState: { errors },
   } = useForm<TransactionPinProps>({
     resolver: zodResolver(transactionPin),
@@ -97,7 +96,6 @@ const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
         <Box sx={style}>
           {/* {createPin?.length >= 0 ? ( */}
           <>
-            {createPin.length}
             {error && (
               <Toast
                 text={createPin?.message}
@@ -165,6 +163,11 @@ const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
                 marginTop={"12px"}
                 register={{ ...register("pin") }}
                 borderColor={errors.pin?.message ? "#DF1111" : ""}
+                onKeyPress={(event: any) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
               />
               <Input
                 type="password"
@@ -176,6 +179,11 @@ const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
                 labelSize={"16px"}
                 register={{ ...register("confirmPin") }}
                 borderColor={errors.confirmPin?.message ? "#DF1111" : ""}
+                onKeyPress={(event: any) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
               />
 
               <Button
