@@ -44,7 +44,7 @@ const ProfileSettings: FC<Props> = ({ children }) => {
             sx={{
               width: "100%",
               overflow: "scroll",
-              height: "100%",
+              height: "100wh",
               pl: "5%",
 
               pr: "5%",

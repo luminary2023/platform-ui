@@ -219,14 +219,17 @@ const Wallet = () => {
                   onChange={handleChange}
                 >
                   <option value="">Choose bank</option>
-                  {(bankDetails || [])?.map((account: any) => (
-                    <option
-                      key={account.accountNumber}
-                      value={account.accountNumber}
-                    >
-                      {account?.bank?.name}
-                    </option>
-                  ))}
+                  {Array.isArray(bankDetails || [])
+                    ? (bankDetails || [])?.map((account: any) => (
+                        <option
+                          key={account.accountNumber}
+                          value={account.accountNumber}
+                        >
+                          {console.log(bankDetails)}
+                          {account?.bank?.name}
+                        </option>
+                      ))
+                    : ""}
                 </select>
 
                 <Box

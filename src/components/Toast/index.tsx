@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Error from "../../assets/images/error.svg";
-import Success from "../../assets/images/toastsucess.svg"
+import Success from "../../assets/images/toastsucess.svg";
 
 const styles = {
   main: {
@@ -22,10 +22,16 @@ interface ToastProp {
   marginBottom?: number;
   color?: string;
   border?: string;
-  success?: boolean
+  success?: boolean;
 }
 
-const Toast: React.FC<ToastProp> = ({ text, marginBottom, color, border, success=false }) => {
+const Toast: React.FC<ToastProp> = ({
+  text,
+  marginBottom,
+  color,
+  border,
+  success = false,
+}) => {
   return (
     <div
       style={
@@ -39,7 +45,11 @@ const Toast: React.FC<ToastProp> = ({ text, marginBottom, color, border, success
           : styles.main
       }
     >
-      <Image src={success ? Success : Error} alt="error" style={{ marginRight: 9 }} />
+      <Image
+        src={success ? Success : Error}
+        alt="error"
+        style={{ marginRight: 9 }}
+      />
       <p>{text}</p>
     </div>
   );
