@@ -24,7 +24,7 @@ const SidebarContainer: FC<PropsWithChildren<Props>> = ({
           display: "flex",
           flexDirection: "column",
           background: "#F6F6F6",
-          height: "100vh",
+          height: "100%",
           width: "100%",
           padding: {
             xs: "18px 6px 6px 8px",

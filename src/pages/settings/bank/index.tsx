@@ -36,7 +36,7 @@ const BankInformation: FC<Props> = ({ id }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const [bankId, setBankId] = useState("");
-  const [bankDetails, setBankDetails] = useState<any[]>([]);
+  const [bankDetails, setBankDetails] = useState<any | []>([]);
   const handleOpenModal = () => {
     setOpenModal(true);
   };
@@ -99,67 +99,69 @@ const BankInformation: FC<Props> = ({ id }) => {
           </Typography>
         </Box>
 
-        {bankDetails.map((bank: any) => (
-          <Box
-            key={bank.id}
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              borderBottom: "1px solid #DADADA",
-              mb: "20px",
-            }}
-          >
-            <Box>
+        {Array.isArray(bankDetails)
+          ? bankDetails.map((bank: any) => (
               <Box
+                key={bank.id}
                 sx={{
-                  mb: "8px",
-                  fontFamily: "sans-serif",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  borderBottom: "1px solid #DADADA",
+                  mb: "20px",
                 }}
               >
-                {bank.bank.name}
-              </Box>
-              <Box
-                sx={{
-                  color: "#AFAFAF",
-                  fontFamily: "sans-serif",
-                }}
-              >
-                {bank.accountName}
-              </Box>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Box
-                sx={{
-                  fontFamily: "sans-serif",
-                }}
-              >
-                {bank.accountNumber}
-              </Box>
+                <Box>
+                  <Box
+                    sx={{
+                      mb: "8px",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    {bank.bank.name}
+                  </Box>
+                  <Box
+                    sx={{
+                      color: "#AFAFAF",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    {bank.accountName}
+                  </Box>
+                </Box>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <Box
+                    sx={{
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    {bank.accountNumber}
+                  </Box>
 
-              <Box>
-                <IconButton
-                  aria-label="more"
-                  id="long-button"
-                  aria-controls={open ? "long-menu" : undefined}
-                  aria-expanded={open ? "true" : undefined}
-                  aria-haspopup="true"
-                  onClick={(event) => handleClick(event, bank.id)}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id="long-menu"
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleCloseMenu}
-                >
-                  <MenuItem onClick={handleOpenModal}>Delete</MenuItem>
-                </Menu>
+                  <Box>
+                    <IconButton
+                      aria-label="more"
+                      id="long-button"
+                      aria-controls={open ? "long-menu" : undefined}
+                      aria-expanded={open ? "true" : undefined}
+                      aria-haspopup="true"
+                      onClick={(event) => handleClick(event, bank.id)}
+                    >
+                      <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                      id="long-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleCloseMenu}
+                    >
+                      <MenuItem onClick={handleOpenModal}>Delete</MenuItem>
+                    </Menu>
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-          </Box>
-        ))}
+            ))
+          : ""}
       </ProfileSettings>
       <Modal
         open={openModal}
