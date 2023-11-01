@@ -57,7 +57,9 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
 
   const handlePhoneNumber = async (data: phoneNumberProps) => {
     setLoading(true);
+    console.log(data);
     setPhoneNumberVerification(false);
+    setLoading(false);
   };
 
   const handleOnClose = () => {
@@ -147,7 +149,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: 10,
+                gap: 5,
                 mb: "5px",
               }}
             >

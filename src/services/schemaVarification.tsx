@@ -86,7 +86,16 @@ export const changeTransactionPinValidation = z
     message: "Passwords don't match",
     path: ["confirmPin"],
   });
-
+export const changePasswordValidation = z
+  .object({
+    newPassword: z.string().min(8, { message: "Password is required" }),
+    currentPassword: z.string().min(8, { message: "Password is required" }),
+    confirmPassword: z.string().min(8, { message: "Password is required" }),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 export const changePasswordPinValidation = z
   .object({
     newPassword: z.string().min(4, { message: "Password is required" }).max(4),
