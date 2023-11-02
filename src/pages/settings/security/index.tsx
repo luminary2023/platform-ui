@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Settingss from "..";
 import ProfileSettings from "../index";
 import {
   Accordion,
@@ -21,6 +20,8 @@ import { ChangeTransactionPinProps } from "@/services/interfaces";
 import { changeTransactionPinValidation } from "@/services/schemaVarification";
 import { ChangeTransactionPin } from "@/api/changeTransactionPin";
 import Toast from "@/components/Toast";
+import ChangePasswordForm from "./changePasswordForm";
+import Loading from "@/components/Loading";
 
 const Security = () => {
   const router = useRouter();
@@ -28,7 +29,6 @@ const Security = () => {
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const [changePin, setChangePin] = useState<any>({});
   const [error, setError] = useState<boolean>(false);
-
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
@@ -38,8 +38,6 @@ const Security = () => {
     handleSubmit,
     register,
     reset,
-    watch,
-    unregister,
     formState: { errors },
   } = useForm<ChangeTransactionPinProps>({
     resolver: zodResolver(changeTransactionPinValidation),
@@ -185,7 +183,7 @@ const Security = () => {
                     mt: "10px",
                   }}
                 >
-                  Update
+                  {loading ? <Loading /> : "Update"}
                 </Button>
               </form>
             </AccordionDetails>
@@ -207,62 +205,7 @@ const Security = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Input
-                // readOnly={true}
-                type={"text"}
-                label="Enter Old Password"
-                bgColor={"#F2F2F2"}
-                marginBottom={"8px"}
-                labelColor={"#081630"}
-                labelSize={"16px"}
-
-                // value={selectedBankDetails?.accountName}
-                // register={{ ...register("accountName") }}
-
-                // borderColor={errors.accountName?.message ? "#DF1111" : ""}
-              />
-
-              <Input
-                // readOnly={true}
-
-                type={"text"}
-                label="Enter New Password"
-                bgColor={"#F2F2F2"}
-                marginBottom={"8px"}
-                labelColor={"#081630"}
-                labelSize={"16px"}
-                // value={selectedBankDetails?.accountName}
-                // register={{ ...register("accountName") }}
-
-                // borderColor={errors.accountName?.message ? "#DF1111" : ""}
-              />
-
-              <Input
-                // readOnly={true}
-
-                type={"text"}
-                label="Confirm New Password"
-                bgColor={"#F2F2F2"}
-                marginBottom={"8px"}
-                labelColor={"#081630"}
-                labelSize={"16px"}
-                // value={selectedBankDetails?.accountName}
-                // register={{ ...register("accountName") }}
-
-                // borderColor={errors.accountName?.message ? "#DF1111" : ""}
-              />
-              <Button
-                color="primary"
-                variant="contained"
-                type="submit"
-                fullWidth
-                sx={{
-                  textTransform: "capitalize",
-                  mt: "10px",
-                }}
-              >
-                Update
-              </Button>
+              <ChangePasswordForm />
             </AccordionDetails>
           </Accordion>
         </div>

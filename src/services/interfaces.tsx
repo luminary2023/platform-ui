@@ -8,6 +8,11 @@ export interface ChangeTransactionPinProps {
   currentPin: number;
   confirmPin: number;
 }
+export interface ChangePasswordProps {
+  newPassword: string;
+  currentPassword: string;
+  confirmPassword: string;
+}
 
 export interface PageTitleProps {
   title: string;
