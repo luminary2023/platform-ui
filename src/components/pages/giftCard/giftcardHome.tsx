@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./giftcard.module.css";
 import Image from "next/image";
-import BuyGiftCardIcon from "../../assets/images/buy-giftcard.svg";
-import SellGiftCardIcon from "../../assets/images/sell-giftcard.svg";
+import BuyGiftCardIcon from "../../../assets/images/buy-giftcard.svg";
+import SellGiftCardIcon from "../../../assets/images/sell-giftcard.svg";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -140,7 +140,7 @@ const GiftcardHome = () => {
                       className={styles.tableData}
                       sx={{
                         position: "relative",
-                        left: '15px',
+                        left: "15px",
                       }}
                     >
                       <>

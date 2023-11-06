@@ -66,7 +66,7 @@ const ChangePasswordForm = () => {
           />
         )}
         <Input
-          type={"text"}
+          type={"password"}
           label="Enter Old Password"
           bgColor={"#F2F2F2"}
           marginBottom={"8px"}
@@ -77,7 +77,7 @@ const ChangePasswordForm = () => {
         />
 
         <Input
-          type={"text"}
+          type={"password"}
           label="Enter New Password"
           bgColor={"#F2F2F2"}
           marginBottom={"8px"}
@@ -88,7 +88,7 @@ const ChangePasswordForm = () => {
         />
 
         <Input
-          type={"text"}
+          type={"password"}
           label="Confirm New Password"
           bgColor={"#F2F2F2"}
           marginBottom={"8px"}

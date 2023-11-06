@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./About.module.css";
 import Image from "next/image";
-import UpperArrow from "../../assets/images/upDropDownArrow.svg";
+import UpperArrow from "../../../assets/images/upDropDownArrow.svg";
 // import Input from "@/components/InputField";
 import { Button } from "@/components/Button/Button";
 import { useForm } from "react-hook-form";

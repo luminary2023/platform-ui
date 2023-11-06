@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import styles from "./dashboard.module.css";
 import { Box, MenuItem, Menu, Fade } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../Button/Button";
 import Image from "next/image";
-import TreadingUp from "../../assets/images/trendingUp.svg";
-import ICN from "../../assets/images/Icn.svg";
-import Line from "../../assets/images/BarLine.svg";
-import PieChart from "../../services/pieChart";
-import DashboardTable from "../../components/Table/tableTwo";
+import TreadingUp from "../../../assets/images/trendingUp.svg";
+import ICN from "../../../assets/images/Icn.svg";
+import Line from "../../../assets/images/BarLine.svg";
+import PieChart from "../../../services/pieChart";
+import DashboardTable from "../../Table/tableTwo";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import tableStyles from "../wallet/wallet.module.css";
-import AmazonCard from "../../assets/images/Amazon.svg";
-import AmericanCard from "../../assets/images/americanCard.svg";
-import MediaCard from "../../assets/images/mediaCard.svg";
+import tableStyles from "../../../pages/wallet/wallet.module.css";
+import AmazonCard from "../../../assets/images/Amazon.svg";
+import AmericanCard from "../../../assets/images/americanCard.svg";
+import MediaCard from "../../../assets/images/mediaCard.svg";
 import { profileRequest } from "@/api/profile";
 
 const giftCards = [

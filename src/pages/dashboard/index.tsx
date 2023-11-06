@@ -1,22 +1,17 @@
 "use client";
 import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
-import styles from "./dashboard.module.css";
-import Security from "../../assets/images/security.svg";
+import styles from "../../components/pages/dashboard/dashboard.module.css";
 import KYC from "../../assets/images/KYC.svg";
 import React, { useState, useEffect, FC } from "react";
 import Bank from "../../assets/images/banks.svg";
 import Image from "next/image";
 import { Button, CircularProgress, Box, Typography } from "@mui/material";
-import BankDetailsModal from "./bankDetailsModal";
-import Dashboard from "./dashboard";
+import BankDetailsModal from "../../components/pages/dashboard/bankDetailsModal";
+import Dashboard from "../../components/pages/dashboard/dashboard";
 import { userAccountDetails } from "@/api/userAccountDetails";
 import CheckIcon from "@mui/icons-material/Check";
-import PhoneNumberModal from "./phoneNumberModal";
-import TransactionPinModal from "./transactionPinModal";
-// import CircularProgressWithLabel from "../../services/dashboardProgress";
-import { createTransactionPin } from "@/api/createTransactionPin";
-import { TransactionPinProps } from "@/services/interfaces";
-import { number } from "zod";
+import PhoneNumberModal from "../../components/pages/dashboard/phoneNumberModal";
+import TransactionPinModal from "../../components/pages/dashboard/transactionPinModal";
 
 const Index = () => {
   const [profile, setProfile] = useState<boolean>(true);

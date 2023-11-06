@@ -2,7 +2,7 @@ import { Typography, Box, Modal } from "@mui/material";
 import { FC } from "react";
 import { Button } from "@/components/Button/Button";
 import { useRouter } from "next/router";
-import SuccessIcon from "../../assets/images/successIcon.svg";
+import SuccessIcon from "../../../assets/images/successIcon.svg";
 import Image from "next/image";
 
 const style = {

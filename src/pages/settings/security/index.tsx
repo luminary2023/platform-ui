@@ -124,7 +124,7 @@ const Security = () => {
                   />
                 )}
                 <Input
-                  type={"text"}
+                  type={"password"}
                   maxLength="4"
                   label="Enter Current PIN"
                   bgColor={"#F2F2F2"}
@@ -141,7 +141,7 @@ const Security = () => {
                 />
 
                 <Input
-                  type={"text"}
+                  type={"password"}
                   maxLength="4"
                   label="Enter New PIN"
                   bgColor={"#F2F2F2"}
@@ -158,7 +158,7 @@ const Security = () => {
                 />
 
                 <Input
-                  type={"text"}
+                  type={"password"}
                   label="Confirm PIN"
                   maxLength="4"
                   bgColor={"#F2F2F2"}
