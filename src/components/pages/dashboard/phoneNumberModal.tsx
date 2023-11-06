@@ -8,7 +8,7 @@ import { phoneNumberProps } from "@/services/interfaces";
 import { verifyPhoneNumber } from "@/services/schemaVarification";
 import Loading from "@/components/Loading";
 import OtpInput from "@/components/OtpInput/otpInput";
-import backArrow from "../../assets/images/arrow-left.svg";
+import backArrow from "../../../assets/images/arrow-left.svg";
 
 import Image from "next/image";
 import { useRouter } from "next/router";

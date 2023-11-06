@@ -1,10 +1,10 @@
 import React from "react";
 import Card from "@/components/Card";
 import Image from "next/image";
-import Amazon from "../../assets/images/Amazon.svg";
-import Amex from "../../assets/images/Amex.svg";
+import Amazon from "../../../assets/images/Amazon.svg";
+import Amex from "../../../assets/images/Amex.svg";
 import giftcardStyles from "./giftcard.module.css";
-import styles from "../wallet/wallet.module.css";
+import styles from "../../../pages/wallet/wallet.module.css";
 import Input from "@/components/InputField";
 
 const ImageArray = [Amex, Amazon, Amazon, Amex, Amazon];

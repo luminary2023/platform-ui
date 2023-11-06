@@ -5,8 +5,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import SellGiftcard from "./sellGiftcard";
-import GiftcardHome from "./giftcardHome";
+import SellGiftcard from "../../components/pages/giftCard/sellGiftcard";
+import GiftcardHome from "../../components/pages/giftCard/giftcardHome";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -31,14 +31,14 @@ const GiftcardTabPanel = (props: TabPanelProps) => {
       )}
     </div>
   );
-}
+};
 
 const a11yProps = (index: number) => {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
-}
+};
 
 const GiftCard = () => {
   const [value, setValue] = useState(0);
@@ -56,15 +56,23 @@ const GiftCard = () => {
               onChange={handleChange}
               aria-label="giftcard tab"
             >
-              <Tab label="Home" {...a11yProps(0)} style={{textTransform: "capitalize"}}/>
-              <Tab label="Sell Giftcards" {...a11yProps(1)} style={{textTransform: "capitalize"}}/>
+              <Tab
+                label="Home"
+                {...a11yProps(0)}
+                style={{ textTransform: "capitalize" }}
+              />
+              <Tab
+                label="Sell Giftcards"
+                {...a11yProps(1)}
+                style={{ textTransform: "capitalize" }}
+              />
             </Tabs>
           </Box>
           <GiftcardTabPanel value={value} index={0}>
-           <GiftcardHome />
+            <GiftcardHome />
           </GiftcardTabPanel>
           <GiftcardTabPanel value={value} index={1}>
-           <SellGiftcard />
+            <SellGiftcard />
           </GiftcardTabPanel>
         </Box>
       </DashboardContainer>

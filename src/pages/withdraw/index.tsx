@@ -6,7 +6,7 @@ import { Button } from "@/components/Button/Button";
 import backArrow from "../../assets/images/arrow-left.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import SuccessModal from "./successModal";
+import SuccessModal from "../../components/pages/withdraw/successModal";
 
 const WidthdrawDetails = [
   {

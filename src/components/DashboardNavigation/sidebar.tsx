@@ -6,11 +6,17 @@ import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
 import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
+import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import { Typography, Box } from "@mui/material";
 
 const links = [
   { path: "/dashboard", title: "Dashboard", icon: <DashboardOutlinedIcon /> },
   { path: "/wallet", title: "Wallet", icon: <WalletOutlinedIcon /> },
+  {
+    path: "/crypto",
+    title: "Crypto",
+    icon: <CurrencyBitcoinIcon />,
+  },
   {
     path: "/giftCard",
     title: "Gift Cards",

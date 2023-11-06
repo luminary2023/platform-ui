@@ -10,7 +10,7 @@ import AppTable from "../../components/Table";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { userAccountDetails } from "@/api/userAccountDetails";
 import { Typography } from "@mui/material";
-import BankDetailsModal from "../dashboard/bankDetailsModal";
+import BankDetailsModal from "../../components/pages/dashboard/bankDetailsModal";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { withdrawDetails } from "@/services/schemaVarification";

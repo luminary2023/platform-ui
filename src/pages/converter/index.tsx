@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
-import styles from "./Convert.module.css";
+import styles from "../../components/pages/converter/Convert.module.css";
 import Navbar from "../../components/Navbar";
-import { Container } from "@mui/material";
-import Calculator from "./calculator";
+import Calculator from "../../components/pages/converter/calculator";
 import Image from "next/image";
 import Ellipse from "../../assets/images/ellipse.svg";
 

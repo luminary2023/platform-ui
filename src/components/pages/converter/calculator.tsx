@@ -11,8 +11,8 @@ import {
   Select,
 } from "@mui/material";
 import Image from "next/image";
-import ConvertCoin from "../../assets/images/convertLogo.svg";
-import Bitcoins from "../../assets/images/Bitcoins.svg";
+import ConvertCoin from "../../../assets/images/convertLogo.svg";
+import Bitcoins from "../../../assets/images/Bitcoins.svg";
 
 interface TabPanelProps {
   children?: React.ReactNode;

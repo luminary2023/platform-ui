@@ -1,11 +1,11 @@
 import React, { ReactNode, useState } from "react";
 import styles from "./About.module.css";
-import Innovation from "../../assets/images/Innovation.svg";
-import Improvement from "../../assets/images/Improvement.svg";
-import User from "../../assets/images/userCentric.svg";
-import TeamWork from "../../assets/images//Teamwork.svg";
-import Transparent from "../../assets/images/Transparency.svg";
-import Simplicity from "../../assets/images/Simplicity.svg";
+import Innovation from "../../../assets/images/Innovation.svg";
+import Improvement from "../../../assets/images/Improvement.svg";
+import User from "../../../assets/images/userCentric.svg";
+import TeamWork from "../../../assets/images//Teamwork.svg";
+import Transparent from "../../../assets/images/Transparency.svg";
+import Simplicity from "../../../assets/images/Simplicity.svg";
 import Image from "next/image";
 
 const cardDetails = [
