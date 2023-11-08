@@ -1,15 +1,37 @@
 "use client";
 import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
+import { Button } from "../../components/Button/Button";
 import BuyIcon from "../../assets/images/cryptoBuyIcon.svg";
 import SellIcon from "../../assets/images/cryptoSellIcon.svg";
 import Withdraw from "../../assets/images/cryptoWithdrawIcon.svg";
 import TransactionTable from "@/components/pages/crypto/transactionTable";
 import CryptoChart from "@/components/pages/crypto/cryptoChart";
-import { useState } from "react";
+import { useState, FC } from "react";
+import RightDrawer from "@/components/drawer";
+import { useRouter } from "next/router";
+import Input from "@/components/InputField";
+import CryptoModal from "@/components/pages/crypto/cryptoModal";
 
 const Crypto = () => {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
   return (
     <div style={{ background: "#F6F6F6", height: "100vh" }}>
       <DashboardContainer title="Crypto">
@@ -73,7 +95,7 @@ const Crypto = () => {
                     }}
                   />
                   <Typography textAlign={"center"} mt={1}>
-                    Buy
+                    Buy coming soon
                   </Typography>
                 </Box>
                 <Box
@@ -84,7 +106,12 @@ const Crypto = () => {
                     borderRadius: "5px",
                     background: "#ECFCE5",
                     cursor: "pointer",
+                    "&:hover": {
+                      backgroundColor: "#F3F3F3",
+                      color: "#007C5B",
+                    },
                   }}
+                  onClick={toggleDrawer}
                 >
                   <Image
                     src={SellIcon}
@@ -107,7 +134,13 @@ const Crypto = () => {
                     height: "113px",
                     borderRadius: "5px",
                     background: "#FAFCE0",
+                    cursor: "pointer",
+                    "&:hover": {
+                      backgroundColor: "#F3F3F3",
+                      color: "#007C5B",
+                    },
                   }}
+                  onClick={() => router.push("wallet")}
                 >
                   <Image
                     src={Withdraw}
@@ -130,6 +163,155 @@ const Crypto = () => {
           <TransactionTable />
         </Box>
       </DashboardContainer>
+
+      <RightDrawer
+        open={isOpen}
+        onClose={toggleDrawer}
+        title="Sell Crypto"
+        subTitle="Transfer funds into your wallet"
+      >
+        <Box sx={{ mb: "30px" }}>
+          <Typography
+            sx={{
+              color: "#344054",
+              fontFamily: "Satoshi Light",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "20px",
+              marginBottom: "8px",
+            }}
+          >
+            Asset
+          </Typography>
+          <select
+            style={{
+              width: "100%",
+              height: "45px",
+              borderRadius: "10px",
+              paddingLeft: "8px",
+              paddingRight: "8px",
+              border: "1px solid #E8E8E8",
+              color: "#667085",
+              outline: "none",
+            }}
+          >
+            <option>Bitcons</option>
+            <option>Entherum</option>
+          </select>
+        </Box>
+        <Box sx={{ mb: "30px" }}>
+          <Typography
+            sx={{
+              color: "#344054",
+              fontFamily: "Satoshi Light",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "20px",
+              marginBottom: "8px",
+            }}
+          >
+            Select Network
+          </Typography>
+          <select
+            style={{
+              width: "100%",
+              height: "45px",
+              borderRadius: "10px",
+              paddingLeft: "8px",
+              paddingRight: "8px",
+              border: "1px solid #E8E8E8",
+              color: "#667085",
+              outline: "none",
+            }}
+          >
+            <option>Bitcons</option>
+            <option>Entherum</option>
+          </select>
+        </Box>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Box>
+            <Typography
+              sx={{
+                color: "#344054",
+                fontFamily: "Satoshi Light",
+                fontSize: "16px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "20px",
+                marginBottom: "8px",
+              }}
+            >
+              You pay
+            </Typography>
+
+            <TextField
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">BTC</InputAdornment>
+                ),
+              }}
+            />
+          </Box>
+          <Box>
+            <Typography
+              sx={{
+                color: "#344054",
+                fontFamily: "Satoshi Light",
+                fontSize: "16px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "20px",
+                marginBottom: "8px",
+              }}
+            >
+              To receive
+            </Typography>
+
+            <TextField
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">NGN</InputAdornment>
+                ),
+              }}
+            />
+          </Box>
+        </Box>
+        <Box sx={{ mt: "30px", mb: "30px" }}>
+          <Typography
+            sx={{
+              color: "#344054",
+              fontFamily: "Satoshi Light",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "20px",
+              marginBottom: "8px",
+            }}
+          >
+            Transaction Pin
+          </Typography>
+          <Input type={"password"} />
+        </Box>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox />}
+            label="I confirm that all the filled details are correct"
+            sx={{ color: "#6C757D" }}
+          />
+        </FormGroup>
+
+        <Button
+          color="primary"
+          variant="contained"
+          sx={{ width: "100%", transform: "initial", mt: "30px" }}
+          onClick={handleOpen}
+        >
+          Sell
+        </Button>
+      </RightDrawer>
+      <CryptoModal open={open} onClose={handleClose} />
     </div>
   );
 };

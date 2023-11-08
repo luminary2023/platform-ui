@@ -22,7 +22,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/services/pieChart.js"
+    "src/services/pieChart.js",
+    "src/services/cryptoChart.js"
   ],
   "exclude": ["node_modules"]
 }

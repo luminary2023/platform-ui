@@ -1,4 +1,12 @@
-import { Box, FormControl, MenuItem, Select } from "@mui/material";
+// import GenerateData from "@/services/cryptoChart";
+import {
+  Box,
+  FormControl,
+  MenuItem,
+  Select,
+  ButtonGroup,
+  Button,
+} from "@mui/material";
 import React from "react";
 
 const CryptoChart = () => {
@@ -19,11 +27,18 @@ const CryptoChart = () => {
         }}
       >
         <FormControl sx={{ width: "25%" }}>
-          <Select>
-            <MenuItem defaultValue={"btc"}>BTC</MenuItem>
-            <MenuItem value={"eth"}>ETH</MenuItem>
-            <MenuItem value={"trm"}>TRM</MenuItem>
-          </Select>
+          <select
+            style={{
+              padding: "10%",
+              borderRadius: "10px",
+              border: "1px solid #ECECEC",
+              outline: "none",
+            }}
+          >
+            <option>BTC</option>
+            <option>ETH</option>
+            <option>TRM</option>
+          </select>
         </FormControl>
         <Box
           sx={{
@@ -31,9 +46,59 @@ const CryptoChart = () => {
             background: "#F3F3F3",
             width: "293.807px",
             borderRadius: "10px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "0px 15px 0px 15px",
           }}
-        ></Box>
+        >
+          <Button
+            sx={{
+              textTransform: "initial",
+              "&:hover": {
+                backgroundColor: "#081630",
+                color: "#fff",
+              },
+            }}
+          >
+            Day
+          </Button>
+          <Button
+            sx={{
+              textTransform: "initial",
+              "&:hover": {
+                backgroundColor: "#081630",
+                color: "#fff",
+              },
+            }}
+          >
+            Week
+          </Button>
+          <Button
+            sx={{
+              textTransform: "initial",
+              "&:hover": {
+                backgroundColor: "#081630",
+                color: "#fff",
+              },
+            }}
+          >
+            Month
+          </Button>
+          <Button
+            sx={{
+              textTransform: "initial",
+              "&:hover": {
+                backgroundColor: "#081630",
+                color: "#fff",
+              },
+            }}
+          >
+            Year
+          </Button>
+        </Box>
       </Box>
+      {/* <GenerateData /> */}
     </Box>
   );
 };

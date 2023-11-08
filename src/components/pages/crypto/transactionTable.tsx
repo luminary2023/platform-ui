@@ -50,7 +50,7 @@ const TransactionTable = () => {
     <Box
       sx={{
         width: "35%",
-        height: "100vh",
+        height: "100%",
         background: "#fff",
         padding: "24px",
         borderRadius: "16px",

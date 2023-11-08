@@ -1,0 +1,102 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import { Button } from "../../../components/Button/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+interface Props {
+  open: boolean;
+  onClose: () => void;
+}
+
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  borderRadius: "8px",
+  boxShadow: 24,
+  p: 4,
+};
+
+export default function CryptoModal({ open, onClose }: Props) {
+  return (
+    <div>
+      <Modal
+        open={open}
+        onClose={onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            sx={{ textAlign: "center", fontSize: "20px", fontWeight: 700 }}
+          >
+            Confirm Sale
+          </Typography>
+          <Typography sx={{ textAlign: "center", color: "#AFAFAF" }}>
+            Confirm the details of your trade
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              mt: "15px",
+            }}
+          >
+            <Typography sx={{ color: "#AFAFAF", fontSize: "14px" }}>
+              Asset
+            </Typography>
+            <Typography sx={{ fontSize: "16px" }}>.USDT</Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              mt: "15px",
+            }}
+          >
+            <Typography sx={{ color: "#AFAFAF", fontSize: "14px" }}>
+              Network
+            </Typography>
+            <Typography sx={{ fontSize: "16px" }}>USDT (TRC20.)</Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              mt: "15px",
+            }}
+          >
+            <Typography sx={{ color: "#AFAFAF", fontSize: "14px" }}>
+              You Pay
+            </Typography>
+            <Typography sx={{ fontSize: "16px" }}>1 .USDT</Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              mt: "15px",
+            }}
+          >
+            <Typography sx={{ color: "#AFAFAF", fontSize: "14px" }}>
+              You Get
+            </Typography>
+            <Typography sx={{ fontSize: "16px" }}>₦1,075.00</Typography>
+          </Box>
+          <Button
+            color="primary"
+            variant="contained"
+            sx={{ width: "100%", transform: "initial", mt: "30px" }}
+          >
+            Proceed
+          </Button>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
