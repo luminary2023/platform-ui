@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { Button } from "../../../components/Button/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import BarcodeModal from "./cryptoBarcodeModal";
+import UploadImage from "./uploadImageModal";
 
 interface Props {
   open: boolean;
@@ -22,16 +22,15 @@ const style = {
   p: 4,
 };
 
-export default function CryptoModal({ open, onClose }: Props) {
+export default function BarcodeModal({ open, onClose }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
-
   return (
     <div>
       <Modal
         open={open}
-        // onClose={onClose}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -51,60 +50,60 @@ export default function CryptoModal({ open, onClose }: Props) {
           <Typography
             sx={{ textAlign: "center", fontSize: "20px", fontWeight: 700 }}
           >
-            Confirm Sale
+            Payment Details{" "}
           </Typography>
           <Typography sx={{ textAlign: "center", color: "#6C757D", mt: 1 }}>
-            Confirm the details of your trade
+            To complete your purchase
+          </Typography>
+          <Typography sx={{ textAlign: "center", color: "#6C757D", mt: 1 }}>
+            Transfer
+          </Typography>
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontSize: "20px",
+              fontWeight: 700,
+              mt: 1,
+            }}
+          >
+            4USSD
+          </Typography>
+          <Typography sx={{ textAlign: "center", color: "#6C757D", mt: 1 }}>
+            To
+          </Typography>
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontSize: "16px",
+              fontWeight: 700,
+              mt: 1,
+            }}
+          >
+            TCBtE7jcrtWLnHn3bM9BNgiZrUeqnSf7wX
+          </Typography>
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontSize: "15px",
+              fontWeight: 500,
+              mt: 1,
+              textDecoration: "underline",
+            }}
+          >
+            Copy wallet address
+          </Typography>
+          <Typography
+            sx={{
+              textAlign: "center",
+              color: "#6C757D",
+              mt: 1,
+
+              fontSize: "15px",
+            }}
+          >
+            or scan the code below
           </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mt: "15px",
-            }}
-          >
-            <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
-              Asset
-            </Typography>
-            <Typography sx={{ fontSize: "16px" }}>.USDT</Typography>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mt: "15px",
-            }}
-          >
-            <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
-              Network
-            </Typography>
-            <Typography sx={{ fontSize: "16px" }}>USDT (TRC20.)</Typography>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mt: "15px",
-            }}
-          >
-            <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
-              You Pay
-            </Typography>
-            <Typography sx={{ fontSize: "16px" }}>1 .USDT</Typography>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mt: "15px",
-            }}
-          >
-            <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
-              You Get
-            </Typography>
-            <Typography sx={{ fontSize: "16px" }}>₦1,075.00</Typography>
-          </Box>
           <Button
             color="primary"
             variant="contained"
@@ -117,7 +116,7 @@ export default function CryptoModal({ open, onClose }: Props) {
           </Button>
         </Box>
       </Modal>
-      <BarcodeModal open={isOpen} onClose={handleClose} />
+      <UploadImage open={isOpen} onClose={handleClose} />
     </div>
   );
 }
