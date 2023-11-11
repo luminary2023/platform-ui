@@ -14,7 +14,7 @@ const ProfileSettings: FC<Props> = ({ children }) => {
       <DashboardContainer title="Settings">
         <Box
           sx={{
-            display: "flex",
+            display: { md: "flex", lg: "flex", xs: "column" },
             justifyContent: "space-between",
             position: "relative",
             // gap: 8,
@@ -45,9 +45,10 @@ const ProfileSettings: FC<Props> = ({ children }) => {
               width: "100%",
               overflow: "scroll",
               height: "100wh",
-              pl: "5%",
-
-              pr: "5%",
+              pl: { md: "5%", lg: "5%", xs: "none" },
+              pr: { md: "5%", lg: "5%", xs: "none" },
+              mt: { xs: "25px", md: "none", lg: "none" },
+              mb: { xs: "20px", md: "none", lg: "none" },
             }}
           >
             {children}

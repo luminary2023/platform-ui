@@ -35,7 +35,6 @@ const RightDrawer: FC<Props> = ({
             background: "#081630",
             height: "85px",
             textAlign: "center",
-
             paddingTop: "5%",
           }}
         >

@@ -27,7 +27,7 @@ const SidebarContainer: FC<PropsWithChildren<Props>> = ({
           height: "100%",
           width: "100%",
           padding: {
-            xs: "18px 6px 6px 8px",
+            xs: "18px 6px 6px 22%",
             sm: "18px 6px 6px 240px",
             lg: "38px 36px 36px 300px",
             xl: "38px 36px 36px 300px",
