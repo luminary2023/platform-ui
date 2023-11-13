@@ -173,7 +173,7 @@ const Wallet = () => {
                 <Typography
                   sx={{
                     color: "#F7931A",
-                    fontSize: { md: "16px", lg: "16px", xs: "12px" },
+                    fontSize: { md: "16px", lg: "16px", xs: "11px" },
                     cursor: "pointer",
                     textDecoration: "underline",
                     display: "flex",
