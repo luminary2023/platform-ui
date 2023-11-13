@@ -79,9 +79,14 @@ const GetInTouch = () => {
             <Input
               label="Phone number"
               placeholder="+1 (555) 000-0000"
-              type="number"
+              type="text"
               register={{ ...register("phoneNumber") }}
               borderColor={errors?.phoneNumber?.message ? "#DF1111" : ""}
+              onKeyPress={(event: any) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault();
+                }
+              }}
             />
           </div>
           <div className={styles.formInputBox}>

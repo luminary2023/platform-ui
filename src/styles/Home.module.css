@@ -1,236 +1,255 @@
 .herosection {
-    background-color: #081630;
-    height: 930px;
-    color: #FFFFFF;
-    /* position: relative; */
-    /* padding: 60px 80px; */
+  background-color: #081630;
+  height: 930px;
+  color: #ffffff;
+  /* position: relative; */
+  /* padding: 60px 80px; */
 }
 .content {
-    text-align: center;
-    /* width: 970px;
+  text-align: center;
+  /* width: 970px;
     margin: auto; */
 }
 .title {
-    /* font-weight: bold; */
-    font-size: 88px;
-    line-height: 110px;
-    font-family: 'Satoshi';
-    width: 970px;
-    margin: 58px auto 0;
-    font-family: 'Clash Display Light';
+  /* font-weight: bold; */
+  font-size: 88px;
+  line-height: 110px;
+  font-family: "Satoshi";
+  width: 970px;
+  margin: 58px auto 0;
+  font-family: "Clash Display Light";
 }
 .subTitle {
-    font-weight: 400;
-    font-size: 23px;
-    line-height: 150%;
-    width: 789px;
-    margin: 28px auto 0;
-    font-family: 'Satoshi Light';
-    /* color: #FFFFFF; */
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 150%;
+  width: 789px;
+  margin: 28px auto 0;
+  font-family: "Satoshi Light";
+  /* color: #FFFFFF; */
 }
 .herosectionImage {
-    position: absolute;
-    left: 15%;
-    top: 7px;
-    z-index: 1;
+  position: absolute;
+  left: 15%;
+  top: 7px;
+  z-index: 1;
 }
 .cardSection {
-    background: #FFF8F1;
-    height: 431px;
-    padding: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  background: #fff8f1;
+  height: 431px;
+  padding: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .cardSectionContent {
-    margin-top: 222px;
-    text-align: center;
+  margin-top: 222px;
+  text-align: center;
 }
 .cardSectionTitle {
-    font-family: 'Clash Display ExtraLight';
-    width: 477px;
-    font-size: 48px;
+  font-family: "Clash Display ExtraLight";
+  width: 477px;
+  font-size: 48px;
 }
 .cardSectionSubTitle {
-    font-family: 'Satoshi Light';
-    margin-top: 24px;
-    color: #626262;
+  font-family: "Satoshi Light";
+  margin-top: 24px;
+  color: #626262;
 }
 .cardWrapper {
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-    top: -73px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  top: -73px;
 }
 .cardContainer {
-    background-color: #FEECDA;
+  background-color: #feecda;
 }
 .stepsWrapper {
-    display: flex;
-    justify-content: space-between;
-    /* background-color: #FFF8F1; */
+  display: flex;
+  justify-content: space-between;
+  /* background-color: #FFF8F1; */
 }
 .leftSection {
-    width: 50%;
-    padding: 96px;
+  width: 50%;
+  padding: 96px;
 }
 .stepsTitle {
-    font-size: 48px;
-    font-family: 'Clash Display SemiBold';
-    color: #2C3131;
+  font-size: 48px;
+  font-family: "Clash Display SemiBold";
+  color: #2c3131;
 }
 .stepsSubTitle {
-    color: #2C3131;
-    font-size: 24px;
-    font-family: 'Clash Display SemiBold';
-    margin-left: 32px;
-    margin-bottom: 8px;
+  color: #2c3131;
+  font-size: 24px;
+  font-family: "Clash Display SemiBold";
+  margin-left: 32px;
+  margin-bottom: 8px;
 }
 .stepsInfo {
-    color: #626262;
-    font-size: 16px;
-    font-family: 'Satoshi Light';
-    margin-left: 59px;
-    width: 359px;
+  color: #626262;
+  font-size: 16px;
+  font-family: "Satoshi Light";
+  margin-left: 59px;
+  width: 359px;
 }
 .stepsContent {
-    margin-top: 32px;
+  margin-top: 32px;
 }
 .topContent {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .stepsNumber {
-    color: #D0DBFF;
-    font-size: 24px;
-    font-family: 'Clash Display SemiBold';
+  color: #d0dbff;
+  font-size: 24px;
+  font-family: "Clash Display SemiBold";
 }
 .contentWrapper {
-    padding: 32px 0;
-    border-bottom: 1px solid #E3E3E3;
-    width: 426px;
+  padding: 32px 0;
+  border-bottom: 1px solid #e3e3e3;
+  width: 426px;
 }
 .infoBox {
-    width: 622px;
-    height: 282px;
-    background: #101828;
-    border-radius: 24px;
-    padding: 18px 21px;
-    display: flex;
-    align-items: center;
-    font-size: 40px;
-    font-family: 'Clash Display Light';
-    justify-content: space-around;
-    font-weight: bold;
+  width: 622px;
+  height: 282px;
+  background: #101828;
+  border-radius: 24px;
+  padding: 18px 21px;
+  display: flex;
+  align-items: center;
+  font-size: 40px;
+  font-family: "Clash Display Light";
+  justify-content: space-around;
+  font-weight: bold;
 }
 .moreInfo {
-    display: flex;
-    padding: 74px 81px;
-    justify-content: space-between;
-    color: #FFF8F1;
+  display: flex;
+  padding: 74px 81px;
+  justify-content: space-between;
+  color: #fff8f1;
 }
 .testimonialSection {
-    width: 100%;
-    height: 961px;
-    background: #081630;
-    padding: 120px;
-    padding: 40px 120px;
+  width: 100%;
+  height: 961px;
+  background: #081630;
+  padding: 120px;
+  padding: 40px 120px;
 }
 .testimonial {
-    margin: 50px auto 100px;
-    width: 608px;
+  margin: 50px auto 100px;
+  width: 608px;
 }
 
 .quote {
-    color: #FFF8F1;
-    font-size: 48px;
+  color: #fff8f1;
+  font-size: 48px;
 }
 .customerName {
-    font-family: 'Clash Display Light';
-    font-size: 18px;
-    color: #FFF8F1;
+  font-family: "Clash Display Light";
+  font-size: 18px;
+  color: #fff8f1;
 }
 .customerRole {
-    font-size: 16px;
-    font-family: 'Satoshi';
-    background: linear-gradient(to right, #FD6E6A, #FFC600);
+  font-size: 16px;
+  font-family: "Satoshi";
+  background: linear-gradient(to right, #fd6e6a, #ffc600);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .customerInfo {
-    display: flex;
+  display: flex;
 }
 .customerInfoWrapper {
-    display: flex;
-    margin-top: 48px;
-    justify-content: space-between;
+  display: flex;
+  margin-top: 48px;
+  justify-content: space-between;
 }
 .ctaSectionTitle {
-    font-family: 'Clash Display Light';
-    font-size: 40px;
-    color: #FFFFFF;
-    position: absolute;
-    top: 40px;
-    width: 530px;
-    left: 70px;
+  font-family: "Clash Display Light";
+  font-size: 40px;
+  color: #ffffff;
+  position: absolute;
+  top: 40px;
+  width: 530px;
+  left: 70px;
 }
 .bitcoinImage {
-    position: absolute;
-    top: -70px;
-    right: 9%;
+  position: absolute;
+  top: -70px;
+  right: 9%;
 }
 .ethImage {
-    position: absolute;
-    top: 121px;
-    right: 3%;
+  position: absolute;
+  top: 121px;
+  right: 3%;
 }
 .lunaImage {
-    position: absolute;
-    right: 19%;
-    bottom: 33px;
+  position: absolute;
+  right: 19%;
+  bottom: 33px;
 }
 .footer {
-    border-top: 1px solid grey;
-    background: #081630;
-    height: fit-content;
-    padding: 30px 110px;
-    color: #FFFFFF;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  border-top: 1px solid grey;
+  background: #081630;
+  height: fit-content;
+  padding: 30px 110px;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 900px) {
+  .footer {
+    padding: 10px 13px 10px 13px;
+  }
 }
 .companyTitle {
-    font-family: 'Clash Display SemiBold';
-    font-size: 32px;
+  font-family: "Clash Display SemiBold";
+  font-size: 32px;
+}
+@media screen and (max-width: 900px) {
+  .companyTitle {
+    font-size: 20px;
+  }
 }
 .companySubTitle {
-    font-size: 16px;
-    font-family: 'Satoshi Light';
-    margin-top: 16px;
+  font-size: 16px;
+  font-family: "Satoshi Light";
+  margin-top: 16px;
+}
+@media screen and (max-width: 900px) {
+  .companySubTitle {
+    font-size: 12px;
+  }
 }
 .footerLinkWrapper {
-    width: 218px;
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Satoshi Light';
+  width: 218px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Satoshi Light";
+}
+@media screen and (max-width: 900px) {
+  .footerLinkWrapper {
+    font-size: 12px;
+  }
 }
 .testimonialFont {
-    font-size: 30px;
+  font-size: 30px;
 }
 .testimonialIconWrapper {
-    height: 56px;
-    background: rgba(255, 255, 255, 0.9);;
-    border-radius: 50%;
-    width: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 .testimonialIconContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 143px;
+  display: flex;
+  justify-content: space-between;
+  width: 143px;
 }
-

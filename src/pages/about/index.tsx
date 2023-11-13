@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import Ellipse from "../../assets/images/ellipse.svg";
 import styles from "../../components/pages/about/About.module.css";
-
 import Footer from "@/components/Footer/Footer";
 import AboutUs from "@/components/pages/about/aboutUs";
 import GetInTouch from "@/components/pages/about/getInTouch";
@@ -27,7 +26,7 @@ export default function About() {
           data-aos-easing="linear"
           data-aos-duration="1500"
         >
-          <Image src={Ellipse} alt="Ellipse" />
+          <Image src={Ellipse} alt="Ellipse" width="1280" />
         </div>
       </div>
       <div className={styles.missionContainer}>
@@ -39,7 +38,7 @@ export default function About() {
           multi-currency savings while growing their finances
         </p>
       </div>
-      <AboutUs />
+      {/* <AboutUs /> */}
       <GetInTouch />
       <Footer />
     </div>

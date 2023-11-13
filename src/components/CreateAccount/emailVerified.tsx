@@ -25,12 +25,12 @@ const EmailVerified: FC<EmailVerifiedProps> = ({
         {" "}
         Continue
       </Button>
-      {actionType !== "reset password" && (
+      {/* {actionType !== "reset password" && (
         <div className={styles.sent}>
           <p>Didn’t receive the email?</p>
           <h6 className={styles.resend}>Click to resend</h6>
         </div>
-      )}
+      )} */}
       <div
         className={styles.goBack}
         onClick={() => router.push(`/${routerPath}`)}

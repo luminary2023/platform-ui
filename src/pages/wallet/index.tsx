@@ -170,10 +170,10 @@ const Wallet = () => {
               <div className={styles.withdrawFunds}>
                 <h3 className={styles.tableTitle}>Withdraw Funds</h3>
 
-                <div
-                  style={{
+                <Typography
+                  sx={{
                     color: "#F7931A",
-                    fontSize: "16px",
+                    fontSize: { md: "16px", lg: "16px", xs: "11px" },
                     cursor: "pointer",
                     textDecoration: "underline",
                     display: "flex",
@@ -182,7 +182,7 @@ const Wallet = () => {
                   onClick={() => setOpenModal(true)}
                 >
                   {bankDetails ? " + Add Another Account" : " + Add Account"}
-                </div>
+                </Typography>
               </div>
 
               <form onSubmit={handleSubmit(handleWithdraw)}>

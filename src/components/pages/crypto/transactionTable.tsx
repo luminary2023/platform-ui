@@ -49,7 +49,7 @@ const TransactionTable = () => {
   return (
     <Box
       sx={{
-        width: "35%",
+        width: { md: "35%", lg: "35%", xs: "100%" },
         height: "100%",
         background: "#fff",
         padding: "24px",

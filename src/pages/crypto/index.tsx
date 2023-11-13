@@ -37,7 +37,7 @@ const Crypto = () => {
       <DashboardContainer title="Crypto">
         <Box
           sx={{
-            display: "flex",
+            display: { md: "flex", lg: "flex", xs: "column" },
             justifyContent: "space-between",
             gap: 2,
           }}
@@ -72,7 +72,7 @@ const Crypto = () => {
                 sx={{
                   display: "flex",
                   marginTop: "10px",
-                  gap: 4,
+                  gap: { md: 4, lg: 4, xs: 4 },
                 }}
               >
                 <Box
@@ -82,6 +82,7 @@ const Crypto = () => {
                     height: "113px",
                     borderRadius: "5px",
                     background: "#FEF4E6",
+                    display: { xs: "none", md: "block", lg: "block" },
                   }}
                 >
                   <Image
@@ -101,7 +102,7 @@ const Crypto = () => {
                 <Box
                   sx={{
                     border: "1px solid #007C5B",
-                    width: "30%",
+                    width: { md: "30%", lg: "30%", xs: "100%" },
                     height: "113px",
                     borderRadius: "5px",
                     background: "#ECFCE5",
@@ -130,7 +131,7 @@ const Crypto = () => {
                 <Box
                   sx={{
                     border: "1px solid #F2C94C",
-                    width: "30%",
+                    width: { md: "30%", lg: "30%", xs: "100%" },
                     height: "113px",
                     borderRadius: "5px",
                     background: "#FAFCE0",

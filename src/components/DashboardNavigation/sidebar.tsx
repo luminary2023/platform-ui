@@ -47,7 +47,7 @@ const Sidebar = () => {
           xl: "20%",
         },
         height: {
-          xs: "100wh",
+          xs: "100vh",
           sm: "100vh",
           lg: "100vh",
           xl: "100vh",
@@ -57,7 +57,7 @@ const Sidebar = () => {
           xs: "12px",
           sm: "12px",
         },
-        position: { xs: "relative", sm: "fixed", lg: "fixed", xl: "fixed" },
+        position: { xs: "fixed", sm: "fixed", lg: "fixed", xl: "fixed" },
       }}
     >
       <Typography

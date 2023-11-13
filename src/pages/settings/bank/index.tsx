@@ -84,7 +84,7 @@ const BankInformation: FC<Props> = ({ id }) => {
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: 10,
+            gap: { md: 10, lg: 10, xs: 5 },
             mb: "25px",
           }}
         >
@@ -94,7 +94,14 @@ const BankInformation: FC<Props> = ({ id }) => {
             onClick={() => router.back()}
             style={{ cursor: "pointer" }}
           />
-          <Typography sx={{ fontWeight: "700", color: "#13111F" }}>
+          <Typography
+            sx={{
+              fontWeight: "700",
+              backgroundImage: ` var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             Bank Information{" "}
           </Typography>
         </Box>

@@ -25,11 +25,22 @@
   font-style: normal;
   font-family: "Clash Display Semibold";
 }
+@media screen and (max-width: 900px) {
+  .title {
+    font-size: 20px;
+    width: 100%;
+  }
+}
 
 .ellipsImage {
   position: relative;
   top: 73px;
   width: auto;
+}
+@media screen and (max-width: 900px) {
+  .ellipsImage {
+    display: none;
+  }
 }
 .missionContainer {
   background: #081630;
@@ -48,6 +59,12 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+@media screen and (max-width: 900px) {
+  .mission {
+    font-size: 30px;
+    width: 100%;
+  }
+}
 .missionDiscrib {
   font-family: "Satoshi";
   font-style: normal;
@@ -58,11 +75,22 @@
   margin: auto;
   color: #fff8f1;
 }
+@media screen and (max-width: 900px) {
+  .missionDiscrib {
+    font-size: 20px;
+    width: 90%;
+  }
+}
 .ourStand {
   height: 100%;
   padding: 52px 120px 52px 120px;
   background: #fff8f1;
   width: 100%;
+}
+@media screen and (max-width: 900px) {
+  .ourStand {
+    padding: 30px 0px 0px 0px;
+  }
 }
 .whatWeDo {
   font-family: "Clash Display ";
@@ -84,6 +112,11 @@
   width: 83%;
   margin-top: 40px;
   text-align: center;
+}
+@media screen and (max-width: 900px) {
+  .whatWeDoSubtitle {
+    width: 90%;
+  }
 }
 
 .whatWeDoCard {
@@ -126,6 +159,12 @@
   text-align: center;
   margin: auto;
 }
+@media screen and (max-width: 900px) {
+  .getInTouchTitle {
+    font-size: 20px;
+    width: 90%;
+  }
+}
 .getInTouchAppointment {
   box-sizing: border-box;
   display: flex;
@@ -143,6 +182,11 @@
   border-top: 1px solid #fd6e6a;
   border-radius: 16px;
 }
+@media screen and (max-width: 900px) {
+  .getInTouchAppointment {
+    padding: 16px;
+  }
+}
 .getInTouchForm {
   display: flex;
   justify-content: space-between;
@@ -156,6 +200,11 @@
   margin: auto;
   border-radius: 0px 0px 16px 16px;
   padding: 50px 300px 50px 300px;
+}
+@media screen and (max-width: 900px) {
+  .formControl {
+    padding: 30px 20px 30px 20px;
+  }
 }
 .groupForm {
   display: flex;
