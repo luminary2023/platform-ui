@@ -42,11 +42,12 @@ export interface InputProps {
 export interface EmailVerifiedProps {
   title: string;
   subTitle: string;
-  backToText: string;
+  backToText?: string;
   actionType?: string;
   routerPath: string;
   btnOnClick: any;
   icon: string;
+  btnText?: string;
 }
 
 export interface SignupProps {

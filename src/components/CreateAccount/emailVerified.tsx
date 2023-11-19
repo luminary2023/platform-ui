@@ -14,16 +14,17 @@ const EmailVerified: FC<EmailVerifiedProps> = ({
   routerPath,
   btnOnClick,
   icon,
+  btnText = "",
 }) => {
   const router = useRouter();
   return (
-    <div className={styles.emailSection}>
+    <div className={styles.emailSection} style={{height: backToText ? '478px' : 'fit-content'}}>
       <Image src={icon} alt="email" width="56" height="56" />
       <h1>{title}</h1>
       <p>{subTitle}</p>
       <Button color="primary" variant="contained" onClick={btnOnClick}>
         {" "}
-        Continue
+        {btnText || "Continue"}
       </Button>
       {/* {actionType !== "reset password" && (
         <div className={styles.sent}>
@@ -35,8 +36,12 @@ const EmailVerified: FC<EmailVerifiedProps> = ({
         className={styles.goBack}
         onClick={() => router.push(`/${routerPath}`)}
       >
-        <Image src={BackArrow} alt="backArrow" />
-        <p>{backToText}</p>
+        {backToText && (
+          <>
+            <Image src={BackArrow} alt="backArrow" />
+            <p>{backToText}</p>
+          </>
+        )}
       </div>
     </div>
   );
