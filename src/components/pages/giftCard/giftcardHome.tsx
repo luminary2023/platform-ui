@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./giftcard.module.css";
 import Image from "next/image";
 import BuyGiftCardIcon from "../../../assets/images/buy-giftcard.svg";
@@ -12,6 +12,10 @@ import TableRow from "@mui/material/TableRow";
 import { giftcardTableHead } from "@/services/data";
 import { TableTag } from "@/components/Table/tableTwo";
 
+interface GiftCardHomeProps {
+  sellOnClick: () => void;
+}
+
 interface actionProps {
   title: string;
   icon: any;
@@ -20,25 +24,6 @@ interface actionProps {
   borderColor: string;
   id: number;
 }
-
-const GCACTIONS: actionProps[] = [
-  {
-    id: 1,
-    title: "Buy",
-    icon: BuyGiftCardIcon,
-    onClick: () => {},
-    backgroundColor: "#FEF4E6",
-    borderColor: "1px solid var(--Linear-1, #FD6E6A)",
-  },
-  {
-    id: 2,
-    title: "Sell",
-    icon: SellGiftCardIcon,
-    onClick: () => {},
-    borderColor: "1px solid var(--Primary, #007C5B)",
-    backgroundColor: "#ECFCE5",
-  },
-];
 
 function createData(
   type: string,
@@ -76,7 +61,27 @@ const statusStyle = (text: string) => {
   return className;
 };
 
-const GiftcardHome = () => {
+const GiftcardHome : FC<GiftCardHomeProps> = ({ sellOnClick }) => {
+
+  const GCACTIONS: actionProps[] = [
+    {
+      id: 1,
+      title: "Buy",
+      icon: BuyGiftCardIcon,
+      onClick: () => {},
+      backgroundColor: "#FEF4E6",
+      borderColor: "1px solid var(--Linear-1, #FD6E6A)",
+    },
+    {
+      id: 2,
+      title: "Sell",
+      icon: SellGiftCardIcon,
+      onClick: sellOnClick,
+      borderColor: "1px solid var(--Primary, #007C5B)",
+      backgroundColor: "#ECFCE5",
+    },
+  ];
+
   return (
     <div>
       <div className={styles.sectionWrapper}>
