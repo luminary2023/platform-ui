@@ -9,9 +9,12 @@ import { verifyPhoneNumber } from "@/services/schemaVarification";
 import Loading from "@/components/Loading";
 import OtpInput from "@/components/OtpInput/otpInput";
 import backArrow from "../../../assets/images/arrow-left.svg";
-
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { numberVerificationCode } from "@/api/phoneNumberVerificationCode";
+import Toast from "@/components/Toast";
+import { ErrorProps } from "@/services/interfaces";
+import { PhoneNumberVerification } from "@/api/verifyPhoneNumber";
 
 const style = {
   position: "absolute" as "absolute",
@@ -41,30 +44,62 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
   const reload = () => window.location.reload();
   const [loading, setLoading] = useState<boolean>(false);
   const [otp, setOtp] = useState("");
-  const onChange = (value: string) => setOtp(value);
   const [phoneNumberVerification, setPhoneNumberVerification] = useState(true);
+  const [phoneNumber, setPhoneNumber] = useState<ErrorProps>({
+    status: "",
+    message: "",
+    statusCode: 0,
+  });
+
+  const [error, setError] = useState<boolean>(false);
+  const onChange = (value: string) => setOtp(value);
 
   const {
     handleSubmit,
     register,
     reset,
-    watch,
-    unregister,
     formState: { errors },
   } = useForm<phoneNumberProps>({
     resolver: zodResolver(verifyPhoneNumber),
   });
 
   const handlePhoneNumber = async (data: phoneNumberProps) => {
+    try {
+      setLoading(true);
+      const response = await numberVerificationCode(data);
+      sessionStorage.setItem("phoneNumber", data.phoneNumber);
+      setPhoneNumber(response);
+      if (phoneNumber.status === "Success") {
+        setError(true);
+        setLoading(false);
+        setPhoneNumberVerification(false);
+      } else {
+        setError(true);
+        setLoading(false);
+      }
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
+
+  const handleOTP = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(true);
-    console.log(data);
-    setPhoneNumberVerification(false);
+    const number = sessionStorage.getItem("phoneNumber");
+    const res = await PhoneNumberVerification({
+      phoneNumber: number,
+      verificationCode: otp,
+    });
+    setPhoneNumber(res);
+
+    setError(true);
     setLoading(false);
   };
 
   const handleOnClose = () => {
     reset();
     onClose();
+    setError(false);
   };
 
   return (
@@ -75,6 +110,19 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
+        {error && (
+          <Toast
+            text={phoneNumber?.message}
+            success={phoneNumber?.status === "Success"}
+            marginBottom={40}
+            color={phoneNumber?.status === "Success" ? "green" : "DF1111"}
+            border={
+              phoneNumber?.status === "Success"
+                ? "1px solid green"
+                : "1px solid #DF1111"
+            }
+          />
+        )}
         {phoneNumberVerification ? (
           <>
             <Box
@@ -107,7 +155,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
               <Input
                 type="text"
                 placeholder={"Enter phone number"}
-                maxLength={"11"}
+                maxLength={"14"}
                 aria-label="Demo number input"
                 // label="Phone number"
                 marginBottom={"20px"}
@@ -149,7 +197,9 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: 5,
+                justifyContent: "space-between",
+
+                // gap: 5,
                 mb: "5px",
               }}
             >
@@ -161,9 +211,36 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
                 }}
                 style={{ cursor: "pointer" }}
               />
-              <Typography sx={{ fontWeight: "700", color: "#13111F" }}>
+              {/* <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              > */}
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h1"
+                sx={{
+                  fontFamily: "Satoshi Bold",
+                  fontSize: {
+                    xs: "14px",
+                    sm: "18px",
+                    lg: "20px",
+                    xl: "20px",
+                  },
+                  fontStyle: "normal",
+                  fontWeight: 600,
+                  lineHeight: "28px;",
+                }}
+              >
                 Phone number verification
+              </Typography>{" "}
+              <Typography sx={{ cursor: "pointer" }} onClick={handleOnClose}>
+                X
               </Typography>
+              {/* </Box> */}
             </Box>
             <Typography
               sx={{
@@ -177,28 +254,30 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
                 marginBottom: "16px",
               }}
             >
-              Code has been sent to your number{" "}
+              {phoneNumber.message}
             </Typography>
-            <OtpInput value={otp} valueLength={6} onChange={onChange} />
-            <Button
-              color="primary"
-              variant={"contained"}
-              // disabled={phoneNumber?.length < 9}
-              sx={{
-                textTransform: "initial",
-                color: "#fff",
-                fontFamily: " Satoshi Light",
-                fontSize: "13px",
-                borderRadius: "10px",
-                width: "100%",
-                height: "38px",
-                background: "#505050",
-                marginTop: "20px",
-              }}
-              type="submit"
-            >
-              {loading ? <Loading /> : "Verify number"}
-            </Button>
+            <form onSubmit={handleOTP}>
+              <OtpInput value={otp} valueLength={6} onChange={onChange} />
+              <Button
+                color="primary"
+                variant={"contained"}
+                // disabled={phoneNumber?.length < 9}
+                sx={{
+                  textTransform: "initial",
+                  color: "#fff",
+                  fontFamily: " Satoshi Light",
+                  fontSize: "13px",
+                  borderRadius: "10px",
+                  width: "100%",
+                  height: "38px",
+                  background: "#505050",
+                  marginTop: "20px",
+                }}
+                type="submit"
+              >
+                Verify
+              </Button>
+            </form>
           </>
         )}
       </Box>

@@ -146,7 +146,6 @@ const Index = () => {
             />
             <div>
               <h3>Verify Phone number</h3>
-
               <p>
                 keep your account more secure by entering your phone number.
               </p>
