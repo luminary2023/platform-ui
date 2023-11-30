@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 
 export const PhoneNumberVerification = async (data: {
-  phoneNumber: string;
+  phoneNumber: string | null;
   verificationCode: string;
 }) => {
   try {

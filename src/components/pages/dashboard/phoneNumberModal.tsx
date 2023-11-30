@@ -91,9 +91,9 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
       verificationCode: otp,
     });
     setPhoneNumber(res);
-
     setError(true);
     setLoading(false);
+    sessionStorage.clear();
   };
 
   const handleOnClose = () => {

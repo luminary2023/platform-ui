@@ -50,6 +50,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
   const logout = () => {
     deleteCookie("logged");
     deleteCookie("token");
+    deleteCookie("name");
+    deleteCookie("value");
     router.push("/");
   };
 
