@@ -69,7 +69,7 @@ const GiftCard = () => {
             </Tabs>
           </Box>
           <GiftcardTabPanel value={value} index={0}>
-            <GiftcardHome />
+            <GiftcardHome sellOnClick={() => setValue(1)}/>
           </GiftcardTabPanel>
           <GiftcardTabPanel value={value} index={1}>
             <SellGiftcard />
