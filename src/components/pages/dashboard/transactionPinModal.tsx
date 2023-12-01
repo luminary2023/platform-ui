@@ -47,6 +47,7 @@ const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
   const reload = () => window.location.reload();
   const [loading, setLoading] = useState<boolean>(false);
   const [createPin, setCreatePin] = useState<any>({});
+  console.log(createPin.message);
   const [error, setError] = useState<boolean>(false);
 
   const {
