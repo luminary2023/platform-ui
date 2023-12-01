@@ -9,6 +9,7 @@ import {
 } from "react";
 import { userAccountDetails } from "../userAccountDetails";
 import { profileRequest } from "../profile";
+import { DeleteAccount } from "../deleteAccount";
 
 interface Props {
   children: React.ReactNode;
@@ -19,12 +20,45 @@ type ThemeContext = {
   setBankDetails: any;
   profileData: any;
   setProfileData: Dispatch<any>;
+  walletBalance: any;
+  bankAccount: any;
+  bankInfo: [];
+  setBankInfo: any;
+  handleBankInfo: any;
+  handleDeleteAccount: any;
+  setBankId: any;
+  openModal: any;
+  setOpenModal: any;
+  anchorEl: any;
+  setAnchorEl: any;
+  handleClose: any;
+  handleCloseMenu: any;
 };
+
+interface WithdrawProps {
+  accountNumber: string;
+  accountName: string;
+}
+
 export const GlobalContext = createContext<ThemeContext | null>(null);
 
 export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [bankDetails, setBankDetails] = useState<[]>([]);
   const [profileData, setProfileData] = useState<any>();
+  const [walletBalance, setWalletBalance] = useState<any>({});
+  const [bankAccount, setBankAccount] = useState<WithdrawProps | any | []>([]);
+  const [bankInfo, setBankInfo] = useState<any | []>([]);
+  const [bankId, setBankId] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClose = () => {
+    setBankId("");
+    setOpenModal(false);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
 
   const fetchProfile = async () => {
     try {
@@ -34,9 +68,6 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
       error?.response?.data;
     }
   };
-  useEffect(() => {
-    fetchProfile();
-  }, []);
 
   const handleBankDetails = async () => {
     try {
@@ -46,12 +77,71 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
       return error?.response?.data;
     }
   };
+  const handleBankAccount = async () => {
+    try {
+      const response = await userAccountDetails();
+      setBankAccount(response);
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
+  const profile = async () => {
+    try {
+      const response = await profileRequest();
+      setWalletBalance(response);
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
+  const handleBankInfo = async () => {
+    try {
+      const response = await userAccountDetails();
+      setBankInfo(response);
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await DeleteAccount(bankId);
+      setBankInfo(response);
+      await handleBankInfo();
+      await handleClose();
+      await handleCloseMenu();
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
+
   useEffect(() => {
+    handleBankInfo();
     handleBankDetails();
+    profile();
+    handleBankAccount();
+    fetchProfile();
   }, []);
   return (
     <GlobalContext.Provider
-      value={{ bankDetails, setBankDetails, profileData, setProfileData }}
+      value={{
+        bankDetails,
+        setBankDetails,
+        profileData,
+        setProfileData,
+        walletBalance,
+        bankAccount,
+        bankInfo,
+        setBankInfo,
+        handleBankInfo,
+        handleDeleteAccount,
+        setBankId,
+        anchorEl,
+        setAnchorEl,
+        openModal,
+        setOpenModal,
+        handleClose,
+        handleCloseMenu,
+      }}
     >
       {children}
     </GlobalContext.Provider>

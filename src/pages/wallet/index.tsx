@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { withdrawDetails } from "@/services/schemaVarification";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileRequest } from "@/api/profile";
+import { useThemeContext } from "@/api/useContext/store";
 
 interface WithdrawProps {
   accountNumber: string;
@@ -23,25 +24,25 @@ interface WithdrawProps {
 }
 
 const Wallet = () => {
+  const { bankAccount, walletBalance } = useThemeContext();
   const router = useRouter();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [bankDetails, setBankDetails] = useState<WithdrawProps | any | []>([]);
   const [show, setShow] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [walletBalance, setWalletBalance] = useState<any>({});
+
   const [error, setError] = useState<null | string>(null);
   const [selectedBank, setSelectedBank] = useState<any>(null);
 
   const selectedBankDetails = useMemo(() => {
-    if (!selectedBank || (bankDetails?.length || 0) <= 0) {
+    if (!selectedBank || (bankAccount?.length || 0) <= 0) {
       return {};
     }
 
     return (
-      bankDetails?.find((b: any) => b.accountNumber === selectedBank) || {}
+      bankAccount?.find((b: any) => b.accountNumber === selectedBank) || {}
     );
-  }, [selectedBank, bankDetails]);
+  }, [selectedBank, bankAccount]);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -77,31 +78,8 @@ const Wallet = () => {
     resolver: zodResolver(withdrawDetails),
   });
 
-  const handleBankDetails = async () => {
-    try {
-      const response = await userAccountDetails();
-      setBankDetails(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
-  const profile = async () => {
-    try {
-      const response = await profileRequest();
-      setWalletBalance(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
-  useEffect(() => {
-    handleBankDetails();
-    profile();
-  }, []);
-
   const bank = watch("bank");
   const amount = watch("amount");
-  // const accountNumber = watch("accountNumber");
-  // const accountName = watch("accountName");
 
   const handleWithdraw = () => {
     const data = { bank, amount };
@@ -181,7 +159,7 @@ const Wallet = () => {
                   }}
                   onClick={() => setOpenModal(true)}
                 >
-                  {bankDetails ? " + Add Another Account" : " + Add Account"}
+                  {bankAccount ? " + Add Another Account" : " + Add Account"}
                 </Typography>
               </div>
 
@@ -219,8 +197,8 @@ const Wallet = () => {
                   onChange={handleChange}
                 >
                   <option value="">Choose bank</option>
-                  {Array.isArray(bankDetails || [])
-                    ? (bankDetails || [])?.map((account: any) => (
+                  {Array.isArray(bankAccount || [])
+                    ? (bankAccount || [])?.map((account: any) => (
                         <option
                           key={account.accountNumber}
                           value={account.accountNumber}
