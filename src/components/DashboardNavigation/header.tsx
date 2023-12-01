@@ -24,7 +24,7 @@ interface Props {
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
   const { profileData } = useThemeContext();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

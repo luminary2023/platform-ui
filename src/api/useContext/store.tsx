@@ -44,7 +44,7 @@ export const GlobalContext = createContext<ThemeContext | null>(null);
 
 export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [bankDetails, setBankDetails] = useState<[]>([]);
-  const [profileData, setProfileData] = useState<any>();
+  const [profileData, setProfileData] = useState<any | string>("");
   const [walletBalance, setWalletBalance] = useState<any>({});
   const [bankAccount, setBankAccount] = useState<WithdrawProps | any | []>([]);
   const [bankInfo, setBankInfo] = useState<any | []>([]);
