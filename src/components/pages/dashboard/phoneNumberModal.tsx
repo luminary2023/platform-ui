@@ -50,7 +50,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     message: "",
     statusCode: 0,
   });
-  console.log(phoneNumber.message.length);
+
   const [error, setError] = useState<boolean>(false);
   const onChange = (value: string) => setOtp(value);
 
