@@ -1,3 +1,4 @@
+"use client";
 import React, { FC } from "react";
 import styles from "./giftcard.module.css";
 import Image from "next/image";
@@ -61,8 +62,7 @@ const statusStyle = (text: string) => {
   return className;
 };
 
-const GiftcardHome : FC<GiftCardHomeProps> = ({ sellOnClick }) => {
-
+const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
   const GCACTIONS: actionProps[] = [
     {
       id: 1,

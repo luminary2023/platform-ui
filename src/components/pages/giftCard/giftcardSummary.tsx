@@ -1,20 +1,18 @@
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import WaitingIcon from "../../../assets/images/waitingIcon.svg";
 import styles from "./giftcard.module.css";
 import { Button } from "@/components/Button/Button";
 import EmailVerified from "@/components/CreateAccount/emailVerified";
-import Amazon from "../../../assets/images/Amazon.svg"
+import Amazon from "../../../assets/images/Amazon.svg";
 import { useRouter } from "next/router";
 
 interface SummaryProps {
-  backToHomeClick: () => void
+  backToHomeClick: () => void;
 }
 
-
-const GiftcardSummary: React.FC<SummaryProps>  = ({
-  backToHomeClick,
-}) => {
+const GiftcardSummary: React.FC<SummaryProps> = ({ backToHomeClick }) => {
   const router = useRouter();
   const [success, setSuccess] = useState(false);
 
@@ -23,13 +21,11 @@ const GiftcardSummary: React.FC<SummaryProps>  = ({
       {success ? (
         <EmailVerified
           title={"Wait for Verification"}
-          subTitle={
-            "NGN150,000 worth of Amazon Giftcard sold."
-          }
+          subTitle={"NGN150,000 worth of Amazon Giftcard sold."}
           routerPath={""}
           btnOnClick={backToHomeClick}
           icon={WaitingIcon}
-          btnText='Back to Home'
+          btnText="Back to Home"
         />
       ) : (
         <div
