@@ -107,20 +107,20 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
       const response = await DeleteAccount(bankId);
       setBankInfo(response);
       await handleBankInfo();
-      await handleClose();
-      await handleCloseMenu();
+      handleClose();
+      handleCloseMenu();
     } catch (error: any) {
       return error?.response?.data;
     }
   };
 
   useEffect(() => {
+    profile();
     handleBankInfo();
     handleBankDetails();
-    profile();
     handleBankAccount();
     fetchProfile();
-  }, []);
+  }, [profile]);
   return (
     <GlobalContext.Provider
       value={{

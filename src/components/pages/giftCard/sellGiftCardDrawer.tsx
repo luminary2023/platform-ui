@@ -1,3 +1,4 @@
+"use client";
 import React, { ChangeEvent, useState } from "react";
 import {
   FormControlLabel,
@@ -15,7 +16,7 @@ import ImageUpload from "@/components/ImageUpload/imageUpload";
 import GiftcardSummary from "./giftcardSummary";
 
 interface SellGifcardDrawerProps {
-  btnOnClick: () => void
+  btnOnClick: () => void;
 }
 
 const bankData = [
@@ -77,9 +78,7 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
           >
             Trade Initiated
           </h1>
-          <GiftcardSummary 
-            backToHomeClick={() => setModalOpen(false)}
-          />
+          <GiftcardSummary backToHomeClick={() => setModalOpen(false)} />
         </Box>
       </Modal>
       <div style={{ display: "flex", marginBottom: 50 }}>
@@ -236,9 +235,9 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
             fullWidth
             type="submit"
             onClick={() => {
-              setStep(1)
-              setModalOpen(true)
-              btnOnClick()
+              setStep(1);
+              setModalOpen(true);
+              btnOnClick();
             }}
             sx={{
               borderRadius: "10px",
