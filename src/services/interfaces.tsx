@@ -82,4 +82,5 @@ export interface ErrorProps {
 
 export interface phoneNumberProps {
   phoneNumber: string;
+  verificationCode?: string;
 }

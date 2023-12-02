@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import "aos/dist/aos.css";
 import { ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
+import { GlobalContextProvider } from "@/api/useContext/store";
 // import axios from "axios";
 // import { getCookie } from "cookies-next";
 
@@ -24,7 +25,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+      <GlobalContextProvider>
+        <Component {...pageProps} />
+      </GlobalContextProvider>
     </ThemeProvider>
   );
 }

@@ -1,62 +1,62 @@
 .signinContainer {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .signinLeftWrapper {
-    width: 50%;
-    padding: 150px;
+  width: 50%;
+  padding: 10%;
 }
 
 .signinRightWrapper {
-    width: 50%;
+  width: 50%;
 }
 
 .forgotPasswordText {
-    font-size: 14px;
-    line-height: 16px;
-    font-family: 'Satoshi Regular';
-    margin-bottom: 12px;
-    color:  #101828;
-    cursor: pointer;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 50px;
+  font-size: 14px;
+  line-height: 16px;
+  font-family: "Satoshi Regular";
+  margin-bottom: 12px;
+  color: #101828;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 50px;
 }
 .createText {
-    font-size: 16px;
-    line-height: 16px;
-    font-family: 'Satoshi Regular';
-    color: #101828;
-    cursor: pointer;
-    margin-left: 5px;
+  font-size: 16px;
+  line-height: 16px;
+  font-family: "Satoshi Regular";
+  color: #101828;
+  cursor: pointer;
+  margin-left: 5px;
 }
-.createAccount{
-    margin-top: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.createAccount {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .signinRightWrapper {
-    background-image: url("../../assets/images/AuthImage.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("../../assets/images/AuthImage.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @media screen and (max-width: 800px) {
-    .signinRightWrapper {
-        display: none;
-    }
-    .signinLeftWrapper {
-        width: 100%;
-        padding: 100px 50px;
-    }
+  .signinRightWrapper {
+    display: none;
+  }
+  .signinLeftWrapper {
+    width: 100%;
+    padding: 100px 50px;
+  }
 }
 
 @media screen and (max-width: 400px) {
-    .createAccount {
-        flex-direction: column;
-    }
+  .createAccount {
+    flex-direction: column;
+  }
 }

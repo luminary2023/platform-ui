@@ -18,7 +18,6 @@ const ChangePasswordForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [password, setPassword] = useState<any>({});
-  console.log(password);
 
   const {
     handleSubmit,
@@ -40,7 +39,6 @@ const ChangePasswordForm = () => {
       setPassword(response);
       setLoading(false);
       setError(true);
-      console.log(data);
     } catch (error: any) {
       error?.response?.data;
     }

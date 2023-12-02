@@ -2,34 +2,23 @@
 import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
 import styles from "../../components/pages/dashboard/dashboard.module.css";
 import KYC from "../../assets/images/KYC.svg";
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC, useContext } from "react";
 import Bank from "../../assets/images/banks.svg";
 import Image from "next/image";
 import { Button, CircularProgress, Box, Typography } from "@mui/material";
 import BankDetailsModal from "../../components/pages/dashboard/bankDetailsModal";
 import Dashboard from "../../components/pages/dashboard/dashboard";
-import { userAccountDetails } from "@/api/userAccountDetails";
 import CheckIcon from "@mui/icons-material/Check";
 import PhoneNumberModal from "../../components/pages/dashboard/phoneNumberModal";
 import TransactionPinModal from "../../components/pages/dashboard/transactionPinModal";
+import { useThemeContext } from "@/api/useContext/store";
 
 const Index = () => {
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [openPhoneModal, setOpenPhoneModal] = useState<boolean>(false);
   const [openTransactionPin, setOpenTransactionPin] = useState<boolean>(false);
-
-  const [bankDetails, setBankDetails] = useState<[]>([]);
-  const [createPin, setCreatePin] = useState<any>({});
-
-  const handleBankDetails = async () => {
-    try {
-      const response = await userAccountDetails();
-      setBankDetails(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
+  const { bankDetails } = useThemeContext();
 
   const handleBankDetailsModal = () => {
     if (bankDetails.length < 1) {
@@ -37,9 +26,6 @@ const Index = () => {
     } else setOpen(false);
   };
   // const data: TransactionPinProps;
-  useEffect(() => {
-    handleBankDetails();
-  }, []);
 
   return (
     <DashboardContainer
@@ -146,7 +132,6 @@ const Index = () => {
             />
             <div>
               <h3>Verify Phone number</h3>
-
               <p>
                 keep your account more secure by entering your phone number.
               </p>

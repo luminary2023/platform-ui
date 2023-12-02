@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import {
   Box,
   Avatar,
@@ -15,7 +15,7 @@ import DownArrow from "../../assets/images/DownArrow.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { deleteCookie } from "cookies-next";
-import { profileRequest } from "@/api/profile";
+import { useThemeContext } from "@/api/useContext/store";
 
 interface Props {
   title: string;
@@ -23,21 +23,9 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [error, setError] = useState<boolean>(false);
-  const [profileData, setProfileData] = useState<any>();
+  const { profileData } = useThemeContext();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const fetchProfile = async () => {
-    try {
-      const res = await profileRequest();
-      setProfileData(res);
-    } catch (error: any) {
-      error?.response?.data;
-    }
-  };
-  useEffect(() => {
-    fetchProfile();
-  }, []);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -50,6 +38,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
   const logout = () => {
     deleteCookie("logged");
     deleteCookie("token");
+    deleteCookie("name");
+    deleteCookie("value");
     router.push("/");
   };
 

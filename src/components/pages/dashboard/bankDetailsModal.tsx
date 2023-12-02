@@ -80,7 +80,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
       onClose();
     }, 2000);
 
-    // reload();
+    reload();
   };
 
   const fetchBankDetails = async () => {

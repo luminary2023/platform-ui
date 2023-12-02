@@ -3,28 +3,16 @@ import { useEffect, useState } from "react";
 import ProfileSettings from "../index";
 import { Box, Typography } from "@mui/material";
 import Input from "@/components/InputField";
-import { Button } from "@/components/Button/Button";
 import backArrow from "../../../assets/images/arrow-left.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { profileRequest } from "@/api/profile";
+
+import { useThemeContext } from "@/api/useContext/store";
 
 const Profile = () => {
   const router = useRouter();
 
-  const [profileData, setProfileData] = useState<any>();
-
-  const fetchProfile = async () => {
-    try {
-      const res = await profileRequest();
-      setProfileData(res);
-    } catch (error: any) {
-      error?.response?.data;
-    }
-  };
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+  const { profileData } = useThemeContext();
 
   return (
     <>

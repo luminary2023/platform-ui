@@ -15,6 +15,7 @@ import AmazonCard from "../../../assets/images/Amazon.svg";
 import AmericanCard from "../../../assets/images/americanCard.svg";
 import MediaCard from "../../../assets/images/mediaCard.svg";
 import { profileRequest } from "@/api/profile";
+import { useThemeContext } from "@/api/useContext/store";
 
 const giftCards = [
   {
@@ -32,22 +33,24 @@ const giftCards = [
 ];
 
 const Dashboard = () => {
+  const { profileData } = useThemeContext();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [profileData, setProfileData] = useState<any>("");
-  // const [error, setError] = useState<boolean>(false);
+  // const [profileData, setProfileData] = useState<any>("");
+  // // const [error, setError] = useState<boolean>(false);
 
-  const fetchProfile = async () => {
-    try {
-      const res = await profileRequest();
-      setProfileData(res);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
+  // const fetchProfile = async () => {
+  //   try {
+  //     const res = await profileRequest();
+  //     setProfileData(res);
+  //   } catch (error: any) {
+  //     return error?.response?.data;
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+  // useEffect(() => {
+  //   fetchProfile();
+  // }, []);
 
   const open = Boolean(anchorEl);
 
@@ -75,7 +78,7 @@ const Dashboard = () => {
           <div className={styles.dashboardAnalysis}>
             <div className={styles.portfolioBalance}>
               <div className={styles.portfolioBg}>
-                <h2>N{profileData.results?.wallet.balance}</h2>
+                <h2>NGN {profileData?.wallet.balance}</h2>
                 <p>Total Portfolio Balance</p>
                 <div className={styles.percentage}>
                   <Image src={TreadingUp} alt="percent" />
@@ -220,6 +223,7 @@ const Dashboard = () => {
             <Button
               color="primary"
               variant="contained"
+              disabled={true}
               sx={{
                 borderRadius: "8px",
                 textTransform: "capitalize",

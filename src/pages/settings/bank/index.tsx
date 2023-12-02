@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { userAccountDetails } from "@/api/userAccountDetails";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { DeleteAccount } from "@/api/deleteAccount";
+import { useThemeContext } from "@/api/useContext/store";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -31,50 +32,30 @@ interface Props {
   id: any;
 }
 const BankInformation: FC<Props> = ({ id }) => {
+  const {
+    bankInfo,
+    handleDeleteAccount,
+    setBankId,
+    anchorEl,
+    setAnchorEl,
+    openModal,
+    setOpenModal,
+    handleClose,
+    handleCloseMenu,
+  } = useThemeContext();
   const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [openModal, setOpenModal] = useState(false);
+  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  // const [openModal, setOpenModal] = useState(false);
 
-  const [bankId, setBankId] = useState("");
-  const [bankDetails, setBankDetails] = useState<any | []>([]);
+  // const [bankId, setBankId] = useState("");
   const handleOpenModal = () => {
     setOpenModal(true);
   };
-  const handleClose = () => {
-    setBankId("");
-    setOpenModal(false);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>, id: any) => {
     setBankId(id);
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleBankDetails = async () => {
-    try {
-      const response = await userAccountDetails();
-      setBankDetails(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
-  useEffect(() => {
-    handleBankDetails();
-  }, []);
-
-  const handleDeleteAccount = async () => {
-    try {
-      const response = await DeleteAccount(bankId);
-      setBankDetails(response);
-      await handleBankDetails();
-      await handleClose();
-      await handleCloseMenu();
-    } catch (error: any) {
-      return error?.response?.data;
-    }
   };
 
   return (
@@ -106,8 +87,8 @@ const BankInformation: FC<Props> = ({ id }) => {
           </Typography>
         </Box>
 
-        {Array.isArray(bankDetails)
-          ? bankDetails.map((bank: any) => (
+        {Array.isArray(bankInfo)
+          ? bankInfo.map((bank: any) => (
               <Box
                 key={bank.id}
                 sx={{
