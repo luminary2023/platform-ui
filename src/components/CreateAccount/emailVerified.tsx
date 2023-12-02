@@ -1,3 +1,4 @@
+"use client";
 import React, { FC } from "react";
 import styles from "./email.module.css";
 import Image from "next/image";
@@ -18,7 +19,10 @@ const EmailVerified: FC<EmailVerifiedProps> = ({
 }) => {
   const router = useRouter();
   return (
-    <div className={styles.emailSection} style={{height: backToText ? '478px' : 'fit-content'}}>
+    <div
+      className={styles.emailSection}
+      style={{ height: backToText ? "478px" : "fit-content" }}
+    >
       <Image src={icon} alt="email" width="56" height="56" />
       <h1>{title}</h1>
       <p>{subTitle}</p>

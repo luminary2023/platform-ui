@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import styles from "./InputField.module.css";
 import { InputProps } from "@/services/interfaces";

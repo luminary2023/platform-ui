@@ -1,3 +1,4 @@
+"use client";
 import React, { useMemo } from "react";
 import styles from "./otp.module.css";
 import { RE_DIGIT } from "./constants";

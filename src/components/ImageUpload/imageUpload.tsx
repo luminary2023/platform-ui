@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useRef, ChangeEvent } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import styles from "../pages/giftCard/giftcard.module.css";
@@ -8,7 +9,7 @@ const hiddenInputStyle: React.CSSProperties = {
   display: "none",
 };
 
-const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+const allowedImageTypes = ["image/jpeg", "image/png", "image/gif"];
 
 const ImageUpload: React.FC<ImageUploadProps> = () => {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
@@ -17,8 +18,8 @@ const ImageUpload: React.FC<ImageUploadProps> = () => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      const newImages = Array.from(files).filter(
-        (file) => allowedImageTypes.includes(file.type)
+      const newImages = Array.from(files).filter((file) =>
+        allowedImageTypes.includes(file.type)
       );
       setSelectedImages((prevImages) => [...prevImages, ...newImages]);
     }

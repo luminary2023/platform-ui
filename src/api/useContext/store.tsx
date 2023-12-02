@@ -52,6 +52,14 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
+  useEffect(() => {
+    profile();
+    handleBankInfo();
+    handleBankDetails();
+    handleBankAccount();
+    fetchProfile();
+  }, []);
+
   const handleClose = () => {
     setBankId("");
     setOpenModal(false);
@@ -114,13 +122,6 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    profile();
-    handleBankInfo();
-    handleBankDetails();
-    handleBankAccount();
-    fetchProfile();
-  }, [profile]);
   return (
     <GlobalContext.Provider
       value={{
