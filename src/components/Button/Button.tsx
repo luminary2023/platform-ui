@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Button, Button as ButtonBase } from "@mui/material";
 

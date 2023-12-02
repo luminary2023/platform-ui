@@ -1,3 +1,4 @@
+"use client";
 import { useRouter } from "next/router";
 import styles from "./Navbar.module.css";
 import { Button } from "../Button/Button";

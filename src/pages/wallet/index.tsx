@@ -1,3 +1,4 @@
+"use client";
 import DashboardContainer from "../../components/DashboardNavigation/dashboardContainer";
 import styles from "./wallet.module.css";
 import React, { useState, useEffect, FC, useMemo } from "react";
