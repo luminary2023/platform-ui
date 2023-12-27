@@ -30,13 +30,6 @@ export default function Index() {
     statusCode: 0,
     errors: "",
   });
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm<SignupProps>({
-    resolver: zodResolver(SignUp),
-  });
 
   const handleRegistration = async (data: SignupProps) => {
     setLoading(true);
@@ -51,6 +44,13 @@ export default function Index() {
     setErrs(res);
     setError(true);
   };
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<SignupProps>({
+    resolver: zodResolver(SignUp),
+  });
 
   return (
     <>

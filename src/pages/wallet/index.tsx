@@ -19,31 +19,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { profileRequest } from "@/api/profile";
 import { useThemeContext } from "@/api/useContext/store";
 
-interface WithdrawProps {
-  accountNumber: string;
-  accountName: string;
-}
-
 const Wallet = () => {
-  const { bankAccount, walletBalance } = useThemeContext();
+  const {
+    bankAccount,
+    walletBalance,
+    selectedBankDetails,
+    setSelectedBank,
+    withdrawAmount,
+    setWithdrawAmount,
+  } = useThemeContext();
   const router = useRouter();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [show, setShow] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const [error, setError] = useState<null | string>(null);
-  const [selectedBank, setSelectedBank] = useState<any>(null);
-
-  const selectedBankDetails = useMemo(() => {
-    if (!selectedBank || (bankAccount?.length || 0) <= 0) {
-      return {};
-    }
-
-    return (
-      bankAccount?.find((b: any) => b.accountNumber === selectedBank) || {}
-    );
-  }, [selectedBank, bankAccount]);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -268,6 +258,8 @@ const Wallet = () => {
                   labelSize={"16px"}
                   register={{ ...register("amount") }}
                   borderColor={errors.amount?.message ? "#DF1111" : ""}
+                  value={withdrawAmount}
+                  onChange={(e: any) => setWithdrawAmount(e.target.value)}
                   onKeyPress={(event: any) => {
                     if (!/[0-9]/.test(event.key)) {
                       event.preventDefault();

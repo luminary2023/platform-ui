@@ -1,12 +1,12 @@
 "use client";
+import { z } from "zod";
+
 import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
 import {
   Box,
   Checkbox,
   FormControlLabel,
   FormGroup,
-  InputAdornment,
-  TextField,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -21,15 +21,44 @@ import RightDrawer from "@/components/drawer";
 import { useRouter } from "next/router";
 import Input from "@/components/InputField";
 import CryptoModal from "@/components/pages/crypto/cryptoModal";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { sellCryptoValidation } from "@/services/schemaVarification";
+import { BankDetailsProps, cryptoProps } from "@/services/interfaces";
+import { CryptoAsset } from "@/api/cryptoAsset";
 
-const Crypto = () => {
+interface AssetProps {
+  networks: string;
+  name: string;
+}
+
+const Crypto: FC<AssetProps> = ({ networks }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [assets, setAssets] = useState<[]>([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
+  };
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<cryptoProps>({
+    resolver: zodResolver(sellCryptoValidation),
+  });
+
+  const handleAsset = async () => {
+    const response = await CryptoAsset();
+    setAssets(response);
+  };
+  const handleInputAmount = (value: any) => {};
+  const handleSellCrypto = () => {
+    handleOpen();
+    console.log("showing");
   };
 
   return (
@@ -165,153 +194,155 @@ const Crypto = () => {
         </Box>
       </DashboardContainer>
 
-      <RightDrawer
-        open={isOpen}
-        onClose={toggleDrawer}
-        title="Sell Crypto"
-        subTitle="Transfer funds into your wallet"
-      >
-        <Box sx={{ mb: "30px" }}>
-          <Typography
-            sx={{
-              color: "#344054",
-              fontFamily: "Satoshi Light",
-              fontSize: "16px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "20px",
-              marginBottom: "8px",
-            }}
-          >
-            Asset
-          </Typography>
-          <select
-            style={{
-              width: "100%",
-              height: "45px",
-              borderRadius: "10px",
-              paddingLeft: "8px",
-              paddingRight: "8px",
-              border: "1px solid #E8E8E8",
-              color: "#667085",
-              outline: "none",
-            }}
-          >
-            <option>Bitcons</option>
-            <option>Entherum</option>
-          </select>
-        </Box>
-        <Box sx={{ mb: "30px" }}>
-          <Typography
-            sx={{
-              color: "#344054",
-              fontFamily: "Satoshi Light",
-              fontSize: "16px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "20px",
-              marginBottom: "8px",
-            }}
-          >
-            Select Network
-          </Typography>
-          <select
-            style={{
-              width: "100%",
-              height: "45px",
-              borderRadius: "10px",
-              paddingLeft: "8px",
-              paddingRight: "8px",
-              border: "1px solid #E8E8E8",
-              color: "#667085",
-              outline: "none",
-            }}
-          >
-            <option>Bitcons</option>
-            <option>Entherum</option>
-          </select>
-        </Box>
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Box>
-            <Typography
-              sx={{
-                color: "#344054",
-                fontFamily: "Satoshi Light",
-                fontSize: "16px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "20px",
-                marginBottom: "8px",
-              }}
-            >
-              You pay
-            </Typography>
-
-            <TextField
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="start">BTC</InputAdornment>
-                ),
-              }}
-            />
-          </Box>
-          <Box>
-            <Typography
-              sx={{
-                color: "#344054",
-                fontFamily: "Satoshi Light",
-                fontSize: "16px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "20px",
-                marginBottom: "8px",
-              }}
-            >
-              To receive
-            </Typography>
-
-            <TextField
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="start">NGN</InputAdornment>
-                ),
-              }}
-            />
-          </Box>
-        </Box>
-        <Box sx={{ mt: "30px", mb: "30px" }}>
-          <Typography
-            sx={{
-              color: "#344054",
-              fontFamily: "Satoshi Light",
-              fontSize: "16px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "20px",
-              marginBottom: "8px",
-            }}
-          >
-            Transaction Pin
-          </Typography>
-          <Input type={"password"} />
-        </Box>
-        <FormGroup>
-          <FormControlLabel
-            control={<Checkbox />}
-            label="I confirm that all the filled details are correct"
-            sx={{ color: "#6C757D" }}
-          />
-        </FormGroup>
-
-        <Button
-          color="primary"
-          variant="contained"
-          sx={{ width: "100%", transform: "initial", mt: "30px" }}
-          onClick={handleOpen}
+      <form onSubmit={handleSubmit(handleSellCrypto)}>
+        <RightDrawer
+          open={isOpen}
+          onClose={toggleDrawer}
+          title="Sell Crypto"
+          subTitle="Transfer funds into your wallet"
         >
-          Sell
-        </Button>
-      </RightDrawer>
+          <Box sx={{ mb: "30px" }}>
+            <Typography
+              sx={{
+                color: "#344054",
+                fontFamily: "Satoshi Light",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "20px",
+                marginBottom: "8px",
+              }}
+            >
+              Asset
+            </Typography>
+            <select
+              style={{
+                width: "100%",
+                height: "45px",
+                borderRadius: "10px",
+                paddingLeft: "8px",
+                paddingRight: "8px",
+                border: "1px solid #E8E8E8",
+                color: "#667085",
+                outline: "none",
+              }}
+              {...register("asset")}
+              onClick={handleAsset}
+            >
+              <option disabled>Choose Asset </option>
+
+              {assets?.map((asset: any) => (
+                <option key={asset.id}>{asset?.name}</option>
+              ))}
+            </select>
+          </Box>
+          <Box sx={{ mb: "30px" }}>
+            <Typography
+              sx={{
+                color: "#344054",
+                fontFamily: "Satoshi Light",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "20px",
+                marginBottom: "8px",
+              }}
+            >
+              Select Network
+            </Typography>
+            <select
+              style={{
+                width: "100%",
+                height: "45px",
+                borderRadius: "10px",
+                paddingLeft: "8px",
+                paddingRight: "8px",
+                border: "1px solid #E8E8E8",
+                color: "#667085",
+                outline: "none",
+              }}
+              {...register("network")}
+              onClick={handleAsset}
+            >
+              {assets?.map((cryptoNetworks: any, index: any) => (
+                <option key={index}>
+                  {cryptoNetworks.networks.map((network: any) => (
+                    <option key={network.name}>
+                      {network.name}
+                      {console.log(cryptoNetworks.sellRate, "selling")}
+                    </option>
+                  ))}
+                </option>
+              ))}
+            </select>
+          </Box>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Box>
+              <Input
+                label="You pay"
+                placeholder="NGN"
+                borderColor={errors.pay?.message ? "#DF1111" : ""}
+                type={"text"}
+                onKeyPress={(event: any) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
+                // value={amount}
+                onKeyUp={handleInputAmount}
+                register={{ ...register("pay") }}
+              />
+            </Box>
+            <Box>
+              <Input
+                label=" To receive"
+                borderColor={errors.pay?.message ? "#DF1111" : ""}
+                type={"text"}
+                placeholder="NGN"
+                onKeyPress={(event: any) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
+                readOnly={true}
+                register={{ ...register("receive") }}
+              />
+            </Box>
+          </Box>
+          <Box sx={{ mt: "30px", mb: "30px" }}>
+            <Input
+              label="  Transaction Pin"
+              type={"password"}
+              register={{ ...register("pin") }}
+              borderColor={errors.pay?.message ? "#DF1111" : ""}
+              onKeyPress={(event: any) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault();
+                }
+              }}
+              maxLength="4"
+            />
+          </Box>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              label="I confirm that all the filled details are correct"
+              sx={{ color: "#6C757D", fontSize: "1px" }}
+            />
+          </FormGroup>
+
+          <Button
+            color="primary"
+            variant="contained"
+            sx={{ width: "100%", transform: "initial", mt: "30px" }}
+            type="submit"
+            // onClick={handleSellCrypto}
+          >
+            Sell
+          </Button>
+        </RightDrawer>
+      </form>
+
       <CryptoModal open={open} onClose={handleClose} />
     </div>
   );
