@@ -4,7 +4,6 @@ export const SignUp = z.object({
   firstName: z
     .string()
     .min(3, { message: "First name is required" })
-    .max(18)
     .regex(
       /^[a-zA-Z0-9_]+$/,
       "The username must contain only letters, numbers and underscore (_)"
@@ -12,7 +11,6 @@ export const SignUp = z.object({
   lastName: z
     .string()
     .min(3, { message: "Last name  is required" })
-    .max(18)
     .regex(
       /^[a-zA-Z0-9_]+$/,
       "The username must contain only letters, numbers and underscore (_)"
@@ -112,3 +110,10 @@ export const changePasswordPinValidation = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+export const sellCryptoValidation = z.object({
+  asset: z.string().min(3, { message: "Password is required" }),
+  network: z.string().min(3, { message: "Password is required" }),
+  pay: z.string().min(1, { message: "Password is required" }).max(5),
+  receive: z.string().min(1, { message: "Password is required" }).max(5),
+  pin: z.string().min(4, { message: "Password is required" }).max(4),
+});

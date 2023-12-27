@@ -182,11 +182,67 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
             onClose={handleClose}
             TransitionComponent={Fade}
           >
-            <MenuItem onClick={() => router.push("/wallet")}>Wallet</MenuItem>
-            <MenuItem onClick={() => router.push("/giftCard")}>
+            <MenuItem
+              onClick={() => router.push("/wallet")}
+              sx={{
+                fontSize: {
+                  xs: "13px",
+                  md: "16px",
+                  lg: "16px",
+                },
+              }}
+            >
+              Wallet
+            </MenuItem>
+            <MenuItem
+              onClick={() => router.push("/crypto")}
+              sx={{
+                fontSize: {
+                  xs: "13px",
+                  md: "16px",
+                  lg: "16px",
+                },
+              }}
+            >
+              Crypto
+            </MenuItem>
+            <MenuItem
+              onClick={() => router.push("/giftCard")}
+              sx={{
+                fontSize: {
+                  xs: "13px",
+                  md: "16px",
+                  lg: "16px",
+                },
+              }}
+            >
               Gift Card
             </MenuItem>
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem
+              onClick={() => router.push("/settings")}
+              sx={{
+                fontSize: {
+                  xs: "13px",
+                  md: "16px",
+                  lg: "16px",
+                },
+              }}
+            >
+              Settings
+            </MenuItem>
+
+            <MenuItem
+              onClick={logout}
+              sx={{
+                fontSize: {
+                  xs: "13px",
+                  md: "16px",
+                  lg: "16px",
+                },
+              }}
+            >
+              Logout
+            </MenuItem>
           </Menu>
         </Box>
       </Box>

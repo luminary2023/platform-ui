@@ -6,6 +6,7 @@ import {
   FC,
   useContext,
   Dispatch,
+  useMemo,
 } from "react";
 import { userAccountDetails } from "../userAccountDetails";
 import { profileRequest } from "../profile";
@@ -33,6 +34,11 @@ type ThemeContext = {
   setAnchorEl: any;
   handleClose: any;
   handleCloseMenu: any;
+  selectedBank: any;
+  withdrawAmount: any;
+  setWithdrawAmount: any;
+  setSelectedBank: any;
+  selectedBankDetails: any;
 };
 
 interface WithdrawProps {
@@ -51,6 +57,8 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [bankId, setBankId] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectedBank, setSelectedBank] = useState<any>(null);
+  const [withdrawAmount, setWithdrawAmount] = useState("");
 
   useEffect(() => {
     profile();
@@ -121,6 +129,15 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
       return error?.response?.data;
     }
   };
+  const selectedBankDetails = useMemo(() => {
+    if (!selectedBank || (bankAccount?.length || 0) <= 0) {
+      return {};
+    }
+
+    return (
+      bankAccount?.find((b: any) => b.accountNumber === selectedBank) || {}
+    );
+  }, [selectedBank, bankAccount]);
 
   return (
     <GlobalContext.Provider
@@ -142,6 +159,11 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
         setOpenModal,
         handleClose,
         handleCloseMenu,
+        selectedBank,
+        setSelectedBank,
+        selectedBankDetails,
+        withdrawAmount,
+        setWithdrawAmount,
       }}
     >
       {children}

@@ -20,6 +20,7 @@ export interface PageTitleProps {
 }
 
 export interface InputProps {
+  onKeyUp?: any;
   placeholder?: string;
   type: string;
   label?: string;
@@ -37,6 +38,7 @@ export interface InputProps {
   searchInput?: boolean;
   inputStyles?: any;
   onKeyPress?: any;
+  onChange?: any;
 }
 
 export interface EmailVerifiedProps {
@@ -83,4 +85,12 @@ export interface ErrorProps {
 export interface phoneNumberProps {
   phoneNumber: string;
   verificationCode?: string;
+}
+
+export interface cryptoProps {
+  asset: string;
+  pay: number;
+  receive: number;
+  pin: string;
+  network: string;
 }

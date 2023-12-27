@@ -74,7 +74,6 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
     setErrs(res);
     setError(true);
     reset();
-
     setTimeout(async () => {
       setError(false);
       onClose();
@@ -260,7 +259,9 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             <Button
               color="secondary"
               variant={"contained"}
-              onClick={handleAccountBankName}
+              onClick={() => {
+                handleAccountBankName(), reset();
+              }}
               sx={{
                 textTransform: "initial",
                 color: "#000",
