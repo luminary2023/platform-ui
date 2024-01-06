@@ -20,7 +20,6 @@ export interface PageTitleProps {
 }
 
 export interface InputProps {
-  onKeyUp?: any;
   placeholder?: string;
   type: string;
   label?: string;
@@ -32,13 +31,12 @@ export interface InputProps {
   borderColor?: string;
   marginTop?: string;
   readOnly?: boolean;
-  value?: string;
   maxLength?: string;
-  width?: string;
   searchInput?: boolean;
   inputStyles?: any;
+  value?: any;
   onKeyPress?: any;
-  onChange?: any;
+  // onChange?: React.ReactNode;
 }
 
 export interface EmailVerifiedProps {
@@ -90,7 +88,6 @@ export interface phoneNumberProps {
 export interface cryptoProps {
   asset: string;
   pay: number;
-  receive: number;
-  pin: string;
+  pin: number;
   network: string;
 }

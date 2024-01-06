@@ -72,6 +72,10 @@ const Wallet = () => {
   const bank = watch("bank");
   const amount = watch("amount");
 
+  useEffect(() => {
+    setWithdrawAmount(amount);
+  });
+
   const handleWithdraw = () => {
     const data = { bank, amount };
     const parseResult = withdrawDetails?.safeParse(data);
@@ -142,7 +146,7 @@ const Wallet = () => {
                 <Typography
                   sx={{
                     color: "#F7931A",
-                    fontSize: { md: "16px", lg: "16px", xs: "11px" },
+                    fontSize: { md: "14px", lg: "16px", xs: "8px" },
                     cursor: "pointer",
                     textDecoration: "underline",
                     display: "flex",
@@ -258,8 +262,6 @@ const Wallet = () => {
                   labelSize={"16px"}
                   register={{ ...register("amount") }}
                   borderColor={errors.amount?.message ? "#DF1111" : ""}
-                  value={withdrawAmount}
-                  onChange={(e: any) => setWithdrawAmount(e.target.value)}
                   onKeyPress={(event: any) => {
                     if (!/[0-9]/.test(event.key)) {
                       event.preventDefault();

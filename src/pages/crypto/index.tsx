@@ -1,5 +1,4 @@
 "use client";
-import { z } from "zod";
 
 import DashboardContainer from "@/components/DashboardNavigation/dashboardContainer";
 import {
@@ -16,7 +15,7 @@ import SellIcon from "../../assets/images/cryptoSellIcon.svg";
 import Withdraw from "../../assets/images/cryptoWithdrawIcon.svg";
 import TransactionTable from "@/components/pages/crypto/transactionTable";
 import CryptoChart from "@/components/pages/crypto/cryptoChart";
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
 import RightDrawer from "@/components/drawer";
 import { useRouter } from "next/router";
 import Input from "@/components/InputField";
@@ -24,15 +23,10 @@ import CryptoModal from "@/components/pages/crypto/cryptoModal";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { sellCryptoValidation } from "@/services/schemaVarification";
-import { BankDetailsProps, cryptoProps } from "@/services/interfaces";
+import { cryptoProps } from "@/services/interfaces";
 import { CryptoAsset } from "@/api/cryptoAsset";
 
-interface AssetProps {
-  networks: string;
-  name: string;
-}
-
-const Crypto: FC<AssetProps> = ({ networks }) => {
+const Crypto = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -46,21 +40,26 @@ const Crypto: FC<AssetProps> = ({ networks }) => {
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm<cryptoProps>({
     resolver: zodResolver(sellCryptoValidation),
+    mode: "onChange",
   });
+  const asset = watch("asset");
+  const network = watch("network");
+  const payValue = watch("pay");
+  console.log(payValue);
+
+  const handleCrypto = async (data: cryptoProps) => {
+    console.log(data, "showingoooooooooo");
+    handleOpen();
+  };
 
   const handleAsset = async () => {
     const response = await CryptoAsset();
     setAssets(response);
   };
-  const handleInputAmount = (value: any) => {};
-  const handleSellCrypto = () => {
-    handleOpen();
-    console.log("showing");
-  };
-
   return (
     <div style={{ background: "#F6F6F6", height: "100vh" }}>
       <DashboardContainer title="Crypto">
@@ -194,13 +193,13 @@ const Crypto: FC<AssetProps> = ({ networks }) => {
         </Box>
       </DashboardContainer>
 
-      <form onSubmit={handleSubmit(handleSellCrypto)}>
-        <RightDrawer
-          open={isOpen}
-          onClose={toggleDrawer}
-          title="Sell Crypto"
-          subTitle="Transfer funds into your wallet"
-        >
+      <RightDrawer
+        open={isOpen}
+        onClose={toggleDrawer}
+        title="Sell Crypto"
+        subTitle="Transfer funds into your wallet"
+      >
+        <form onSubmit={handleSubmit(handleCrypto)}>
           <Box sx={{ mb: "30px" }}>
             <Typography
               sx={{
@@ -222,7 +221,11 @@ const Crypto: FC<AssetProps> = ({ networks }) => {
                 borderRadius: "10px",
                 paddingLeft: "8px",
                 paddingRight: "8px",
-                border: "1px solid #E8E8E8",
+                border: `${
+                  errors.asset?.message
+                    ? "1px solid #DF1111"
+                    : "1px solid #E8E8E8"
+                }`,
                 color: "#667085",
                 outline: "none",
               }}
@@ -257,7 +260,11 @@ const Crypto: FC<AssetProps> = ({ networks }) => {
                 borderRadius: "10px",
                 paddingLeft: "8px",
                 paddingRight: "8px",
-                border: "1px solid #E8E8E8",
+                border: `${
+                  errors.network?.message
+                    ? "1px solid #DF1111"
+                    : "1px solid #E8E8E8"
+                }`,
                 color: "#667085",
                 outline: "none",
               }}
@@ -282,30 +289,22 @@ const Crypto: FC<AssetProps> = ({ networks }) => {
                 label="You pay"
                 placeholder="NGN"
                 borderColor={errors.pay?.message ? "#DF1111" : ""}
+                register={register("pay")}
                 type={"text"}
                 onKeyPress={(event: any) => {
                   if (!/[0-9]/.test(event.key)) {
                     event.preventDefault();
                   }
                 }}
-                // value={amount}
-                onKeyUp={handleInputAmount}
-                register={{ ...register("pay") }}
               />
             </Box>
             <Box>
               <Input
                 label=" To receive"
-                borderColor={errors.pay?.message ? "#DF1111" : ""}
                 type={"text"}
                 placeholder="NGN"
-                onKeyPress={(event: any) => {
-                  if (!/[0-9]/.test(event.key)) {
-                    event.preventDefault();
-                  }
-                }}
                 readOnly={true}
-                register={{ ...register("receive") }}
+                value={payValue}
               />
             </Box>
           </Box>
@@ -314,7 +313,7 @@ const Crypto: FC<AssetProps> = ({ networks }) => {
               label="  Transaction Pin"
               type={"password"}
               register={{ ...register("pin") }}
-              borderColor={errors.pay?.message ? "#DF1111" : ""}
+              borderColor={errors.pin?.message ? "#DF1111" : ""}
               onKeyPress={(event: any) => {
                 if (!/[0-9]/.test(event.key)) {
                   event.preventDefault();
@@ -323,27 +322,32 @@ const Crypto: FC<AssetProps> = ({ networks }) => {
               maxLength="4"
             />
           </Box>
-          <FormGroup>
+          {/* <FormGroup>
             <FormControlLabel
               control={<Checkbox />}
               label="I confirm that all the filled details are correct"
               sx={{ color: "#6C757D", fontSize: "1px" }}
             />
-          </FormGroup>
+          </FormGroup> */}
 
           <Button
             color="primary"
             variant="contained"
-            sx={{ width: "100%", transform: "initial", mt: "30px" }}
             type="submit"
-            // onClick={handleSellCrypto}
+            sx={{ width: "100%", transform: "initial", mt: "30px" }}
           >
             Sell
           </Button>
-        </RightDrawer>
-      </form>
+        </form>
+      </RightDrawer>
 
-      <CryptoModal open={open} onClose={handleClose} />
+      <CryptoModal
+        open={open}
+        onClose={handleClose}
+        payValue={payValue}
+        network={network}
+        asset={asset}
+      />
     </div>
   );
 };

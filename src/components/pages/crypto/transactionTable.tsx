@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Table,
@@ -10,29 +10,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { cryptoTable } from "@/api/cryptoTable";
 
-const cryptoTransaction = [
-  {
-    type: "Received",
-    amount: "12ETH",
-    status: "Pending",
-  },
-  {
-    type: "Exchange",
-    amount: "12ETH",
-    status: "Completed",
-  },
-  {
-    type: "Send",
-    amount: "12ETH",
-    status: "Error",
-  },
-  {
-    type: "Send",
-    amount: "12ETH",
-    status: "Requested",
-  },
-];
 const Color: Record<string, string> = {
   Requested: "#F7931A",
   Error: "#E73434",
@@ -47,6 +26,15 @@ const bgColor: Record<string, string> = {
 };
 
 const TransactionTable = () => {
+  const [cryptoTableData, setCryptoTableData] = useState([]);
+
+  const cryptoTransactions = async () => {
+    const response = await cryptoTable();
+    setCryptoTableData(response);
+  };
+  useEffect(() => {
+    cryptoTransactions();
+  }, []);
   return (
     <Box
       sx={{
@@ -71,51 +59,63 @@ const TransactionTable = () => {
       </Typography>
 
       <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: "700" }}>Type</TableCell>
-              <TableCell sx={{ fontWeight: "700" }}>Amount</TableCell>
-              <TableCell sx={{ fontWeight: "700" }}>Status</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {cryptoTransaction.map((crypto) => (
-              <TableRow key={crypto.type}>
-                <TableCell
-                  sx={{
-                    fontSize: "12px",
-                    color: "#111",
-
-                    // fontFamily: { Satoshi },
-                  }}
-                >
-                  {crypto.type}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    fontSize: "12px",
-                    color: "#111",
-                    // fontFamily: { Satoshi },
-                  }}
-                >
-                  {crypto.amount}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    fontSize: "12px",
-                    color: Color[crypto.status],
-                    background: bgColor[crypto.status],
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  {crypto.status}
-                </TableCell>
+        {cryptoTableData.length < 1 ? (
+          <Typography
+            sx={{
+              fontSize: "13px",
+              textAlign: "center",
+              mt: "15px",
+              mb: "15px",
+              textDecoration: "underline",
+            }}
+          >
+            No transaction yet
+          </Typography>
+        ) : (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ fontWeight: "700" }}>Type</TableCell>
+                <TableCell sx={{ fontWeight: "700" }}>Amount</TableCell>
+                <TableCell sx={{ fontWeight: "700" }}>Status</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody sx={{ textAlign: "center" }}>
+              {cryptoTableData.map((crypto) => (
+                <TableRow key={crypto.id}>
+                  <TableCell
+                    sx={{
+                      fontSize: "12px",
+                      color: "#111",
+                    }}
+                  >
+                    {crypto.type}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      fontSize: "12px",
+                      color: "#111",
+                      // fontFamily: { Satoshi },
+                    }}
+                  >
+                    {crypto.amount}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      fontSize: "12px",
+                      color: Color[crypto.status],
+                      background: bgColor[crypto.status],
+                      borderRadius: "10px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {crypto.status}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </TableContainer>
     </Box>
   );
