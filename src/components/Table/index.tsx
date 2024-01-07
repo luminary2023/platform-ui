@@ -15,15 +15,14 @@ interface AppTableProps {
   tableHeaderData: any;
 }
 
-const singleData = 
-  {
-    date: "6/19/14",
-    beneficiary: "Cameron Williamson",
-    bank: "Guaranty Trust Bank",
-    country: "Nigeria",
-    amount: "120,000",
-    status: "completed"
-  }
+const singleData = {
+  date: "6/19/14",
+  beneficiary: "Cameron Williamson",
+  bank: "Guaranty Trust Bank",
+  country: "Nigeria",
+  amount: "120,000",
+  status: "completed",
+};
 
 const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
   return (
@@ -52,9 +51,7 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
           </TableHead>
           <TableBody>
             {[...Array(10).fill(singleData)].map((row) => (
-              <TableRow
-                key={row.date}
-              >
+              <TableRow key={row.date}>
                 <TableCell
                   sx={{
                     color: "#787389",

@@ -24,7 +24,7 @@ interface AppTableTagProps {
 
 const singleData = [
   {
-    date: "6/19/14",
+    date: "6/11/14",
     type: "Received",
     assest: "Apple Gift card",
     description: "the description of the transaction",
@@ -32,7 +32,7 @@ const singleData = [
     status: "completed",
   },
   {
-    date: "6/19/14",
+    date: "6/01/14",
     type: "Send",
     assest: "Apple Gift card",
     description: "the description of the transaction",
@@ -40,7 +40,7 @@ const singleData = [
     status: "completed",
   },
   {
-    date: "6/19/14",
+    date: "6/12/14",
     type: "Received",
     assest: "Apple Gift card",
     description: "the description of the transaction",
@@ -48,7 +48,7 @@ const singleData = [
     status: "completed",
   },
   {
-    date: "6/19/14",
+    date: "8/19/14",
     type: "Send",
     assest: "Apple Gift card",
     description: "the description of the transaction",

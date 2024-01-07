@@ -9,6 +9,9 @@ import BarcodeModal from "./cryptoBarcodeModal";
 interface Props {
   open: boolean;
   onClose: () => void;
+  payValue: any;
+  network: any;
+  asset: any;
 }
 
 const style = {
@@ -23,7 +26,13 @@ const style = {
   p: 4,
 };
 
-export default function CryptoModal({ open, onClose }: Props) {
+export default function CryptoModal({
+  open,
+  onClose,
+  payValue,
+  network,
+  asset,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
@@ -68,7 +77,7 @@ export default function CryptoModal({ open, onClose }: Props) {
             <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
               Asset
             </Typography>
-            <Typography sx={{ fontSize: "16px" }}>.USDT</Typography>
+            <Typography sx={{ fontSize: "16px" }}>{asset}</Typography>
           </Box>
           <Box
             sx={{
@@ -80,7 +89,7 @@ export default function CryptoModal({ open, onClose }: Props) {
             <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
               Network
             </Typography>
-            <Typography sx={{ fontSize: "16px" }}>USDT (TRC20.)</Typography>
+            <Typography sx={{ fontSize: "16px" }}>{network}</Typography>
           </Box>
           <Box
             sx={{
@@ -92,7 +101,7 @@ export default function CryptoModal({ open, onClose }: Props) {
             <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
               You Pay
             </Typography>
-            <Typography sx={{ fontSize: "16px" }}>1 .USDT</Typography>
+            <Typography sx={{ fontSize: "16px" }}>{payValue}</Typography>
           </Box>
           <Box
             sx={{

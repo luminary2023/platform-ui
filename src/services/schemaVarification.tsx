@@ -25,7 +25,6 @@ export const Login = z.object({
 });
 
 export const codeValidation = z.object({
-  // email: z.string().email({ message: "Email is required" }),
   verificationCode: z.string().min(8, { message: "code required" }).max(24),
 });
 
@@ -36,14 +35,10 @@ export const forgotPassword = z.object({
 export const bankDetails = z.object({
   bankId: z.string().nonempty({ message: "Bank name is required" }),
   accountNumber: z.string().min(10, { message: "Account number is required" }),
-  // accountName: z.string().min(21, { message: "Account name is required" }),
 });
 export const withdrawDetails = z.object({
   amount: z.string().min(3, { message: "Amount" }),
   bank: z.string().min(3, { message: "Select bank" }),
-  // accountName: z.string().min(3, { message: "Account name is required" }),
-  // accountNumber: z.string().min(3, { message: "Account number is required" }),
-  // accountName: z.string().min(21, { message: "Account name is required" }),
 });
 export const resetPassword = z.object({
   password: z.string().min(8, { message: "Password is required" }).max(24),
@@ -113,7 +108,6 @@ export const changePasswordPinValidation = z
 export const sellCryptoValidation = z.object({
   asset: z.string().min(3, { message: "Password is required" }),
   network: z.string().min(3, { message: "Password is required" }),
-  pay: z.string().min(1, { message: "Password is required" }).max(5),
-  receive: z.string().min(1, { message: "Password is required" }).max(5),
+  pay: z.string().min(1, { message: "Password is required" }),
   pin: z.string().min(4, { message: "Password is required" }).max(4),
 });
