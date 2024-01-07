@@ -133,7 +133,7 @@ export default function UploadImage({ open, onClose }: Props) {
                   onClick={onImageUpload}
                   {...dragProps}
                 >
-                  {images.length < 1 ? " Upload image" : " Upload more images"}
+                  {images.length < 1 && " Upload image"}
                 </div>
               </div>
             )}

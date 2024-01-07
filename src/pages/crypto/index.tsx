@@ -52,7 +52,6 @@ const Crypto = () => {
   console.log(payValue);
 
   const handleCrypto = async (data: cryptoProps) => {
-    console.log(data, "showingoooooooooo");
     handleOpen();
   };
 

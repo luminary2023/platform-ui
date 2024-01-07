@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Box,
   Table,
@@ -26,15 +26,17 @@ const bgColor: Record<string, string> = {
 };
 
 const TransactionTable = () => {
-  const [cryptoTableData, setCryptoTableData] = useState([]);
+  const [cryptoTableData, setCryptoTableData] = useState([
+    { type: "Received", status: "Pending", amount: "2000", id: "1" },
+  ]);
 
-  const cryptoTransactions = async () => {
-    const response = await cryptoTable();
-    setCryptoTableData(response);
-  };
-  useEffect(() => {
-    cryptoTransactions();
-  }, []);
+  // const cryptoTransactions = async () => {
+  //   const response = await cryptoTable();
+  //   setCryptoTableData(response);
+  // };
+  // useEffect(() => {
+  //   cryptoTransactions();
+  // }, []);
   return (
     <Box
       sx={{
@@ -81,38 +83,39 @@ const TransactionTable = () => {
               </TableRow>
             </TableHead>
             <TableBody sx={{ textAlign: "center" }}>
-              {cryptoTableData.map((crypto) => (
-                <TableRow key={crypto.id}>
-                  <TableCell
-                    sx={{
-                      fontSize: "12px",
-                      color: "#111",
-                    }}
-                  >
-                    {crypto.type}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontSize: "12px",
-                      color: "#111",
-                      // fontFamily: { Satoshi },
-                    }}
-                  >
-                    {crypto.amount}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      fontSize: "12px",
-                      color: Color[crypto.status],
-                      background: bgColor[crypto.status],
-                      borderRadius: "10px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {crypto.status}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {Array.isArray(cryptoTableData || [])
+                ? (cryptoTableData || [])?.map((crypto) => (
+                    <TableRow key={crypto.id}>
+                      <TableCell
+                        sx={{
+                          fontSize: "12px",
+                          color: "#111",
+                        }}
+                      >
+                        {crypto.type}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: "12px",
+                          color: "#111",
+                        }}
+                      >
+                        {crypto.amount}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: "12px",
+                          color: Color[crypto.status],
+                          background: bgColor[crypto.status],
+                          borderRadius: "10px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {crypto.status}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : ""}
             </TableBody>
           </Table>
         )}
