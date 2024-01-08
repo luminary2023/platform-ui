@@ -1,13 +1,14 @@
-import axios from "axios";
-import { getCookie } from "cookies-next";
+import { axiosInstance } from "./axiosClient";
 
-export const numberVerificationCode = async (data: { phoneNumber: string }) => {
+interface Props {
+  phoneNumber: string;
+}
+
+export const numberVerificationCode = async ({ phoneNumber }: Props) => {
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/send-code/phone-number`,
-      data,
-      { headers: { Authorization: `Bearer ${getCookie("token")}` } }
-    );
+    const res = await axiosInstance.post("/auth/send-code/phone-number", {
+      phoneNumber,
+    });
     return res.data || {};
   } catch (error: any) {
     return error?.response?.data;

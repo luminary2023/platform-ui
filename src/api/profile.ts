@@ -1,12 +1,8 @@
-import axios from "axios";
-import { getCookie } from "cookies-next";
+import { axiosInstance } from "./axiosClient";
 
 export const profileRequest = async () => {
   try {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/profile`,
-      { headers: { Authorization: `Bearer ${getCookie("token")}` } }
-    );
+    const res = await axiosInstance.get("/auth/profile");
     return res.data?.results || [];
   } catch (error: any) {
     return error?.response?.data;

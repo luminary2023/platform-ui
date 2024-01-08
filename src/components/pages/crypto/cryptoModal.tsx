@@ -12,6 +12,7 @@ interface Props {
   payValue: any;
   network: any;
   asset: any;
+  receiveValue: any;
 }
 
 const style = {
@@ -32,6 +33,7 @@ export default function CryptoModal({
   payValue,
   network,
   asset,
+  receiveValue,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);
@@ -77,7 +79,7 @@ export default function CryptoModal({
             <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
               Asset
             </Typography>
-            <Typography sx={{ fontSize: "16px" }}>{asset}</Typography>
+            <Typography sx={{ fontSize: "16px" }}>{asset?.name}</Typography>
           </Box>
           <Box
             sx={{
@@ -89,7 +91,7 @@ export default function CryptoModal({
             <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
               Network
             </Typography>
-            <Typography sx={{ fontSize: "16px" }}>{network}</Typography>
+            <Typography sx={{ fontSize: "16px" }}>{network?.name}</Typography>
           </Box>
           <Box
             sx={{
@@ -113,7 +115,7 @@ export default function CryptoModal({
             <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
               You Get
             </Typography>
-            <Typography sx={{ fontSize: "16px" }}>₦1,075.00</Typography>
+            <Typography sx={{ fontSize: "16px" }}>N{receiveValue}</Typography>
           </Box>
           <Button
             color="primary"

@@ -1,17 +1,18 @@
-import { BankDetailsProps } from "@/services/interfaces";
-import axios from "axios";
-import { getCookie } from "cookies-next";
+import { axiosInstance } from "./axiosClient";
 
-export const ChangePassword = async (data: {
+interface Props {
   newPassword: string;
   currentPassword: string;
-}) => {
+}
+export const ChangePassword = async ({
+  newPassword,
+  currentPassword,
+}: Props) => {
   try {
-    const res = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/password/change`,
-      data,
-      { headers: { Authorization: `Bearer ${getCookie("token")}` } }
-    );
+    const res = await axiosInstance.put("/password/change", {
+      newPassword,
+      currentPassword,
+    });
     return res.data;
   } catch (error: any) {
     return error?.response?.data;
