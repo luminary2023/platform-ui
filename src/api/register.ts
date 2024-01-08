@@ -1,11 +1,24 @@
-import axios from "axios";
-import { cookies } from "next/headers";
-export const RegisterRequest = async (data: any) => {
+import { axiosInstance } from "./axiosClient";
+
+interface Props {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+export const RegisterRequest = async ({
+  firstName,
+  lastName,
+  email,
+  password,
+}: Props) => {
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/register`,
-      data
-    );
+    const res = await axiosInstance.post("/register", {
+      firstName,
+      lastName,
+      email,
+      password,
+    });
     return res.data;
   } catch (error: any) {
     return error?.response?.data;

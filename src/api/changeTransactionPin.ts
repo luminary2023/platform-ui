@@ -1,17 +1,16 @@
-import { BankDetailsProps } from "@/services/interfaces";
-import axios from "axios";
-import { getCookie } from "cookies-next";
+import { axiosInstance } from "./axiosClient";
 
-export const ChangeTransactionPin = async (data: {
+interface Props {
   newPin: number;
   currentPin: number;
-}) => {
+}
+
+export const ChangeTransactionPin = async ({ newPin, currentPin }: Props) => {
   try {
-    const res = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/transaction/pin/change`,
-      data,
-      { headers: { Authorization: `Bearer ${getCookie("token")}` } }
-    );
+    const res = await axiosInstance.put("/transaction/pin/change", {
+      newPin,
+      currentPin,
+    });
     return res.data;
   } catch (error: any) {
     return error?.response?.data;

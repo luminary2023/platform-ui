@@ -1,13 +1,16 @@
-import axios from "axios";
-import { getCookie } from "cookies-next";
+import { axiosInstance } from "./axiosClient";
 
-export const addBankAccount = async (data: any) => {
+interface Props {
+  bankId: string;
+  accountNumber: string;
+}
+
+export const addBankAccount = async ({ bankId, accountNumber }: Props) => {
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/banks/account`,
-      data,
-      { headers: { Authorization: `Bearer ${getCookie("token")}` } }
-    );
+    const res = await axiosInstance.post("/banks/account", {
+      bankId,
+      accountNumber,
+    });
     return res.data;
   } catch (error: any) {
     return error?.response?.data;

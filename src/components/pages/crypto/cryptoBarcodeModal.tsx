@@ -117,7 +117,7 @@ export default function BarcodeModal({ open, onClose }: Props) {
           </Button>
         </Box>
       </Modal>
-      <UploadImage open={isOpen} onClose={handleClose} />
+      {/* <UploadImage open={isOpen} onClose={handleClose} payValue={undefined} /> */}
     </div>
   );
 }

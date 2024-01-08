@@ -1,11 +1,11 @@
-import axios from "axios";
-import { cookies } from "next/headers";
-export const resendVerificationCodeRequest = async (data: any) => {
+import { axiosInstance } from "./axiosClient";
+
+interface Props {
+  email: string;
+}
+export const resendVerificationCodeRequest = async ({ email }: Props) => {
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/account/resend-code`,
-      data
-    );
+    const res = await axiosInstance.post("/account/resend-code", { email });
     return res.data;
   } catch (error: any) {
     return error?.response?.data;

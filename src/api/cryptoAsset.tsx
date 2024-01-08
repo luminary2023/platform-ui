@@ -1,12 +1,8 @@
-import axios from "axios";
-import { getCookie } from "cookies-next";
+import { axiosInstance } from "./axiosClient";
 
 export const CryptoAsset = async () => {
   try {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/assets`,
-      { headers: { Authorization: `Bearer ${getCookie("token")}` } }
-    );
+    const res = await axiosInstance.get("/assets");
     return res.data?.results || [];
   } catch (error: any) {
     return error?.response?.data;

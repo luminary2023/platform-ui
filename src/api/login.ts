@@ -1,11 +1,15 @@
-import axios from "axios";
-import { cookies } from "next/headers";
-export const loginRequest = async (data: any) => {
+import { axiosInstance } from "./axiosClient";
+
+interface Props {
+  email: string;
+  password: string;
+}
+export const loginRequest = async ({ email, password }: Props) => {
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/login`,
-      data
-    );
+    const res = await axiosInstance.post("/login", {
+      email,
+      password,
+    });
     return res.data;
   } catch (error: any) {
     return error?.response?.data;

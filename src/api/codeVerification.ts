@@ -1,5 +1,4 @@
 import axios from "axios";
-import { cookies } from "next/headers";
 export const codeVerificationRequest = async (data: any) => {
   try {
     const res = await axios.post(

@@ -15,7 +15,7 @@ import SellIcon from "../../assets/images/cryptoSellIcon.svg";
 import Withdraw from "../../assets/images/cryptoWithdrawIcon.svg";
 import TransactionTable from "@/components/pages/crypto/transactionTable";
 import CryptoChart from "@/components/pages/crypto/cryptoChart";
-import { useState, FC, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import RightDrawer from "@/components/drawer";
 import { useRouter } from "next/router";
 import Input from "@/components/InputField";
@@ -30,7 +30,7 @@ const Crypto = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const [assets, setAssets] = useState<[]>([]);
+  const [assets, setAssets] = useState<any[]>([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const toggleDrawer = () => {
@@ -46,10 +46,27 @@ const Crypto = () => {
     resolver: zodResolver(sellCryptoValidation),
     mode: "onChange",
   });
-  const asset = watch("asset");
-  const network = watch("network");
+  const assetId = watch("asset");
+  const networkId = watch("network");
   const payValue = watch("pay");
-  console.log(payValue);
+
+  const asset = useMemo(() => {
+    if (assets?.length < 0) {
+      return null;
+    }
+    return assets.find((a) => a.id === assetId);
+  }, [assets, assetId]);
+
+  const network = useMemo(() => {
+    if (!asset) {
+      return null;
+    }
+    return asset.networks?.find((n: any) => n.id === networkId);
+  }, [asset, networkId]);
+
+  const receiveValue = useMemo(() => {
+    return (payValue || 0) * (asset?.sellRate || 1);
+  }, [asset, payValue]);
 
   const handleCrypto = async (data: cryptoProps) => {
     handleOpen();
@@ -59,6 +76,11 @@ const Crypto = () => {
     const response = await CryptoAsset();
     setAssets(response);
   };
+
+  useEffect(() => {
+    handleAsset();
+  }, []);
+
   return (
     <div style={{ background: "#F6F6F6", height: "100vh" }}>
       <DashboardContainer title="Crypto">
@@ -229,12 +251,14 @@ const Crypto = () => {
                 outline: "none",
               }}
               {...register("asset")}
-              onClick={handleAsset}
+              // onClick={handleAsset}
             >
-              <option disabled>Choose Asset </option>
+              <option value="">Choose Asset </option>
 
               {assets?.map((asset: any) => (
-                <option key={asset.id}>{asset?.name}</option>
+                <option key={asset.id} value={asset.id}>
+                  {asset?.name}
+                </option>
               ))}
             </select>
           </Box>
@@ -268,16 +292,12 @@ const Crypto = () => {
                 outline: "none",
               }}
               {...register("network")}
-              onClick={handleAsset}
             >
-              {assets?.map((cryptoNetworks: any, index: any) => (
-                <option key={index}>
-                  {cryptoNetworks.networks.map((network: any) => (
-                    <option key={network.name}>
-                      {network.name}
-                      {console.log(cryptoNetworks.sellRate, "selling")}
-                    </option>
-                  ))}
+              <option value="">Choose Asset </option>
+
+              {asset?.networks.map((network: any) => (
+                <option key={network.name} value={network.id}>
+                  {network.name}
                 </option>
               ))}
             </select>
@@ -286,7 +306,6 @@ const Crypto = () => {
             <Box>
               <Input
                 label="You pay"
-                placeholder="NGN"
                 borderColor={errors.pay?.message ? "#DF1111" : ""}
                 register={register("pay")}
                 type={"text"}
@@ -303,7 +322,7 @@ const Crypto = () => {
                 type={"text"}
                 placeholder="NGN"
                 readOnly={true}
-                value={payValue}
+                value={receiveValue}
               />
             </Box>
           </Box>
@@ -346,7 +365,9 @@ const Crypto = () => {
         payValue={payValue}
         network={network}
         asset={asset}
+        receiveValue={receiveValue}
       />
+      {/* <UploadImageModal  open={open} onClose={ () => void} handleCrypto={handleCrypto}/> */}
     </div>
   );
 };

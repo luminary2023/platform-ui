@@ -187,8 +187,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               sx={{
                 fontSize: {
                   xs: "13px",
-                  md: "16px",
-                  lg: "16px",
+                  md: "14px",
+                  lg: "14px",
                 },
               }}
             >
@@ -199,8 +199,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               sx={{
                 fontSize: {
                   xs: "13px",
-                  md: "16px",
-                  lg: "16px",
+                  md: "14px",
+                  lg: "14px",
                 },
               }}
             >
@@ -211,8 +211,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               sx={{
                 fontSize: {
                   xs: "13px",
-                  md: "16px",
-                  lg: "16px",
+                  md: "14px",
+                  lg: "14px",
                 },
               }}
             >
@@ -223,8 +223,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               sx={{
                 fontSize: {
                   xs: "13px",
-                  md: "16px",
-                  lg: "16px",
+                  md: "14px",
+                  lg: "14px",
                 },
               }}
             >
@@ -236,8 +236,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
               sx={{
                 fontSize: {
                   xs: "13px",
-                  md: "16px",
-                  lg: "16px",
+                  md: "14px",
+                  lg: "14px",
                 },
               }}
             >
