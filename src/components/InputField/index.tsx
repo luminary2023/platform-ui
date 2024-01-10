@@ -23,7 +23,7 @@ const Input: React.FC<InputProps> = ({
   inputStyles,
   onKeyPress,
   value,
-  // onChange,
+  name,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const handleTogglePassword = () => {
@@ -55,6 +55,7 @@ const Input: React.FC<InputProps> = ({
         )}
         <input
           type={visible ? "text" : type}
+          name={name}
           placeholder={placeholder}
           className={styles.inputForm}
           {...register}

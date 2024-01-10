@@ -25,14 +25,37 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { sellCryptoValidation } from "@/services/schemaVarification";
 import { cryptoProps } from "@/services/interfaces";
 import { CryptoAsset } from "@/api/cryptoAsset";
+import BarcodeModal from "@/components/pages/crypto/cryptoBarcodeModal";
+import UploadImageModal from "@/components/pages/crypto/uploadImageModal";
+import { sellCryptoApi } from "@/api/sellCrypto";
+import axios from "axios";
 
 const Crypto = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [openBarcodeModal, setOpenBarcodeModal] = useState(false);
+  const [openCryptoModal, setOpenCryptoModal] = useState(false);
+  const [openUploadImage, setOpenUploadImageModal] = useState(false);
+  const [selectedNetwork, setSelectedNetwork] = useState(null);
   const [assets, setAssets] = useState<any[]>([]);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [image, setImage] = useState();
+  const preset_key = "732132719217354";
+  const cloud_name = "dgi4ygmix";
+
+  function handleFile(event: any) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", preset_key);
+    axios
+      .post(
+        `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+        formData
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
+
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
@@ -49,12 +72,15 @@ const Crypto = () => {
   const assetId = watch("asset");
   const networkId = watch("network");
   const payValue = watch("pay");
+  const comment = watch("comment");
+  const proof = watch("comment");
+  const transactionPin = watch("pin");
 
   const asset = useMemo(() => {
     if (assets?.length < 0) {
       return null;
     }
-    return assets.find((a) => a.id === assetId);
+    return assets?.find((a) => a.id === assetId);
   }, [assets, assetId]);
 
   const network = useMemo(() => {
@@ -68,8 +94,40 @@ const Crypto = () => {
     return (payValue || 0) * (asset?.sellRate || 1);
   }, [asset, payValue]);
 
+  const sellCrypto = async () => {
+    const response = await sellCryptoApi({
+      assetId,
+      networkId,
+      assetAmount: payValue,
+      transactionPin,
+      proof,
+      comment,
+    });
+    console.log(
+      assetId,
+      networkId,
+      payValue,
+      transactionPin,
+      proof,
+      comment,
+      "asettttt"
+    );
+    console.log(response);
+    if (response.status === "Success" && response.statusCode === "200") {
+      alert("Successful");
+    }
+  };
+
   const handleCrypto = async (data: cryptoProps) => {
-    handleOpen();
+    setOpenCryptoModal(true);
+  };
+  const handleCryptoModal = async () => {
+    setOpenCryptoModal(false);
+    setOpenBarcodeModal(true);
+  };
+  const handleBarcodeModal = async () => {
+    setOpenBarcodeModal(false);
+    setOpenUploadImageModal(true);
   };
 
   const handleAsset = async () => {
@@ -253,7 +311,9 @@ const Crypto = () => {
               {...register("asset")}
               // onClick={handleAsset}
             >
-              <option value="">Choose Asset </option>
+              <option value="" hidden>
+                Choose Asset{" "}
+              </option>
 
               {assets?.map((asset: any) => (
                 <option key={asset.id} value={asset.id}>
@@ -292,8 +352,13 @@ const Crypto = () => {
                 outline: "none",
               }}
               {...register("network")}
+              onChange={(e) =>
+                setSelectedNetwork(asset?.networks[e.target.selectedIndex - 1])
+              }
             >
-              <option value="">Choose Asset </option>
+              <option value="" hidden>
+                Choose Asset{" "}
+              </option>
 
               {asset?.networks.map((network: any) => (
                 <option key={network.name} value={network.id}>
@@ -306,6 +371,7 @@ const Crypto = () => {
             <Box>
               <Input
                 label="You pay"
+                placeholder="0"
                 borderColor={errors.pay?.message ? "#DF1111" : ""}
                 register={register("pay")}
                 type={"text"}
@@ -347,6 +413,13 @@ const Crypto = () => {
               sx={{ color: "#6C757D", fontSize: "1px" }}
             />
           </FormGroup> */}
+          <Input
+            label="Comment"
+            placeholder="Add comment"
+            borderColor={errors.comment?.message ? "#DF1111" : ""}
+            register={register("comment")}
+            type={"text"}
+          />
 
           <Button
             color="primary"
@@ -360,14 +433,36 @@ const Crypto = () => {
       </RightDrawer>
 
       <CryptoModal
-        open={open}
-        onClose={handleClose}
+        onClose={() => setOpenCryptoModal(false)}
+        open={openCryptoModal}
+        handleCryptoModal={handleCryptoModal}
         payValue={payValue}
         network={network}
         asset={asset}
         receiveValue={receiveValue}
       />
-      {/* <UploadImageModal  open={open} onClose={ () => void} handleCrypto={handleCrypto}/> */}
+      <BarcodeModal
+        open={openBarcodeModal}
+        onClose={() => setOpenBarcodeModal(false)}
+        handleBarcodeModal={handleBarcodeModal}
+        payValue={payValue}
+        network={network}
+        asset={asset}
+        receiveValue={receiveValue}
+        walletAddress={selectedNetwork}
+      />
+      <UploadImageModal
+        open={openUploadImage}
+        onClose={() => setOpenUploadImageModal(false)}
+        payValue={payValue}
+        network={network}
+        asset={asset}
+        receiveValue={receiveValue}
+        sellCrypto={sellCrypto}
+        handleFile={handleFile}
+        image={image}
+      />
+      {/* <input type="file" name="image" onChange={handleFile} /> */}
     </div>
   );
 };

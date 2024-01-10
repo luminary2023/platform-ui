@@ -9,6 +9,12 @@ import UploadImage from "./uploadImageModal";
 interface Props {
   open: boolean;
   onClose: () => void;
+  handleBarcodeModal: any;
+  payValue: any;
+  network: any;
+  asset: any;
+  receiveValue: any;
+  walletAddress: any;
 }
 
 const style = {
@@ -23,10 +29,20 @@ const style = {
   p: 4,
 };
 
-export default function BarcodeModal({ open, onClose }: Props) {
+export default function BarcodeModal({
+  open,
+  onClose,
+  handleBarcodeModal,
+  payValue,
+  network,
+  asset,
+  receiveValue,
+  walletAddress,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
+
   return (
     <div>
       <Modal
@@ -75,17 +91,18 @@ export default function BarcodeModal({ open, onClose }: Props) {
           <Typography
             sx={{
               textAlign: "center",
-              fontSize: "16px",
+              fontSize: "14px",
               fontWeight: 700,
               mt: 1,
             }}
           >
-            TCBtE7jcrtWLnHn3bM9BNgiZrUeqnSf7wX
+            {walletAddress?.walletAddress}
           </Typography>
+
           <Typography
             sx={{
               textAlign: "center",
-              fontSize: "15px",
+              fontSize: "14px",
               fontWeight: 500,
               mt: 1,
               textDecoration: "underline",
@@ -98,26 +115,36 @@ export default function BarcodeModal({ open, onClose }: Props) {
               textAlign: "center",
               color: "#6C757D",
               mt: 1,
-
+              mb: 2,
               fontSize: "15px",
             }}
           >
             or scan the code below
           </Typography>
 
+          <img
+            src={`https://api.qrserver.com/v1/create-qr-code/?data=${walletAddress?.walletAddress}=50x50`}
+            alt="barcode"
+            width={150}
+            style={{
+              margin: "auto",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          />
           <Button
             color="primary"
             variant="contained"
             sx={{ width: "100%", transform: "initial", mt: "30px" }}
             onClick={() => {
-              onClose(), handleOpen();
+              onClose(), handleBarcodeModal();
             }}
           >
             Proceed
           </Button>
         </Box>
       </Modal>
-      {/* <UploadImage open={isOpen} onClose={handleClose} payValue={undefined} /> */}
+      {/* <UploadImage open={isOpen} onClose={handleClose} /> */}
     </div>
   );
 }

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.14.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.1.0",
@@ -21,6 +23,7 @@
     "aos": "^2.3.4",
     "axios": "^1.4.0",
     "chart.js": "^2.9.4",
+    "cloudinary": "^1.41.2",
     "cookies-next": "^2.1.2",
     "echarts": "^5.4.3",
     "echarts-for-react": "^3.0.2",
