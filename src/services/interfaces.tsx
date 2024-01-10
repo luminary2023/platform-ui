@@ -36,7 +36,7 @@ export interface InputProps {
   inputStyles?: any;
   value?: any;
   onKeyPress?: any;
-  // onChange?: React.ReactNode;
+  name?: string;
 }
 
 export interface EmailVerifiedProps {
@@ -87,7 +87,8 @@ export interface phoneNumberProps {
 
 export interface cryptoProps {
   asset: string;
-  pay: number;
-  pin: number;
+  pay: any;
+  pin: any;
   network: string;
+  comment: string;
 }

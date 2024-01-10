@@ -22,7 +22,7 @@ import { useThemeContext } from "@/api/useContext/store";
 const Wallet = () => {
   const {
     bankAccount,
-    walletBalance,
+    profileData,
     selectedBankDetails,
     setSelectedBank,
     withdrawAmount,
@@ -94,7 +94,7 @@ const Wallet = () => {
                 </p>
                 {show ? (
                   <p className={styles.walletBalance}>
-                    NGN {walletBalance?.wallet?.balance}
+                    NGN {profileData?.wallet?.balance}
                   </p>
                 ) : (
                   <p className={styles.walletBalance}>**********</p>

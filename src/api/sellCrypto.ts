@@ -1,20 +1,31 @@
-import axios from "axios";
-import { getCookie } from "cookies-next";
+import { axiosInstance } from "./axiosClient";
 
-export const sellCryptoApi = async (data: {
+interface Props {
   assetId: string;
   networkId: string;
   assetAmount: string;
   proof: string;
   transactionPin: string;
   comment: string;
-}) => {
+}
+
+export const sellCryptoApi = async ({
+  assetId,
+  networkId,
+  assetAmount,
+  proof,
+  transactionPin,
+  comment,
+}: Props) => {
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/crypto/sell`,
-      data,
-      { headers: { Authorization: `Bearer ${getCookie("token")}` } }
-    );
+    const res = await axiosInstance.post("/crypto/sell", {
+      assetId,
+      networkId,
+      assetAmount,
+      proof,
+      transactionPin,
+      comment,
+    });
     return res.data || {};
   } catch (error: any) {
     return error?.response?.data;

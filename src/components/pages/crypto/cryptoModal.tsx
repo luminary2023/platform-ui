@@ -13,6 +13,7 @@ interface Props {
   network: any;
   asset: any;
   receiveValue: any;
+  handleCryptoModal: any;
 }
 
 const style = {
@@ -34,11 +35,8 @@ export default function CryptoModal({
   network,
   asset,
   receiveValue,
+  handleCryptoModal,
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
-
   return (
     <div>
       <Modal
@@ -122,14 +120,14 @@ export default function CryptoModal({
             variant="contained"
             sx={{ width: "100%", transform: "initial", mt: "30px" }}
             onClick={() => {
-              onClose(), handleOpen();
+              onClose(), handleCryptoModal();
             }}
           >
             Proceed
           </Button>
         </Box>
       </Modal>
-      <BarcodeModal open={isOpen} onClose={handleClose} />
+      {/* <BarcodeModal open={isOpen} onClose={handleClose} /> */}
     </div>
   );
 }

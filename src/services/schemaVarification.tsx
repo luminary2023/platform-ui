@@ -109,6 +109,7 @@ export const sellCryptoValidation = z.object({
   asset: z.string().min(3, { message: "Password is required" }),
   network: z.string().min(3, { message: "Password is required" }),
   pay: z.string().min(1, { message: "Password is required" }),
+  comment: z.string().min(1, { message: "Password is required" }),
   pin: z.string().min(4, { message: "Password is required" }).max(4),
 });
 
