@@ -86,10 +86,10 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
     <div>
       <div className={styles.sectionWrapper}>
         <div className={styles.homeSectionOne}>
-          <div className={styles.giftCardAmount}>
+          {/* <div className={styles.giftCardAmount}>
             # 500,000
             <span className={styles.giftCardAmountSub}># 500,000</span>
-          </div>
+          </div> */}
           <p className={styles.action}>Choose an Action</p>
           <div className={styles.actionWrapper}>
             {GCACTIONS.map((item: actionProps) => (

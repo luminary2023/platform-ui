@@ -18,11 +18,15 @@ import { withdrawDetails } from "@/services/schemaVarification";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileRequest } from "@/api/profile";
 import { useThemeContext } from "@/api/useContext/store";
+interface WithdrawProps {
+  accountNumber: string;
+  accountName: string;
+}
 
 const Wallet = () => {
   const {
     bankAccount,
-    profileData,
+    // profileData,
     selectedBankDetails,
     setSelectedBank,
     withdrawAmount,
@@ -34,6 +38,16 @@ const Wallet = () => {
   const [show, setShow] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
 
+  const [profileData, setProfileData] = useState<any>({});
+
+  const fetchProfile = async () => {
+    try {
+      const res = await profileRequest();
+      setProfileData(res);
+    } catch (error: any) {
+      error?.response?.data;
+    }
+  };
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -74,6 +88,8 @@ const Wallet = () => {
 
   useEffect(() => {
     setWithdrawAmount(amount);
+
+    fetchProfile();
   });
 
   const handleWithdraw = () => {
@@ -185,6 +201,7 @@ const Wallet = () => {
                       errors.bank?.message ? "1px solid  #DF1111" : "none"
                     } `,
                     color: "#667085",
+                    outline: "none",
                     background: "#F5F5F5",
                     marginBottom: "8px",
                   }}

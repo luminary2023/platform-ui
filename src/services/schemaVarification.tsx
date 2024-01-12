@@ -124,3 +124,13 @@ export const sellCryptoSchema = z.object({
     .max(4),
   comment: z.string().min(4, { message: "comment is required" }),
 });
+
+export const giftcardSchema = z.object({
+  giftcardCategory: z.string().min(1, { message: "required" }),
+
+  currency: z.string().min(1, { message: "required" }),
+
+  giftcardType: z.string().min(1, { message: "require" }),
+  card: z.string().min(1, { message: "require" }),
+  quantity: z.string().min(1, { message: "require" }),
+});

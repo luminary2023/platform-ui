@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Box,
   Avatar,
@@ -16,6 +16,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { deleteCookie } from "cookies-next";
 import { useThemeContext } from "@/api/useContext/store";
+import { profileRequest } from "@/api/profile";
 
 interface Props {
   title: string;
@@ -23,8 +24,9 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
-  const { profileData } = useThemeContext();
+  // const { profileData } = useThemeContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [profileData, setProfileData] = useState<any>({});
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,6 +36,17 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     setAnchorEl(null);
   };
   const router = useRouter();
+  const fetchProfile = async () => {
+    try {
+      const res = await profileRequest();
+      setProfileData(res);
+    } catch (error: any) {
+      error?.response?.data;
+    }
+  };
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
   const logout = () => {
     deleteCookie("logged");

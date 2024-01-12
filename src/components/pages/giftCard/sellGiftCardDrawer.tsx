@@ -15,6 +15,10 @@ import { Button } from "@/components/Button/Button";
 import ImageUpload from "@/components/ImageUpload/imageUpload";
 import GiftcardSummary from "./giftcardSummary";
 import { GiftCardCurrency } from "@/api/giftCardCategoriesCurrency";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { giftcardSchema } from "@/services/schemaVarification";
+import { giftcardProps } from "@/services/interfaces";
 
 interface SellGifcardDrawerProps {
   btnOnClick: () => void;
@@ -53,6 +57,14 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
   const [giftcardCurrency, setGiftcardCurrency] = useState<any[]>([]);
   console.log(giftcardCurrency.length, "giftcard");
 
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<giftcardProps>({
+    resolver: zodResolver(giftcardSchema),
+  });
+
   // useEffect(() => {
   //   handleGiftcardCurrencyApi(selectedId);
   // }, []);
@@ -64,6 +76,8 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
       [id]: value,
     }));
   };
+
+  const handleGiftcardValidation = () => {};
 
   const style = {
     position: "absolute" as "absolute",
@@ -114,109 +128,151 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
           Upload images
         </p>
       </div>
-      {step === 1 && (
-        <div>
-          <label className={styles.GCDSelectLabel}>Currency</label>
-          <select
-            onChange={handleChange}
-            className={styles.GCDSelect}
-            placeholder="Select currency"
-            value={selectFields?.currency}
-            id="currency"
-          >
-            <option value="" disabled>
-              Select currency
-            </option>
-            {bankData?.map((bank: any) => (
-              <option value={bank.name} key={bank.id}>
-                {bank.name}
-              </option>
-            ))}
-          </select>
-
-          <label className={styles.GCDSelectLabel}>Giftcard type</label>
-          <select
-            onChange={handleChange}
-            className={styles.GCDSelect}
-            placeholder="Select currency"
-            value={selectFields?.gitcardType}
-            id="gitcardType"
-          >
-            <option value="" disabled>
-              Select giftcard type
-            </option>
-            {bankData?.map((bank: any) => (
-              <option value={bank.name} key={bank.id}>
-                {bank.name}
-              </option>
-            ))}
-          </select>
-
-          <label className={styles.GCDSelectLabel}>Sub-category</label>
-          <select
-            onChange={handleChange}
-            className={styles.GCDSelect}
-            placeholder="Select currency"
-            value={selectFields?.subcategory}
-            id="subcategory"
-          >
-            <option value="" disabled>
-              Select currency
-            </option>
-            {bankData?.map((bank: any) => (
-              <option value={bank.name} key={bank.id}>
-                {bank.name}
-              </option>
-            ))}
-          </select>
-
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Input
-              placeholder="Enter Card amount"
-              type="text"
-              label=""
-              marginBottom="24px"
-              inputStyles={{
-                width: "100%",
+      <form onSubmit={handleSubmit(handleGiftcardValidation)}>
+        {step === 1 && (
+          <div>
+            <label className={styles.GCDSelectLabel}>Currency</label>
+            <select
+              // onChange={handleChange}
+              className={styles.GCDSelect}
+              placeholder="Select currency"
+              // value={selectFields?.currency}
+              // id="currency"
+              {...register("currency")}
+              style={{
+                border: `${
+                  errors.currency?.message
+                    ? "1px solid #DF1111"
+                    : "1px solid #E8E8E8"
+                }`,
+                color: "#667085",
+                outline: "none",
               }}
-            />
-            <Input
-              placeholder="How many"
-              type="text"
-              label=""
-              inputStyles={{
-                width: "100%",
-              }}
-              marginBottom="24px"
-            />
-          </div>
-          <div style={{ textAlign: "center", margin: "30px" }}>
-            <p>You would get:</p>
-            <h1 className={styles.GCDAmount}>NGN 0.00</h1>
-            <p
-              style={{ color: "#17A2B8", fontSize: "14px" }}
-              className={styles.GCDAmount}
             >
-              Rate: 400
-            </p>
+              <option value="" hidden>
+                Select currency
+              </option>
+              {bankData?.map((bank: any) => (
+                <option value={bank.name} key={bank.id}>
+                  {bank.name}
+                </option>
+              ))}
+            </select>
+
+            <label className={styles.GCDSelectLabel}>Giftcard type</label>
+            <select
+              // onChange={handleChange}
+              className={styles.GCDSelect}
+              placeholder="Select currency"
+              value={selectFields?.gitcardType}
+              // id="gitcardType"
+              {...register("giftcardType")}
+              style={{
+                border: `${
+                  errors.giftcardType?.message
+                    ? "1px solid #DF1111"
+                    : "1px solid #E8E8E8"
+                }`,
+                color: "#667085",
+                outline: "none",
+              }}
+            >
+              <option value="" disabled>
+                Select giftcard type
+              </option>
+              {bankData?.map((bank: any) => (
+                <option value={bank.name} key={bank.id}>
+                  {bank.name}
+                </option>
+              ))}
+            </select>
+
+            <label className={styles.GCDSelectLabel}>Sub-category</label>
+            <select
+              // onChange={handleChange}
+              className={styles.GCDSelect}
+              placeholder="Select currency"
+              // value={selectFields?.subcategory}
+              // id="subcategory"
+              {...register("giftcardType")}
+              style={{
+                border: `${
+                  errors.giftcardType?.message
+                    ? "1px solid #DF1111"
+                    : "1px solid #E8E8E8"
+                }`,
+                color: "#667085",
+                outline: "none",
+              }}
+            >
+              <option value="" disabled>
+                Select currency
+              </option>
+              {bankData?.map((bank: any) => (
+                <option value={bank.name} key={bank.id}>
+                  {bank.name}
+                </option>
+              ))}
+            </select>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "5px",
+              }}
+            >
+              <Input
+                placeholder="Enter Card amount"
+                type="text"
+                label=""
+                marginBottom="24px"
+                inputStyles={{
+                  width: "100%",
+                }}
+                borderColor={errors.card?.message ? "#DF1111" : ""}
+                register={register("card")}
+              />
+              <Input
+                placeholder="How many"
+                type="text"
+                label=""
+                inputStyles={{
+                  width: "100%",
+                }}
+                marginBottom="24px"
+                borderColor={errors.quantity?.message ? "#DF1111" : ""}
+                register={register("quantity")}
+              />
+            </div>
+            <div style={{ textAlign: "center", margin: "30px" }}>
+              <p>You would get:</p>
+              <h1 className={styles.GCDAmount}>NGN 0.00</h1>
+              <p
+                style={{ color: "#17A2B8", fontSize: "14px" }}
+                className={styles.GCDAmount}
+              >
+                Rate: 400
+              </p>
+            </div>
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              type="submit"
+              sx={{
+                borderRadius: "10px",
+                textTransform: "capitalize",
+                height: "61px",
+                margintTop: "8px",
+              }}
+            >
+              Proceed{" "}
+            </Button>
           </div>
-          <Button
-            color="primary"
-            variant="contained"
-            fullWidth
-            type="submit"
-            onClick={() => setStep(2)}
-            sx={{
-              borderRadius: "10px",
-              textTransform: "capitalize",
-              height: "61px",
-              margintTop: "8px",
-            }}
-          >
-            Proceed{" "}
-          </Button>
-        </div>
-      )}
+        )}
+      </form>
+
       {step === 2 && (
         <div>
           <Input
