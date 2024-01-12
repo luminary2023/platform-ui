@@ -33,24 +33,24 @@ const giftCards = [
 ];
 
 const Dashboard = () => {
-  const { profileData } = useThemeContext();
+  // const { profileData } = useThemeContext();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  // const [profileData, setProfileData] = useState<any>("");
-  // // const [error, setError] = useState<boolean>(false);
+  const [profileData, setProfileData] = useState<any>("");
+  // const [error, setError] = useState<boolean>(false);
 
-  // const fetchProfile = async () => {
-  //   try {
-  //     const res = await profileRequest();
-  //     setProfileData(res);
-  //   } catch (error: any) {
-  //     return error?.response?.data;
-  //   }
-  // };
+  const fetchProfile = async () => {
+    try {
+      const res = await profileRequest();
+      setProfileData(res);
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchProfile();
-  // }, []);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
   const open = Boolean(anchorEl);
 
