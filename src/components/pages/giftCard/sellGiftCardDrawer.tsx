@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import {
   FormControlLabel,
   FormGroup,
@@ -14,9 +14,11 @@ import Input from "@/components/InputField";
 import { Button } from "@/components/Button/Button";
 import ImageUpload from "@/components/ImageUpload/imageUpload";
 import GiftcardSummary from "./giftcardSummary";
+import { GiftCardCurrency } from "@/api/giftCardCategoriesCurrency";
 
 interface SellGifcardDrawerProps {
   btnOnClick: () => void;
+  selectedId: any;
 }
 
 const bankData = [
@@ -42,11 +44,18 @@ const initialSelectFields: SelectFields = {
 
 const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
   btnOnClick,
+  selectedId,
 }) => {
   const [selectFields, setSelectFields] =
     useState<SelectFields>(initialSelectFields);
   const [step, setStep] = useState<1 | 2>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [giftcardCurrency, setGiftcardCurrency] = useState<any[]>([]);
+  console.log(giftcardCurrency.length, "giftcard");
+
+  // useEffect(() => {
+  //   handleGiftcardCurrencyApi(selectedId);
+  // }, []);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { id, value } = event.target;

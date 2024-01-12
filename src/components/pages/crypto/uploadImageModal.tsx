@@ -1,14 +1,14 @@
 "use client";
-import { useState } from "react";
+
 import Box from "@mui/material/Box";
 import { Button } from "../../../components/Button/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import ImageUploading from "react-images-uploading";
-import { sellCryptoApi } from "@/api/sellCrypto";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { sellCryptoSchema } from "@/services/schemaVarification";
+import Toast from "@/components/Toast";
+import Loading from "@/components/Loading";
 
 interface Props {
   open: boolean;
@@ -19,7 +19,10 @@ interface Props {
   receiveValue: any;
   sellCrypto: any;
   handleFile: any;
-  image: any;
+  loading: boolean;
+  setError: any;
+  error: boolean;
+  errs: any;
 }
 
 interface SellCryptoProps {
@@ -47,32 +50,43 @@ const style = {
 export default function UploadImage({
   open,
   onClose,
-  payValue,
-  network,
-  asset,
-  receiveValue,
+
   sellCrypto,
   handleFile,
-  image,
+  setError,
+  loading,
+  error,
+  errs,
 }: Props) {
-  // const [images, setImages] = useState([]);
-  const maxNumber = 3;
-
   const {
-    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<SellCryptoProps>({
     resolver: zodResolver(sellCryptoSchema),
   });
+
   return (
     <div>
       <Modal
         open={open}
-        // onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          {error && (
+            <Toast
+              text={errs?.message || errs?.errors?.message}
+              success={
+                errs?.message === "Place crypto sell order successfully."
+              }
+              marginBottom={40}
+              border={
+                errs?.message === "Place crypto sell order successfully."
+                  ? "1px solid green"
+                  : "1px solid #DF1111"
+              }
+            />
+          )}
           <Box
             sx={{
               display: "flex",
@@ -91,12 +105,19 @@ export default function UploadImage({
                 float: "right",
                 cursor: "pointer",
               }}
-              onClick={onClose}
+              onClick={() => {
+                onClose(), reset(), setError(false);
+              }}
             >
               X
             </Typography>
           </Box>
-          <input type="file" name="image" onChange={handleFile} />
+          <input
+            type="file"
+            name="image"
+            onChange={handleFile}
+            accept="image/*"
+          />
 
           <Button
             color="primary"
@@ -104,7 +125,7 @@ export default function UploadImage({
             sx={{ width: "100%", transform: "initial", mt: "30px" }}
             onClick={sellCrypto}
           >
-            Proceed
+            {loading ? <Loading /> : "Proceed"}
           </Button>
         </Box>
       </Modal>

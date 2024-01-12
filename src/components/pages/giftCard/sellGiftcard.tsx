@@ -1,50 +1,46 @@
 "use client";
-import React, { useState } from "react";
-import Card from "@/components/Card";
-import Image from "next/image";
-import Amazon from "../../../assets/images/Amazon.svg";
-import Amex from "../../../assets/images/Amex.svg";
+import React, { useEffect, useMemo, useState } from "react";
+
 import giftcardStyles from "./giftcard.module.css";
 import styles from "../../../pages/wallet/wallet.module.css";
 import Input from "@/components/InputField";
 import RightDrawer from "@/components/drawer";
 import SellGiftCardDrawer from "./sellGiftCardDrawer";
-
-interface CardProps {
-  id: number;
-  image: any;
-  name: string;
-}
-
-const giftCardArray: CardProps[] = [
-  {
-    id: 1,
-    name: "Amazon",
-    image: Amazon,
-  },
-  {
-    id: 2,
-    name: "Amex",
-    image: Amex,
-  },
-  {
-    id: 3,
-    name: "Amazon",
-    image: Amazon,
-  },
-];
+import { AllGiftCardCategories } from "@/api/allGiftCardCategories";
+import { GiftCardCurrency } from "@/api/giftCardCategoriesCurrency";
 
 const SellGiftcard = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedGiftCard, setSelectedGiftCard] = useState<CardProps | null>(
-    null
-  );
+  const [selectedGiftCard, setSelectedGiftCard] = useState<any[]>([]);
+  const [selectedId, setSelectedId] = useState("");
+  const [giftcardCurrency, setGiftcardCurrency] = useState();
+  console.log(giftcardCurrency, "currency");
+
+  console.log(selectedGiftCard, "giftcard selcted", selectedId);
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
 
+  const handleCardDrawer = async () => {
+    setIsOpen(true);
+    const res = await GiftCardCurrency();
+    setGiftcardCurrency(res);
+  };
+
+  const GitfCardCategories = async () => {
+    try {
+      const response = await AllGiftCardCategories();
+      setSelectedGiftCard(response);
+    } catch (error: any) {
+      error?.results.data;
+    }
+  };
+  useEffect(() => {
+    GitfCardCategories();
+  }, []);
+
   return (
-    <>
+    <div>
       <Input
         type="text"
         placeholder="Search Giftcard category"
@@ -61,32 +57,35 @@ const SellGiftcard = () => {
         Select Giftcard
       </h2>
       <div className={giftcardStyles.wrapper}>
-        {giftCardArray.map((data) => (
-          <div
-            className={giftcardStyles.container}
-            key={data?.id}
-            onClick={() => {
-              setSelectedGiftCard(data);
-              setIsOpen(true);
-            }}
-          >
-            <Image src={data?.image} alt={"giftcard"} />
-          </div>
-        ))}
+        {selectedGiftCard.map((giftcard) => {
+          console.log(giftcard);
+          return (
+            <div key={giftcard.id}>
+              <img
+                src={giftcard.image}
+                alt="amazon"
+                width={200}
+                onClick={handleCardDrawer}
+              />
+            </div>
+          );
+        })}
       </div>
+
       <RightDrawer
         open={isOpen}
         onClose={toggleDrawer}
-        title={selectedGiftCard?.name}
-        subTitle=""
+        title="Sell GiftCard"
+        subTitle="We buy all giftcards"
       >
         <SellGiftCardDrawer
+          selectedId={selectedId}
           btnOnClick={() => {
             setIsOpen(false);
           }}
         />
       </RightDrawer>
-    </>
+    </div>
   );
 };
 

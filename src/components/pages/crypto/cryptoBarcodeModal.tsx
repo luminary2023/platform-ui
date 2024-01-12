@@ -83,7 +83,7 @@ export default function BarcodeModal({
               mt: 1,
             }}
           >
-            4USSD
+            {payValue}USSD
           </Typography>
           <Typography sx={{ textAlign: "center", color: "#6C757D", mt: 1 }}>
             To

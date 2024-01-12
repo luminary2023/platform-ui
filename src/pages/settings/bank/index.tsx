@@ -33,7 +33,7 @@ interface Props {
 }
 const BankInformation: FC<Props> = ({ id }) => {
   const {
-    bankInfo,
+    bankAccount,
     handleDeleteAccount,
     setBankId,
     anchorEl,
@@ -87,8 +87,8 @@ const BankInformation: FC<Props> = ({ id }) => {
           </Typography>
         </Box>
 
-        {Array.isArray(bankInfo)
-          ? bankInfo.map((bank: any) => (
+        {Array.isArray(bankAccount)
+          ? bankAccount.map((bank: any) => (
               <Box
                 key={bank.id}
                 sx={{
