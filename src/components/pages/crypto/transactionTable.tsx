@@ -13,30 +13,28 @@ import {
 import { cryptoTable } from "@/api/cryptoTable";
 
 const Color: Record<string, string> = {
-  Requested: "#F7931A",
+  Transferred: "#F7931A",
   Error: "#E73434",
   Completed: "#5FDA24",
   Pending: "#6338DC",
 };
 const bgColor: Record<string, string> = {
-  Requested: "#FFF4E7",
+  Transferred: "#FFF4E7",
   Error: "#FFE9E9",
   Completed: "#E8FFDD",
   Pending: "#F4F0FF",
 };
 
 const TransactionTable = () => {
-  const [cryptoTableData, setCryptoTableData] = useState([
-    { type: "Received", status: "Pending", amount: "2000", id: "1" },
-  ]);
+  const [cryptoTableData, setCryptoTableData] = useState<any[]>([]);
 
-  // const cryptoTransactions = async () => {
-  //   const response = await cryptoTable();
-  //   setCryptoTableData(response);
-  // };
-  // useEffect(() => {
-  //   cryptoTransactions();
-  // }, []);
+  const cryptoTransactions = async () => {
+    const response = await cryptoTable();
+    setCryptoTableData(response);
+  };
+  useEffect(() => {
+    cryptoTransactions();
+  }, []);
   return (
     <Box
       sx={{
@@ -61,7 +59,7 @@ const TransactionTable = () => {
       </Typography>
 
       <TableContainer>
-        {cryptoTableData.length < 1 ? (
+        {cryptoTableData.length === 0 || cryptoTableData.length === null ? (
           <Typography
             sx={{
               fontSize: "13px",
@@ -92,7 +90,7 @@ const TransactionTable = () => {
                           color: "#111",
                         }}
                       >
-                        {crypto.type}
+                        {crypto.asset?.name}
                       </TableCell>
                       <TableCell
                         sx={{
@@ -100,7 +98,7 @@ const TransactionTable = () => {
                           color: "#111",
                         }}
                       >
-                        {crypto.amount}
+                        {crypto.assetAmount}
                       </TableCell>
                       <TableCell
                         sx={{

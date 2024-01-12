@@ -23,7 +23,7 @@ import CryptoModal from "@/components/pages/crypto/cryptoModal";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { sellCryptoValidation } from "@/services/schemaVarification";
-import { cryptoProps } from "@/services/interfaces";
+import { ErrorProps, cryptoProps } from "@/services/interfaces";
 import { CryptoAsset } from "@/api/cryptoAsset";
 import BarcodeModal from "@/components/pages/crypto/cryptoBarcodeModal";
 import UploadImageModal from "@/components/pages/crypto/uploadImageModal";
@@ -38,23 +38,33 @@ const Crypto = () => {
   const [openUploadImage, setOpenUploadImageModal] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState(null);
   const [assets, setAssets] = useState<any[]>([]);
-  const [image, setImage] = useState();
-  const preset_key = "732132719217354";
-  const cloud_name = "dgi4ygmix";
+  const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  const [errs, setErrs] = useState<ErrorProps>({
+    status: "",
+    message: "",
+    statusCode: 0,
+  });
 
-  function handleFile(event: any) {
+  const [image, setImage] = useState("");
+
+  const preset_key = "luminaryExchange";
+  const cloud_name = "dgmaqh6lu";
+
+  const handleFile = async (event: any) => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", preset_key);
-    axios
+    await axios
       .post(
         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
         formData
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }
+      .then((res) => setImage(res.data?.secure_url))
+      .catch((err) => err.error?.data);
+    // return data
+  };
 
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
@@ -73,7 +83,6 @@ const Crypto = () => {
   const networkId = watch("network");
   const payValue = watch("pay");
   const comment = watch("comment");
-  const proof = watch("comment");
   const transactionPin = watch("pin");
 
   const asset = useMemo(() => {
@@ -95,26 +104,32 @@ const Crypto = () => {
   }, [asset, payValue]);
 
   const sellCrypto = async () => {
-    const response = await sellCryptoApi({
-      assetId,
-      networkId,
-      assetAmount: payValue,
-      transactionPin,
-      proof,
-      comment,
-    });
-    console.log(
-      assetId,
-      networkId,
-      payValue,
-      transactionPin,
-      proof,
-      comment,
-      "asettttt"
-    );
-    console.log(response);
-    if (response.status === "Success" && response.statusCode === "200") {
-      alert("Successful");
+    setLoading(true);
+    try {
+      const response = await sellCryptoApi({
+        assetId,
+        networkId,
+        assetAmount: payValue,
+        transactionPin,
+        proof: image,
+        comment,
+      });
+      if (
+        response.status === "Created" &&
+        response.message === "Place crypto sell order successfully."
+      ) {
+        setLoading(false);
+        setError(true);
+
+        setErrs(response);
+      } else {
+        setLoading(false);
+
+        setError(true);
+        setErrs(response);
+      }
+    } catch (error: any) {
+      return error?.response?.data;
     }
   };
 
@@ -460,7 +475,10 @@ const Crypto = () => {
         receiveValue={receiveValue}
         sellCrypto={sellCrypto}
         handleFile={handleFile}
-        image={image}
+        error={error}
+        setError={setError}
+        errs={errs}
+        loading={loading}
       />
       {/* <input type="file" name="image" onChange={handleFile} /> */}
     </div>
