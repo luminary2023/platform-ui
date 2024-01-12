@@ -92,3 +92,11 @@ export interface cryptoProps {
   network: string;
   comment: string;
 }
+
+export interface giftcardProps {
+  currency: string;
+  giftcardType: string;
+  SubCategory: string;
+  card: string;
+  quantity: string;
+}

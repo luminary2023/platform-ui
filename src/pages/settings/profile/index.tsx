@@ -8,11 +8,26 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { useThemeContext } from "@/api/useContext/store";
+import { profileRequest } from "@/api/profile";
 
 const Profile = () => {
   const router = useRouter();
 
-  const { profileData } = useThemeContext();
+  // const { profileData } = useThemeContext();
+  const [profileData, setProfileData] = useState<any>({});
+
+  const fetchProfile = async () => {
+    try {
+      const res = await profileRequest();
+      setProfileData(res);
+    } catch (error: any) {
+      error?.response?.data;
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  });
 
   return (
     <>
