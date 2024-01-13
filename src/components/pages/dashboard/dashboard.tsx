@@ -36,7 +36,7 @@ const Dashboard = () => {
   // const { profileData } = useThemeContext();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [profileData, setProfileData] = useState<any>("");
+  const [profileData, setProfileData] = useState<any>({});
   // const [error, setError] = useState<boolean>(false);
 
   const fetchProfile = async () => {
@@ -78,7 +78,7 @@ const Dashboard = () => {
           <div className={styles.dashboardAnalysis}>
             <div className={styles.portfolioBalance}>
               <div className={styles.portfolioBg}>
-                <h2>NGN {profileData?.wallet.balance}</h2>
+                <h2>NGN {profileData?.wallet?.balance}</h2>
                 <p>Total Portfolio Balance</p>
                 <div className={styles.percentage}>
                   <Image src={TreadingUp} alt="percent" />

@@ -2,6 +2,7 @@
 import { FC, useEffect, useState } from "react";
 import {
   Box,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -27,6 +28,21 @@ const bgColor: Record<string, string> = {
 
 const TransactionTable = () => {
   const [cryptoTableData, setCryptoTableData] = useState<any[]>([]);
+
+  //Pagination //
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const recordsPerPage = 5;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const currentPost = cryptoTableData.slice(firstIndex, lastIndex);
+
+  // const pageNumber = [];
+  // const npage = Math.ceil(cryptoTableData.length / recordsPerPage)
+  // for (let i = 1; 1 <= Math.ceil(cryptoTableData.length / PrevPage); i++)
+  //   pageNumber.push(i);
+  // const npage = Math.ceil(cryptoTableData.length / recordsPerPage)
+  // const numbers = [...Array(npage + 1).keys()].slice(1)
 
   const cryptoTransactions = async () => {
     const response = await cryptoTable();
@@ -81,8 +97,8 @@ const TransactionTable = () => {
               </TableRow>
             </TableHead>
             <TableBody sx={{ textAlign: "center" }}>
-              {Array.isArray(cryptoTableData || [])
-                ? (cryptoTableData || [])?.map((crypto) => (
+              {Array.isArray(currentPost || [])
+                ? (currentPost || [])?.map((crypto) => (
                     <TableRow key={crypto.id}>
                       <TableCell
                         sx={{
@@ -117,6 +133,21 @@ const TransactionTable = () => {
             </TableBody>
           </Table>
         )}
+        <Pagination
+          variant="outlined"
+          shape="rounded"
+          // showFirstButton
+          count={currentPost.length}
+          defaultPage={currentPage}
+          // hideNextButton={false}
+          sx={{
+            color: "#007C5B",
+            mt: "20px",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+          onChange={(_, newPage) => setCurrentPage(newPage)}
+        />
       </TableContainer>
     </Box>
   );
