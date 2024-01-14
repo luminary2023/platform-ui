@@ -87,9 +87,8 @@ const Wallet = () => {
   const amount = watch("amount");
 
   useEffect(() => {
-    setWithdrawAmount(amount);
-
     fetchProfile();
+    setWithdrawAmount(amount);
   });
 
   const handleWithdraw = () => {
@@ -208,7 +207,9 @@ const Wallet = () => {
                   {...register("bank")}
                   onChange={handleChange}
                 >
-                  <option value="">Choose bank</option>
+                  <option value="" hidden>
+                    Choose bank
+                  </option>
                   {Array.isArray(bankAccount || [])
                     ? (bankAccount || [])?.map((account: any) => (
                         <option

@@ -12,12 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { transactionPin } from "@/services/schemaVarification";
 
-const WidthdrawDetails = [
-  {
-    processFee: "10",
-  },
-];
-
 interface PinProps {
   pin: string;
 }
@@ -88,173 +82,173 @@ export default function Index() {
               padding: "16px",
             }}
           >
-            {WidthdrawDetails.map((account) => (
-              <Box key={account.processFee}>
-                <Box
+            {/* {WidthdrawDetails.map((account) => ( */}
+            <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
                   sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 500,
                   }}
                 >
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Bank
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "18px",
-                      fontWeight: 700,
-                    }}
-                  >
-                    {selectedBankDetails?.bank?.name}
-                  </Typography>
-                </Box>
-                <hr
-                  style={{
-                    marginTop: "19px",
-                    marginBottom: "19px",
-                    color: "#E8E8E8",
-                  }}
-                />
-                <Box
+                  Bank
+                </Typography>
+                <Typography
                   sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    color: "#1F2739",
+                    fontSize: "18px",
+                    fontWeight: 700,
                   }}
                 >
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Account Number
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 700,
-                    }}
-                  >
-                    {selectedBankDetails?.accountNumber}
-                  </Typography>
-                </Box>
-                <hr
-                  style={{
-                    marginTop: "19px",
-                    marginBottom: "19px",
-                    color: "#E8E8E8",
-                  }}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Account Name
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 700,
-                    }}
-                  >
-                    {selectedBankDetails?.accountName}
-                  </Typography>
-                </Box>
-                <hr
-                  style={{
-                    marginTop: "19px",
-                    marginBottom: "19px",
-                    color: "#E8E8E8",
-                  }}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Amount
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 700,
-                    }}
-                  >
-                    NGN {withdrawAmount}
-                  </Typography>
-                </Box>
-                <hr
-                  style={{
-                    marginTop: "19px",
-                    marginBottom: "19px",
-                    color: "#E8E8E8",
-                  }}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 500,
-                    }}
-                  >
-                    Processing Fee
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#1F2739",
-                      fontSize: "16px",
-                      fontWeight: 700,
-                    }}
-                  >
-                    NGN{account.processFee}
-                  </Typography>
-                </Box>
+                  {selectedBankDetails?.bank?.name}
+                </Typography>
               </Box>
-            ))}
+              <hr
+                style={{
+                  marginTop: "19px",
+                  marginBottom: "19px",
+                  color: "#E8E8E8",
+                }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 500,
+                  }}
+                >
+                  Account Number
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                  }}
+                >
+                  {selectedBankDetails?.accountNumber}
+                </Typography>
+              </Box>
+              <hr
+                style={{
+                  marginTop: "19px",
+                  marginBottom: "19px",
+                  color: "#E8E8E8",
+                }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 500,
+                  }}
+                >
+                  Account Name
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                  }}
+                >
+                  {selectedBankDetails?.accountName}
+                </Typography>
+              </Box>
+              <hr
+                style={{
+                  marginTop: "19px",
+                  marginBottom: "19px",
+                  color: "#E8E8E8",
+                }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 500,
+                  }}
+                >
+                  Amount
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                  }}
+                >
+                  NGN {withdrawAmount}
+                </Typography>
+              </Box>
+              <hr
+                style={{
+                  marginTop: "19px",
+                  marginBottom: "19px",
+                  color: "#E8E8E8",
+                }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 500,
+                  }}
+                >
+                  Processing Fee
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#1F2739",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                  }}
+                >
+                  NGN{"200"}
+                </Typography>
+              </Box>
+            </Box>
+            {/* ))} */}
           </Paper>
 
           <Box
