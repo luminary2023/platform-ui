@@ -3,7 +3,7 @@ import { axiosInstance } from "./axiosClient";
 export const AllGiftCardCategories = async () => {
   try {
     const res = await axiosInstance.get(
-      "/giftcards/categories?page=1&perPage=20&search=amazon"
+      "/giftcards/categories?page=1&perPage=20"
     );
     return res.data?.results?.data || [];
   } catch (error: any) {

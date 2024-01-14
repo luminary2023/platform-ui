@@ -50,6 +50,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     message: "",
     statusCode: 0,
   });
+  console.log(phoneNumber, "phoen");
 
   const [error, setError] = useState<boolean>(false);
   const onChange = (value: string) => setOtp(value);
@@ -150,11 +151,26 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
                 X
               </Typography>
             </Box>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h1"
+              sx={{
+                fontFamily: "Satoshi Bold",
+                fontSize: { xs: "12px", sm: "14px", lg: "16px", xl: "16px" },
+                fontStyle: "normal",
+                fontWeight: 600,
+                lineHeight: "28px;",
+                color: "#6F6C99",
+              }}
+            >
+              Enter phone number in this format: +2348100000000
+            </Typography>
 
             <form onSubmit={handleSubmit(handlePhoneNumber)}>
               <Input
                 type="text"
-                placeholder={"Enter phone number"}
+                placeholder={"Enter phone number +2348100000000"}
                 maxLength={"14"}
                 aria-label="Demo number input"
                 // label="Phone number"

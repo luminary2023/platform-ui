@@ -12,6 +12,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import PhoneNumberModal from "../../components/pages/dashboard/phoneNumberModal";
 import TransactionPinModal from "../../components/pages/dashboard/transactionPinModal";
 import { useThemeContext } from "@/api/useContext/store";
+import { profileRequest } from "@/api/profile";
 
 const Index = () => {
   const [profile, setProfile] = useState<boolean>(true);
@@ -20,13 +21,39 @@ const Index = () => {
   const [openTransactionPin, setOpenTransactionPin] = useState<boolean>(false);
   const { bankDetails } = useThemeContext();
 
+  const [profileData, setProfileData] = useState<any>({});
+
+  const fetchProfile = async () => {
+    try {
+      const res = await profileRequest();
+      setProfileData(res);
+    } catch (error: any) {
+      error?.response?.data;
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  });
+
   const handleBankDetailsModal = () => {
     if (bankDetails.length < 1) {
       setOpen(true);
     } else setOpen(false);
   };
+
+  const value = 0;
   // const data: TransactionPinProps;
 
+  // const [phone, setPhone] = useState("");
+  // console.log(phone, "phonen");
+
+  const handlePhoneModal = () => {
+    if (profileData?.phoneNumber === "" || profileData?.phoneNumber === null) {
+      setOpenPhoneModal(true);
+    } else;
+    setOpenPhoneModal(false);
+  };
   return (
     <DashboardContainer
       title="Dashboard"
@@ -61,7 +88,17 @@ const Index = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  {bankDetails.length === null ? "0" : "1"}/3
+                  {bankDetails?.length > 0
+                    ? value + 1
+                    : profileData?.phoneNumber != "" ||
+                      profileData?.phoneNumber != null
+                    ? value + 1
+                    : (bankDetails?.length > 0 &&
+                        profileData?.phoneNumber != "") ||
+                      profileData?.phoneNumber != null
+                    ? value + 2
+                    : ""}
+                  /3
                 </Typography>
                 <CircularProgress
                   variant="determinate"
@@ -123,7 +160,7 @@ const Index = () => {
           <div
             className={styles.profileSecurity}
             style={{ cursor: "pointer" }}
-            onClick={() => setOpenPhoneModal(true)}
+            onClick={handlePhoneModal}
           >
             <Image
               src={KYC}
@@ -131,7 +168,15 @@ const Index = () => {
               className={styles.profileSecurityImg}
             />
             <div>
-              <h3>Verify Phone number</h3>
+              <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                <h3>Verify Phone number</h3>{" "}
+                {profileData?.phoneNumber === "" ||
+                profileData?.phoneNumber === null ? (
+                  ""
+                ) : (
+                  <CheckIcon sx={{ color: "green" }} />
+                )}
+              </Box>
               <p>
                 keep your account more secure by entering your phone number.
               </p>
@@ -186,3 +231,6 @@ const Index = () => {
   );
 };
 export default Index;
+function numberVerificationCode() {
+  throw new Error("Function not implemented.");
+}
