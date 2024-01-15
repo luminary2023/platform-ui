@@ -19,43 +19,31 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { giftcardSchema } from "@/services/schemaVarification";
 import { giftcardProps } from "@/services/interfaces";
+import { GiftCardType } from "@/api/GiftcardType";
+import { GiftCardSubCategory } from "@/api/giftcardSubCategory";
 
 interface SellGifcardDrawerProps {
   btnOnClick: () => void;
   selectedId: any;
 }
 
-const bankData = [
-  {
-    id: 1,
-    name: "Naira",
-  },
-  {
-    id: 1,
-    name: "Dollar",
-  },
-];
-
-interface SelectFields {
-  [key: string]: string;
-}
-
-const initialSelectFields: SelectFields = {
-  currency: "",
-  gitcardType: "",
-  subcategory: "",
-};
-
 const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
   btnOnClick,
   selectedId,
 }) => {
-  const [selectFields, setSelectFields] =
-    useState<SelectFields>(initialSelectFields);
   const [step, setStep] = useState<1 | 2>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [giftcardCurrency, setGiftcardCurrency] = useState<any[]>([]);
-  console.log(giftcardCurrency.length, "giftcard");
+  const [currencyId, setCurrencyId] = useState("");
+
+  const [giftcardType, setGiftcardType] = useState<any[]>([]);
+  const [giftcardTypeId, setGiftcardTypeId] = useState("");
+
+  const [giftcardSubCategory, setGiftcardSubCategory] = useState<any[]>([]);
+
+  const [nairaRateId, setNairaRateId] = useState("");
+
+  console.log(nairaRateId, "nairaRateId");
 
   const {
     handleSubmit,
@@ -65,17 +53,34 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
     resolver: zodResolver(giftcardSchema),
   });
 
-  // useEffect(() => {
-  //   handleGiftcardCurrencyApi(selectedId);
-  // }, []);
-
-  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const { id, value } = event.target;
-    setSelectFields((prevSelectFields) => ({
-      ...prevSelectFields,
-      [id]: value,
-    }));
+  const handleCardCurrency = async (id: any) => {
+    const res = await GiftCardCurrency(id);
+    setGiftcardCurrency(res);
   };
+
+  const handleGiftcardType = async (selectedId: any, currencyId: any) => {
+    const res = await GiftCardType(selectedId, currencyId);
+    setGiftcardType(res);
+  };
+
+  const handleSubCategory = async (
+    selectedId: any,
+    currencyId: any,
+    giftcardTypeId: any
+  ) => {
+    const res = await GiftCardSubCategory(
+      selectedId,
+      currencyId,
+      giftcardTypeId
+    );
+    setGiftcardSubCategory(res);
+  };
+
+  useEffect(() => {
+    handleCardCurrency(selectedId);
+    handleGiftcardType(selectedId, currencyId);
+    handleSubCategory(selectedId, currencyId, giftcardTypeId);
+  }, [selectedId, currencyId, giftcardTypeId]);
 
   const handleGiftcardValidation = () => {};
 
@@ -133,11 +138,8 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
           <div>
             <label className={styles.GCDSelectLabel}>Currency</label>
             <select
-              // onChange={handleChange}
               className={styles.GCDSelect}
               placeholder="Select currency"
-              // value={selectFields?.currency}
-              // id="currency"
               {...register("currency")}
               style={{
                 border: `${
@@ -148,24 +150,26 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
                 color: "#667085",
                 outline: "none",
               }}
+              onChange={(e) =>
+                setCurrencyId(giftcardCurrency[e.target.selectedIndex - 1]?.id)
+              }
             >
               <option value="" hidden>
                 Select currency
               </option>
-              {bankData?.map((bank: any) => (
-                <option value={bank.name} key={bank.id}>
-                  {bank.name}
-                </option>
-              ))}
+              {giftcardCurrency?.map((currency) => {
+                return (
+                  <option value={currency.name} key={currency.id}>
+                    {currency.name}
+                  </option>
+                );
+              })}
             </select>
 
             <label className={styles.GCDSelectLabel}>Giftcard type</label>
             <select
-              // onChange={handleChange}
               className={styles.GCDSelect}
               placeholder="Select currency"
-              value={selectFields?.gitcardType}
-              // id="gitcardType"
               {...register("giftcardType")}
               style={{
                 border: `${
@@ -176,24 +180,23 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
                 color: "#667085",
                 outline: "none",
               }}
+              onChange={(e) =>
+                setGiftcardTypeId(giftcardType[e.target.selectedIndex - 1]?.id)
+              }
             >
-              <option value="" disabled>
-                Select giftcard type
+              <option value="" hidden>
+                Select type
               </option>
-              {bankData?.map((bank: any) => (
-                <option value={bank.name} key={bank.id}>
-                  {bank.name}
-                </option>
-              ))}
+              {giftcardType?.map((type) => {
+                return <option key={type.id}>{type.name}</option>;
+              })}
             </select>
 
             <label className={styles.GCDSelectLabel}>Sub-category</label>
+
             <select
-              // onChange={handleChange}
               className={styles.GCDSelect}
               placeholder="Select currency"
-              // value={selectFields?.subcategory}
-              // id="subcategory"
               {...register("giftcardType")}
               style={{
                 border: `${
@@ -204,13 +207,18 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
                 color: "#667085",
                 outline: "none",
               }}
+              onChange={(e) =>
+                setNairaRateId(
+                  giftcardSubCategory[e.target.selectedIndex - 1]?.nairaRate
+                )
+              }
             >
-              <option value="" disabled>
-                Select currency
+              <option value="" hidden>
+                Select category
               </option>
-              {bankData?.map((bank: any) => (
-                <option value={bank.name} key={bank.id}>
-                  {bank.name}
+              {giftcardSubCategory?.map((sub: any) => (
+                <option value={sub.range} key={sub.id}>
+                  {sub.range}
                 </option>
               ))}
             </select>
@@ -252,7 +260,7 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
                 style={{ color: "#17A2B8", fontSize: "14px" }}
                 className={styles.GCDAmount}
               >
-                Rate: 400
+                {nairaRateId}
               </p>
             </div>
             <Button
