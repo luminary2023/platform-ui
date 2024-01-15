@@ -48,12 +48,6 @@ const Index = () => {
   // const [phone, setPhone] = useState("");
   // console.log(phone, "phonen");
 
-  const handlePhoneModal = () => {
-    if (profileData?.phoneNumber === "" || profileData?.phoneNumber === null) {
-      setOpenPhoneModal(true);
-    } else;
-    setOpenPhoneModal(false);
-  };
   return (
     <DashboardContainer
       title="Dashboard"
@@ -160,7 +154,9 @@ const Index = () => {
           <div
             className={styles.profileSecurity}
             style={{ cursor: "pointer" }}
-            onClick={handlePhoneModal}
+            onClick={() => {
+              if (profileData?.phoneNumber === null) setOpenPhoneModal(true);
+            }}
           >
             <Image
               src={KYC}
@@ -170,12 +166,10 @@ const Index = () => {
             <div>
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 <h3>Verify Phone number</h3>{" "}
-                {profileData?.phoneNumber === "" ||
-                profileData?.phoneNumber === null ? (
-                  ""
-                ) : (
-                  <CheckIcon sx={{ color: "green" }} />
-                )}
+                {profileData?.phoneNumber != "" &&
+                  profileData?.phoneNumber != null && (
+                    <CheckIcon sx={{ color: "green" }} />
+                  )}
               </Box>
               <p>
                 keep your account more secure by entering your phone number.
