@@ -13,18 +13,15 @@ const SellGiftcard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedGiftCard, setSelectedGiftCard] = useState<any[]>([]);
   const [selectedId, setSelectedId] = useState("");
-  const [giftcardCurrency, setGiftcardCurrency] = useState();
-  console.log(giftcardCurrency, "currency");
+  // console.log(selectedId, "iddd");
 
-  console.log(selectedGiftCard, "giftcard selcted", selectedId);
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  const handleCardDrawer = async () => {
+  const handleCardDrawer = async (id: any) => {
+    setSelectedId(id);
     setIsOpen(true);
-    const res = await GiftCardCurrency();
-    setGiftcardCurrency(res);
   };
 
   const GitfCardCategories = async () => {
@@ -58,14 +55,13 @@ const SellGiftcard = () => {
       </h2>
       <div className={giftcardStyles.wrapper}>
         {selectedGiftCard.map((giftcard) => {
-          console.log(giftcard);
           return (
             <div key={giftcard.id}>
               <img
                 src={giftcard.image}
                 alt="amazon"
                 width={200}
-                onClick={handleCardDrawer}
+                onClick={() => handleCardDrawer(giftcard.id)}
               />
             </div>
           );
