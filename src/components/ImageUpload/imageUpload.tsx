@@ -2,8 +2,13 @@
 import React, { useState, useRef, ChangeEvent } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import styles from "../pages/giftCard/giftcard.module.css";
+import Image from "next/image";
 
-interface ImageUploadProps {}
+interface ImageUploadProps {
+  handleFile: any;
+  setImage: any;
+  image: any;
+}
 
 const hiddenInputStyle: React.CSSProperties = {
   display: "none",
@@ -11,19 +16,12 @@ const hiddenInputStyle: React.CSSProperties = {
 
 const allowedImageTypes = ["image/jpeg", "image/png", "image/gif"];
 
-const ImageUpload: React.FC<ImageUploadProps> = () => {
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+const ImageUpload: React.FC<ImageUploadProps> = ({
+  handleFile,
+  setImage,
+  image,
+}) => {
   const hiddenInputRef = useRef<HTMLInputElement>(null);
-
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      const newImages = Array.from(files).filter((file) =>
-        allowedImageTypes.includes(file.type)
-      );
-      setSelectedImages((prevImages) => [...prevImages, ...newImages]);
-    }
-  };
 
   const handleIconClick = () => {
     if (hiddenInputRef.current) {
@@ -32,7 +30,7 @@ const ImageUpload: React.FC<ImageUploadProps> = () => {
   };
 
   const handleRemoveImage = (index: number) => {
-    setSelectedImages((prevImages) => {
+    setImage((prevImages: any) => {
       const newImages = [...prevImages];
       newImages.splice(index, 1);
       return newImages;
@@ -45,7 +43,7 @@ const ImageUpload: React.FC<ImageUploadProps> = () => {
         <input
           type="file"
           ref={hiddenInputRef}
-          onChange={handleImageChange}
+          onChange={handleFile}
           style={hiddenInputStyle}
           multiple
           accept="image/jpeg, image/png, image/gif"
@@ -57,9 +55,9 @@ const ImageUpload: React.FC<ImageUploadProps> = () => {
         {/* <button onClick={handleUpload}>Upload Image(s)</button> */}
       </div>
       <div>
-        {selectedImages.map((image, index) => (
+        {image.map((image: any, index: any) => (
           <div key={index} style={{ display: "inline-block", margin: "8px" }}>
-            <img
+            <Image
               src={URL.createObjectURL(image)}
               alt={`Selected ${index + 1}`}
               style={{ maxWidth: "100px", maxHeight: "100px" }}
