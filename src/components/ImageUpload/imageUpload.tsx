@@ -2,6 +2,7 @@
 import React, { useState, useRef, ChangeEvent } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import styles from "../pages/giftCard/giftcard.module.css";
+import Image from "next/image";
 
 interface ImageUploadProps {
   handleFile: any;
@@ -56,7 +57,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       <div>
         {image.map((image: any, index: any) => (
           <div key={index} style={{ display: "inline-block", margin: "8px" }}>
-            <img
+            <Image
               src={URL.createObjectURL(image)}
               alt={`Selected ${index + 1}`}
               style={{ maxWidth: "100px", maxHeight: "100px" }}

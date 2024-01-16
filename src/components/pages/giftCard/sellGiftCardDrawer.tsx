@@ -30,16 +30,16 @@ import { GiftCardType } from "@/api/GiftcardType";
 import { GiftCardSubCategory } from "@/api/giftcardSubCategory";
 import SellGiftcardStepTwo from "./sellGiftcardStepTwo";
 
-interface SellGifcardDrawerProps {
+interface SellGiftcardDrawerProps {
   btnOnClick: () => void;
   selectedId: any;
-  routerPath: string;
+  // routerPath: string;
 }
 
-const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
+const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
   btnOnClick,
   selectedId,
-  routerPath,
+  // routerPath,
 }) => {
   const [step, setStep] = useState<1 | 2>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
