@@ -131,6 +131,11 @@ export const giftcardSchema = z.object({
   currency: z.string().min(1, { message: "required" }),
 
   giftcardType: z.string().min(1, { message: "require" }),
-  card: z.string().min(1, { message: "require" }),
+  cardAmount: z.string().min(1, { message: "require" }),
   quantity: z.string().min(1, { message: "require" }),
+});
+
+export const tradeGiftcardSchema = z.object({
+  eCode: z.string().min(1, { message: "require" }),
+  transactionPin: z.string().min(1, { message: "require" }),
 });

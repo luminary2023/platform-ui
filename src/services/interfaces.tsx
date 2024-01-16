@@ -96,7 +96,7 @@ export interface cryptoProps {
 export interface giftcardProps {
   currency: string;
   giftcardType: string;
-  SubCategory: string;
-  card: string;
-  quantity: string;
+  giftcardCategory: string;
+  cardAmount: string;
+  quantity: number;
 }

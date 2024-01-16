@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState, useEffect, useMemo } from "react";
 import {
   FormControlLabel,
   FormGroup,
@@ -8,6 +8,10 @@ import {
   Box,
 } from "@mui/material";
 import styles from "./giftcard.module.css";
+import BackArrow from "../../../assets/images/arrow-left.svg";
+import { useRouter } from "next/router";
+import Image from "next/image";
+
 import WalletStyles from "../../../pages/wallet/wallet.module.css";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Input from "@/components/InputField";
@@ -17,19 +21,25 @@ import GiftcardSummary from "./giftcardSummary";
 import { GiftCardCurrency } from "@/api/giftCardCategoriesCurrency";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { giftcardSchema } from "@/services/schemaVarification";
+import {
+  giftcardSchema,
+  tradeGiftcardSchema,
+} from "@/services/schemaVarification";
 import { giftcardProps } from "@/services/interfaces";
 import { GiftCardType } from "@/api/GiftcardType";
 import { GiftCardSubCategory } from "@/api/giftcardSubCategory";
+import SellGiftcardStepTwo from "./sellGiftcardStepTwo";
 
 interface SellGifcardDrawerProps {
   btnOnClick: () => void;
   selectedId: any;
+  routerPath: string;
 }
 
 const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
   btnOnClick,
   selectedId,
+  routerPath,
 }) => {
   const [step, setStep] = useState<1 | 2>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -41,17 +51,25 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
 
   const [giftcardSubCategory, setGiftcardSubCategory] = useState<any[]>([]);
 
-  const [nairaRateId, setNairaRateId] = useState("");
-
-  console.log(nairaRateId, "nairaRateId");
+  const [nairaRate, setNairaRate] = useState<any>();
+  const [nairaRateId, setNairaRateId] = useState<any>();
 
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm<giftcardProps>({
     resolver: zodResolver(giftcardSchema),
   });
+
+  const router = useRouter();
+  const giftcardQuantity = watch("quantity");
+  const cardAmount = watch("cardAmount");
+
+  const receiveValue = useMemo(() => {
+    return (giftcardQuantity || 0) * (nairaRate || 1);
+  }, [nairaRate, giftcardQuantity]);
 
   const handleCardCurrency = async (id: any) => {
     const res = await GiftCardCurrency(id);
@@ -82,7 +100,9 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
     handleSubCategory(selectedId, currencyId, giftcardTypeId);
   }, [selectedId, currencyId, giftcardTypeId]);
 
-  const handleGiftcardValidation = () => {};
+  const handleGiftcardValidation = () => {
+    setStep(2);
+  };
 
   const style = {
     position: "absolute" as "absolute",
@@ -110,6 +130,8 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
         </Box>
       </Modal>
       <div style={{ display: "flex", marginBottom: 50 }}>
+        <Image src={BackArrow} alt="backArrow" onClick={() => router.back()} />
+
         <p
           className={styles.GCDSteps}
           style={{
@@ -196,22 +218,25 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
 
             <select
               className={styles.GCDSelect}
-              placeholder="Select currency"
-              {...register("giftcardType")}
+              placeholder="Select category"
+              {...register("giftcardCategory")}
               style={{
                 border: `${
-                  errors.giftcardType?.message
+                  errors.giftcardCategory?.message
                     ? "1px solid #DF1111"
                     : "1px solid #E8E8E8"
                 }`,
                 color: "#667085",
                 outline: "none",
               }}
-              onChange={(e) =>
-                setNairaRateId(
+              onChange={(e) => {
+                setNairaRate(
                   giftcardSubCategory[e.target.selectedIndex - 1]?.nairaRate
-                )
-              }
+                ),
+                  setNairaRateId(
+                    giftcardSubCategory[e.target.selectedIndex - 1]?.id
+                  );
+              }}
             >
               <option value="" hidden>
                 Select category
@@ -233,34 +258,44 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
               <Input
                 placeholder="Enter Card amount"
                 type="text"
-                label=""
+                label="Enter Card amount"
                 marginBottom="24px"
                 inputStyles={{
                   width: "100%",
                 }}
-                borderColor={errors.card?.message ? "#DF1111" : ""}
-                register={register("card")}
+                borderColor={errors.cardAmount?.message ? "#DF1111" : ""}
+                register={register("cardAmount")}
+                onKeyPress={(event: any) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
               />
               <Input
                 placeholder="How many"
                 type="text"
-                label=""
+                label="How many card"
                 inputStyles={{
                   width: "100%",
                 }}
                 marginBottom="24px"
                 borderColor={errors.quantity?.message ? "#DF1111" : ""}
                 register={register("quantity")}
+                onKeyPress={(event: any) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
               />
             </div>
             <div style={{ textAlign: "center", margin: "30px" }}>
               <p>You would get:</p>
-              <h1 className={styles.GCDAmount}>NGN 0.00</h1>
+              <h1 className={styles.GCDAmount}>NGN {receiveValue}</h1>
               <p
                 style={{ color: "#17A2B8", fontSize: "14px" }}
                 className={styles.GCDAmount}
               >
-                {nairaRateId}
+                Rate {nairaRate}
               </p>
             </div>
             <Button
@@ -282,47 +317,12 @@ const SellGiftCardDrawer: React.FC<SellGifcardDrawerProps> = ({
       </form>
 
       {step === 2 && (
-        <div>
-          <Input
-            placeholder="Card E-code..."
-            type="text"
-            label="E-code"
-            inputStyles={{
-              width: "100%",
-            }}
-            marginBottom="24px"
-          />
-          <p style={{ color: "#1F2739", fontSize: 16 }}>Upload card images</p>
-          <ImageUpload />
-          <Input label="Password" type="password" />
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox />}
-              label="I confirm that all the filled details are correct"
-              sx={{ color: "#6C757D" }}
-            />
-          </FormGroup>
-          <Button
-            color="primary"
-            variant="contained"
-            fullWidth
-            type="submit"
-            onClick={() => {
-              setStep(1);
-              setModalOpen(true);
-              btnOnClick();
-            }}
-            sx={{
-              borderRadius: "10px",
-              textTransform: "capitalize",
-              height: "61px",
-              margintTop: "8px",
-              marginTop: 10,
-            }}
-          >
-            Trade Giftcard{" "}
-          </Button>
-        </div>
+        <SellGiftcardStepTwo
+          nairaRate={nairaRate}
+          nairaRateId={nairaRateId}
+          giftcardQuantity={giftcardQuantity}
+          cardAmount={cardAmount}
+        />
       )}
     </>
   );
