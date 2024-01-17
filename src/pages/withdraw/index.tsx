@@ -18,6 +18,7 @@ interface PinProps {
 
 export default function Index() {
   const { selectedBankDetails, withdrawAmount } = useThemeContext();
+  console.log(selectedBankDetails, "drawwwwwwww", withdrawAmount);
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -108,7 +109,7 @@ export default function Index() {
                     fontWeight: 700,
                   }}
                 >
-                  {selectedBankDetails?.bank?.name}
+                  {selectedBankDetails.bank?.name}
                 </Typography>
               </Box>
               <hr

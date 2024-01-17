@@ -25,7 +25,7 @@ type ThemeContext = {
   bankAccount: any;
   bankInfo: [];
   setBankInfo: any;
-  handleBankInfo: any;
+  // handleBankInfo: any;
   handleDeleteAccount: any;
   setBankId: any;
   openModal: any;
@@ -51,7 +51,7 @@ export const GlobalContext = createContext<ThemeContext | null>(null);
 export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [bankDetails, setBankDetails] = useState<[]>([]);
   // const [profileData, setProfileData] = useState("");
-  const [bankAccount, setBankAccount] = useState<WithdrawProps | any | []>([]);
+  const [bankAccount, setBankAccount] = useState<any[]>([]);
 
   const [bankInfo, setBankInfo] = useState<any | []>([]);
   const [bankId, setBankId] = useState("");
@@ -77,14 +77,14 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
   //   }
   // };
 
-  const handleBankDetails = async () => {
-    try {
-      const response = await userAccountDetails();
-      setBankDetails(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
+  // const handleBankDetails = async () => {
+  //   try {
+  //     const response = await userAccountDetails();
+  //     setBankDetails(response);
+  //   } catch (error: any) {
+  //     return error?.response?.data;
+  //   }
+  // };
   const handleBankAccount = async () => {
     try {
       const response = await userAccountDetails();
@@ -94,20 +94,20 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const handleBankInfo = async () => {
-    try {
-      const response = await userAccountDetails();
-      setBankInfo(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
+  // const handleBankInfo = async () => {
+  //   try {
+  //     const response = await userAccountDetails();
+  //     setBankInfo(response);
+  //   } catch (error: any) {
+  //     return error?.response?.data;
+  //   }
+  // };
 
   const handleDeleteAccount = async () => {
     try {
       const response = await DeleteAccount(bankId);
       setBankInfo(response);
-      await handleBankInfo();
+      // await handleBankInfo();
       handleClose();
       handleCloseMenu();
     } catch (error: any) {
@@ -118,10 +118,10 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     // fetchProfile();
     // profile();
     handleBankAccount();
-    handleBankInfo();
-    handleBankDetails();
+    // handleBankInfo();
+    // handleBankDetails();
     // handleBankAccount();
-  }, []);
+  }, [handleBankAccount]);
   const selectedBankDetails = useMemo(() => {
     if (!selectedBank || (bankAccount?.length || 0) <= 0) {
       return {};
@@ -142,7 +142,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
         bankAccount,
         bankInfo,
         setBankInfo,
-        handleBankInfo,
+        // handleBankInfo,
         handleDeleteAccount,
         setBankId,
         anchorEl,
