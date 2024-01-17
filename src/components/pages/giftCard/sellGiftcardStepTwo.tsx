@@ -12,6 +12,7 @@ import Loading from "@/components/Loading";
 import SummaryModal from "./summaryModal";
 import { useRouter } from "next/router";
 import { sellGiftcard } from "@/api/sellGiftcard";
+import { ErrorProps } from "@/services/interfaces";
 
 interface tradeGiftcardProps {
   eCode: string;
@@ -24,6 +25,8 @@ interface Props {
   cardAmount: any;
   nairaRateId: any;
   receiveValue: any;
+  cardImage: string;
+  cardName: string;
 }
 
 const SellGiftcardStepTwo: FC<Props> = ({
@@ -32,11 +35,20 @@ const SellGiftcardStepTwo: FC<Props> = ({
   cardAmount,
   nairaRateId,
   receiveValue,
+  cardImage,
+  cardName,
 }) => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errs, setErrs] = useState<ErrorProps>({
+    status: "",
+    message: "",
+    statusCode: 0,
+    errors: "",
+  });
   const router = useRouter();
 
   const preset_key = "luminaryExchange";
@@ -94,6 +106,9 @@ const SellGiftcardStepTwo: FC<Props> = ({
         res.message === "Place giftcard sell order successfully."
       ) {
         setSuccess(true);
+      } else {
+        setErrs(res);
+        setError(true);
       }
     } catch (error: any) {
       error.results?.data;
@@ -127,7 +142,27 @@ const SellGiftcardStepTwo: FC<Props> = ({
             image={image}
           /> */}
 
-          <input type={"file"} multiple onChange={handleFile} />
+          <input
+            type={"file"}
+            multiple
+            onChange={handleFile}
+            style={{
+              marginTop: "25px",
+              marginBottom: "25px",
+            }}
+          />
+          {/* <img
+            src={image}
+            alt="image"
+            width={150}
+            style={{
+              marginTop: "25px",
+              marginBottom: "25px",
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+            }}
+          /> */}
           <Input
             label="Transaction pin"
             type="password"
@@ -175,6 +210,10 @@ const SellGiftcardStepTwo: FC<Props> = ({
         handleSellGiftcard={handleSellGiftcard}
         loading={loading}
         success={success}
+        errs={errs}
+        error={error}
+        cardImage={cardImage}
+        cardName={cardName}
       />
     </div>
   );

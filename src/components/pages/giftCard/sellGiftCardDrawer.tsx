@@ -33,12 +33,17 @@ import SellGiftcardStepTwo from "./sellGiftcardStepTwo";
 interface SellGiftcardDrawerProps {
   btnOnClick: () => void;
   selectedId: any;
+  cardImage: string;
+  cardName: string;
   // routerPath: string;
 }
 
 const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
   btnOnClick,
   selectedId,
+  cardImage,
+  cardName,
+
   // routerPath,
 }) => {
   const [step, setStep] = useState<1 | 2>(1);
@@ -323,6 +328,8 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
           giftcardQuantity={giftcardQuantity}
           cardAmount={cardAmount}
           receiveValue={receiveValue}
+          cardImage={cardImage}
+          cardName={cardName}
         />
       )}
     </>

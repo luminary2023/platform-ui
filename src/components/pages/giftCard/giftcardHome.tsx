@@ -12,6 +12,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { giftcardTableHead } from "@/services/data";
 import { giftcardTable } from "@/api/giftcardTable";
+import { Pagination, Typography } from "@mui/material";
 
 interface GiftCardHomeProps {
   sellOnClick: () => void;
@@ -47,6 +48,14 @@ const statusStyle = (text: string) => {
 
 const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
   const [giftcardsTable, setGiftcardsTable] = useState<any>([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const recordsPerPage = 5;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const currentPost = giftcardsTable.slice(firstIndex, lastIndex);
+
   const GCACTIONS: actionProps[] = [
     {
       id: 1,
@@ -115,67 +124,95 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
         </div>
         <div className={styles.homeSectionTwo}>
           <h1 className={styles.tableTitle}>Transactions</h1>
-          <TableContainer>
-            <Table sx={{ width: "100%" }} aria-label="giftcard table">
-              <TableHead>
-                <TableRow>
-                  {giftcardTableHead.map((item, i) => (
-                    <TableCell className={styles.tableHead} key={i}>
-                      {item}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {giftcardsTable.map((giftcard: any) => (
-                  <TableRow
-                    key={giftcard.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      className={styles.tableData}
-                      sx={
-                        {
-                          // position: "relative",
-                          // left: "15px",
-                        }
-                      }
-                    >
-                      <>
-                        {
-                          giftcard.giftcardSubCategory
-                            ?.giftcardCategoriesCurrenciesType?.giftcardCategory
-                            ?.name
-                        }
-                      </>
-                    </TableCell>
-                    <TableCell className={styles.tableData}>
-                      <>{giftcard.amount}</>
-                    </TableCell>
-                    <TableCell className={styles.tableData}>
-                      {giftcard.rate}
-                    </TableCell>
-                    <TableCell className={styles.tableData}>
-                      {giftcard.totalAmount}
-                    </TableCell>
-                    <TableCell className={styles.tableData}>
-                      <div
-                        className={`${styles.statusTag} ${statusStyle(
-                          giftcard.status
-                        )}`}
-                      >
-                        {giftcard.status}
-                      </div>
-                    </TableCell>
+          {giftcardsTable.length === 0 ? (
+            <Typography
+              sx={{
+                fontSize: "13px",
+                textAlign: "center",
+                mt: "15px",
+                mb: "15px",
+                textDecoration: "underline",
+              }}
+            >
+              No transaction yet
+            </Typography>
+          ) : (
+            <TableContainer>
+              <Table sx={{ width: "100%" }} aria-label="giftcard table">
+                <TableHead>
+                  <TableRow>
+                    {giftcardTableHead.map((item, i) => (
+                      <TableCell className={styles.tableHead} key={i}>
+                        {item}
+                      </TableCell>
+                    ))}
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {currentPost.map((giftcard: any) => (
+                    <TableRow
+                      key={giftcard.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        className={styles.tableData}
+                        sx={
+                          {
+                            // position: "relative",
+                            // left: "15px",
+                          }
+                        }
+                      >
+                        <>
+                          {
+                            giftcard.giftcardSubCategory
+                              ?.giftcardCategoriesCurrenciesType
+                              ?.giftcardCategory?.name
+                          }
+                        </>
+                      </TableCell>
+                      <TableCell className={styles.tableData}>
+                        <>{giftcard.amount}</>
+                      </TableCell>
+                      <TableCell className={styles.tableData}>
+                        {giftcard.rate}
+                      </TableCell>
+                      <TableCell className={styles.tableData}>
+                        {giftcard.totalAmount}
+                      </TableCell>
+                      <TableCell className={styles.tableData}>
+                        <div
+                          className={`${styles.statusTag} ${statusStyle(
+                            giftcard.status
+                          )}`}
+                        >
+                          {giftcard.status}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <Pagination
+                variant="outlined"
+                shape="rounded"
+                // showFirstButton
+                count={currentPost.length}
+                defaultPage={currentPage}
+                // hideNextButton={false}
+                sx={{
+                  color: "#007C5B",
+                  mt: "20px",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+                onChange={(_, newPage) => setCurrentPage(newPage)}
+              />
+            </TableContainer>
+          )}
         </div>
-        <div></div>
       </div>
     </div>
   );

@@ -9,6 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { sellCryptoSchema } from "@/services/schemaVarification";
 import Toast from "@/components/Toast";
 import Loading from "@/components/Loading";
+import { useState } from "react";
+import Image from "next/image";
 
 interface Props {
   open: boolean;
@@ -23,6 +25,8 @@ interface Props {
   setError: any;
   error: boolean;
   errs: any;
+  image: any;
+  setImage: any;
 }
 
 interface SellCryptoProps {
@@ -32,6 +36,7 @@ interface SellCryptoProps {
   proof: string;
   transactionPin: string;
   comment: string;
+  image: any;
 }
 
 const style = {
@@ -50,13 +55,14 @@ const style = {
 export default function UploadImage({
   open,
   onClose,
-
+  image,
   sellCrypto,
   handleFile,
   setError,
   loading,
   error,
   errs,
+  setImage,
 }: Props) {
   const {
     reset,
@@ -106,7 +112,7 @@ export default function UploadImage({
                 cursor: "pointer",
               }}
               onClick={() => {
-                onClose(), reset(), setError(false);
+                onClose(), reset(), setImage(""), setError(false);
               }}
             >
               X
@@ -117,6 +123,21 @@ export default function UploadImage({
             name="image"
             onChange={handleFile}
             accept="image/*"
+            style={{
+              marginTop: "25px",
+              marginBottom: "25px",
+            }}
+          />
+
+          <img
+            src={image}
+            width={150}
+            style={{
+              marginTop: "25px",
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+            }}
           />
 
           <Button

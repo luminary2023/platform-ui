@@ -479,6 +479,8 @@ const Crypto = () => {
         setError={setError}
         errs={errs}
         loading={loading}
+        image={image}
+        setImage={setImage}
       />
       {/* <input type="file" name="image" onChange={handleFile} /> */}
     </div>
