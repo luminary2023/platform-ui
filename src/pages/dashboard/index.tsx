@@ -43,10 +43,6 @@ const Index = () => {
   };
 
   const value = 0;
-  // const data: TransactionPinProps;
-
-  // const [phone, setPhone] = useState("");
-  // console.log(phone, "phonen");
 
   return (
     <DashboardContainer

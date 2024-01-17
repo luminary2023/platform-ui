@@ -17,7 +17,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Input from "@/components/InputField";
 import { Button } from "@/components/Button/Button";
 import ImageUpload from "@/components/ImageUpload/imageUpload";
-import GiftcardSummary from "./giftcardSummary";
+// import GiftcardSummary from "./giftcardSummary";
 import { GiftCardCurrency } from "@/api/giftCardCategoriesCurrency";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -126,7 +126,7 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
           >
             Trade Initiated
           </h1>
-          <GiftcardSummary backToHomeClick={() => setModalOpen(false)} />
+          {/* <GiftcardSummary backToHomeClick={() => setModalOpen(false)} /> */}
         </Box>
       </Modal>
       <div style={{ display: "flex", marginBottom: 50 }}>
@@ -219,10 +219,10 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
             <select
               className={styles.GCDSelect}
               placeholder="Select category"
-              {...register("giftcardCategory")}
+              {...register("SubCategory")}
               style={{
                 border: `${
-                  errors.giftcardCategory?.message
+                  errors.SubCategory?.message
                     ? "1px solid #DF1111"
                     : "1px solid #E8E8E8"
                 }`,
@@ -322,6 +322,7 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
           nairaRateId={nairaRateId}
           giftcardQuantity={giftcardQuantity}
           cardAmount={cardAmount}
+          receiveValue={receiveValue}
         />
       )}
     </>

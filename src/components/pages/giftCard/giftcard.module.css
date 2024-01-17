@@ -103,6 +103,7 @@
   font-weight: 400;
   line-height: normal;
   padding: 24px;
+  text-align: right;
 }
 .statusTag {
   display: flex;

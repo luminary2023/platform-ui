@@ -126,7 +126,7 @@ export const sellCryptoSchema = z.object({
 });
 
 export const giftcardSchema = z.object({
-  giftcardCategory: z.string().min(1, { message: "required" }),
+  SubCategory: z.string().min(1, { message: "required" }),
 
   currency: z.string().min(1, { message: "required" }),
 
