@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./giftcard.module.css";
 import Image from "next/image";
 import BuyGiftCardIcon from "../../../assets/images/buy-giftcard.svg";
@@ -11,7 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { giftcardTableHead } from "@/services/data";
-import { TableTag } from "@/components/Table/tableTwo";
+import { giftcardTable } from "@/api/giftcardTable";
 
 interface GiftCardHomeProps {
   sellOnClick: () => void;
@@ -25,23 +25,6 @@ interface actionProps {
   borderColor: string;
   id: number;
 }
-
-function createData(
-  type: string,
-  giftcard: string,
-  amount: string,
-  naira: string,
-  status: string
-) {
-  return { type, giftcard, amount, naira, status };
-}
-
-const rows = [
-  createData("Received", "Amazon", "2000", "15000", "Pending"),
-  createData("Send", "Amazon", "2000", "15000", "Completed"),
-  createData("Received", "Amazon", "2000", "15000", "Error"),
-  createData("Send", "Amazon", "2000", "15000", "Pending"),
-];
 
 const statusStyle = (text: string) => {
   let className = "";
@@ -63,6 +46,7 @@ const statusStyle = (text: string) => {
 };
 
 const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
+  const [giftcardsTable, setGiftcardsTable] = useState<any>([]);
   const GCACTIONS: actionProps[] = [
     {
       id: 1,
@@ -81,6 +65,15 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
       backgroundColor: "#ECFCE5",
     },
   ];
+
+  const giftcardTransactionTable = async () => {
+    const response = await giftcardTable();
+    setGiftcardsTable(response);
+  };
+
+  useEffect(() => {
+    giftcardTransactionTable();
+  }, []);
 
   return (
     <div>
@@ -134,41 +127,46 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row, i) => (
+                {giftcardsTable.map((giftcard: any) => (
                   <TableRow
-                    key={i}
+                    key={giftcard.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell
                       component="th"
                       scope="row"
                       className={styles.tableData}
-                      sx={{
-                        position: "relative",
-                        left: "15px",
-                      }}
+                      sx={
+                        {
+                          // position: "relative",
+                          // left: "15px",
+                        }
+                      }
                     >
                       <>
-                        <TableTag text={row.type} />
-                        {row.type}
+                        {
+                          giftcard.giftcardSubCategory
+                            ?.giftcardCategoriesCurrenciesType?.giftcardCategory
+                            ?.name
+                        }
                       </>
                     </TableCell>
-                    <TableCell align="right" className={styles.tableData}>
-                      {row.giftcard}
+                    <TableCell className={styles.tableData}>
+                      <>{giftcard.amount}</>
                     </TableCell>
-                    <TableCell align="right" className={styles.tableData}>
-                      {row.amount}
+                    <TableCell className={styles.tableData}>
+                      {giftcard.rate}
                     </TableCell>
-                    <TableCell align="right" className={styles.tableData}>
-                      {row.naira}
+                    <TableCell className={styles.tableData}>
+                      {giftcard.totalAmount}
                     </TableCell>
-                    <TableCell align="right" className={styles.tableData}>
+                    <TableCell className={styles.tableData}>
                       <div
                         className={`${styles.statusTag} ${statusStyle(
-                          row.status
+                          giftcard.status
                         )}`}
                       >
-                        {row.status}
+                        {giftcard.status}
                       </div>
                     </TableCell>
                   </TableRow>

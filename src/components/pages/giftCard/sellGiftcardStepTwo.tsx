@@ -6,8 +6,12 @@ import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tradeGiftcardSchema } from "@/services/schemaVarification";
-import { sellGiftcard } from "@/api/sellGiftcard";
+// import { sellGiftcard } from "@/api/sellGiftcard";
 import axios from "axios";
+import Loading from "@/components/Loading";
+import SummaryModal from "./summaryModal";
+import { useRouter } from "next/router";
+import { sellGiftcard } from "@/api/sellGiftcard";
 
 interface tradeGiftcardProps {
   eCode: string;
@@ -19,6 +23,7 @@ interface Props {
   giftcardQuantity: any;
   cardAmount: any;
   nairaRateId: any;
+  receiveValue: any;
 }
 
 const SellGiftcardStepTwo: FC<Props> = ({
@@ -26,8 +31,13 @@ const SellGiftcardStepTwo: FC<Props> = ({
   giftcardQuantity,
   cardAmount,
   nairaRateId,
+  receiveValue,
 }) => {
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const router = useRouter();
 
   const preset_key = "luminaryExchange";
   const cloud_name = "dgmaqh6lu";
@@ -35,6 +45,10 @@ const SellGiftcardStepTwo: FC<Props> = ({
   const handleFile = async (event: any) => {
     const file = event.target.files[0];
     const formData = new FormData();
+    for (let i = 0; i < image.length; i++) {
+      let file = image[i];
+      formData.append("file", file);
+    }
     formData.append("file", file);
     formData.append("upload_preset", preset_key);
     await axios
@@ -57,15 +71,33 @@ const SellGiftcardStepTwo: FC<Props> = ({
 
   const eCode = watch("eCode");
   const handleTradeGiftcard = async () => {
-    const res = await sellGiftcard({
-      amount: cardAmount,
-      quantity: giftcardQuantity,
-      comment: eCode,
-      attachments: image,
-      giftcardSubCategoryId: nairaRateId,
-    });
+    try {
+      setIsOpen(true);
+    } catch (error: any) {
+      error.results?.data;
+    }
+  };
+  const handleSellGiftcard = async () => {
+    try {
+      setLoading(true);
+      const res = await sellGiftcard({
+        amount: cardAmount,
+        quantity: giftcardQuantity,
+        comment: eCode,
+        attachments: image,
+        giftcardSubCategoryId: nairaRateId,
+      });
 
-    console.log(res, "giftcard sell");
+      setLoading(false);
+      if (
+        res.status === "Created" &&
+        res.message === "Place giftcard sell order successfully."
+      ) {
+        setSuccess(true);
+      }
+    } catch (error: any) {
+      error.results?.data;
+    }
   };
 
   return (
@@ -120,11 +152,6 @@ const SellGiftcardStepTwo: FC<Props> = ({
             variant="contained"
             fullWidth
             type="submit"
-            //   onClick={() => {
-            //     setStep(1);
-            //     setModalOpen(true);
-            //     btnOnClick();
-            //   }}
             sx={{
               borderRadius: "10px",
               textTransform: "capitalize",
@@ -133,10 +160,22 @@ const SellGiftcardStepTwo: FC<Props> = ({
               marginTop: 10,
             }}
           >
-            Trade Giftcard{" "}
+            Trade Giftcard
           </Button>
         </div>
       </form>
+      <SummaryModal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        backToHomeClick={() => router.push("/dashboard")}
+        giftcardQuantity={giftcardQuantity}
+        cardAmount={cardAmount}
+        receiveValue={receiveValue}
+        nairaRate={nairaRate}
+        handleSellGiftcard={handleSellGiftcard}
+        loading={loading}
+        success={success}
+      />
     </div>
   );
 };
