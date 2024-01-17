@@ -18,6 +18,7 @@ import { withdrawDetails } from "@/services/schemaVarification";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileRequest } from "@/api/profile";
 import { useThemeContext } from "@/api/useContext/store";
+import Loading from "@/components/Loading";
 interface WithdrawProps {
   accountNumber: string;
   accountName: string;
@@ -37,6 +38,7 @@ const Wallet = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [show, setShow] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   const [profileData, setProfileData] = useState<any>({});
 
@@ -86,14 +88,18 @@ const Wallet = () => {
   const bank = watch("bank");
   const amount = watch("amount");
 
+  setWithdrawAmount(amount);
+
   useEffect(() => {
     fetchProfile();
-    setWithdrawAmount(amount);
-  });
+  }, []);
 
   const handleWithdraw = () => {
+    setLoading(true);
     const data = { bank, amount };
+    setWithdrawAmount(amount);
     const parseResult = withdrawDetails?.safeParse(data);
+    setLoading(false);
     if (parseResult.success) router.push("/withdraw");
   };
 
@@ -300,8 +306,7 @@ const Wallet = () => {
                     margintTop: "8px",
                   }}
                 >
-                  Withdraw{" "}
-                  <EastIcon style={{ marginLeft: 9, color: "#ffff" }} />
+                  {loading ? <Loading /> : "Withdraw"}
                 </Button>
               </form>
             </div>
