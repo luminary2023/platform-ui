@@ -8,15 +8,25 @@ import RightDrawer from "@/components/drawer";
 import SellGiftCardDrawer from "./sellGiftCardDrawer";
 import { AllGiftCardCategories } from "@/api/allGiftCardCategories";
 import { GiftCardCurrency } from "@/api/giftCardCategoriesCurrency";
-import { IconButton, Input, InputBase, Box } from "@mui/material";
+import { IconButton, Input, InputBase, Box, Pagination } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 const SellGiftcard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [cardImage, setCardImage] = useState("");
+  const [cardName, setCardName] = useState("");
+
   const [selectedGiftCard, setSelectedGiftCard] = useState<any[]>([]);
   const [selectedId, setSelectedId] = useState("");
 
   const [searchItem, setSearchItem] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const recordsPerPage = 20;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const currentPost = selectedGiftCard.slice(firstIndex, lastIndex);
 
   const handleInputChange = (e: any) => {
     const searchItem = e.target.value;
@@ -87,19 +97,38 @@ const SellGiftcard = () => {
         Select Giftcard
       </div>
       <div className={giftcardStyles.wrapper}>
-        {selectedGiftCard.map((giftcard) => {
+        {currentPost.map((giftcard) => {
           return (
             <div key={giftcard.id}>
               <img
                 src={giftcard.image}
                 alt="amazon"
                 width={200}
-                onClick={() => handleCardDrawer(giftcard.id)}
+                onClick={() => {
+                  handleCardDrawer(giftcard.id),
+                    setCardImage(giftcard.image),
+                    setCardName(giftcard.name);
+                }}
               />
             </div>
           );
         })}
       </div>
+      <Pagination
+        variant="outlined"
+        shape="rounded"
+        // showFirstButton
+        count={currentPost.length}
+        defaultPage={currentPage}
+        // hideNextButton={false}
+        sx={{
+          color: "#007C5B",
+          mt: "20px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+        onChange={(_, newPage) => setCurrentPage(newPage)}
+      />
 
       <RightDrawer
         open={isOpen}
@@ -108,6 +137,8 @@ const SellGiftcard = () => {
         subTitle="We buy all giftcards"
       >
         <SellGiftCardDrawer
+          cardImage={cardImage}
+          cardName={cardName}
           selectedId={selectedId}
           btnOnClick={() => {
             setIsOpen(false);

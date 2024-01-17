@@ -9,16 +9,7 @@ import Amazon from "../../../assets/images/Amazon.svg";
 import { useRouter } from "next/router";
 import { Modal, Box } from "@mui/material";
 import Loading from "@/components/Loading";
-
-interface Props {
-  open: boolean;
-  onClose: () => void;
-  payValue: any;
-  network: any;
-  asset: any;
-  receiveValue: any;
-  handleCryptoModal: any;
-}
+import Toast from "@/components/Toast";
 
 const style = {
   position: "absolute" as "absolute",
@@ -42,6 +33,10 @@ interface SummaryProps {
   handleSellGiftcard: () => void;
   loading: any;
   success: boolean;
+  errs: any;
+  error: boolean;
+  cardImage: any;
+  cardName: string;
 }
 
 export default function SummaryModal({
@@ -55,6 +50,10 @@ export default function SummaryModal({
   handleSellGiftcard,
   loading,
   success,
+  errs,
+  error,
+  cardImage,
+  cardName,
 }: SummaryProps) {
   return (
     <div>
@@ -65,10 +64,30 @@ export default function SummaryModal({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          {error && (
+            <Toast
+              text={errs?.message}
+              success={
+                errs?.message === "Place giftcard sell order successfully."
+              }
+              marginBottom={40}
+              color={
+                errs?.message === "Place giftcard sell order successfully."
+                  ? "green"
+                  : "DF1111"
+              }
+              border={
+                errs?.message === "Place giftcard sell order successfully."
+                  ? "1px solid green"
+                  : "1px solid #DF1111"
+              }
+            />
+          )}
+
           {success ? (
             <EmailVerified
               title={"Wait for Verification"}
-              subTitle={"NGN150,000 worth of Amazon Giftcard sold."}
+              subTitle={`NGN${receiveValue} worth of ${cardName} sold.`}
               routerPath={""}
               btnOnClick={backToHomeClick}
               icon={WaitingIcon}
@@ -82,9 +101,9 @@ export default function SummaryModal({
                 alignItems: "center",
               }}
             >
-              <Image src={Amazon} alt={"giftcard"} />
+              <img src={cardImage} alt={"giftcard"} width={150} height={100} />
               <p className={styles.tableTitle} style={{ marginTop: 36 }}>
-                Amazon Gift Card
+                {cardName} Gift Card
               </p>
               <div className={styles.summaryWrapper}>
                 <div className={styles.summaryDetailsWrapper}>
