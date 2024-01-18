@@ -18,3 +18,22 @@ axiosInstance.interceptors.request.use((config) => {
   }
   return config;
 });
+
+// const isTokenExpired = () => {
+//   const token = getCookie("token");
+
+//   if (!token) {
+//     return true;
+//   }
+
+//   try {
+//     const decodedToken = JSON.parse(atob(token.split(".")[1]));
+//     const expirationTime = decodedToken.exp * 1000; //
+
+//     return Date.now() > expirationTime;
+//   } catch (error) {
+//     return true;
+//   }
+// };
+
+// export default isTokenExpired;

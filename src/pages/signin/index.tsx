@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Signin.module.css";
 import PageTitle from "@/components/PageTitle";
 import Input from "@/components/InputField";
@@ -14,6 +14,8 @@ import Loading from "@/components/Loading";
 import Toast from "../../components/Toast";
 import { setCookie } from "cookies-next";
 import { ErrorProps } from "@/services/interfaces";
+import { getCookie } from "cookies-next";
+// import isTokenExpired from "@/api/axiosClient";
 
 interface LoginProps {
   password: string;
@@ -50,6 +52,18 @@ const SignIn = () => {
     setErrs(res);
     setError(true);
   };
+
+  // const exp = () => {
+  //   const tokenExpired = isTokenExpired();
+
+  //   if (tokenExpired) {
+  //     router.push("/signin");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   exp();
+  // }, [exp]);
 
   return (
     <div className={styles.signinContainer}>

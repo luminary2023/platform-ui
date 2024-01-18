@@ -121,7 +121,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     // handleBankInfo();
     // handleBankDetails();
     // handleBankAccount();
-  }, [handleBankAccount]);
+  }, []);
   const selectedBankDetails = useMemo(() => {
     if (!selectedBank || (bankAccount?.length || 0) <= 0) {
       return {};
