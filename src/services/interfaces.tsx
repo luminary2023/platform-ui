@@ -20,6 +20,7 @@ export interface PageTitleProps {
 }
 
 export interface InputProps {
+  defaultCountry?: string;
   placeholder?: string;
   type: string;
   label?: string;
