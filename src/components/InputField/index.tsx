@@ -24,6 +24,7 @@ const Input: React.FC<InputProps> = ({
   onKeyPress,
   value,
   name,
+  defaultCountry,
 }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const handleTogglePassword = () => {
@@ -63,6 +64,7 @@ const Input: React.FC<InputProps> = ({
           onKeyPress={onKeyPress}
           readOnly={readOnly}
           maxLength={maxLength}
+          defaultCountry={defaultCountry}
           value={value}
           style={{
             marginBottom: marginBottom,

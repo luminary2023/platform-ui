@@ -49,9 +49,11 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     status: "",
     message: "",
     statusCode: 0,
+    errors: "",
   });
-
+  console.log(phoneNumber);
   const [error, setError] = useState<boolean>(false);
+  const [errs, setErrs] = useState(false);
   const onChange = (value: string) => setOtp(value);
 
   const {
@@ -74,8 +76,9 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
         setLoading(false);
         setPhoneNumberVerification(false);
       } else {
-        setError(true);
         setLoading(false);
+        setPhoneNumber(response);
+        setError(true);
       }
     } catch (error: any) {
       return error?.response?.data;
@@ -112,7 +115,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
       <Box sx={style}>
         {error && (
           <Toast
-            text={phoneNumber?.message}
+            text={phoneNumber?.errors?.[0].message}
             success={phoneNumber?.status === "Success"}
             marginBottom={40}
             color={phoneNumber?.status === "Success" ? "green" : "DF1111"}
@@ -146,7 +149,12 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
               >
                 Phone number verification
               </Typography>{" "}
-              <Typography sx={{ cursor: "pointer" }} onClick={handleOnClose}>
+              <Typography
+                sx={{ cursor: "pointer" }}
+                onClick={() => {
+                  handleOnClose(), reset();
+                }}
+              >
                 X
               </Typography>
             </Box>
