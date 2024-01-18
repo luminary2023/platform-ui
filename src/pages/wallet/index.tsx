@@ -19,6 +19,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { profileRequest } from "@/api/profile";
 import { useThemeContext } from "@/api/useContext/store";
 import Loading from "@/components/Loading";
+import { refreshTokenApi } from "@/api/refreshToken";
+
 interface WithdrawProps {
   accountNumber: string;
   accountName: string;
@@ -88,19 +90,22 @@ const Wallet = () => {
   const bank = watch("bank");
   const amount = watch("amount");
 
-  setWithdrawAmount(amount);
-
   useEffect(() => {
+    setWithdrawAmount(amount);
     fetchProfile();
   }, []);
 
-  const handleWithdraw = () => {
-    setLoading(true);
-    const data = { bank, amount };
-    setWithdrawAmount(amount);
-    const parseResult = withdrawDetails?.safeParse(data);
-    setLoading(false);
-    if (parseResult.success) router.push("/withdraw");
+  const handleWithdraw = async () => {
+    try {
+      setLoading(true);
+      const data = await { bank, amount };
+      setWithdrawAmount(amount);
+      const parseResult = await withdrawDetails?.safeParse(data);
+      setLoading(false);
+      if (parseResult.success) router.push("/withdraw");
+    } catch (error: any) {
+      return error.results.data;
+    }
   };
 
   return (
@@ -298,7 +303,7 @@ const Wallet = () => {
                   variant="contained"
                   fullWidth
                   type="submit"
-                  onClick={handleWithdraw}
+                  // onClick={handleWithdraw}
                   sx={{
                     borderRadius: "10px",
                     textTransform: "capitalize",

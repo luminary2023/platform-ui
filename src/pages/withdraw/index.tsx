@@ -18,7 +18,7 @@ interface PinProps {
 
 export default function Index() {
   const { selectedBankDetails, withdrawAmount } = useThemeContext();
-  console.log(selectedBankDetails, "drawwwwwwww", withdrawAmount);
+
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
