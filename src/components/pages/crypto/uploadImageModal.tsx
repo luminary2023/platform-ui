@@ -149,6 +149,7 @@ export default function UploadImage({
           <Button
             color="primary"
             variant="contained"
+            disabled={image.length === 0}
             sx={{ width: "100%", transform: "initial", mt: "30px" }}
             onClick={sellCrypto}
           >
