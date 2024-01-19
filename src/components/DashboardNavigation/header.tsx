@@ -51,7 +51,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     //   ev.preventDefault();
     //   deleteCookie("token");
     // });
-    // window.addEventListener("beforeunload", deleteCookie("token"));
+    // window.addEventListener("beforeunload");
   }, []);
 
   const logout = () => {

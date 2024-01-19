@@ -66,7 +66,7 @@ export default function SummaryModal({
         <Box sx={style}>
           {error && (
             <Toast
-              text={errs?.message}
+              text={errs?.errors?.[0].message}
               success={
                 errs?.message === "Place giftcard sell order successfully."
               }

@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginRequest } from "@/api/login";
 import Loading from "@/components/Loading";
 import Toast from "../../components/Toast";
-import { setCookie } from "cookies-next";
+import { deleteCookie, setCookie } from "cookies-next";
 import { ErrorProps } from "@/services/interfaces";
 import { getCookie } from "cookies-next";
 // import isTokenExpired from "@/api/axiosClient";
@@ -60,10 +60,6 @@ const SignIn = () => {
   //     router.push("/signin");
   //   }
   // };
-
-  // useEffect(() => {
-  //   exp();
-  // }, [exp]);
 
   return (
     <div className={styles.signinContainer}>

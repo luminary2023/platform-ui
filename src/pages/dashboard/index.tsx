@@ -13,14 +13,16 @@ import PhoneNumberModal from "../../components/pages/dashboard/phoneNumberModal"
 import TransactionPinModal from "../../components/pages/dashboard/transactionPinModal";
 import { useThemeContext } from "@/api/useContext/store";
 import { profileRequest } from "@/api/profile";
+import { userAccountDetails } from "@/api/userAccountDetails";
 
 const Index = () => {
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [openPhoneModal, setOpenPhoneModal] = useState<boolean>(false);
   const [openTransactionPin, setOpenTransactionPin] = useState<boolean>(false);
-  const { bankDetails } = useThemeContext();
-
+  // const { bankDetails } = useThemeContext();
+  const [bankAccount, setBankAccount] = useState<any[]>([]);
+  const [progress, setProgress] = useState(0);
   const [profileData, setProfileData] = useState<any>({});
 
   const fetchProfile = async () => {
@@ -32,12 +34,36 @@ const Index = () => {
     }
   };
 
+  const handleBankAccount = async () => {
+    try {
+      const response = await userAccountDetails();
+      setBankAccount(response);
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
+
+  // const bankProgress = () => {
+  //   if (bankAccount.length > 0) {
+  //     setProgress((progress) => progress + 1);
+  //   }
+  // };
+
+  // const phoneNumberProgress = () => {
+  //   if (profileData?.phoneNumber != "" && profileData?.phoneNumber != null) {
+  //     setProgress((progress) => progress + 1);
+  //   }
+  // };
+
   useEffect(() => {
     fetchProfile();
-  });
+    // bankProgress();
+    // phoneNumberProgress();
+    handleBankAccount();
+  }, []);
 
   const handleBankDetailsModal = () => {
-    if (bankDetails.length < 1) {
+    if (bankAccount.length < 1) {
       setOpen(true);
     } else setOpen(false);
   };
@@ -57,8 +83,8 @@ const Index = () => {
             <div className={styles.profile}>
               <div>
                 <p>
-                  Finish setting up your P3 Wallet To buy, sell <br /> and
-                  recieve cryto without limits.
+                  Finish setting up your Wallet To buy, sell <br /> and recieve
+                  cryto without limits.
                 </p>
               </div>
 
@@ -69,7 +95,7 @@ const Index = () => {
                   alignItems: "center",
                 }}
               >
-                <Typography
+                {/* <Typography
                   sx={{
                     marginLeft: "107px",
                     position: "absolute",
@@ -78,18 +104,8 @@ const Index = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  {bankDetails?.length > 0
-                    ? value + 1
-                    : profileData?.phoneNumber != "" ||
-                      profileData?.phoneNumber != null
-                    ? value + 1
-                    : (bankDetails?.length > 0 &&
-                        profileData?.phoneNumber != "") ||
-                      profileData?.phoneNumber != null
-                    ? value + 2
-                    : ""}
-                  /3
-                </Typography>
+                  {progress}/8
+                </Typography> */}
                 <CircularProgress
                   variant="determinate"
                   value={100}
@@ -125,7 +141,7 @@ const Index = () => {
               <h3>KYC Verification</h3>
 
               <p>
-                Submit your Identification documents and increase your P3 wallet
+                Submit your Identification documents and increase your wallet
                 limits.
               </p>
             </div>
@@ -186,7 +202,7 @@ const Index = () => {
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 {" "}
                 <h3>Bank Details</h3>{" "}
-                {bankDetails.length > 0 && (
+                {bankAccount.length > 0 && (
                   <CheckIcon sx={{ color: "green" }} />
                 )}
               </Box>
