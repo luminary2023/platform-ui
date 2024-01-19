@@ -39,7 +39,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
   cardName,
 }) => {
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState<[]>([]);
+  const [image, setImage] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<boolean>(false);
@@ -57,10 +57,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
   const handleFile = async (event: any) => {
     const file = event.target.files[0];
     const formData = new FormData();
-    for (let i = 0; i < image.length; i++) {
-      let file = image[i];
-      formData.append("file", file);
-    }
+
     formData.append("file", file);
     formData.append("upload_preset", preset_key);
     await axios
@@ -70,7 +67,6 @@ const SellGiftcardStepTwo: FC<Props> = ({
       )
       .then((res) => setImage(res.data?.secure_url))
       .catch((err) => err.error?.data);
-    // return data
   };
   const {
     handleSubmit,
@@ -96,7 +92,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
         amount: cardAmount,
         quantity: giftcardQuantity,
         comment: eCode,
-        attachments: image,
+        attachments: [image].flat() as string[],
         giftcardSubCategoryId: nairaRateId,
       });
 
@@ -118,7 +114,8 @@ const SellGiftcardStepTwo: FC<Props> = ({
   const handleHome = () => {
     setSuccess(false);
     setIsOpen(false);
-    router.push("/giftCard");
+
+    router.push("/dashboard");
   };
 
   return (
@@ -157,6 +154,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
               marginBottom: "25px",
             }}
           />
+
           {/* <img
             src={image}
             alt="image"
@@ -193,6 +191,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
             variant="contained"
             fullWidth
             type="submit"
+            disabled={image.length === 0}
             sx={{
               borderRadius: "10px",
               textTransform: "capitalize",

@@ -4,7 +4,7 @@ interface Props {
   amount: string;
   quantity: string;
   comment: string;
-  attachments: [];
+  attachments: string[];
   giftcardSubCategoryId: string;
 }
 export const sellGiftcard = async ({

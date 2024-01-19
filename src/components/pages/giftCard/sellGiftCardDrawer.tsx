@@ -135,8 +135,6 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
         </Box>
       </Modal>
       <div style={{ display: "flex", marginBottom: 50 }}>
-        <Image src={BackArrow} alt="backArrow" onClick={() => router.back()} />
-
         <p
           className={styles.GCDSteps}
           style={{

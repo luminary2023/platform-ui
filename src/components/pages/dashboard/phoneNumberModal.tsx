@@ -72,8 +72,8 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
       sessionStorage.setItem("phoneNumber", data.phoneNumber);
       setPhoneNumber(response);
       if (phoneNumber.status === "Success") {
-        setError(true);
         setLoading(false);
+        // setError(true);
         setPhoneNumberVerification(false);
       } else {
         setLoading(false);
