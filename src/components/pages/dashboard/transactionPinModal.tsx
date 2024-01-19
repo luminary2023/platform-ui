@@ -46,6 +46,7 @@ interface ErrorProps {
 const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [createPin, setCreatePin] = useState<any>({});
+
   const [error, setError] = useState<boolean>(false);
 
   const {
