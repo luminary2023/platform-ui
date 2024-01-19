@@ -22,7 +22,7 @@ type ThemeContext = {
   // profileData: any;
   // setProfileData: Dispatch<any>;
   // walletBalance: any;
-  bankAccount: any;
+  // bankAccount: any;
   bankInfo: [];
   setBankInfo: any;
   // handleBankInfo: any;
@@ -38,6 +38,7 @@ type ThemeContext = {
   withdrawAmount: any;
   setWithdrawAmount: any;
   setSelectedBank: any;
+  setSelectedBankDetails: any;
   selectedBankDetails: any;
 };
 
@@ -51,7 +52,7 @@ export const GlobalContext = createContext<ThemeContext | null>(null);
 export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [bankDetails, setBankDetails] = useState<[]>([]);
   // const [profileData, setProfileData] = useState("");
-  const [bankAccount, setBankAccount] = useState<any[]>([]);
+  const [selectedBankDetails, setSelectedBankDetails] = useState<any>({});
 
   const [bankInfo, setBankInfo] = useState<any | []>([]);
   const [bankId, setBankId] = useState("");
@@ -85,14 +86,14 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
   //     return error?.response?.data;
   //   }
   // };
-  const handleBankAccount = async () => {
-    try {
-      const response = await userAccountDetails();
-      setBankAccount(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
+  // const handleBankAccount = async () => {
+  //   try {
+  //     const response = await userAccountDetails();
+  //     setBankAccount(response);
+  //   } catch (error: any) {
+  //     return error?.response?.data;
+  //   }
+  // };
 
   // const handleBankInfo = async () => {
   //   try {
@@ -117,20 +118,20 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
   useEffect(() => {
     // fetchProfile();
     // profile();
-    handleBankAccount();
+    // handleBankAccount();
     // handleBankInfo();
     // handleBankDetails();
     // handleBankAccount();
   }, []);
-  const selectedBankDetails = useMemo(() => {
-    if (!selectedBank || (bankAccount?.length || 0) <= 0) {
-      return {};
-    }
+  // const selectedBankDetails = useMemo(() => {
+  //   if (!selectedBank || (bankAccount?.length || 0) <= 0) {
+  //     return {};
+  //   }
 
-    return (
-      bankAccount?.find((b: any) => b.accountNumber === selectedBank) || {}
-    );
-  }, [selectedBank, bankAccount]);
+  //   return (
+  //     bankAccount?.find((b: any) => b.accountNumber === selectedBank) || {}
+  //   );
+  // }, [selectedBank, bankAccount]);
 
   return (
     <GlobalContext.Provider
@@ -139,7 +140,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
         setBankDetails,
         // profileData,
         // setProfileData,
-        bankAccount,
+        // bankAccount,
         bankInfo,
         setBankInfo,
         // handleBankInfo,
@@ -154,6 +155,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
         selectedBank,
         setSelectedBank,
         selectedBankDetails,
+        setSelectedBankDetails,
         withdrawAmount,
         setWithdrawAmount,
       }}

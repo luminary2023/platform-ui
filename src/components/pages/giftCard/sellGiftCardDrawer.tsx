@@ -73,8 +73,8 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
   const cardAmount = watch("cardAmount");
 
   const receiveValue = useMemo(() => {
-    return (giftcardQuantity || 0) * (nairaRate || 1);
-  }, [nairaRate, giftcardQuantity]);
+    return (giftcardQuantity || 0) * (nairaRate || 1) * (cardAmount || 1);
+  }, [nairaRate, giftcardQuantity, cardAmount]);
 
   const handleCardCurrency = async (id: any) => {
     const res = await GiftCardCurrency(id);

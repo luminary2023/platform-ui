@@ -467,6 +467,7 @@ const Crypto = () => {
         walletAddress={selectedNetwork}
       />
       <UploadImageModal
+        toggleDrawer={toggleDrawer}
         open={openUploadImage}
         onClose={() => setOpenUploadImageModal(false)}
         payValue={payValue}

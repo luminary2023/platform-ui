@@ -98,6 +98,6 @@ export interface giftcardProps {
   currency: string;
   giftcardType: string;
   SubCategory: string;
-  cardAmount: string;
+  cardAmount: number;
   quantity: number;
 }
