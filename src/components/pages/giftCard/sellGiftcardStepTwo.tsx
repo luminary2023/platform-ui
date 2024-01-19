@@ -115,6 +115,12 @@ const SellGiftcardStepTwo: FC<Props> = ({
     }
   };
 
+  const handleHome = () => {
+    setSuccess(false);
+    setIsOpen(false);
+    router.push("/giftCard");
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit(handleTradeGiftcard)}>
@@ -202,7 +208,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
       <SummaryModal
         open={isOpen}
         onClose={() => setIsOpen(false)}
-        backToHomeClick={() => router.push("/dashboard")}
+        backToHomeClick={handleHome}
         giftcardQuantity={giftcardQuantity}
         cardAmount={cardAmount}
         receiveValue={receiveValue}

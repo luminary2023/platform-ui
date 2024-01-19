@@ -27,6 +27,7 @@ interface Props {
   errs: any;
   image: any;
   setImage: any;
+  toggleDrawer: any;
 }
 
 interface SellCryptoProps {
@@ -63,6 +64,7 @@ export default function UploadImage({
   error,
   errs,
   setImage,
+  toggleDrawer,
 }: Props) {
   const {
     reset,
@@ -112,7 +114,11 @@ export default function UploadImage({
                 cursor: "pointer",
               }}
               onClick={() => {
-                onClose(), reset(), setImage(""), setError(false);
+                onClose(),
+                  reset(),
+                  setImage(""),
+                  setError(false),
+                  toggleDrawer();
               }}
             >
               X

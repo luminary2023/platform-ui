@@ -28,12 +28,13 @@ interface WithdrawProps {
 
 const Wallet = () => {
   const {
-    bankAccount,
+    // bankAccount,
     // profileData,
-    selectedBankDetails,
-    setSelectedBank,
+    // selectedBankDetails,
+    // setSelectedBank,
     withdrawAmount,
     setWithdrawAmount,
+    setSelectedBankDetails,
   } = useThemeContext();
   const router = useRouter();
 
@@ -41,8 +42,28 @@ const Wallet = () => {
   const [show, setShow] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+  const [bankAccount, setBankAccount] = useState<any[]>([]);
+  const [selectedBank, setSelectedBank] = useState<any>(null);
 
   const [profileData, setProfileData] = useState<any>({});
+
+  const handleBankAccount = async () => {
+    try {
+      const response = await userAccountDetails();
+      setBankAccount(response);
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
+  const selectedBankDetails = useMemo(() => {
+    if (!selectedBank || (bankAccount?.length || 0) <= 0) {
+      return {};
+    }
+
+    return (
+      bankAccount?.find((b: any) => b.accountNumber === selectedBank) || {}
+    );
+  }, [selectedBank, bankAccount]);
 
   const fetchProfile = async () => {
     try {
@@ -89,17 +110,20 @@ const Wallet = () => {
 
   const bank = watch("bank");
   const amount = watch("amount");
+  const accountNumber = watch("accountNumber");
+  const accountName = watch("accountName");
 
   useEffect(() => {
-    setWithdrawAmount(amount);
     fetchProfile();
+    handleBankAccount();
   }, []);
 
   const handleWithdraw = async () => {
     try {
       setLoading(true);
-      const data = await { bank, amount };
+      const data = await { bank, amount, selectedBankDetails };
       setWithdrawAmount(amount);
+      setSelectedBankDetails(selectedBankDetails);
       const parseResult = await withdrawDetails?.safeParse(data);
       setLoading(false);
       if (parseResult.success) router.push("/withdraw");
@@ -255,7 +279,7 @@ const Wallet = () => {
                       labelSize={"16px"}
                       readOnly={true}
                       value={selectedBankDetails?.accountNumber}
-                      // register={{ ...register("accountNumber") }}
+                      register={{ ...register("accountNumber") }}
                       borderColor={
                         errors.accountNumber?.message ? "#DF1111" : ""
                       }
@@ -275,8 +299,7 @@ const Wallet = () => {
                       labelColor={"#081630"}
                       labelSize={"16px"}
                       value={selectedBankDetails?.accountName}
-                      // register={{ ...register("accountName") }}
-
+                      register={{ ...register("accountName") }}
                       borderColor={errors.accountName?.message ? "#DF1111" : ""}
                     />
                   </Box>

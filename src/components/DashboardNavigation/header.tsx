@@ -46,6 +46,12 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
   };
   useEffect(() => {
     fetchProfile();
+
+    // window.addEventListener("beforeunload", (ev) => {
+    //   ev.preventDefault();
+    //   deleteCookie("token");
+    // });
+    // window.addEventListener("beforeunload", deleteCookie("token"));
   }, []);
 
   const logout = () => {
