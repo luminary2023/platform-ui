@@ -148,7 +148,10 @@ const Index = () => {
           </div>
           <div
             className={styles.profileSecurity}
-            onClick={() => setOpenTransactionPin(true)}
+            onClick={() => {
+              if (profileData.isTransactionPinSet === 0)
+                setOpenTransactionPin(true);
+            }}
             style={{ cursor: "pointer" }}
           >
             <Image
@@ -157,7 +160,13 @@ const Index = () => {
               className={styles.profileSecurityImg}
             />
             <div>
-              <h3>Create Transaction Pin</h3>
+              <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                <h3>Create Transaction Pin</h3>
+
+                {profileData?.isTransactionPinSet === 1 && (
+                  <CheckIcon sx={{ color: "green" }} />
+                )}
+              </Box>
 
               <p>To be able to transact create transaction pin</p>
             </div>
@@ -178,10 +187,9 @@ const Index = () => {
             <div>
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 <h3>Verify Phone number</h3>{" "}
-                {profileData?.phoneNumber != "" &&
-                  profileData?.phoneNumber != null && (
-                    <CheckIcon sx={{ color: "green" }} />
-                  )}
+                {profileData?.isPhoneNumberVerified === 1 && (
+                  <CheckIcon sx={{ color: "green" }} />
+                )}
               </Box>
               <p>
                 keep your account more secure by entering your phone number.

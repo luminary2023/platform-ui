@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { deleteCookie } from "cookies-next";
 import { useThemeContext } from "@/api/useContext/store";
 import { profileRequest } from "@/api/profile";
+import { refreshTokenApi } from "@/api/refreshToken";
 
 interface Props {
   title: string;
@@ -44,9 +45,18 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
       error?.response?.data;
     }
   };
+  // const [refreshTokens, setRefreshToken] = useState("");
+  // console.log(profileData, "expired", refreshTokens);
+
+  // const fetchToken = async (refreshToken: any) => {
+  //   if (profileData.exp) {
+  //     const newToken = await refreshTokenApi(refreshToken);
+  //     setRefreshToken(newToken);
+  //   }
+  // };
   useEffect(() => {
     fetchProfile();
-
+    // fetchToken(refreshToken);
     // window.addEventListener("beforeunload", (ev) => {
     //   ev.preventDefault();
     //   deleteCookie("token");
