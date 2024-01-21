@@ -5,6 +5,12 @@
   flex-wrap: wrap;
   cursor: pointer;
 }
+@media screen and (max-width: 900px) {
+  .imgCard {
+    display: flex;
+    width: 100px;
+  }
+}
 .container {
   display: flex;
   height: 150px;
@@ -30,6 +36,12 @@
   background: var(--base-0, #fff);
   height: fit-content;
 }
+@media screen and (max-width: 900px) {
+  .homeSectionOne {
+    width: 100%;
+  }
+}
+
 .homeSectionTwo {
   display: flex;
   width: 60%;
@@ -39,6 +51,11 @@
   gap: 10px;
   background: var(--base-0, #fff);
   border-radius: 16px;
+}
+@media screen and (max-width: 900px) {
+  .homeSectionTwo {
+    width: 100%;
+  }
 }
 .giftCardAmount {
   display: flex;
@@ -66,6 +83,7 @@
   gap: 10px;
   margin-top: 16px;
 }
+
 .actionBox {
   display: flex;
   height: 113px;
@@ -78,6 +96,12 @@
   border: 1px solid var(--Linear-1, #fd6e6a);
   background: #fef4e6;
   cursor: pointer;
+}
+@media screen and (max-width: 900px) {
+  .actionBox {
+    width: 100%;
+    padding: 15px 60%;
+  }
 }
 .tableTitle {
   color: #111;

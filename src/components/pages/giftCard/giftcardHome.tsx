@@ -12,7 +12,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { giftcardTableHead } from "@/services/data";
 import { giftcardTable } from "@/api/giftcardTable";
-import { Pagination, Typography } from "@mui/material";
+import { Box, Pagination, Typography } from "@mui/material";
 
 interface GiftCardHomeProps {
   sellOnClick: () => void;
@@ -51,7 +51,7 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const recordsPerPage = 5;
+  const recordsPerPage = 6;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const currentPost = giftcardsTable.slice(firstIndex, lastIndex);
@@ -86,7 +86,13 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
 
   return (
     <div>
-      <div className={styles.sectionWrapper}>
+      <Box
+        sx={{
+          display: { lg: "flex", md: "flex", xs: "column" },
+          gap: 5,
+        }}
+      >
+        {/* <div className={styles.sectionWrapper}> */}
         <div className={styles.homeSectionOne}>
           {/* <div className={styles.giftCardAmount}>
             # 500,000
@@ -213,7 +219,8 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
             </TableContainer>
           )}
         </div>
-      </div>
+        {/* </div> */}
+      </Box>
     </div>
   );
 };

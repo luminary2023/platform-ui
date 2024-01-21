@@ -1,6 +1,7 @@
 "use client";
 import { Box, Typography } from "@mui/material";
 import { useState, FC } from "react";
+import styles from "./Drawer.module.css";
 
 // import component 👇
 import Drawer from "react-modern-drawer";

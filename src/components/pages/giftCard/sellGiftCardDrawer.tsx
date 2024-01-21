@@ -113,7 +113,7 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
     position: "absolute" as "absolute",
     top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)",
+    transform: "translate(-150%, -150%)",
     width: "50%",
     bgcolor: "background.paper",
     borderRadius: "8px",

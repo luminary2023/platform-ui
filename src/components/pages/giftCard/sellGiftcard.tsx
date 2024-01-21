@@ -101,6 +101,7 @@ const SellGiftcard = () => {
           return (
             <div key={giftcard.id}>
               <img
+                className={giftcardStyles.imgCard}
                 src={giftcard.image}
                 alt="amazon"
                 width={200}
