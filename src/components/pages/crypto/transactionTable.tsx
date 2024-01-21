@@ -32,7 +32,7 @@ const TransactionTable = () => {
   //Pagination //
   const [currentPage, setCurrentPage] = useState(1);
 
-  const recordsPerPage = 5;
+  const recordsPerPage = 6;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const currentPost = cryptoTableData.slice(firstIndex, lastIndex);
