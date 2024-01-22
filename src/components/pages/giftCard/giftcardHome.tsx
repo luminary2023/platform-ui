@@ -138,6 +138,7 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
                 mt: "15px",
                 mb: "15px",
                 textDecoration: "underline",
+                margin: "auto",
               }}
             >
               No transaction yet

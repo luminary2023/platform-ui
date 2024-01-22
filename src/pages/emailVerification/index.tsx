@@ -137,7 +137,7 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
         <EmailVerified
           title={"Email verified"}
           subTitle={
-            "Your password has been successfully reset. Click below to log in magically."
+            "You email has been successfully verified. Click below to log in magically."
           }
           backToText={`Back to ${
             fromForgotPasswordPage ? "forgot password" : "create account"

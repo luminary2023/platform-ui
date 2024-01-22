@@ -71,9 +71,8 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
       const response = await numberVerificationCode(data);
       sessionStorage.setItem("phoneNumber", data.phoneNumber);
       setPhoneNumber(response);
-      if (phoneNumber.status === "Success") {
+      if (phoneNumber.message === "Verification code sent successfully.") {
         setLoading(false);
-        // setError(true);
         setPhoneNumberVerification(false);
       } else {
         setLoading(false);
@@ -115,7 +114,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
       <Box sx={style}>
         {error && (
           <Toast
-            text={phoneNumber?.errors?.[0].message}
+            text={phoneNumber?.errors?.[0].message || phoneNumber?.message}
             success={phoneNumber?.status === "Success"}
             marginBottom={40}
             color={phoneNumber?.status === "Success" ? "green" : "DF1111"}
@@ -188,7 +187,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
                 register={{ ...register("phoneNumber") }}
                 borderColor={errors.phoneNumber?.message ? "#DF1111" : ""}
                 onKeyPress={(event: any) => {
-                  if (!/[0-9]/.test(event.key)) {
+                  if (!/[0-9 +]/.test(event.key)) {
                     event.preventDefault();
                   }
                 }}
