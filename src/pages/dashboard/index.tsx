@@ -91,7 +91,7 @@ const Index = () => {
               <Box
                 sx={{
                   position: "relative",
-                  display: "flex",
+                  display: { lg: "flex", md: "flex", xs: "none" },
                   alignItems: "center",
                 }}
               >
