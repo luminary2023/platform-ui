@@ -67,13 +67,17 @@ const Calculator = () => {
     <>
       <Box
         sx={{
-          width: "60%",
+          width: { lg: "60%", md: "60%", xs: "100%" },
           height: "423px",
           left: "855px",
-          top: "224px",
+          top: { lg: "224px", md: "224px", xs: "524px" },
           background: "#FFFFFF",
           borderRadius: "16px",
-          padding: "20px 34px 38px 34px",
+          padding: {
+            lg: "20px 34px 38px 34px",
+            md: "20px 34px 38px 34px",
+            xs: "20px 15px 38px 15px",
+          },
         }}
       >
         <Box
@@ -109,7 +113,11 @@ const Calculator = () => {
                 fontSize: "14px",
                 textTransform: "capitalize",
                 textAlign: "center",
-                padding: "0px 30px 0px 30px",
+                padding: {
+                  lg: "0px 30px 0px 30px",
+                  md: "0px 30px 0px 30px",
+                  xs: "0px 5px 0px 30px",
+                },
               }}
             />
 
