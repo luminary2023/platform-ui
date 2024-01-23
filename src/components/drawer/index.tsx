@@ -14,6 +14,8 @@ interface Props {
   children: React.ReactNode;
   title: string | undefined;
   subTitle: string;
+  drawerWidth?: string;
+  closeIcon?: boolean;
 }
 
 const RightDrawer: FC<Props> = ({
@@ -22,6 +24,8 @@ const RightDrawer: FC<Props> = ({
   children,
   title,
   subTitle,
+  drawerWidth = "",
+  closeIcon = false,
 }) => {
   return (
     <>
@@ -30,23 +34,36 @@ const RightDrawer: FC<Props> = ({
         onClose={onClose}
         direction="right"
         className="bla bla bla"
-        style={{ width: "32%", height: "100%", overflow: "scroll" }}
+        style={{
+          width: drawerWidth || "32%",
+          height: "100%",
+          overflow: "scroll",
+        }}
       >
-        <Box
-          sx={{
-            background: "#081630",
-            height: "85px",
-            textAlign: "center",
-            paddingTop: "5%",
-          }}
-        >
-          <Typography sx={{ color: "#fff", fontWeight: 700 }}>
-            {title}
-          </Typography>
-          <Typography sx={{ color: "#fff", fontSize: "12px" }}>
-            {subTitle}
-          </Typography>
-        </Box>
+        {!closeIcon ? (
+          <Box
+            sx={{
+              background: "#081630",
+              height: "85px",
+              textAlign: "center",
+              paddingTop: "5%",
+            }}
+          >
+            <Typography sx={{ color: "#fff", fontWeight: 700 }}>
+              {title}
+            </Typography>
+            <Typography sx={{ color: "#fff", fontSize: "12px" }}>
+              {subTitle}
+            </Typography>
+          </Box>
+        ) : (
+          <div
+            onClick={onClose}
+            className={styles.closeIcon}
+          >
+            X
+          </div>
+        )}
         <Box
           sx={{
             padding: "8%",

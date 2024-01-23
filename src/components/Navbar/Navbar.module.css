@@ -23,3 +23,20 @@
 .Content {
   text-align: center;
 }
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: white;
+  height: 30px;
+  padding: 5px 4px;
+  border-radius: 4px;
+}
+
+.line {
+  width: 30px;
+  height: 5px;
+  background-color: #000;
+  margin: 3px 0;
+}
