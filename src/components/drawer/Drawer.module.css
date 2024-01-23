@@ -10,3 +10,12 @@
     overflow: scroll;
   }
 }
+
+.closeIcon {
+  cursor: pointer;
+  color: black;
+  font-size: 24px;
+  text-align: end;
+  margin: 15px;
+  font-family: "Satoshi Bold";
+}

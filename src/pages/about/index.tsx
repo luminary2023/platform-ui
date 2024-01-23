@@ -12,14 +12,12 @@ export default function About() {
   return (
     <div>
       <div className={styles.heroSection}>
-        <div style={{ padding: "60px 80px" }}>
-          <Navbar />
+        <Navbar />
           <div className={styles.content}>
             <p className={styles.about}>ABOUT US</p>
             <h1 className={styles.title}>
               Simple, Transparent and Secure way of trading
             </h1>
-          </div>
         </div>
         <div
           className={styles.ellipsImage}

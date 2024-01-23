@@ -7,6 +7,7 @@ import styles from "@/styles/Home.module.css";
 import Ellipse from "../assets/images/ellipse.svg";
 import Image1 from "../assets/images/home-image1.svg";
 import Phone from "../assets/images/phone.svg";
+import PhoneMobile from "../assets/images/Phone-mobile.svg"
 import Card from "../components/Card";
 import Padlock from "../assets/images/padlock.svg";
 import CryptoCurrency from "../assets/images/crypto-currency.svg";
@@ -30,6 +31,7 @@ import EastIcon from "@mui/icons-material/East";
 import { Button } from "../components/Button/Button";
 import Footer from "@/components/Footer/Footer";
 import { useRouter } from "next/router";
+import { MOBILE_RESPONSIVE_BREAKPOINT } from "@/utils";
 
 const Testimonial = ({ testimonial, onArrowClick }: any) => {
   const [value, setValue] = useState<number | null>(5);
@@ -48,7 +50,6 @@ const Testimonial = ({ testimonial, onArrowClick }: any) => {
       <p className={styles.quote}>{testimonial.quote}</p>
       <div className={styles.customerInfoWrapper}>
         <div className={styles.customerInfo}>
-          {/* <Avatar alt="Katherine Moss" src={Customer} /> */}
           <div style={{ marginLeft: 16 }}>
             <p className={styles.customerName}> {testimonial.name}</p>
             <p className={styles.customerRole}> {testimonial.role}</p>
@@ -76,6 +77,8 @@ const Testimonial = ({ testimonial, onArrowClick }: any) => {
 export default function Home() {
   const [current, setCurrent] = useState(0);
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
 
   const slide = (type: string) => {
     const last = TestimonialData.length - 1;
@@ -102,6 +105,18 @@ export default function Home() {
     }
   };
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= MOBILE_RESPONSIVE_BREAKPOINT);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -113,7 +128,7 @@ export default function Home() {
       </Head>
       <>
         <div className={styles.herosection}>
-          <div style={{ padding: "60px 80px" }}>
+          <div>
             <Navbar />
             <div className={styles.content}>
               <h1 className={styles.title}>
@@ -146,6 +161,7 @@ export default function Home() {
             style={{ position: "relative" }}
             data-aos="slide-up"
             data-aos-duration="2000"
+            className={styles.ellipseSection}
           >
             <Image src={Ellipse} alt="Ellipse" />
             <div className={styles.herosectionImage}>
@@ -204,7 +220,7 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.rightSection}>
-              <Image src={Phone} alt="phone" />
+              <Image src={isMobile ? PhoneMobile : Phone} alt="phone" />
             </div>
           </div>
           <div
@@ -213,12 +229,12 @@ export default function Home() {
             data-aos-duration="2000"
           >
             <div className={styles.infoBox}>
-              <Image src={Padlock} alt="padlock" />
+              <Image src={Padlock} alt="padlock" style={{width: isMobile ? '100px' : ""}} />
               <p style={{ width: 279 }}>Security from day one</p>
             </div>
             <div className={styles.infoBox}>
               <p>Smooth transactions</p>
-              <Image src={CryptoCurrency} alt="padlock" />
+              <Image src={CryptoCurrency} alt="padlock" style={{width: isMobile ? '100px' : ""}} />
             </div>
           </div>
         </div>
@@ -232,7 +248,7 @@ export default function Home() {
             data-aos="flip-up"
             data-aos-duration="2000"
           >
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} className={styles.ellipseSection}>
               <Image src={CTAImage} alt="cta" />
               <h1 className={styles.ctaSectionTitle}>
                 Join over 4,000 crypto traders already growing with luminary
