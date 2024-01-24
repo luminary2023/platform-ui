@@ -33,9 +33,8 @@ const RightDrawer: FC<Props> = ({
         open={open}
         onClose={onClose}
         direction="right"
-        className="bla bla bla"
+        className={`bla bla bla ${styles.drawerImg}`}
         style={{
-          width: drawerWidth || "32%",
           height: "100%",
           overflow: "scroll",
         }}
@@ -57,10 +56,7 @@ const RightDrawer: FC<Props> = ({
             </Typography>
           </Box>
         ) : (
-          <div
-            onClick={onClose}
-            className={styles.closeIcon}
-          >
+          <div onClick={onClose} className={styles.closeIcon}>
             X
           </div>
         )}

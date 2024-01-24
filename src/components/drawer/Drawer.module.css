@@ -1,11 +1,11 @@
-.Drawer {
-  width: 100%;
+.drawerImg {
+  min-width: 32%;
   height: 100%;
   overflow: scroll;
 }
 @media screen and (max-width: 900px) {
-  .Drawer {
-    width: 50%;
+  .drawerImg {
+    min-width: 75%;
     height: 100%;
     overflow: scroll;
   }
