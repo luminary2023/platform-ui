@@ -16,7 +16,7 @@ import { ErrorProps } from "@/services/interfaces";
 
 interface tradeGiftcardProps {
   eCode: string;
-  transactionPin: string;
+  // transactionPin: string;
 }
 
 interface Props {
@@ -167,7 +167,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
               margin: "auto",
             }}
           /> */}
-          <Input
+          {/* <Input
             label="Transaction pin"
             type="password"
             borderColor={errors.transactionPin?.message ? "#DF1111" : ""}
@@ -178,7 +178,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
               }
             }}
             maxLength="4"
-          />
+          /> */}
           {/* <FormGroup>
             <FormControlLabel
               control={<Checkbox />}

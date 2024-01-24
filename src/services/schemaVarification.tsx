@@ -137,5 +137,5 @@ export const giftcardSchema = z.object({
 
 export const tradeGiftcardSchema = z.object({
   eCode: z.string().min(1, { message: "require" }),
-  transactionPin: z.string().min(1, { message: "require" }),
+  // transactionPin: z.string().min(1, { message: "require" }),
 });

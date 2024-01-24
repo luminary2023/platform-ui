@@ -149,7 +149,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
                 color: "#fff",
               }}
             >
-              15
+              0
             </Typography>
           </Box>
           <Box
