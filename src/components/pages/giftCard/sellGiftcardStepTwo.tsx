@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tradeGiftcardSchema } from "@/services/schemaVarification";
 // import { sellGiftcard } from "@/api/sellGiftcard";
+import Image, { StaticImageData } from "next/image";
 import axios from "axios";
 import Loading from "@/components/Loading";
 import SummaryModal from "./summaryModal";
@@ -27,6 +28,7 @@ interface Props {
   receiveValue: any;
   cardImage: string;
   cardName: string;
+  src: string | StaticImageData | any;
 }
 
 const SellGiftcardStepTwo: FC<Props> = ({
@@ -37,12 +39,14 @@ const SellGiftcardStepTwo: FC<Props> = ({
   receiveValue,
   cardImage,
   cardName,
+  src,
 }) => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<boolean>(false);
+
   const [errs, setErrs] = useState<ErrorProps>({
     status: "",
     message: "",
@@ -132,11 +136,11 @@ const SellGiftcardStepTwo: FC<Props> = ({
             marginBottom="24px"
             borderColor={errors.eCode?.message ? "#DF1111" : ""}
             register={register("eCode")}
-            onKeyPress={(event: any) => {
-              if (!/[0-9]/.test(event.key)) {
-                event.preventDefault();
-              }
-            }}
+            // onKeyPress={(event: any) => {
+            //   if (!/[0-9]/.test(event.key)) {
+            //     event.preventDefault();
+            //   }
+            // }}
           />
           <p style={{ color: "#1F2739", fontSize: 16 }}>Upload card images</p>
           {/* <ImageUpload
@@ -144,29 +148,34 @@ const SellGiftcardStepTwo: FC<Props> = ({
             setImage={setImage}
             image={image}
           /> */}
+          <>
+            <input
+              type={"file"}
+              multiple
+              onChange={handleFile}
+              accept="image/jpeg, image/png, image/gif"
+              style={{
+                marginTop: "25px",
+                marginBottom: "25px",
+              }}
+            />
+            {/* {image.map((imgs) => {
+              <> */}
+            <img
+              src={`${image}`}
+              width={150}
+              style={{
+                marginTop: "25px",
+                marginBottom: "25px",
+                display: "flex",
+                justifyContent: "center",
+                margin: "auto",
+              }}
+            />
+            {/* </>; */}
+            {/* })} */}
+          </>
 
-          <input
-            type={"file"}
-            multiple
-            onChange={handleFile}
-            style={{
-              marginTop: "25px",
-              marginBottom: "25px",
-            }}
-          />
-
-          {/* <img
-            src={image}
-            alt="image"
-            width={150}
-            style={{
-              marginTop: "25px",
-              marginBottom: "25px",
-              display: "flex",
-              justifyContent: "center",
-              margin: "auto",
-            }}
-          /> */}
           {/* <Input
             label="Transaction pin"
             type="password"
