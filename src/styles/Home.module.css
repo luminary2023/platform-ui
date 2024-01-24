@@ -3,6 +3,7 @@
   height: 930px;
   color: #ffffff;
   padding: 60px 80px;
+  width: 100%;
 
   @media screen and (max-width: 800px) {
     padding: 24px 20px;
@@ -40,9 +41,11 @@
   }
 }
 .herosectionImage {
-  position: absolute;
-  left: 15%;
-  top: 7px;
+  position: relative;
+  /* left: 15%; */
+  display: flex;
+  justify-content: center;
+  top: -270px;
   z-index: 1;
 }
 .cardSection {
@@ -123,7 +126,6 @@
     width: 100%;
     padding: 20px;
   }
-
 }
 .stepsTitle {
   font-size: 48px;
@@ -142,9 +144,8 @@
   margin-left: 32px;
   margin-bottom: 8px;
 
-
   @media screen and (max-width: 800px) {
-    margin-left: 13px
+    margin-left: 13px;
   }
 }
 .stepsInfo {
@@ -158,7 +159,6 @@
     width: 100%;
     margin-left: 30px;
   }
-
 }
 .stepsContent {
   margin-top: 32px;
@@ -201,8 +201,9 @@
 .moreInfo {
   display: flex;
   padding: 74px 81px;
-  justify-content: space-between;
+  justify-content: space-around;
   color: #fff8f1;
+  gap: 2%;
 
   @media screen and (max-width: 800px) {
     flex-direction: column;
@@ -214,7 +215,7 @@
   width: 100%;
   height: 961px;
   background: #081630;
-  padding: 40px 120px;
+  padding: 40px 0px;
 
   @media screen and (max-width: 800px) {
     height: fit-content;
@@ -225,17 +226,31 @@
   margin: 50px auto 100px;
   width: 608px;
 
-  @media screen and (max-width: 800px)  {
+  @media screen and (max-width: 800px) {
     width: 100%;
   }
 }
-
+.imgCta {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.ctaImgText {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 17%;
+  /* margin-right: 40%; */
+}
+.coinImg {
+  /* position: absolute; */
+  margin-right: 50%;
+}
 .quote {
   color: #fff8f1;
   font-size: 48px;
 
-  @media screen and (max-width: 800px)  {
-   font-size: 32px;
+  @media screen and (max-width: 800px) {
+    font-size: 32px;
   }
 }
 .customerName {
@@ -264,22 +279,22 @@
   color: #ffffff;
   position: absolute;
   top: 40px;
-  width: 530px;
-  left: 70px;
+  width: 35%;
+  /* left: 70px; */
 }
 .bitcoinImage {
   position: absolute;
   top: -70px;
-  right: 9%;
+  right: 20%;
 }
 .ethImage {
   position: absolute;
   top: 121px;
-  right: 3%;
+  right: 12%;
 }
 .lunaImage {
   position: absolute;
-  right: 19%;
+  right: 25%;
   bottom: 33px;
 }
 .footer {
@@ -345,8 +360,15 @@
   justify-content: space-between;
   width: 143px;
 }
+.ellipse {
+  width: 100%;
+}
 .ellipseSection {
   @media screen and (max-width: 800px) {
     display: none;
   }
+}
+.rightSection {
+  width: 100%;
+  height: 100%;
 }

@@ -7,7 +7,7 @@ import styles from "@/styles/Home.module.css";
 import Ellipse from "../assets/images/ellipse.svg";
 import Image1 from "../assets/images/home-image1.svg";
 import Phone from "../assets/images/phone.svg";
-import PhoneMobile from "../assets/images/Phone-mobile.svg"
+import PhoneMobile from "../assets/images/Phone-mobile.svg";
 import Card from "../components/Card";
 import Padlock from "../assets/images/padlock.svg";
 import CryptoCurrency from "../assets/images/crypto-currency.svg";
@@ -79,7 +79,6 @@ export default function Home() {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
-
   const slide = (type: string) => {
     const last = TestimonialData.length - 1;
     const first = 0;
@@ -105,15 +104,14 @@ export default function Home() {
     }
   };
 
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= MOBILE_RESPONSIVE_BREAKPOINT);
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -163,7 +161,7 @@ export default function Home() {
             data-aos-duration="2000"
             className={styles.ellipseSection}
           >
-            <Image src={Ellipse} alt="Ellipse" />
+            <Image src={Ellipse} alt="Ellipse" className={styles.ellipse} />
             <div className={styles.herosectionImage}>
               <Image src={Image1} alt="image" />
             </div>
@@ -220,21 +218,33 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.rightSection}>
-              <Image src={isMobile ? PhoneMobile : Phone} alt="phone" />
+              <Image
+                src={isMobile ? PhoneMobile : Phone}
+                alt="phone"
+                className={styles.rightSection}
+              />
             </div>
           </div>
           <div
             className={styles.moreInfo}
-            data-aos="flip-up"
-            data-aos-duration="2000"
+            // data-aos="flip-up"
+            // data-aos-duration="2000"
           >
             <div className={styles.infoBox}>
-              <Image src={Padlock} alt="padlock" style={{width: isMobile ? '100px' : ""}} />
+              <Image
+                src={Padlock}
+                alt="padlock"
+                style={{ width: isMobile ? "100px" : "" }}
+              />
               <p style={{ width: 279 }}>Security from day one</p>
             </div>
             <div className={styles.infoBox}>
               <p>Smooth transactions</p>
-              <Image src={CryptoCurrency} alt="padlock" style={{width: isMobile ? '100px' : ""}} />
+              <Image
+                src={CryptoCurrency}
+                alt="padlock"
+                style={{ width: isMobile ? "100px" : "" }}
+              />
             </div>
           </div>
         </div>
@@ -245,21 +255,27 @@ export default function Home() {
           />
           <div
             className={styles.ctaSection}
-            data-aos="flip-up"
-            data-aos-duration="2000"
+            // data-aos="flip-up"
+            // data-aos-duration="2000"
           >
-            <div style={{ position: "relative" }} className={styles.ellipseSection}>
-              <Image src={CTAImage} alt="cta" />
-              <h1 className={styles.ctaSectionTitle}>
-                Join over 4,000 crypto traders already growing with luminary
-              </h1>
-              <Image
-                src={Bitcoin}
-                alt="bitcoin"
-                className={styles.bitcoinImage}
-              />
-              <Image src={Luna} alt="luna" className={styles.lunaImage} />
-              <Image src={Eth} alt="etherium" className={styles.ethImage} />
+            <div
+              style={{ position: "relative" }}
+              className={styles.ellipseSection}
+            >
+              <Image src={CTAImage} alt="cta" className={styles.imgCta} />
+              <div className={styles.ctaImgText}>
+                <h1 className={styles.ctaSectionTitle}>
+                  Join over 4,000 crypto traders already growing with luminary
+                </h1>
+
+                <Image
+                  src={Bitcoin}
+                  alt="bitcoin"
+                  className={styles.bitcoinImage}
+                />
+                <Image src={Luna} alt="luna" className={styles.lunaImage} />
+                <Image src={Eth} alt="etherium" className={styles.ethImage} />
+              </div>
             </div>
           </div>
         </div>
