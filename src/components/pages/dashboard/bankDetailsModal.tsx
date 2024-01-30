@@ -79,7 +79,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
       onClose();
     }, 2000);
 
-    reload();
+    // reload();
   };
 
   const fetchBankDetails = async () => {
@@ -224,7 +224,10 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
               }
             }}
           />
-          {accountNumber && accountNumber.length === 10 && bankId ? (
+          {accountNumber &&
+          accountNumber.length === 10 &&
+          bankId &&
+          accountBankName?.accountName ? (
             <Input
               placeholder={"Account name"}
               type="text"
@@ -279,7 +282,10 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
               color="primary"
               variant={"contained"}
               disabled={
-                !accountNumber || accountNumber?.length != 10 || !bankId
+                !accountNumber ||
+                accountNumber?.length != 10 ||
+                !bankId ||
+                !accountBankName?.accountName
               }
               sx={{
                 textTransform: "initial",

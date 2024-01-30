@@ -156,7 +156,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
             sx={{ display: "flex", alignItems: "center", gap: 1 }}
             onClick={handleClick}
           >
-            {/* <Box
+            <Avatar
               sx={{
                 width: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
                 height: { xs: "24px", sm: "24px", lg: "30px", xl: "30px" },
@@ -166,10 +166,10 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
                 display: "flex",
               }}
             >
-              {profileData?.firstName}
-              {profileData?.lastName}
-            </Box> */}
-            <Typography
+              {profileData?.firstName?.[0]}
+              {profileData?.lastName?.[0]}
+            </Avatar>
+            {/* <Typography
               // onClick={handleClick}
               style={{ cursor: "pointer" }}
               sx={{
@@ -187,8 +187,8 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
                 },
               }}
             >
-              {profileData?.firstName} {profileData?.lastName}
-            </Typography>
+              {profileData?.firstName[0]} {profileData?.lastName[0]}
+            </Typography> */}
             <Box>
               <Image
                 src={DownArrow}

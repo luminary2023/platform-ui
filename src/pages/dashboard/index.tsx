@@ -49,26 +49,36 @@ const Index = () => {
   //   }
   // };
 
-  // const phoneNumberProgress = () => {
-  //   if (profileData?.phoneNumber != "" && profileData?.phoneNumber != null) {
-  //     setProgress((progress) => progress + 1);
-  //   }
-  // };
+  const transactionPinSet = () => {
+    if (profileData?.isTransactionPinSet === 1) {
+      setProgress(+1);
+    }
+  };
+
+  const phoneNumberSet = () => {
+    if (profileData?.isPhoneNumberVerified === 1) {
+      setProgress(+2);
+    }
+  };
+  const bankAccountTrue = () => {
+    if (bankAccount?.length > 0) {
+      setProgress((progress) => progress + 1);
+    }
+  };
 
   useEffect(() => {
     fetchProfile();
-    // bankProgress();
-    // phoneNumberProgress();
     handleBankAccount();
-  }, []);
+    transactionPinSet();
+    phoneNumberSet();
+    bankAccountTrue();
+  }, [fetchProfile, handleBankAccount]);
 
   const handleBankDetailsModal = () => {
     if (bankAccount.length < 1) {
       setOpen(true);
     } else setOpen(false);
   };
-
-  const value = 0;
 
   return (
     <DashboardContainer
@@ -95,7 +105,7 @@ const Index = () => {
                   alignItems: "center",
                 }}
               >
-                {/* <Typography
+                <Typography
                   sx={{
                     marginLeft: "107px",
                     position: "absolute",
@@ -104,8 +114,8 @@ const Index = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  {progress}/8
-                </Typography> */}
+                  {progress}/3
+                </Typography>
                 <CircularProgress
                   variant="determinate"
                   value={100}
@@ -210,7 +220,7 @@ const Index = () => {
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 {" "}
                 <h3>Bank Details</h3>{" "}
-                {bankAccount.length > 0 && (
+                {bankAccount?.length > 0 && (
                   <CheckIcon sx={{ color: "green" }} />
                 )}
               </Box>
