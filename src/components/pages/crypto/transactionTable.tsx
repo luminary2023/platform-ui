@@ -50,7 +50,7 @@ const TransactionTable = () => {
   };
   useEffect(() => {
     cryptoTransactions();
-  }, []);
+  }, [cryptoTransactions]);
   return (
     <Box
       sx={{

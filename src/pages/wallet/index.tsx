@@ -44,7 +44,7 @@ const Wallet = () => {
   const [loading, setLoading] = useState(false);
   const [bankAccount, setBankAccount] = useState<any[]>([]);
   const [selectedBank, setSelectedBank] = useState<any>(null);
-
+  const [accountCheck, setAccountCheck] = useState(true);
   const [profileData, setProfileData] = useState<any>({});
 
   const handleBankAccount = async () => {
@@ -69,6 +69,7 @@ const Wallet = () => {
     try {
       const res = await profileRequest();
       setProfileData(res);
+      setAccountCheck(false);
     } catch (error: any) {
       error?.response?.data;
     }
@@ -116,7 +117,7 @@ const Wallet = () => {
   useEffect(() => {
     fetchProfile();
     handleBankAccount();
-  }, []);
+  }, [fetchProfile]);
 
   const handleWithdraw = async () => {
     try {
@@ -157,7 +158,7 @@ const Wallet = () => {
                   onClick={() => setShow(!show)}
                   sx={{
                     textTransform: "capitalize",
-                    width: 150,
+                    width: "100%",
                     Padding: "16px 32px",
                     borderRadius: 2,
                     height: 48,
@@ -180,7 +181,7 @@ const Wallet = () => {
                       className={styles.quickActionsContainer}
                       style={{ background: item.background }}
                     >
-                      <p>Coming soon...</p>
+                      <p style={{ textAlign: "center" }}>Coming soon...</p>
                     </div>
                     <p className={styles.quickActionsText}>{item.text}</p>
                   </div>
@@ -193,6 +194,24 @@ const Wallet = () => {
               <div className={styles.withdrawFunds}>
                 <h3 className={styles.tableTitle}>Withdraw Funds</h3>
 
+                {bankAccount.length > 0 && (
+                  <Typography
+                    sx={{
+                      color: "#F7931A",
+                      fontSize: { md: "14px", lg: "16px", xs: "8px" },
+                      cursor: "pointer",
+                      textDecoration: "underline",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                    onClick={() => setOpenModal(true)}
+                  >
+                    + Add Another Account
+                  </Typography>
+                )}
+              </div>
+
+              {bankAccount.length < 1 ? (
                 <Typography
                   sx={{
                     color: "#F7931A",
@@ -201,142 +220,148 @@ const Wallet = () => {
                     textDecoration: "underline",
                     display: "flex",
                     alignItems: "center",
+                    textAlign: "center",
+                    justifyContent: "center",
+                    mt: "50px",
+                    mb: "50px",
                   }}
                   onClick={() => setOpenModal(true)}
                 >
-                  {bankAccount ? " + Add Another Account" : " + Add Account"}
+                  + Add Account
                 </Typography>
-              </div>
-
-              <form onSubmit={handleSubmit(handleWithdraw)}>
-                <Typography
-                  sx={{
-                    color: "#344054",
-                    fontFamily: "Satoshi Light",
-                    fontSize: "16px",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "20px",
-                    marginBottom: "8px",
-                  }}
-                >
-                  Select Bank
-                </Typography>
-                <select
-                  placeholder="Choose a bank"
-                  style={{
-                    width: "100%",
-                    height: "45px",
-                    borderRadius: "10px",
-                    paddingLeft: "8px",
-                    paddingRight: "8px",
-                    // borderBlock: "none",
-                    border: `${
-                      errors.bank?.message ? "1px solid  #DF1111" : "none"
-                    } `,
-                    color: "#667085",
-                    outline: "none",
-                    background: "#F5F5F5",
-                    marginBottom: "8px",
-                  }}
-                  {...register("bank")}
-                  onChange={handleChange}
-                >
-                  <option value="" hidden>
-                    Choose bank
-                  </option>
-                  {Array.isArray(bankAccount || [])
-                    ? (bankAccount || [])?.map((account: any) => (
-                        <option
-                          key={account.accountNumber}
-                          value={account.accountNumber}
-                        >
-                          {account?.bank?.name}
-                        </option>
-                      ))
-                    : ""}
-                </select>
-
-                <Box
-                  sx={{
-                    display: { lg: "flex", md: "flex", xs: "" },
-                    // justifyContent: "space-between",
-                    width: "100%",
-                    gap: 1,
-                  }}
-                >
-                  <Box
+              ) : (
+                <form onSubmit={handleSubmit(handleWithdraw)}>
+                  <Typography
                     sx={{
-                      width: "100%",
+                      color: "#344054",
+                      fontFamily: "Satoshi Light",
+                      fontSize: "16px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "20px",
+                      marginBottom: "8px",
                     }}
                   >
-                    <Input
-                      type={"text"}
-                      label="Account Number"
-                      bgColor={"#F6F6F6"}
-                      marginBottom={"8px"}
-                      labelColor={"#081630"}
-                      labelSize={"16px"}
-                      readOnly={true}
-                      value={selectedBankDetails?.accountNumber}
-                      register={{ ...register("accountNumber") }}
-                      borderColor={
-                        errors.accountNumber?.message ? "#DF1111" : ""
+                    Select Bank
+                  </Typography>
+                  <select
+                    placeholder="Choose a bank"
+                    style={{
+                      width: "100%",
+                      height: "45px",
+                      borderRadius: "10px",
+                      paddingLeft: "8px",
+                      paddingRight: "8px",
+                      // borderBlock: "none",
+                      border: `${
+                        errors.bank?.message ? "1px solid  #DF1111" : "none"
+                      } `,
+                      color: "#667085",
+                      outline: "none",
+                      background: "#F5F5F5",
+                      marginBottom: "8px",
+                    }}
+                    {...register("bank")}
+                    onChange={handleChange}
+                  >
+                    <option value="" hidden>
+                      Choose bank
+                    </option>
+                    {Array.isArray(bankAccount || [])
+                      ? (bankAccount || [])?.map((account: any) => (
+                          <option
+                            key={account.accountNumber}
+                            value={account.accountNumber}
+                          >
+                            {account?.bank?.name}
+                          </option>
+                        ))
+                      : ""}
+                  </select>
+
+                  <Box
+                    sx={{
+                      display: { lg: "flex", md: "flex", xs: "" },
+                      // justifyContent: "space-between",
+                      width: "100%",
+                      gap: 1,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: "100%",
+                      }}
+                    >
+                      <Input
+                        type={"text"}
+                        label="Account Number"
+                        bgColor={"#F6F6F6"}
+                        marginBottom={"8px"}
+                        labelColor={"#081630"}
+                        labelSize={"16px"}
+                        readOnly={true}
+                        value={selectedBankDetails?.accountNumber}
+                        register={{ ...register("accountNumber") }}
+                        borderColor={
+                          errors.accountNumber?.message ? "#DF1111" : ""
+                        }
+                      />
+                    </Box>
+                    <Box
+                      sx={{
+                        width: "100%",
+                      }}
+                    >
+                      <Input
+                        readOnly={true}
+                        type={"NGN 15,000"}
+                        label="Account Name"
+                        bgColor={"#F6F6F6"}
+                        marginBottom={"8px"}
+                        labelColor={"#081630"}
+                        labelSize={"16px"}
+                        value={selectedBankDetails?.accountName}
+                        register={{ ...register("accountName") }}
+                        borderColor={
+                          errors.accountName?.message ? "#DF1111" : ""
+                        }
+                      />
+                    </Box>
+                  </Box>
+                  <Input
+                    placeholder={"NGN"}
+                    type={"text"}
+                    label="Amount"
+                    bgColor={"#F6F6F6"}
+                    marginBottom={"18px"}
+                    labelColor={"#081630"}
+                    labelSize={"16px"}
+                    register={{ ...register("amount") }}
+                    borderColor={errors.amount?.message ? "#DF1111" : ""}
+                    onKeyPress={(event: any) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
                       }
-                    />
-                  </Box>
-                  <Box
+                    }}
+                  />
+
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                    type="submit"
+                    // onClick={handleWithdraw}
                     sx={{
-                      width: "100%",
+                      borderRadius: "10px",
+                      textTransform: "capitalize",
+                      height: "61px",
+                      margintTop: "8px",
                     }}
                   >
-                    <Input
-                      readOnly={true}
-                      type={"NGN 15,000"}
-                      label="Account Name"
-                      bgColor={"#F6F6F6"}
-                      marginBottom={"8px"}
-                      labelColor={"#081630"}
-                      labelSize={"16px"}
-                      value={selectedBankDetails?.accountName}
-                      register={{ ...register("accountName") }}
-                      borderColor={errors.accountName?.message ? "#DF1111" : ""}
-                    />
-                  </Box>
-                </Box>
-                <Input
-                  placeholder={"NGN"}
-                  type={"text"}
-                  label="Amount"
-                  bgColor={"#F6F6F6"}
-                  marginBottom={"18px"}
-                  labelColor={"#081630"}
-                  labelSize={"16px"}
-                  register={{ ...register("amount") }}
-                  borderColor={errors.amount?.message ? "#DF1111" : ""}
-                  onKeyPress={(event: any) => {
-                    if (!/[0-9]/.test(event.key)) {
-                      event.preventDefault();
-                    }
-                  }}
-                />
-
-                <Button
-                  color="primary"
-                  variant="contained"
-                  fullWidth
-                  type="submit"
-                  // onClick={handleWithdraw}
-                  sx={{
-                    borderRadius: "10px",
-                    textTransform: "capitalize",
-                    height: "61px",
-                    margintTop: "8px",
-                  }}
-                >
-                  {loading ? <Loading /> : "Withdraw"}
-                </Button>
-              </form>
+                    {loading ? <Loading /> : "Withdraw"}
+                  </Button>
+                </form>
+              )}
             </div>
           </div>
         </div>

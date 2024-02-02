@@ -194,7 +194,7 @@ export default function SummaryModal({
                     width: "40%",
                   }}
                 >
-                  {loading ? <Loading /> : "Pay to wallet"}
+                  {loading ? <Loading /> : "Trade Giftcard"}
                 </Button>
               </div>
             </div>

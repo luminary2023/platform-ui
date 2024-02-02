@@ -328,6 +328,7 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
           receiveValue={receiveValue}
           cardImage={cardImage}
           cardName={cardName}
+          src={undefined}
         />
       )}
     </>
