@@ -110,8 +110,8 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
           <Image src={EmailLogo} alt="email" width="56" height="56" />
           <h1>Check your email</h1>
           <p>
-            We sent a verification code to {email}, if you can't find it check
-            your spam.
+            We sent a verification code to {email}, if you can&apos;t find it
+            check your spam.
           </p>
 
           <form onSubmit={codeVerification}>
@@ -124,7 +124,7 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
           </form>
 
           <div className={styles.sent}>
-            <p>Didnt receive the email?</p>
+            <p>Didn&apos;t receive the email?</p>
 
             <h6 className={styles.resend} onClick={handleResendOtp}>
               Click to resend
