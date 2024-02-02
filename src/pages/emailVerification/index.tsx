@@ -124,7 +124,7 @@ const EmailCodeVarification: React.FC<CodeProps> = () => {
           </form>
 
           <div className={styles.sent}>
-            <p>Didn’t receive the email?</p>
+            <p>Didnt receive the email?</p>
 
             <h6 className={styles.resend} onClick={handleResendOtp}>
               Click to resend
