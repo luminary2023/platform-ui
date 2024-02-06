@@ -16,6 +16,8 @@ import { profileRequest } from "@/api/profile";
 import { userAccountDetails } from "@/api/userAccountDetails";
 
 const Index = () => {
+  const { profileData } = useThemeContext();
+
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [openPhoneModal, setOpenPhoneModal] = useState<boolean>(false);
@@ -23,16 +25,16 @@ const Index = () => {
   // const { bankDetails } = useThemeContext();
   const [bankAccount, setBankAccount] = useState<any[]>([]);
   const [progress, setProgress] = useState(0);
-  const [profileData, setProfileData] = useState<any>({});
+  // const [profileData, setProfileData] = useState<any>({});
 
-  const fetchProfile = async () => {
-    try {
-      const res = await profileRequest();
-      setProfileData(res);
-    } catch (error: any) {
-      error?.response?.data;
-    }
-  };
+  // const fetchProfile = async () => {
+  //   try {
+  //     const res = await profileRequest();
+  //     setProfileData(res);
+  //   } catch (error: any) {
+  //     error?.response?.data;
+  //   }
+  // };
 
   const handleBankAccount = async () => {
     try {
@@ -67,12 +69,12 @@ const Index = () => {
   };
 
   useEffect(() => {
-    fetchProfile();
+    // fetchProfile();
     handleBankAccount();
     transactionPinSet();
     phoneNumberSet();
     bankAccountTrue();
-  }, [fetchProfile, handleBankAccount]);
+  }, [handleBankAccount]);
 
   const handleBankDetailsModal = () => {
     if (bankAccount.length < 1) {

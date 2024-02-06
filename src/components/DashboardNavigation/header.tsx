@@ -25,9 +25,10 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
-  // const { profileData } = useThemeContext();
+  const { profileData } = useThemeContext();
+  console.log(profileData, "data");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [profileData, setProfileData] = useState<any>({});
+  // const [profileData, setProfileData] = useState<any>({});
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -37,14 +38,14 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     setAnchorEl(null);
   };
   const router = useRouter();
-  const fetchProfile = async () => {
-    try {
-      const res = await profileRequest();
-      setProfileData(res);
-    } catch (error: any) {
-      error?.response?.data;
-    }
-  };
+  // const fetchProfile = async () => {
+  //   try {
+  //     const res = await profileRequest();
+  //     setProfileData(res);
+  //   } catch (error: any) {
+  //     error?.response?.data;
+  //   }
+  // };
   // const [refreshTokens, setRefreshToken] = useState("");
   // console.log(profileData, "expired", refreshTokens);
 
@@ -55,7 +56,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
   //   }
   // };
   useEffect(() => {
-    fetchProfile();
+    // fetchProfile();
     // fetchToken(refreshToken);
     // window.addEventListener("beforeunload", (ev) => {
     //   ev.preventDefault();

@@ -19,8 +19,8 @@ interface Props {
 type ThemeContext = {
   bankDetails: [];
   setBankDetails: any;
-  // profileData: any;
-  // setProfileData: Dispatch<any>;
+  profileData: any;
+  setProfileData: any;
   // walletBalance: any;
   // bankAccount: any;
   bankInfo: [];
@@ -51,7 +51,7 @@ export const GlobalContext = createContext<ThemeContext | null>(null);
 
 export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [bankDetails, setBankDetails] = useState<[]>([]);
-  // const [profileData, setProfileData] = useState("");
+  const [profileData, setProfileData] = useState("");
   const [selectedBankDetails, setSelectedBankDetails] = useState<any>({});
 
   const [bankInfo, setBankInfo] = useState<any | []>([]);
@@ -69,14 +69,14 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     setAnchorEl(null);
   };
 
-  // const fetchProfile = async () => {
-  //   try {
-  //     const res = await profileRequest();
-  //     setProfileData(res);
-  //   } catch (error: any) {
-  //     error?.response?.data;
-  //   }
-  // };
+  const fetchProfile = async () => {
+    try {
+      const res = await profileRequest();
+      setProfileData(res);
+    } catch (error: any) {
+      error?.response?.data;
+    }
+  };
 
   // const handleBankDetails = async () => {
   //   try {
@@ -116,13 +116,13 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     }
   };
   useEffect(() => {
-    // fetchProfile();
+    fetchProfile();
     // profile();
     // handleBankAccount();
     // handleBankInfo();
     // handleBankDetails();
     // handleBankAccount();
-  }, []);
+  }, [fetchProfile]);
   // const selectedBankDetails = useMemo(() => {
   //   if (!selectedBank || (bankAccount?.length || 0) <= 0) {
   //     return {};
@@ -138,8 +138,8 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
       value={{
         bankDetails,
         setBankDetails,
-        // profileData,
-        // setProfileData,
+        profileData,
+        setProfileData,
         // bankAccount,
         bankInfo,
         setBankInfo,
