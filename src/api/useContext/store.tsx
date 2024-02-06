@@ -21,11 +21,10 @@ type ThemeContext = {
   setBankDetails: any;
   profileData: any;
   setProfileData: any;
-  // walletBalance: any;
-  // bankAccount: any;
+
   bankInfo: [];
   setBankInfo: any;
-  // handleBankInfo: any;
+
   handleDeleteAccount: any;
   setBankId: any;
   openModal: any;
@@ -78,32 +77,6 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  // const handleBankDetails = async () => {
-  //   try {
-  //     const response = await userAccountDetails();
-  //     setBankDetails(response);
-  //   } catch (error: any) {
-  //     return error?.response?.data;
-  //   }
-  // };
-  // const handleBankAccount = async () => {
-  //   try {
-  //     const response = await userAccountDetails();
-  //     setBankAccount(response);
-  //   } catch (error: any) {
-  //     return error?.response?.data;
-  //   }
-  // };
-
-  // const handleBankInfo = async () => {
-  //   try {
-  //     const response = await userAccountDetails();
-  //     setBankInfo(response);
-  //   } catch (error: any) {
-  //     return error?.response?.data;
-  //   }
-  // };
-
   const handleDeleteAccount = async () => {
     try {
       const response = await DeleteAccount(bankId);
@@ -117,21 +90,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
   };
   useEffect(() => {
     fetchProfile();
-    // profile();
-    // handleBankAccount();
-    // handleBankInfo();
-    // handleBankDetails();
-    // handleBankAccount();
   }, [fetchProfile]);
-  // const selectedBankDetails = useMemo(() => {
-  //   if (!selectedBank || (bankAccount?.length || 0) <= 0) {
-  //     return {};
-  //   }
-
-  //   return (
-  //     bankAccount?.find((b: any) => b.accountNumber === selectedBank) || {}
-  //   );
-  // }, [selectedBank, bankAccount]);
 
   return (
     <GlobalContext.Provider

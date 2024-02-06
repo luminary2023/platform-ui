@@ -22,19 +22,9 @@ const Index = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [openPhoneModal, setOpenPhoneModal] = useState<boolean>(false);
   const [openTransactionPin, setOpenTransactionPin] = useState<boolean>(false);
-  // const { bankDetails } = useThemeContext();
+
   const [bankAccount, setBankAccount] = useState<any[]>([]);
   const [progress, setProgress] = useState(0);
-  // const [profileData, setProfileData] = useState<any>({});
-
-  // const fetchProfile = async () => {
-  //   try {
-  //     const res = await profileRequest();
-  //     setProfileData(res);
-  //   } catch (error: any) {
-  //     error?.response?.data;
-  //   }
-  // };
 
   const handleBankAccount = async () => {
     try {

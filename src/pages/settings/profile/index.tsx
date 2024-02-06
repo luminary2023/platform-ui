@@ -14,20 +14,6 @@ const Profile = () => {
   const router = useRouter();
 
   const { profileData } = useThemeContext();
-  // const [profileData, setProfileData] = useState<any>({});
-
-  // const fetchProfile = async () => {
-  //   try {
-  //     const res = await profileRequest();
-  //     setProfileData(res);
-  //   } catch (error: any) {
-  //     error?.response?.data;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchProfile();
-  // });
 
   return (
     <>
