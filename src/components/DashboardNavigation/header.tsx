@@ -45,9 +45,9 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     deleteCookie("value");
     router.push("/");
   };
-  useEffect(() => {
-    const token = deleteCookie('token')
-  }, []);
+  // useEffect(() => {
+  //   const token = deleteCookie('token')
+  // }, []);
 
   return (
     <>

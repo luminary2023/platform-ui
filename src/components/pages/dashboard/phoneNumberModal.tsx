@@ -66,13 +66,15 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     resolver: zodResolver(verifyPhoneNumber),
   });
 
-  const phone = watch("phoneNumber");
-  console.log(phone, "numbersss");
-
   const handlePhoneNumber = async (data: phoneNumberProps) => {
+    const payload = {
+      phoneNumber: `+234${data.phoneNumber.slice(1)}`,
+      verificationCode: data.verificationCode,
+    };
+
     // try {
     setLoading(true);
-    const response = await numberVerificationCode(data);
+    const response = await numberVerificationCode(payload);
     setPhoneNumber(response);
     console.log(phoneNumber, "response");
     if (response.message === "Verification code sent successfully.") {
