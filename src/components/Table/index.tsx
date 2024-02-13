@@ -126,5 +126,3 @@ const AppTable: React.FC<AppTableProps> = ({ tableHeaderData }) => {
 };
 
 export default AppTable;
-
-// const singleData = ["6/9/14", "Cameron", "gt", "Nigeria", "120,000", "completed"];

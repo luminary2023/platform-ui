@@ -60,10 +60,14 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     handleSubmit,
     register,
     reset,
+    watch,
     formState: { errors },
   } = useForm<phoneNumberProps>({
     resolver: zodResolver(verifyPhoneNumber),
   });
+
+  const phone = watch("phoneNumber");
+  console.log(phone, "numbersss");
 
   const handlePhoneNumber = async (data: phoneNumberProps) => {
     // try {
@@ -165,7 +169,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
                 X
               </Typography>
             </Box>
-            <Typography
+            {/* <Typography
               id="modal-modal-title"
               variant="h6"
               component="h1"
@@ -179,13 +183,13 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
               }}
             >
               Enter phone number in this format: +2348100000000
-            </Typography>
+            </Typography> */}
 
             <form onSubmit={handleSubmit(handlePhoneNumber)}>
               <Input
                 type="text"
                 placeholder={"Enter phone number +2348100000000"}
-                maxLength={"14"}
+                maxLength={"11"}
                 aria-label="Demo number input"
                 // label="Phone number"
                 marginBottom={"20px"}

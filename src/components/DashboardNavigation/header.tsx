@@ -14,7 +14,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import DownArrow from "../../assets/images/DownArrow.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 import { useThemeContext } from "@/api/useContext/store";
 import { profileRequest } from "@/api/profile";
 import { refreshTokenApi } from "@/api/refreshToken";
@@ -45,6 +45,9 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     deleteCookie("value");
     router.push("/");
   };
+  useEffect(() => {
+    const token = deleteCookie('token')
+  }, []);
 
   return (
     <>
