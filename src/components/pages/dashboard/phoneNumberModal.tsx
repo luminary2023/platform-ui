@@ -76,7 +76,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     setLoading(true);
     const response = await numberVerificationCode(payload);
     setPhoneNumber(response);
-    console.log(phoneNumber, "response");
+
     if (response.message === "Verification code sent successfully.") {
       setPhoneNumberVerification(false);
       setError(false);
