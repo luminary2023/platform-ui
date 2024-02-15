@@ -70,9 +70,9 @@ const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
       setLoading(false);
 
       if (createPin?.message === "Transaction pin is set successfully.") {
-        setTimeout(async () => {
+        setTimeout(() => {
           onClose();
-        }, 2000);
+        }, 1000);
       }
     } catch (error: any) {
       return error?.response?.data;
