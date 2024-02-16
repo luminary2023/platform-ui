@@ -225,11 +225,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div
-            className={styles.moreInfo}
-            // data-aos="flip-up"
-            // data-aos-duration="2000"
-          >
+          <div className={styles.moreInfo}>
             <div className={styles.infoBox}>
               <Image
                 src={Padlock}
@@ -253,11 +249,7 @@ export default function Home() {
             testimonial={TestimonialData[current]}
             onArrowClick={slide}
           />
-          <div
-            className={styles.ctaSection}
-            // data-aos="flip-up"
-            // data-aos-duration="2000"
-          >
+          <div className={styles.ctaSection}>
             <div
               style={{ position: "relative" }}
               className={styles.ellipseSection}
