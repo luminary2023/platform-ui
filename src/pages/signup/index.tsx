@@ -120,11 +120,12 @@ export default function Index() {
                   style={{
                     color: " #667085",
                     marginTop: "8px",
-                    fontSize: "14px",
+                    fontSize: "11px",
                     fontFamily: "Satoshi Light",
                   }}
                 >
-                  Must be at least 8 characters.
+                  Password must be at least 8 characters long and contain at
+                  least one letter, one digit, and one special character.
                 </p>
               </div>
 

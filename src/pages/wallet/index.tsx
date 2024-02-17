@@ -121,13 +121,17 @@ const Wallet = () => {
 
   const handleWithdraw = async () => {
     try {
-      setLoading(true);
-      const data = await { bank, amount, selectedBankDetails };
-      setWithdrawAmount(amount);
-      setSelectedBankDetails(selectedBankDetails);
-      const parseResult = await withdrawDetails?.safeParse(data);
-      setLoading(false);
-      if (parseResult.success) router.push("/withdraw");
+      if (amount < 1000) {
+        return "error";
+      } else {
+        setLoading(true);
+        const data = await { bank, amount, selectedBankDetails };
+        setWithdrawAmount(amount);
+        setSelectedBankDetails(selectedBankDetails);
+        const parseResult = await withdrawDetails?.safeParse(data);
+        setLoading(false);
+        if (parseResult.success) router.push("/withdraw");
+      }
     } catch (error: any) {
       return error.results.data;
     }
@@ -337,7 +341,9 @@ const Wallet = () => {
                     labelColor={"#081630"}
                     labelSize={"16px"}
                     register={{ ...register("amount") }}
-                    borderColor={errors.amount?.message ? "#DF1111" : ""}
+                    borderColor={
+                      errors.amount?.message || amount < 1000 ? "#DF1111" : ""
+                    }
                     onKeyPress={(event: any) => {
                       if (!/[0-9]/.test(event.key)) {
                         event.preventDefault();

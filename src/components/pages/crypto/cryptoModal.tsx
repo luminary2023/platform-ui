@@ -99,7 +99,7 @@ export default function CryptoModal({
             }}
           >
             <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
-              You Pay
+              You Send
             </Typography>
             <Typography sx={{ fontSize: "16px" }}>{payValue}</Typography>
           </Box>

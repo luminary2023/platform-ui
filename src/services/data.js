@@ -17,10 +17,9 @@ export const quickActionsData = [
 ];
 
 export const giftcardTableHead = [
- 
   "Giftcard",
-  "Amount($)",
+  "Amount",
   "Rate",
-  "Total Amount(NGN)",
-  "Status"
-]
+  "Total Amount",
+  "Status",
+];

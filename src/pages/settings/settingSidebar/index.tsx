@@ -35,16 +35,16 @@ const SettingSidebar = () => {
       name: "Login & Security",
       icon: <LockIcon />,
     },
-    {
-      path: "/",
-      name: "Terms and Conditions",
-      icon: <LibraryBooksIcon />,
-    },
-    {
-      path: "/",
-      name: "Privacy Policy",
-      icon: <PrivacyTipIcon />,
-    },
+    // {
+    //   path: "/",
+    //   name: "Terms and Conditions",
+    //   icon: <LibraryBooksIcon />,
+    // },
+    // {
+    //   path: "/",
+    //   name: "Privacy Policy",
+    //   icon: <PrivacyTipIcon />,
+    // },
   ];
   const handleClick = (href: string) => {
     router.push(href);

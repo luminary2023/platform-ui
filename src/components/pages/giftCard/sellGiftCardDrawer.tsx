@@ -99,6 +99,10 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
     setGiftcardSubCategory(res);
   };
 
+  const handleBack = () => {
+    setStep(1);
+  };
+
   useEffect(() => {
     handleCardCurrency(selectedId);
     handleGiftcardType(selectedId, currencyId);
@@ -135,6 +139,13 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
         </Box>
       </Modal>
       <div style={{ display: "flex", marginBottom: 50 }}>
+        {step === 2 ? (
+          <Box sx={{ cursor: "pointer", marginRight: "2px" }}>
+            <Image src={BackArrow} alt="backArrow" onClick={handleBack} />
+          </Box>
+        ) : (
+          ""
+        )}
         <p
           className={styles.GCDSteps}
           style={{

@@ -93,6 +93,7 @@ const Sidebar = () => {
             flexDirection: "row",
             alignItems: "center",
             marginBottom: "29px",
+            cursor: "pointer",
             marginLeft: {
               xs: "20px",
               lg: "44px",
