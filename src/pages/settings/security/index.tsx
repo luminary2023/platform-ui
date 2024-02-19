@@ -207,10 +207,17 @@ const Security = () => {
               aria-controls="panel2bh-content"
               id="panel2bh-header"
             >
-              <Typography sx={{ fontWeight: "700", color: "#13111F" }}>
-                Change Password
-              </Typography>
+              <Box>
+                <Typography sx={{ fontWeight: "700", color: "#13111F" }}>
+                  Change Password
+                </Typography>
+                <Typography sx={{ fontSize: "12px" }}>
+                  Password must be at least 8 characters long and contain at
+                  least one letter, one digit, and one special character.
+                </Typography>
+              </Box>
             </AccordionSummary>
+
             <AccordionDetails>
               <ChangePasswordForm />
             </AccordionDetails>

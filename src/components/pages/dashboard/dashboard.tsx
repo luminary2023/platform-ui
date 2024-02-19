@@ -104,7 +104,7 @@ const Dashboard = () => {
             </div>
             <div className={styles.transactionDone}>
               <div className={styles.transactionBg}>
-                <h2>$107,216</h2>
+                <h2>$0</h2>
                 <p>Total Transaction Done</p>
                 <div className={styles.percentage}>
                   <Image src={TreadingUp} alt="percent" />
@@ -282,8 +282,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className={tableStyles.tableContainer}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+      <div className={tableStyles.tableContaineri}>
+        {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
           <h1 className={tableStyles.tableTitle}>History</h1>
           <div className={tableStyles.filterWrapper}>
             <p>All</p>
@@ -304,8 +305,8 @@ const Dashboard = () => {
               <MenuItem onClick={handleClose}>Oldest</MenuItem>
             </Menu>
           </div>
-        </div>
-        <DashboardTable tableHeaderData={tableHeaderData} />
+        </div> */}
+        {/* <DashboardTable tableHeaderData={tableHeaderData} /> */}
       </div>
     </div>
   );

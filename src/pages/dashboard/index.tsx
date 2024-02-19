@@ -14,25 +14,20 @@ import TransactionPinModal from "../../components/pages/dashboard/transactionPin
 import { useThemeContext } from "@/api/useContext/store";
 import { profileRequest } from "@/api/profile";
 import { userAccountDetails } from "@/api/userAccountDetails";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 
 const Index = () => {
+  const { profileData } = useThemeContext();
+
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [openPhoneModal, setOpenPhoneModal] = useState<boolean>(false);
   const [openTransactionPin, setOpenTransactionPin] = useState<boolean>(false);
-  // const { bankDetails } = useThemeContext();
+
   const [bankAccount, setBankAccount] = useState<any[]>([]);
   const [progress, setProgress] = useState(0);
-  const [profileData, setProfileData] = useState<any>({});
-
-  const fetchProfile = async () => {
-    try {
-      const res = await profileRequest();
-      setProfileData(res);
-    } catch (error: any) {
-      error?.response?.data;
-    }
-  };
 
   const handleBankAccount = async () => {
     try {
@@ -49,18 +44,30 @@ const Index = () => {
   //   }
   // };
 
-  // const phoneNumberProgress = () => {
-  //   if (profileData?.phoneNumber != "" && profileData?.phoneNumber != null) {
-  //     setProgress((progress) => progress + 1);
-  //   }
-  // };
+  const transactionPinSet = () => {
+    if (profileData?.isTransactionPinSet === 1) {
+      setProgress(+1);
+    }
+  };
+
+  const phoneNumberSet = () => {
+    if (profileData?.isPhoneNumberVerified === 1) {
+      setProgress(+2);
+    }
+  };
+  const bankAccountTrue = () => {
+    if (bankAccount?.length > 0) {
+      setProgress((progress) => progress + 1);
+    }
+  };
 
   useEffect(() => {
-    fetchProfile();
-    // bankProgress();
-    // phoneNumberProgress();
+    // fetchProfile();
     handleBankAccount();
-  }, []);
+    transactionPinSet();
+    phoneNumberSet();
+    bankAccountTrue();
+  }, [handleBankAccount]);
 
   const handleBankDetailsModal = () => {
     if (bankAccount.length < 1) {
@@ -68,8 +75,14 @@ const Index = () => {
     } else setOpen(false);
   };
 
-  const value = 0;
-
+  const progressCheck = () => {
+    if (progress === 3) {
+      setProfile(false);
+    }
+  };
+  useEffect(() => {
+    progressCheck();
+  }, [progressCheck]);
   return (
     <DashboardContainer
       title="Dashboard"
@@ -95,7 +108,7 @@ const Index = () => {
                   alignItems: "center",
                 }}
               >
-                {/* <Typography
+                <Typography
                   sx={{
                     marginLeft: "107px",
                     position: "absolute",
@@ -104,15 +117,16 @@ const Index = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  {progress}/8
-                </Typography> */}
+                  {progress}/3
+                </Typography>
                 <CircularProgress
                   variant="determinate"
                   value={100}
                   thickness={8}
                   size={80}
                   sx={{
-                    color: "#F2F4FC",
+                    color: progress === 3 ? "green" : "#F2F4FC",
+
                     width: { xs: "20px", sm: "20px", lg: "100px", xl: "100px" },
                     height: {
                       xs: "20px",
@@ -154,11 +168,30 @@ const Index = () => {
             }}
             style={{ cursor: "pointer" }}
           >
-            <Image
+            {/* <Image
               src={KYC}
               alt="secure"
               className={styles.profileSecurityImg}
-            />
+            /> */}
+            <Box
+              sx={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "100%",
+                background: "#081630",
+                // position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: "7%",
+              }}
+            >
+              <ReceiptLongIcon
+                sx={{
+                  color: "#fff",
+                }}
+              />
+            </Box>
             <div>
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 <h3>Create Transaction Pin</h3>
@@ -179,11 +212,30 @@ const Index = () => {
               if (profileData?.phoneNumber === null) setOpenPhoneModal(true);
             }}
           >
-            <Image
+            {/* <Image
               src={KYC}
               alt="secure"
               className={styles.profileSecurityImg}
-            />
+            /> */}
+            <Box
+              sx={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "100%",
+                background: "#081630",
+                // position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: "7%",
+              }}
+            >
+              <PhoneInTalkIcon
+                sx={{
+                  color: "#fff",
+                }}
+              />
+            </Box>
             <div>
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 <h3>Verify Phone number</h3>{" "}
@@ -201,16 +253,35 @@ const Index = () => {
             style={{ cursor: "pointer" }}
             onClick={handleBankDetailsModal}
           >
-            <Image
+            {/* <Image
               src={Bank}
               alt="secure"
               className={styles.profileSecurityImg}
-            />
+            /> */}
+            <Box
+              sx={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "100%",
+                background: "#081630",
+                // position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: "7%",
+              }}
+            >
+              <AccountBalanceIcon
+                sx={{
+                  color: "#fff",
+                }}
+              />
+            </Box>
             <div>
               <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                 {" "}
                 <h3>Bank Details</h3>{" "}
-                {bankAccount.length > 0 && (
+                {bankAccount?.length > 0 && (
                   <CheckIcon sx={{ color: "green" }} />
                 )}
               </Box>

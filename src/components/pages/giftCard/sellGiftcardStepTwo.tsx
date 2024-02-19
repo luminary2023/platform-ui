@@ -76,6 +76,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
     handleSubmit,
     register,
     watch,
+    reset,
     formState: { errors },
   } = useForm<tradeGiftcardProps>({
     resolver: zodResolver(tradeGiftcardSchema),
@@ -209,7 +210,7 @@ const SellGiftcardStepTwo: FC<Props> = ({
               marginTop: 10,
             }}
           >
-            Trade Giftcard
+            Continue
           </Button>
         </div>
       </form>

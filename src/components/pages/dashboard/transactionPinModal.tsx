@@ -44,6 +44,8 @@ interface ErrorProps {
 }
 
 const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
+  const reload = () => window.location.reload();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [createPin, setCreatePin] = useState<any>({});
 
@@ -68,11 +70,10 @@ const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
       setLoading(false);
 
       if (createPin?.message === "Transaction pin is set successfully.") {
-        setTimeout(async () => {
+        setTimeout(() => {
           onClose();
-        }, 1500);
+        }, 1000);
       }
-      // reload();
     } catch (error: any) {
       return error?.response?.data;
     }

@@ -118,7 +118,7 @@ export default function UploadImage({
                   reset(),
                   setImage(""),
                   setError(false),
-                  toggleDrawer();
+                  toggleDrawer(false);
               }}
             >
               X

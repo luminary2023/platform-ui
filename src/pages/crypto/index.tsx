@@ -15,7 +15,7 @@ import SellIcon from "../../assets/images/cryptoSellIcon.svg";
 import Withdraw from "../../assets/images/cryptoWithdrawIcon.svg";
 import TransactionTable from "@/components/pages/crypto/transactionTable";
 import CryptoChart from "@/components/pages/crypto/cryptoChart";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, FC } from "react";
 import RightDrawer from "@/components/drawer";
 import { useRouter } from "next/router";
 import Input from "@/components/InputField";
@@ -30,7 +30,11 @@ import UploadImageModal from "@/components/pages/crypto/uploadImageModal";
 import { sellCryptoApi } from "@/api/sellCrypto";
 import axios from "axios";
 
-const Crypto = () => {
+interface Props {
+  onClose: () => void;
+}
+
+const Crypto: FC<Props> = ({ onClose }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [openBarcodeModal, setOpenBarcodeModal] = useState(false);
@@ -74,6 +78,7 @@ const Crypto = () => {
     handleSubmit,
     register,
     watch,
+    reset,
     formState: { errors },
   } = useForm<cryptoProps>({
     resolver: zodResolver(sellCryptoValidation),
@@ -122,6 +127,15 @@ const Crypto = () => {
         setError(true);
 
         setErrs(response);
+        setTimeout(() => {
+          // onClose();
+          reset();
+          setOpenUploadImageModal(false);
+
+          setImage("");
+          setError(false);
+          setIsOpen(false);
+        }, 1000);
       } else {
         setLoading(false);
 

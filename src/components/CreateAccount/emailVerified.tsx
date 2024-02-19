@@ -6,6 +6,7 @@ import { Button } from "../Button/Button";
 import BackArrow from "../../assets/images/arrow-left.svg";
 import { useRouter } from "next/router";
 import { EmailVerifiedProps } from "@/services/interfaces";
+import { Box } from "@mui/material";
 
 const EmailVerified: FC<EmailVerifiedProps> = ({
   title,
@@ -26,10 +27,12 @@ const EmailVerified: FC<EmailVerifiedProps> = ({
       <Image src={icon} alt="email" width="56" height="56" />
       <h1>{title}</h1>
       <p>{subTitle}</p>
-      <Button color="primary" variant="contained" onClick={btnOnClick}>
-        {" "}
-        {btnText || "Continue"}
-      </Button>
+      <Box sx={{ width: "45%" }}>
+        <Button color="primary" variant="contained" onClick={btnOnClick}>
+          {" "}
+          {btnText || "Continue"}
+        </Button>
+      </Box>
       {/* {actionType !== "reset password" && (
         <div className={styles.sent}>
           <p>Didn’t receive the email?</p>

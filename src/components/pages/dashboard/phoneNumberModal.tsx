@@ -60,28 +60,36 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     handleSubmit,
     register,
     reset,
+    watch,
     formState: { errors },
   } = useForm<phoneNumberProps>({
     resolver: zodResolver(verifyPhoneNumber),
   });
 
   const handlePhoneNumber = async (data: phoneNumberProps) => {
-    try {
-      setLoading(true);
-      const response = await numberVerificationCode(data);
+    const payload = {
+      phoneNumber: `+234${data.phoneNumber.slice(1)}`,
+      verificationCode: data.verificationCode,
+    };
+
+    // try {
+    setLoading(true);
+    const response = await numberVerificationCode(payload);
+    setPhoneNumber(response);
+
+    if (response.message === "Verification code sent successfully.") {
+      setPhoneNumberVerification(false);
+      setError(false);
+      setLoading(false);
       sessionStorage.setItem("phoneNumber", data.phoneNumber);
-      setPhoneNumber(response);
-      if (phoneNumber.message === "Verification code sent successfully.") {
-        setLoading(false);
-        setPhoneNumberVerification(false);
-      } else {
-        setLoading(false);
-        setPhoneNumber(response);
-        setError(true);
-      }
-    } catch (error: any) {
-      return error?.response?.data;
     }
+    setLoading(false);
+    setPhoneNumber(response);
+    setError(true);
+
+    // } catch (error: any) {
+    //   return error?.response?.data;
+    // }
   };
 
   const handleOTP = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -95,6 +103,11 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     setPhoneNumber(res);
     setError(true);
     setLoading(false);
+    setTimeout(async () => {
+      setError(false);
+      onClose();
+    }, 2000);
+
     sessionStorage.clear();
   };
 
@@ -102,6 +115,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
     reset();
     onClose();
     setError(false);
+    setPhoneNumberVerification(true);
   };
 
   return (
@@ -112,21 +126,21 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        {error && (
-          <Toast
-            text={phoneNumber?.errors?.[0].message || phoneNumber?.message}
-            success={phoneNumber?.status === "Success"}
-            marginBottom={40}
-            color={phoneNumber?.status === "Success" ? "green" : "DF1111"}
-            border={
-              phoneNumber?.status === "Success"
-                ? "1px solid green"
-                : "1px solid #DF1111"
-            }
-          />
-        )}
         {phoneNumberVerification ? (
           <>
+            {error && (
+              <Toast
+                text={phoneNumber?.errors?.[0].message || phoneNumber.message}
+                success={phoneNumber?.status === "Success"}
+                marginBottom={40}
+                color={phoneNumber?.status === "Success" ? "green" : "DF1111"}
+                border={
+                  phoneNumber?.status === "Success"
+                    ? "1px solid green"
+                    : "1px solid #DF1111"
+                }
+              />
+            )}
             <Box
               sx={{
                 display: "flex",
@@ -157,27 +171,12 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
                 X
               </Typography>
             </Box>
-            <Typography
-              id="modal-modal-title"
-              variant="h6"
-              component="h1"
-              sx={{
-                fontFamily: "Satoshi Bold",
-                fontSize: { xs: "12px", sm: "14px", lg: "16px", xl: "16px" },
-                fontStyle: "normal",
-                fontWeight: 600,
-                lineHeight: "28px;",
-                color: "#6F6C99",
-              }}
-            >
-              Enter phone number in this format: +2348100000000
-            </Typography>
 
             <form onSubmit={handleSubmit(handlePhoneNumber)}>
               <Input
                 type="text"
-                placeholder={"Enter phone number +2348100000000"}
-                maxLength={"14"}
+                placeholder={"08100000000"}
+                maxLength={"11"}
                 aria-label="Demo number input"
                 // label="Phone number"
                 marginBottom={"20px"}
@@ -266,7 +265,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
             </Box>
             <Typography
               sx={{
-                color: "#667085",
+                // color: "green",
                 fontFamily: "Satoshi Light",
                 fontSize: { xs: "14px", sm: "14px", lg: "16px", xl: "16px" },
                 textAlign: "center",
@@ -275,6 +274,14 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
                 lineHeight: "24px",
                 marginBottom: "16px",
               }}
+              color={`${
+                phoneNumber.message === "Verification code sent successfully."
+                  ? "green"
+                  : phoneNumber.message ===
+                    "Your phone number have been verified."
+                  ? "green"
+                  : "red"
+              }`}
             >
               {phoneNumber.message}
             </Typography>
