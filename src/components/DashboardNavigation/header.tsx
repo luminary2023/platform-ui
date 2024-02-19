@@ -9,22 +9,50 @@ import {
   Button,
   Fade,
 } from "@mui/material";
+import { useRouter } from "next/router";
+
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
+import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
+
 // import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DownArrow from "../../assets/images/DownArrow.svg";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { deleteCookie, getCookie } from "cookies-next";
 import { useThemeContext } from "@/api/useContext/store";
 import { profileRequest } from "@/api/profile";
 import { refreshTokenApi } from "@/api/refreshToken";
 
+const links = [
+  { path: "/dashboard", title: "Dashboard", icon: <DashboardOutlinedIcon /> },
+  { path: "/wallet", title: "Wallet", icon: <WalletOutlinedIcon /> },
+  {
+    path: "/crypto",
+    title: "Crypto",
+    icon: <CurrencyBitcoinIcon />,
+  },
+  {
+    path: "/giftCard",
+    title: "Gift Cards",
+    icon: <CardGiftcardOutlinedIcon />,
+  },
+  {
+    path: "/settings",
+    title: "Settings",
+    icon: <SettingsIcon />,
+  },
+];
 interface Props {
   title: string;
   subtitle: string;
 }
 
 const Header: FC<Props> = ({ title, subtitle = "" }) => {
+  const router = useRouter();
+  const currentRoute = router.pathname;
   const { profileData } = useThemeContext();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -32,11 +60,14 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+    // router.push(href);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const router = useRouter();
+  const handleClickPath = (href: string) => {
+    router.push(href);
+  };
 
   const logout = () => {
     deleteCookie("logged");
@@ -188,67 +219,69 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
             onClose={handleClose}
             TransitionComponent={Fade}
           >
-            <MenuItem
-              onClick={() => router.push("/wallet")}
-              sx={{
-                fontSize: {
-                  xs: "13px",
-                  md: "14px",
-                  lg: "14px",
-                },
-              }}
-            >
-              Wallet
-            </MenuItem>
-            <MenuItem
-              onClick={() => router.push("/crypto")}
-              sx={{
-                fontSize: {
-                  xs: "13px",
-                  md: "14px",
-                  lg: "14px",
-                },
-              }}
-            >
-              Crypto
-            </MenuItem>
-            <MenuItem
-              onClick={() => router.push("/giftCard")}
-              sx={{
-                fontSize: {
-                  xs: "13px",
-                  md: "14px",
-                  lg: "14px",
-                },
-              }}
-            >
-              Gift Card
-            </MenuItem>
-            <MenuItem
-              onClick={() => router.push("/settings")}
-              sx={{
-                fontSize: {
-                  xs: "13px",
-                  md: "14px",
-                  lg: "14px",
-                },
-              }}
-            >
-              Settings
-            </MenuItem>
+            {links.map((link) => (
+              <Box
+                key={link.path}
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: "10px",
+                  cursor: "pointer",
 
-            <MenuItem
-              onClick={logout}
-              sx={{
-                fontSize: {
-                  xs: "13px",
-                  md: "14px",
-                  lg: "14px",
-                },
-              }}
-            >
-              Logout
-            </MenuItem>
+                  marginLeft: {
+                    xs: "20px",
+                    lg: "10px",
+                  },
+                }}
+                onClick={() => handleClickPath(link.path)}
+              >
+                <span
+                  style={{
+                    color: currentRoute === link.path ? "#FD6E6A" : "#000",
+                    // width: "10px",
+                  }}
+                >
+                  {link.icon}
+                </span>
+
+                <Typography
+                  color={
+                    currentRoute === link.path
+                      ? {
+                          backgroundImage: ` var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))`,
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                        }
+                      : "#000"
+                  }
+                  sx={{
+                    marginLeft: { xs: "10px", sm: "13px", lg: "10px" },
+                    marginRight: { lg: "10px" },
+                    fontSize: {
+                      xs: "10px",
+                      md: "12px",
+                      lg: "12px",
+                    },
+                    fontFamily: "Satoshi Light",
+                    fontStyle: "normal",
+                    fontWeight: "bold",
+                    lineHeight: "normal",
+                    letterSpacing: "0.5px",
+                    cursor: "pointer",
+                    display: {
+                      xs: "none",
+                      sm: "block",
+                      md: "block",
+                      lg: "block",
+                      xl: "block",
+                    },
+                  }}
+                >
+                  {link.title}
+                </Typography>
+              </Box>
+            ))}
           </Menu>
         </Box>
       </Box>

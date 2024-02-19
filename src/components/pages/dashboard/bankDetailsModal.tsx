@@ -217,7 +217,13 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             labelSize={"16px"}
             marginTop={"12px"}
             register={{ ...register("accountNumber") }}
-            borderColor={errors.accountNumber?.message ? "#DF1111" : ""}
+            borderColor={
+              errors.accountNumber?.message
+                ? "#DF1111"
+                : accountNumber?.length != 10 || !accountBankName?.accountName
+                ? "red"
+                : ""
+            }
             onKeyPress={(event: any) => {
               if (!/[0-9]/.test(event.key)) {
                 event.preventDefault();
