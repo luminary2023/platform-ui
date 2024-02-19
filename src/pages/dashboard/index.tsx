@@ -114,7 +114,8 @@ const Index = () => {
                   thickness={8}
                   size={80}
                   sx={{
-                    color: "#F2F4FC",
+                    // color : {progress === 3 ? "green" : "#F2F4FC"}
+
                     width: { xs: "20px", sm: "20px", lg: "100px", xl: "100px" },
                     height: {
                       xs: "20px",

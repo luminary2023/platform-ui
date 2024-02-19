@@ -8,6 +8,8 @@ import WalletOutlinedIcon from "@mui/icons-material/WalletOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import { Typography, Box } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { deleteCookie, getCookie } from "cookies-next";
 
 const links = [
   { path: "/dashboard", title: "Dashboard", icon: <DashboardOutlinedIcon /> },
@@ -35,6 +37,14 @@ const Sidebar = () => {
 
   const handleClick = (href: string) => {
     router.push(href);
+  };
+
+  const logout = () => {
+    deleteCookie("logged");
+    deleteCookie("token");
+    deleteCookie("name");
+    deleteCookie("value");
+    router.push("/");
   };
 
   return (
@@ -141,6 +151,42 @@ const Sidebar = () => {
           </Typography>
         </Box>
       ))}
+      <Box
+        onClick={logout}
+        sx={{
+          display: "flex",
+          color: "red",
+          marginLeft: {
+            xs: "20px",
+            lg: "44px",
+          },
+          position: "absolute",
+          top: "bottom",
+        }}
+      >
+        <LogoutIcon
+          sx={{
+            color: "red",
+          }}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: "29px",
+            cursor: "pointer",
+
+            fontSize: "16px",
+            fontFamily: "Satoshi Light",
+            fontStyle: "normal",
+            fontWeight: "bold",
+            marginLeft: "27px",
+          }}
+        >
+          Logout
+        </Box>
+      </Box>
     </Box>
   );
 };
