@@ -10,6 +10,8 @@ import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import { Typography, Box } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { deleteCookie, getCookie } from "cookies-next";
+import Image from "next/image";
+import Logo from "../../assets/images/logo.png";
 
 const links = [
   { path: "/dashboard", title: "Dashboard", icon: <DashboardOutlinedIcon /> },
@@ -63,6 +65,7 @@ const Sidebar = () => {
           xl: "100vh",
         },
         background: "#081630",
+
         paddingRight: {
           xs: "12px",
           sm: "12px",
@@ -70,7 +73,7 @@ const Sidebar = () => {
         position: { xs: "fixed", sm: "fixed", lg: "fixed", xl: "fixed" },
       }}
     >
-      <Typography
+      {/* <Typography
         sx={{
           color: "#FFF",
           fontSize: {
@@ -92,9 +95,20 @@ const Sidebar = () => {
           textAlign: "center",
           marginBottom: "105px",
         }}
-      >
-        LumiApp
-      </Typography>
+      > */}
+      <Image
+        src={Logo}
+        alt="logo"
+        width={200}
+        style={{
+          position: "relative",
+          top: "-30px",
+          margin: "auto",
+          display: "block",
+          justifyContent: "center",
+        }}
+      />
+      {/* </Typography> */}
       {links.map((link) => (
         <Box
           key={link.path}
@@ -102,11 +116,12 @@ const Sidebar = () => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            // justifyContent: "center",
             marginBottom: "29px",
             cursor: "pointer",
             marginLeft: {
               xs: "20px",
-              lg: "44px",
+              lg: "55px",
             },
           }}
           onClick={() => handleClick(link.path)}
@@ -158,7 +173,7 @@ const Sidebar = () => {
           color: "red",
           marginLeft: {
             xs: "20px",
-            lg: "44px",
+            lg: "55px",
           },
           position: "absolute",
           top: "bottom",
