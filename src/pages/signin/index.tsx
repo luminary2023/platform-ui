@@ -15,6 +15,7 @@ import Toast from "../../components/Toast";
 import { deleteCookie, setCookie } from "cookies-next";
 import { ErrorProps } from "@/services/interfaces";
 import { getCookie } from "cookies-next";
+import jwt, { JwtPayload } from "jsonwebtoken";
 // import isTokenExpired from "@/api/axiosClient";
 
 interface LoginProps {
@@ -46,21 +47,25 @@ const SignIn = () => {
     setLoading(false);
     if (res?.statusCode === 200 && res.status === "Success") {
       setCookie("token", res.token.token);
+      // localStorage.setItem("token", res.token.token);
       router.push("/dashboard");
       setError(false);
+      console.log(res.token);
     }
     setErrs(res);
     setError(true);
   };
 
-  // const exp = () => {
-  //   const tokenExpired = isTokenExpired();
-
-  //   if (tokenExpired) {
-  //     router.push("/signin");
-  //   }
-  // };
-
+  const checkTokenExpired = () => {
+    setTimeout(() => {
+      router.push("/signin");
+      deleteCookie("token");
+      // localStorage.removeItem("token");
+    }, 3300000);
+  };
+  useEffect(() => {
+    checkTokenExpired();
+  }, []);
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signinLeftWrapper}>
