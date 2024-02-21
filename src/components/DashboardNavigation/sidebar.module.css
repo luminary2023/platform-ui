@@ -1,0 +1,10 @@
+@media screen and (max-width: 800px) {
+  .logo {
+    width: 50;
+    height: 50;
+    position: relative;
+    left: "-50px";
+    /* justify-content: left; */
+    display: none;
+  }
+}

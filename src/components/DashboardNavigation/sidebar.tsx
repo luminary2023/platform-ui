@@ -12,6 +12,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { deleteCookie, getCookie } from "cookies-next";
 import Image from "next/image";
 import Logo from "../../assets/images/logo.png";
+import styles from "./sidebar.module.css";
 
 const links = [
   { path: "/dashboard", title: "Dashboard", icon: <DashboardOutlinedIcon /> },
@@ -96,18 +97,21 @@ const Sidebar = () => {
           marginBottom: "105px",
         }}
       > */}
-      <Image
-        src={Logo}
-        alt="logo"
-        width={200}
-        style={{
-          position: "relative",
-          top: "-30px",
-          margin: "auto",
-          // display: "block",
-          justifyContent: "center",
-        }}
-      />
+      <div className={styles.logo}>
+        <Image
+          src={Logo}
+          alt="logo"
+          width={200}
+          className={styles.logo}
+          style={{
+            position: "relative",
+            top: "-30px",
+            margin: "auto",
+            // display: "block",
+            justifyContent: "center",
+          }}
+        />
+      </div>
       {/* </Typography> */}
       {links.map((link) => (
         <Box
@@ -123,6 +127,7 @@ const Sidebar = () => {
               xs: "20px",
               lg: "55px",
             },
+            marginTop: { lg: "0px", sm: "30px", xs: "30px" },
           }}
           onClick={() => handleClick(link.path)}
         >

@@ -54,6 +54,7 @@
 @media screen and (max-width: 992px) {
   .profileSecurity {
     width: 99%;
+    padding: 16px 16px 16px 10px;
   }
 }
 .profileSecurityImg {
@@ -433,3 +434,13 @@
   font-weight: 700;
   line-height: normal;
 }
+.logo {
+  width: "100px";
+  /* position: "relative"; */
+  /* top: "-30px"; */
+}
+/* @media screen and (max-width: 992px) {
+  .logo {
+    width: "100px";
+  }
+} */

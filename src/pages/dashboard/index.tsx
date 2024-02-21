@@ -175,7 +175,7 @@ const Index = () => {
             /> */}
             <Box
               sx={{
-                width: "40px",
+                width: { lg: "40px", md: "6%", sm: "55px", xs: "55px" },
                 height: "40px",
                 borderRadius: "100%",
                 background: "#081630",
@@ -220,7 +220,7 @@ const Index = () => {
             /> */}
             <Box
               sx={{
-                width: "40px",
+                width: { lg: "40px", md: "40px", sm: "75px", xs: "75px" },
                 height: "40px",
                 borderRadius: "100%",
                 background: "#081630",
@@ -262,7 +262,7 @@ const Index = () => {
             /> */}
             <Box
               sx={{
-                width: "40px",
+                width: { lg: "40px", md: "40px", sm: "70px", xs: "65px" },
                 height: "40px",
                 borderRadius: "100%",
                 background: "#081630",

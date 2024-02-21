@@ -10,7 +10,7 @@ export const refreshTokenApi = async ({ refreshToken }: Props) => {
     const res = await axiosInstance.post("/refresh", {
       refreshToken,
     });
-    console.log(res);
+
     return res.data;
   } catch (error: any) {
     return error?.response?.data;
