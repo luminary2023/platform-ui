@@ -23,7 +23,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/services/pieChart.js",
-    "src/services/cryptoChart.js"
+    "src/services/cryptoChart.js",
+    "src/components/idle.js"
   ],
   "exclude": ["node_modules"]
 }

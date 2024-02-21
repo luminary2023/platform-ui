@@ -104,7 +104,7 @@ const Sidebar = () => {
           position: "relative",
           top: "-30px",
           margin: "auto",
-          display: "block",
+          // display: "block",
           justifyContent: "center",
         }}
       />
@@ -186,9 +186,6 @@ const Sidebar = () => {
         />
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
             marginBottom: "29px",
             cursor: "pointer",
 
@@ -196,7 +193,14 @@ const Sidebar = () => {
             fontFamily: "Satoshi Light",
             fontStyle: "normal",
             fontWeight: "bold",
-            marginLeft: "27px",
+            marginLeft: { xs: "10px", sm: "13px", lg: "27px" },
+            display: {
+              xs: "none",
+              sm: "block",
+              md: "block",
+              lg: "block",
+              xl: "block",
+            },
           }}
         >
           Logout

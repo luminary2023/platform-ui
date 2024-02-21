@@ -189,6 +189,7 @@ const Index = () => {
               <ReceiptLongIcon
                 sx={{
                   color: "#fff",
+                  width: "70%",
                 }}
               />
             </Box>
@@ -233,6 +234,7 @@ const Index = () => {
               <PhoneInTalkIcon
                 sx={{
                   color: "#fff",
+                  width: "70%",
                 }}
               />
             </Box>
@@ -274,6 +276,7 @@ const Index = () => {
               <AccountBalanceIcon
                 sx={{
                   color: "#fff",
+                  width: "70%",
                 }}
               />
             </Box>
