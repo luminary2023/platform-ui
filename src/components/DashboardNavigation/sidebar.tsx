@@ -106,6 +106,7 @@ const Sidebar = () => {
           style={{
             position: "relative",
             top: "-30px",
+            display: "flex",
             margin: "auto",
             // display: "block",
             justifyContent: "center",
