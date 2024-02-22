@@ -172,6 +172,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
                 fontSize: { xs: "13px", sm: "13px", md: "15px", lg: "17px" },
                 cursor: "pointer",
                 display: "flex",
+                textTransform: "uppercase",
               }}
             >
               {profileData?.firstName?.[0]}

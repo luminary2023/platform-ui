@@ -116,6 +116,7 @@ const Sidebar = () => {
       {/* </Typography> */}
       {links.map((link) => (
         <Box
+          color={currentRoute === link.path ? "#FD6E6A" : "#FFFFFF"}
           key={link.path}
           sx={{
             display: "flex",
@@ -129,16 +130,23 @@ const Sidebar = () => {
               lg: "55px",
             },
             marginTop: { lg: "0px", sm: "30px", xs: "30px" },
+            "&:hover": {
+              backgroundImage: ` var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              color: "#FD6E6A",
+            },
           }}
           onClick={() => handleClick(link.path)}
         >
-          <span
-            style={{
-              color: currentRoute === link.path ? "#FD6E6A" : "#ffff",
-            }}
+          <Box
+
+          // style={{
+          //   color: currentRoute === link.path ? "#FD6E6A" : "#ffff",
+          // }}
           >
             {link.icon}
-          </span>
+          </Box>
 
           <Typography
             color={
@@ -166,6 +174,13 @@ const Sidebar = () => {
                 lg: "block",
                 xl: "block",
               },
+              // "&:hover": {
+              //   color: {
+              //     backgroundImage: ` var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))`,
+              //     WebkitBackgroundClip: "text",
+              //     WebkitTextFillColor: "transparent",
+              //   },
+              // },
             }}
           >
             {link.title}

@@ -20,6 +20,7 @@ import { profileRequest } from "@/api/profile";
 import { useThemeContext } from "@/api/useContext/store";
 import Loading from "@/components/Loading";
 import { refreshTokenApi } from "@/api/refreshToken";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 
 interface WithdrawProps {
   accountNumber: string;
@@ -49,8 +50,10 @@ const Wallet = () => {
 
   const handleBankAccount = async () => {
     try {
+      // setLoading(true);
       const response = await userAccountDetails();
       setBankAccount(response);
+      // setLoading(false);
     } catch (error: any) {
       return error?.response?.data;
     }
@@ -124,19 +127,19 @@ const Wallet = () => {
       if (amount < 1000) {
         return "error";
       } else {
-        setLoading(true);
+        // setLoading(true);
         const data = await { bank, amount, selectedBankDetails };
         setWithdrawAmount(amount);
         setSelectedBankDetails(selectedBankDetails);
         const parseResult = await withdrawDetails?.safeParse(data);
-        setLoading(false);
+        // setLoading(false);
         if (parseResult.success) router.push("/withdraw");
       }
     } catch (error: any) {
       return error.results.data;
     }
   };
-
+  const minimumAmount = 1000;
   return (
     <div style={{ background: "#F6F6F6" }}>
       <DashboardContainer title="Wallet">
@@ -198,7 +201,9 @@ const Wallet = () => {
               <div className={styles.withdrawFunds}>
                 <h3 className={styles.tableTitle}>Withdraw Funds</h3>
 
-                {bankAccount.length > 0 && (
+                {/* {loading ? <Loading /> : ""} */}
+
+                {bankAccount?.length > 0 && (
                   <Typography
                     sx={{
                       color: "#F7931A",
@@ -215,24 +220,28 @@ const Wallet = () => {
                 )}
               </div>
 
-              {bankAccount.length < 1 ? (
-                <Typography
-                  sx={{
-                    color: "#F7931A",
-                    fontSize: { md: "14px", lg: "16px", xs: "8px" },
-                    cursor: "pointer",
-                    textDecoration: "underline",
-                    display: "flex",
-                    alignItems: "center",
-                    textAlign: "center",
-                    justifyContent: "center",
-                    mt: "50px",
-                    mb: "50px",
-                  }}
-                  onClick={() => setOpenModal(true)}
-                >
-                  + Add Account
-                </Typography>
+              {bankAccount?.length < 1 ? (
+                bankAccount?.length === 0 ? (
+                  <Loading />
+                ) : (
+                  <Typography
+                    sx={{
+                      color: "#F7931A",
+                      fontSize: { md: "14px", lg: "16px", xs: "8px" },
+                      cursor: "pointer",
+                      textDecoration: "underline",
+                      display: "flex",
+                      alignItems: "center",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      mt: "50px",
+                      mb: "50px",
+                    }}
+                    onClick={() => setOpenModal(true)}
+                  >
+                    <GroupAddIcon sx={{ width: "60px", height: "60px" }} />
+                  </Typography>
+                )
               ) : (
                 <form onSubmit={handleSubmit(handleWithdraw)}>
                   <Typography
@@ -337,12 +346,15 @@ const Wallet = () => {
                     type={"text"}
                     label="Amount"
                     bgColor={"#F6F6F6"}
-                    marginBottom={"18px"}
+                    // marginBottom={"18px"}
                     labelColor={"#081630"}
                     labelSize={"16px"}
                     register={{ ...register("amount") }}
                     borderColor={
-                      errors.amount?.message || amount < 1000 ? "#DF1111" : ""
+                      errors.amount?.message ||
+                      (amount?.length === 3 && amount < minimumAmount)
+                        ? "#DF1111"
+                        : ""
                     }
                     onKeyPress={(event: any) => {
                       if (!/[0-9]/.test(event.key)) {
@@ -350,6 +362,12 @@ const Wallet = () => {
                       }
                     }}
                   />
+                  <Typography
+                    marginBottom={"18px"}
+                    sx={{ fontSize: "10px", color: "#081630" }}
+                  >
+                    Minimum: N1000
+                  </Typography>
 
                   <Button
                     color="primary"
