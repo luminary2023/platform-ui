@@ -8,3 +8,8 @@
     display: none;
   }
 }
+
+.icon:hover {
+  /* display: none; */
+  color: #ffc600;
+}

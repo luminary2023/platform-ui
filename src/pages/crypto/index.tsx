@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   FormGroup,
   Typography,
+  TextField,
 } from "@mui/material";
 import Image from "next/image";
 import { Button } from "../../components/Button/Button";
@@ -212,13 +213,15 @@ const Crypto: FC<Props> = ({ onClose }) => {
                 }}
               >
                 <Box
+                  // disabled={true}
                   sx={{
-                    border: "1px solid #FD6E6A",
+                    border: "1px solid #F3F3F3",
                     width: "30%",
                     height: "113px",
                     borderRadius: "5px",
-                    background: "#FEF4E6",
+                    background: "#F3F3F3",
                     display: { xs: "none", md: "block", lg: "block" },
+                    ":disabled": "true",
                   }}
                 >
                   <Image
@@ -232,7 +235,7 @@ const Crypto: FC<Props> = ({ onClose }) => {
                     }}
                   />
                   <Typography textAlign={"center"} mt={1}>
-                    Buy coming soon
+                    Buy
                   </Typography>
                 </Box>
                 <Box
@@ -399,7 +402,7 @@ const Crypto: FC<Props> = ({ onClose }) => {
           <Box sx={{ display: "flex", gap: 2 }}>
             <Box>
               <Input
-                label="You pay"
+                label="You send"
                 placeholder="0"
                 borderColor={errors.pay?.message ? "#DF1111" : ""}
                 register={register("pay")}
@@ -442,13 +445,27 @@ const Crypto: FC<Props> = ({ onClose }) => {
               sx={{ color: "#6C757D", fontSize: "1px" }}
             />
           </FormGroup> */}
-          <Input
+          {/* <Input
             label="Comment"
             placeholder="Add comment"
             borderColor={errors.comment?.message ? "#DF1111" : ""}
             register={register("comment")}
             type={"text"}
-          />
+          /> */}
+          <label style={{ color: "#344054", fontSize: "14px" }}>Comment</label>
+          <br />
+          <textarea
+            cols={15}
+            style={{
+              borderColor: `${errors.comment?.message ? "#DF1111" : "#d0d5dd"}`,
+              width: "100%",
+              padding: "15px",
+              borderRadius: "10px",
+              marginTop: "8px",
+              outline: "none",
+            }}
+            {...register("comment")}
+          ></textarea>
 
           <Button
             color="primary"

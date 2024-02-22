@@ -84,7 +84,6 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
 
   const fetchBankDetails = async () => {
     try {
-      setLoading(true);
       const res = await bankRequest();
       setBanks(res);
       setLoading(false);
@@ -98,11 +97,14 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
+
         const data = { accountNumber, bankId };
         const parseResult = bankDetails.safeParse(data);
         if (parseResult.success) {
           const response = await resolveAccount(data);
           setAccountBankName(response);
+          setLoading(false);
         }
       } catch (error: any) {
         error?.response?.data;
@@ -134,11 +136,12 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             fontStyle: "normal",
             fontWeight: 600,
             lineHeight: "28px;",
+            marginBottom: "16px",
           }}
         >
           Add your bank details{" "}
         </Typography>
-        <Typography
+        {/* <Typography
           sx={{
             color: "#667085",
             fontFamily: "Satoshi Light",
@@ -151,7 +154,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
           }}
         >
           Add your bank details{" "}
-        </Typography>
+        </Typography> */}
         {error && (
           <Toast
             text={errs?.errors?.[0].message || errs?.message}
@@ -220,7 +223,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
             borderColor={
               errors.accountNumber?.message
                 ? "#DF1111"
-                : accountNumber?.length != 10 || !accountBankName?.accountName
+                : accountNumber?.length === 10 && !accountBankName?.accountName
                 ? "red"
                 : ""
             }
