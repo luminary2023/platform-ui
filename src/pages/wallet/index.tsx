@@ -139,24 +139,12 @@ const Wallet = () => {
 
   const handleWithdraw = async () => {
     setLoading(true);
-
-    try {
-      if (amount < 1000) {
-        setLoading(false);
-
-        return "error";
-      } else {
-        setLoading(true);
-        const data = await { bank, amount, selectedBankDetails };
-        setWithdrawAmount(amount);
-        setSelectedBankDetails(selectedBankDetails);
-        const parseResult = await withdrawDetails?.safeParse(data);
-        setLoading(false);
-        if (parseResult.success) router.push("/withdraw");
-      }
-    } catch (error: any) {
-      return error.results.data;
-    }
+    const data = { bank, amount, selectedBankDetails };
+    setWithdrawAmount(amount);
+    setSelectedBankDetails(selectedBankDetails);
+    const parseResult = withdrawDetails?.safeParse(data);
+    setLoading(false);
+    if (parseResult.success) router.push("/withdraw");
   };
   const minimumAmount = 1000;
   return (
