@@ -137,9 +137,9 @@ const TransactionTable = () => {
           variant="outlined"
           shape="rounded"
           // showFirstButton
-          count={currentPost.length}
+          // count={currentPost.length}
           defaultPage={currentPage}
-          // hideNextButton={false}
+          hideNextButton={recordsPerPage < 7 ? false : true}
           sx={{
             color: "#007C5B",
             mt: "20px",

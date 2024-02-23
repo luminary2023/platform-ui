@@ -197,7 +197,7 @@ const Sidebar = () => {
             lg: "55px",
           },
           position: "absolute",
-          top: "bottom",
+          top: "90%",
         }}
       >
         <LogoutIcon

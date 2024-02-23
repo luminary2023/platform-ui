@@ -222,6 +222,7 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
           >
             {links.map((link) => (
               <Box
+                color={currentRoute === link.path ? "#FD6E6A" : "#000"}
                 key={link.path}
                 sx={{
                   display: "flex",
@@ -234,17 +235,16 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
                     xs: "20px",
                     lg: "10px",
                   },
+                  "&:hover": {
+                    backgroundImage: ` var(--linear-1, linear-gradient(135deg, #FD6E6A 0%, #FFC600 100%))`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    color: "#FD6E6A",
+                  },
                 }}
                 onClick={() => handleClickPath(link.path)}
               >
-                <span
-                  style={{
-                    color: currentRoute === link.path ? "#FD6E6A" : "#000",
-                    // width: "10px",
-                  }}
-                >
-                  {link.icon}
-                </span>
+                <span>{link.icon}</span>
 
                 <Typography
                   color={
