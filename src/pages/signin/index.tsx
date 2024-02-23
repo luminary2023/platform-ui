@@ -50,7 +50,6 @@ const SignIn = () => {
       // localStorage.setItem("token", res.token.token);
       router.push("/dashboard");
       setError(false);
-      console.log(res.token);
     }
     setErrs(res);
     setError(true);

@@ -44,7 +44,6 @@ const Wallet = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [bankAccount, setBankAccount] = useState<any[]>([]);
-  console.log(bankAccount, "account");
   const [selectedBank, setSelectedBank] = useState<any>(null);
   const [accountCheck, setAccountCheck] = useState(true);
   const [profileData, setProfileData] = useState<any>({});
