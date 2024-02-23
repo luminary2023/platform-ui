@@ -138,16 +138,20 @@ const Wallet = () => {
   };
 
   const handleWithdraw = async () => {
+    setLoading(true);
+
     try {
       if (amount < 1000) {
+        setLoading(false);
+
         return "error";
       } else {
-        // setLoading(true);
+        setLoading(true);
         const data = await { bank, amount, selectedBankDetails };
         setWithdrawAmount(amount);
         setSelectedBankDetails(selectedBankDetails);
         const parseResult = await withdrawDetails?.safeParse(data);
-        // setLoading(false);
+        setLoading(false);
         if (parseResult.success) router.push("/withdraw");
       }
     } catch (error: any) {
@@ -375,12 +379,7 @@ const Wallet = () => {
                     labelColor={"#081630"}
                     labelSize={"16px"}
                     register={{ ...register("amount") }}
-                    borderColor={
-                      errors.amount?.message ||
-                      (amount?.length === 3 && amount < minimumAmount)
-                        ? "#DF1111"
-                        : ""
-                    }
+                    borderColor={errors.amount?.message ? "#DF1111" : ""}
                     onKeyPress={(event: any) => {
                       if (!/[0-9]/.test(event.key)) {
                         event.preventDefault();
@@ -389,7 +388,8 @@ const Wallet = () => {
                   />
                   <Typography
                     marginBottom={"18px"}
-                    sx={{ fontSize: "10px", color: "#081630" }}
+                    color={`${amount < minimumAmount ? "#DF1111" : "#081630"}`}
+                    sx={{ fontSize: "10px" }}
                   >
                     Minimum: N1000
                   </Typography>
@@ -406,6 +406,7 @@ const Wallet = () => {
                       height: "61px",
                       margintTop: "8px",
                     }}
+                    disabled={amount < minimumAmount}
                   >
                     {loading ? <Loading /> : "Withdraw"}
                   </Button>

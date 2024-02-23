@@ -37,7 +37,7 @@ export const bankDetails = z.object({
   accountNumber: z.string().min(10, { message: "Account number is required" }),
 });
 export const withdrawDetails = z.object({
-  amount: z.string().min(3, { message: "Amount" }),
+  amount: z.string().min(4, { message: "Amount" }),
   bank: z.string().min(3, { message: "Select bank" }),
 });
 export const resetPassword = z.object({
