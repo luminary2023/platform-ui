@@ -6,6 +6,7 @@ import {
   Checkbox,
   Modal,
   Box,
+  Typography,
 } from "@mui/material";
 import styles from "./giftcard.module.css";
 import BackArrow from "../../../assets/images/arrow-left.svg";
@@ -55,6 +56,8 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
   const [giftcardTypeId, setGiftcardTypeId] = useState("");
 
   const [giftcardSubCategory, setGiftcardSubCategory] = useState<any[]>([]);
+
+  const minimumAmount = giftcardSubCategory?.[0]?.minimumAmount;
 
   const [nairaRate, setNairaRate] = useState<any>();
   const [nairaRateId, setNairaRateId] = useState<any>();
@@ -269,22 +272,36 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
                 gap: "5px",
               }}
             >
-              <Input
-                placeholder="Enter Card amount"
-                type="text"
-                label="Enter Card amount"
-                marginBottom="24px"
-                inputStyles={{
-                  width: "100%",
-                }}
-                borderColor={errors.cardAmount?.message ? "#DF1111" : ""}
-                register={register("cardAmount")}
-                onKeyPress={(event: any) => {
-                  if (!/[0-9]/.test(event.key)) {
-                    event.preventDefault();
+              <Box marginBottom="24px">
+                <Input
+                  placeholder="Enter Card amount"
+                  type="text"
+                  label="Enter Card amount"
+                  // marginBottom="24px"
+                  inputStyles={{
+                    width: "100%",
+                  }}
+                  borderColor={
+                    errors.cardAmount?.message
+                      ? "#DF1111"
+                      : cardAmount < minimumAmount
+                      ? "#DF1111"
+                      : ""
                   }
-                }}
-              />
+                  register={register("cardAmount")}
+                  onKeyPress={(event: any) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
+                />
+                <Typography
+                  // marginBottom={"24px"}
+                  sx={{ fontSize: "10px", color: "#081630" }}
+                >
+                  Enter sub category amount range
+                </Typography>
+              </Box>
               <Input
                 placeholder="How many"
                 type="text"
@@ -304,28 +321,34 @@ const SellGiftCardDrawer: React.FC<SellGiftcardDrawerProps> = ({
             </div>
             <div style={{ textAlign: "center", margin: "30px" }}>
               <p>You would get:</p>
-              <h1 className={styles.GCDAmount}>NGN {receiveValue}</h1>
-              <p
-                style={{ color: "#17A2B8", fontSize: "14px" }}
-                className={styles.GCDAmount}
-              >
-                Rate {nairaRate}
-              </p>
+              {cardAmount >= minimumAmount && (
+                <>
+                  <h1 className={styles.GCDAmount}>NGN {receiveValue}</h1>
+
+                  <p
+                    style={{ color: "#17A2B8", fontSize: "14px" }}
+                    className={styles.GCDAmount}
+                  >
+                    Rate {nairaRate}
+                  </p>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                    type="submit"
+                    sx={{
+                      borderRadius: "10px",
+                      textTransform: "capitalize",
+                      height: "61px",
+                      margintTop: "8px",
+                    }}
+                    // disabled={cardAmount < minimumAmount}
+                  >
+                    Proceed{" "}
+                  </Button>
+                </>
+              )}
             </div>
-            <Button
-              color="primary"
-              variant="contained"
-              fullWidth
-              type="submit"
-              sx={{
-                borderRadius: "10px",
-                textTransform: "capitalize",
-                height: "61px",
-                margintTop: "8px",
-              }}
-            >
-              Proceed{" "}
-            </Button>
           </div>
         )}
       </form>

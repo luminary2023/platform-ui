@@ -62,8 +62,8 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
       title: "Buy",
       icon: BuyGiftCardIcon,
       onClick: () => {},
-      backgroundColor: "#FEF4E6",
-      borderColor: "1px solid var(--Linear-1, #FD6E6A)",
+      borderColor: "1px solid #F3F3F3",
+      backgroundColor: "#F3F3F3",
     },
     {
       id: 2,
@@ -202,9 +202,9 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
                 variant="outlined"
                 shape="rounded"
                 // showFirstButton
-                count={currentPost.length}
+                // count={currentPost.length}
                 defaultPage={currentPage}
-                // hideNextButton={false}
+                hideNextButton={recordsPerPage < 7 ? false : true}
                 sx={{
                   color: "#007C5B",
                   mt: "20px",

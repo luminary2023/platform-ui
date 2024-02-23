@@ -26,7 +26,7 @@ const SellGiftcard = () => {
   const recordsPerPage = 20;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
-  const currentPost = selectedGiftCard.slice(firstIndex, lastIndex);
+  const currentPost = selectedGiftCard?.slice(firstIndex, lastIndex);
 
   const handleInputChange = (e: any) => {
     const searchItem = e.target.value;
@@ -119,9 +119,9 @@ const SellGiftcard = () => {
         variant="outlined"
         shape="rounded"
         // showFirstButton
-        count={currentPost.length}
+        // count={currentPost.length}
         defaultPage={currentPage}
-        // hideNextButton={false}
+        hideNextButton={recordsPerPage < 21 ? false : true}
         sx={{
           color: "#007C5B",
           mt: "20px",

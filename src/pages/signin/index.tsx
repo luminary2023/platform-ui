@@ -65,7 +65,7 @@ const SignIn = () => {
   };
   useEffect(() => {
     checkTokenExpired();
-  }, []);
+  }, [checkTokenExpired]);
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signinLeftWrapper}>

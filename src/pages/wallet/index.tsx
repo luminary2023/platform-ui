@@ -44,6 +44,7 @@ const Wallet = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [bankAccount, setBankAccount] = useState<any[]>([]);
+  console.log(bankAccount, "account");
   const [selectedBank, setSelectedBank] = useState<any>(null);
   const [accountCheck, setAccountCheck] = useState(true);
   const [profileData, setProfileData] = useState<any>({});
@@ -121,6 +122,20 @@ const Wallet = () => {
     fetchProfile();
     handleBankAccount();
   }, [fetchProfile]);
+
+  const [accountInfo, setAccountInfo] = useState(true);
+
+  // const setTimerLoading = useMemo(() => {
+  //   setTimeout(() => {
+  //     setAccountInfo(false);
+  //   }, 3000);
+  // }, []);
+
+  const setTimerLoading = () => {
+    setTimeout(() => {
+      setAccountInfo(false);
+    }, 16000);
+  };
 
   const handleWithdraw = async () => {
     try {
@@ -220,28 +235,38 @@ const Wallet = () => {
                 )}
               </div>
 
-              {bankAccount?.length < 1 ? (
-                bankAccount?.length === 0 ? (
-                  <Loading />
-                ) : (
+              {accountInfo ? (
+                <>
                   <Typography
                     sx={{
-                      color: "#F7931A",
-                      fontSize: { md: "14px", lg: "16px", xs: "8px" },
-                      cursor: "pointer",
-                      textDecoration: "underline",
                       display: "flex",
-                      alignItems: "center",
-                      textAlign: "center",
                       justifyContent: "center",
                       mt: "50px",
                       mb: "50px",
                     }}
-                    onClick={() => setOpenModal(true)}
                   >
-                    <GroupAddIcon sx={{ width: "60px", height: "60px" }} />
+                    <Loading />
                   </Typography>
-                )
+                  {setTimerLoading()}
+                </>
+              ) : bankAccount?.length < 1 ? (
+                <Typography
+                  sx={{
+                    color: "#F7931A",
+                    fontSize: { md: "14px", lg: "16px", xs: "8px" },
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    display: "flex",
+                    alignItems: "center",
+                    textAlign: "center",
+                    justifyContent: "center",
+                    mt: "50px",
+                    mb: "50px",
+                  }}
+                  onClick={() => setOpenModal(true)}
+                >
+                  <GroupAddIcon sx={{ width: "60px", height: "60px" }} />
+                </Typography>
               ) : (
                 <form onSubmit={handleSubmit(handleWithdraw)}>
                   <Typography
@@ -389,7 +414,7 @@ const Wallet = () => {
             </div>
           </div>
         </div>
-        <div className={styles.tableContainer}>
+        {/* <div className={styles.tableContainer}>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <h1 className={styles.tableTitle}>History</h1>
             <div className={styles.filterWrapper}>
@@ -413,7 +438,7 @@ const Wallet = () => {
             </div>
           </div>
           <AppTable tableHeaderData={tableHeaderData} />
-        </div>
+        </div> */}
       </DashboardContainer>
       <BankDetailsModal open={openModal} onClose={() => setOpenModal(false)} />
     </div>
