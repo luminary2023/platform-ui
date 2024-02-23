@@ -13,6 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import { giftcardTableHead } from "@/services/data";
 import { giftcardTable } from "@/api/giftcardTable";
 import { Box, Pagination, Typography } from "@mui/material";
+import TradeInfoModal from "@/components/TradeInfoModal";
 
 interface GiftCardHomeProps {
   sellOnClick: () => void;
@@ -47,14 +48,19 @@ const statusStyle = (text: string) => {
 };
 
 const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
-  const [giftcardsTable, setGiftcardsTable] = useState<any>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const closeCardInfo = () => {
+    setIsOpen(false);
+  };
 
+  const [giftcardsTable, setGiftcardsTable] = useState<any>([]);
+  // const giftcardInfo = giftcardTable?.[0]
   const [currentPage, setCurrentPage] = useState(1);
 
   const recordsPerPage = 6;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
-  const currentPost = giftcardsTable.slice(firstIndex, lastIndex);
+  const currentPost = giftcardsTable?.slice(firstIndex, lastIndex);
 
   const GCACTIONS: actionProps[] = [
     {
@@ -83,6 +89,12 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
   useEffect(() => {
     giftcardTransactionTable();
   }, []);
+  const [cardInfo, setCardInfo] = useState<any>("");
+
+  const handleTransactionDetails = (giftcard: any) => {
+    setCardInfo({ ...giftcard });
+    setIsOpen(true);
+  };
 
   return (
     <div>
@@ -153,48 +165,54 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
                 </TableHead>
                 <TableBody>
                   {currentPost.map((giftcard: any) => (
-                    <TableRow
-                      key={giftcard.id}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        className={styles.tableData}
-                        sx={
-                          {
-                            // position: "relative",
-                            // left: "15px",
-                          }
-                        }
+                    <>
+                      <TableRow
+                        key={giftcard.id}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleTransactionDetails(giftcard)}
                       >
-                        <>
-                          {
-                            giftcard.giftcardSubCategory
-                              ?.giftcardCategoriesCurrenciesType
-                              ?.giftcardCategory?.name
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          className={styles.tableData}
+                          sx={
+                            {
+                              // position: "relative",
+                              // left: "15px",
+                            }
                           }
-                        </>
-                      </TableCell>
-                      <TableCell className={styles.tableData}>
-                        <>{giftcard.amount}</>
-                      </TableCell>
-                      <TableCell className={styles.tableData}>
-                        {giftcard.rate}
-                      </TableCell>
-                      <TableCell className={styles.tableData}>
-                        {giftcard.totalAmount}
-                      </TableCell>
-                      <TableCell className={styles.tableData}>
-                        <div
-                          className={`${styles.statusTag} ${statusStyle(
-                            giftcard.status
-                          )}`}
                         >
-                          {giftcard.status}
-                        </div>
-                      </TableCell>
-                    </TableRow>
+                          <>
+                            {
+                              giftcard.giftcardSubCategory
+                                ?.giftcardCategoriesCurrenciesType
+                                ?.giftcardCategory?.name
+                            }
+                          </>
+                        </TableCell>
+                        <TableCell className={styles.tableData}>
+                          <>{giftcard.amount}</>
+                        </TableCell>
+                        <TableCell className={styles.tableData}>
+                          {giftcard.rate}
+                        </TableCell>
+                        <TableCell className={styles.tableData}>
+                          {giftcard.totalAmount}
+                        </TableCell>
+                        <TableCell className={styles.tableData}>
+                          <div
+                            className={`${styles.statusTag} ${statusStyle(
+                              giftcard.status
+                            )}`}
+                          >
+                            {giftcard.status}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    </>
                   ))}
                 </TableBody>
               </Table>
@@ -218,6 +236,91 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
         </div>
         {/* </div> */}
       </Box>
+      <TradeInfoModal
+        open={isOpen}
+        onClose={closeCardInfo}
+        title="Giftcard Transaction information"
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            mt: "15px",
+          }}
+        >
+          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+            Giftcard
+          </Typography>
+          <Typography sx={{ fontSize: "16px" }}>
+            {
+              cardInfo.giftcardSubCategory?.giftcardCategoriesCurrenciesType
+                ?.giftcardCategory?.name
+            }
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            mt: "15px",
+          }}
+        >
+          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+            Amount
+          </Typography>
+          <Typography sx={{ fontSize: "16px" }}>{cardInfo.amount}</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            mt: "15px",
+          }}
+        >
+          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+            Rate
+          </Typography>
+          <Typography sx={{ fontSize: "16px" }}>{cardInfo.rate}</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            mt: "15px",
+          }}
+        >
+          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+            Quantity
+          </Typography>
+          <Typography sx={{ fontSize: "16px" }}>{cardInfo.quantity}</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            mt: "15px",
+          }}
+        >
+          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+            Total Amount
+          </Typography>
+          <Typography sx={{ fontSize: "16px" }}>
+            {cardInfo.totalAmount}
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            mt: "15px",
+          }}
+        >
+          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+            Status
+          </Typography>
+          <Typography sx={{ fontSize: "16px" }}>{cardInfo.status}</Typography>
+        </Box>
+      </TradeInfoModal>
     </div>
   );
 };

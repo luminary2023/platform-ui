@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
@@ -49,7 +49,11 @@ const Sidebar = () => {
     deleteCookie("value");
     router.push("/");
   };
-
+  useEffect(() => {
+    setTimeout(() => {
+      logout();
+    }, 3300000);
+  }, []);
   return (
     <Box
       sx={{
