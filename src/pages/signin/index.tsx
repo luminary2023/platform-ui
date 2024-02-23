@@ -56,16 +56,6 @@ const SignIn = () => {
     setError(true);
   };
 
-  const checkTokenExpired = () => {
-    setTimeout(() => {
-      router.push("/signin");
-      deleteCookie("token");
-      // localStorage.removeItem("token");
-    }, 3300000);
-  };
-  useEffect(() => {
-    checkTokenExpired();
-  }, [checkTokenExpired]);
   return (
     <div className={styles.signinContainer}>
       <div className={styles.signinLeftWrapper}>

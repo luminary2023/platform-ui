@@ -76,6 +76,13 @@ const Header: FC<Props> = ({ title, subtitle = "" }) => {
     deleteCookie("value");
     router.push("/");
   };
+  useEffect(() => {
+    setTimeout(() => {
+      router.push("/signin");
+      deleteCookie("token");
+      // localStorage.removeItem("token");
+    }, 3300000);
+  }, []);
   // useEffect(() => {
   //   const token = deleteCookie('token')
   // }, []);
