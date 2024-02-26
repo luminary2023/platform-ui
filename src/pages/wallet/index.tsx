@@ -17,10 +17,11 @@ import { useForm } from "react-hook-form";
 import { withdrawDetails } from "@/services/schemaVarification";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileRequest } from "@/api/profile";
-import { useThemeContext } from "@/api/useContext/store";
+// import { useThemeContext } from "@/api/useContext/store";
 import Loading from "@/components/Loading";
 import { refreshTokenApi } from "@/api/refreshToken";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import { useThemeContext } from "@/api/useContext/store";
 
 interface WithdrawProps {
   accountNumber: string;
@@ -39,6 +40,8 @@ const Wallet = () => {
   } = useThemeContext();
   const router = useRouter();
 
+  const { profileData } = useThemeContext();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [show, setShow] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -46,7 +49,7 @@ const Wallet = () => {
   const [bankAccount, setBankAccount] = useState<any[]>([]);
   const [selectedBank, setSelectedBank] = useState<any>(null);
   const [accountCheck, setAccountCheck] = useState(true);
-  const [profileData, setProfileData] = useState<any>({});
+  // const [profileData, setProfileData] = useState<any>({});
 
   const handleBankAccount = async () => {
     try {
@@ -68,15 +71,15 @@ const Wallet = () => {
     );
   }, [selectedBank, bankAccount]);
 
-  const fetchProfile = async () => {
-    try {
-      const res = await profileRequest();
-      setProfileData(res);
-      setAccountCheck(false);
-    } catch (error: any) {
-      error?.response?.data;
-    }
-  };
+  // const fetchProfile = async () => {
+  //   try {
+  //     const res = await profileRequest();
+  //     setProfileData(res);
+  //     setAccountCheck(false);
+  //   } catch (error: any) {
+  //     error?.response?.data;
+  //   }
+  // };
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -118,9 +121,9 @@ const Wallet = () => {
   const accountName = watch("accountName");
 
   useEffect(() => {
-    fetchProfile();
+    // fetchProfile();
     handleBankAccount();
-  }, [fetchProfile]);
+  }, []);
 
   const [accountInfo, setAccountInfo] = useState(true);
 

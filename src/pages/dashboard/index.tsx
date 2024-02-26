@@ -67,7 +67,7 @@ const Index = () => {
     transactionPinSet();
     phoneNumberSet();
     bankAccountTrue();
-  }, [handleBankAccount]);
+  }, [handleBankAccount, bankAccountTrue]);
 
   const handleBankDetailsModal = () => {
     if (bankAccount.length < 1) {

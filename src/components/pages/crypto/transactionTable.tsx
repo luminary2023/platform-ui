@@ -87,7 +87,7 @@ const TransactionTable = () => {
         </Typography>
 
         <TableContainer>
-          {cryptoTableData.length === 0 || cryptoTableData.length === null ? (
+          {cryptoTableData?.length === 0 ? (
             <Typography
               sx={{
                 fontSize: "13px",
@@ -151,10 +151,11 @@ const TransactionTable = () => {
           <Pagination
             variant="outlined"
             shape="rounded"
-            // showFirstButton
-            // count={currentPost.length}
+            showFirstButton
+            showLastButton
+            count={currentPost?.length}
             defaultPage={currentPage}
-            hideNextButton={recordsPerPage < 7 ? false : true}
+            hideNextButton={true}
             sx={{
               color: "#007C5B",
               mt: "20px",
