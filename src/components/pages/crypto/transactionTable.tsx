@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { cryptoTable } from "@/api/cryptoTable";
 import TradeInfoModal from "@/components/TradeInfoModal";
+import Loading from "@/components/Loading";
 
 const Color: Record<string, string> = {
   Transferred: "#F7931A",
@@ -30,6 +31,7 @@ const bgColor: Record<string, string> = {
 const TransactionTable = () => {
   const [cryptoTableData, setCryptoTableData] = useState<any[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const closeCardInfo = () => {
     setIsOpen(false);
   };
@@ -46,6 +48,7 @@ const TransactionTable = () => {
   const recordsPerPage = 6;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
+
   const currentPost = cryptoTableData?.slice(firstIndex, lastIndex);
 
   // const pageNumber = [];
@@ -56,12 +59,14 @@ const TransactionTable = () => {
   // const numbers = [...Array(npage + 1).keys()].slice(1)
 
   const cryptoTransactions = async () => {
+    setLoading(true);
     const response = await cryptoTable();
     setCryptoTableData(response);
+    setLoading(false);
   };
   useEffect(() => {
     cryptoTransactions();
-  }, [cryptoTransactions]);
+  }, []);
   return (
     <>
       <Box
@@ -86,85 +91,98 @@ const TransactionTable = () => {
           Transactions
         </Typography>
 
-        <TableContainer>
-          {cryptoTableData?.length === 0 ? (
-            <Typography
-              sx={{
-                fontSize: "13px",
-                textAlign: "center",
-                mt: "15px",
-                mb: "15px",
-                textDecoration: "underline",
-              }}
-            >
-              No transaction yet
-            </Typography>
-          ) : (
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ fontWeight: "700" }}>Type</TableCell>
-                  <TableCell sx={{ fontWeight: "700" }}>Amount</TableCell>
-                  <TableCell sx={{ fontWeight: "700" }}>Status</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody sx={{ textAlign: "center", cursor: "pointer" }}>
-                {Array.isArray(currentPost || [])
-                  ? (currentPost || [])?.map((crypto) => (
-                      <TableRow
-                        key={crypto.id}
-                        onClick={() => handleTransactionDetails(crypto)}
-                      >
-                        <TableCell
-                          sx={{
-                            fontSize: "12px",
-                            color: "#111",
-                          }}
-                        >
-                          {crypto.asset?.name}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: "12px",
-                            color: "#111",
-                          }}
-                        >
-                          {crypto.assetAmount}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: "12px",
-                            color: Color[crypto.status],
-                            background: bgColor[crypto.status],
-                            borderRadius: "10px",
-                            textAlign: "center",
-                          }}
-                        >
-                          {crypto.status}
-                        </TableCell>
-                      </TableRow>
-                    ))
-                  : ""}
-              </TableBody>
-            </Table>
-          )}
-          <Pagination
-            variant="outlined"
-            shape="rounded"
-            showFirstButton
-            showLastButton
-            count={currentPost?.length}
-            defaultPage={currentPage}
-            hideNextButton={true}
+        {loading ? (
+          <Box
             sx={{
-              color: "#007C5B",
-              mt: "20px",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "center",
+              mt: "25px",
+              mb: "25px",
             }}
-            onChange={(_, newPage) => setCurrentPage(newPage)}
-          />
-        </TableContainer>
+          >
+            <Loading />
+          </Box>
+        ) : (
+          <TableContainer>
+            {cryptoTableData?.length === 0 ? (
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  textAlign: "center",
+                  mt: "15px",
+                  mb: "15px",
+                  textDecoration: "underline",
+                }}
+              >
+                No transaction yet
+              </Typography>
+            ) : (
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ fontWeight: "700" }}>Type</TableCell>
+                    <TableCell sx={{ fontWeight: "700" }}>Amount</TableCell>
+                    <TableCell sx={{ fontWeight: "700" }}>Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody sx={{ textAlign: "center", cursor: "pointer" }}>
+                  {Array.isArray(currentPost || [])
+                    ? (currentPost || [])?.map((crypto) => (
+                        <TableRow
+                          key={crypto.id}
+                          onClick={() => handleTransactionDetails(crypto)}
+                        >
+                          <TableCell
+                            sx={{
+                              fontSize: "12px",
+                              color: "#111",
+                            }}
+                          >
+                            {crypto.asset?.name}
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              fontSize: "12px",
+                              color: "#111",
+                            }}
+                          >
+                            {crypto.assetAmount}
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              fontSize: "12px",
+                              color: Color[crypto.status],
+                              background: bgColor[crypto.status],
+                              borderRadius: "10px",
+                              textAlign: "center",
+                            }}
+                          >
+                            {crypto.status}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    : ""}
+                </TableBody>
+              </Table>
+            )}
+            <Pagination
+              variant="outlined"
+              shape="rounded"
+              // showFirstButton
+              // showLastButton
+              // count={cryptoTableData?.length}
+              // defaultPage={currentPage}
+              // hideNextButton={false}
+              sx={{
+                color: "#007C5B",
+                mt: "20px",
+                display: "flex",
+                justifyContent: "center",
+              }}
+              onChange={(_, newPage) => setCurrentPage(newPage)}
+            />
+          </TableContainer>
+        )}
       </Box>
       <TradeInfoModal
         open={isOpen}

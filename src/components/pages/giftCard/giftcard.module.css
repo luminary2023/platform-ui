@@ -112,6 +112,8 @@
   font-size: 22px;
   font-weight: 500;
   letter-spacing: -0.22px;
+  display: block;
+  justify-content: center;
 }
 .tableHead {
   color: #111;
