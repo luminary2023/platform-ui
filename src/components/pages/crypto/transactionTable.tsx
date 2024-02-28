@@ -197,7 +197,7 @@ const TransactionTable = () => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Giftcard
           </Typography>
@@ -213,7 +213,7 @@ const TransactionTable = () => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Amount
           </Typography>
@@ -229,7 +229,7 @@ const TransactionTable = () => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Rate
           </Typography>
@@ -243,7 +243,7 @@ const TransactionTable = () => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Network
           </Typography>
@@ -259,7 +259,7 @@ const TransactionTable = () => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Total Amount
           </Typography>
@@ -275,7 +275,7 @@ const TransactionTable = () => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Status
           </Typography>

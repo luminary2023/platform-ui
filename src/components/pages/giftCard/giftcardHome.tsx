@@ -255,7 +255,7 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Giftcard
           </Typography>
@@ -274,7 +274,7 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Amount
           </Typography>
@@ -288,7 +288,7 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Rate
           </Typography>
@@ -302,7 +302,7 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Quantity
           </Typography>
@@ -316,7 +316,7 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Total Amount
           </Typography>
@@ -332,7 +332,7 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
           }}
         >
           <Typography
-            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+            sx={{ color: "#081630", fontSize: "14px", fontWeight: 700 }}
           >
             Status
           </Typography>
