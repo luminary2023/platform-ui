@@ -136,7 +136,7 @@ const Wallet = () => {
   const setTimerLoading = () => {
     setTimeout(() => {
       setAccountInfo(false);
-    }, 10000);
+    }, 8000);
   };
 
   const handleWithdraw = async () => {
