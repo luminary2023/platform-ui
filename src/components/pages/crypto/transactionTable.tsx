@@ -193,10 +193,12 @@ const TransactionTable = () => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            mt: "15px",
+            mt: "40px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Giftcard
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>
@@ -210,7 +212,9 @@ const TransactionTable = () => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Amount
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>
@@ -224,7 +228,9 @@ const TransactionTable = () => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Rate
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>{cardInfo.rate}</Typography>
@@ -236,7 +242,9 @@ const TransactionTable = () => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Network
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>
@@ -250,7 +258,9 @@ const TransactionTable = () => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Total Amount
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>
@@ -264,10 +274,14 @@ const TransactionTable = () => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Status
           </Typography>
-          <Typography sx={{ fontSize: "16px" }}>{cardInfo.status}</Typography>
+          <Typography sx={{ fontSize: "16px", color: Color[cardInfo.status] }}>
+            {cardInfo.status}
+          </Typography>
         </Box>
       </TradeInfoModal>
     </>

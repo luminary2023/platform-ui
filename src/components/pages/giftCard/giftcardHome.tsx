@@ -28,6 +28,12 @@ interface actionProps {
   id: number;
 }
 
+const Color: Record<string, string> = {
+  Error: "#E73434",
+  Completed: "#5FDA24",
+  Pending: "#6338DC",
+};
+
 const statusStyle = (text: string) => {
   let className = "";
 
@@ -245,10 +251,12 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            mt: "15px",
+            mt: "40px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Giftcard
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>
@@ -265,7 +273,9 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Amount
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>{cardInfo.amount}</Typography>
@@ -277,7 +287,9 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Rate
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>{cardInfo.rate}</Typography>
@@ -289,7 +301,9 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Quantity
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>{cardInfo.quantity}</Typography>
@@ -301,7 +315,9 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Total Amount
           </Typography>
           <Typography sx={{ fontSize: "16px" }}>
@@ -315,10 +331,26 @@ const GiftcardHome: FC<GiftCardHomeProps> = ({ sellOnClick }) => {
             mt: "15px",
           }}
         >
-          <Typography sx={{ color: "#6C757D", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#FD6E6A", fontSize: "14px", fontWeight: 700 }}
+          >
             Status
           </Typography>
-          <Typography sx={{ fontSize: "16px" }}>{cardInfo.status}</Typography>
+
+          <Typography
+            // color={`${
+            //   cardInfo.status === "Pending"
+            //     ? "#6338dc"
+            //     : cardInfo.status === "Completed"
+            //     ? "#5fda24"
+            //     : cardInfo.status === "Error"
+            //     ? "#e73434"
+            //     : ""
+            // } `}
+            sx={{ fontSize: "16px", color: Color[cardInfo.status] }}
+          >
+            {cardInfo.status}
+          </Typography>
         </Box>
       </TradeInfoModal>
     </div>
