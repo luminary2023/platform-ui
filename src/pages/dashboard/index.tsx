@@ -21,6 +21,7 @@ import Loading from "@/components/Loading";
 
 const Index = () => {
   const { profileData } = useThemeContext();
+  // window.location.reload();
 
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
@@ -66,6 +67,7 @@ const Index = () => {
 
   useEffect(() => {
     // fetchProfile();
+
     handleBankAccount();
     transactionPinSet();
     phoneNumberSet();

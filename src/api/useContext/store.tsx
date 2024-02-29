@@ -21,7 +21,7 @@ type ThemeContext = {
   setBankDetails: any;
   profileData: any;
   setProfileData: any;
-
+  fetchProfile: any;
   bankInfo: [];
   setBankInfo: any;
 
@@ -77,6 +77,9 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    fetchProfile();
+  }, []);
   const handleDeleteAccount = async () => {
     try {
       const response = await DeleteAccount(bankId);
@@ -88,9 +91,6 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
       return error?.response?.data;
     }
   };
-  useEffect(() => {
-    fetchProfile();
-  }, [fetchProfile]);
 
   return (
     <GlobalContext.Provider
@@ -117,6 +117,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
         setSelectedBankDetails,
         withdrawAmount,
         setWithdrawAmount,
+        fetchProfile,
       }}
     >
       {children}

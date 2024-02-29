@@ -16,6 +16,7 @@ import { deleteCookie, setCookie } from "cookies-next";
 import { ErrorProps } from "@/services/interfaces";
 import { getCookie } from "cookies-next";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { useThemeContext } from "@/api/useContext/store";
 // import isTokenExpired from "@/api/axiosClient";
 
 interface LoginProps {
@@ -24,6 +25,8 @@ interface LoginProps {
 }
 
 const SignIn = () => {
+  const { fetchProfile } = useThemeContext();
+
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -48,6 +51,7 @@ const SignIn = () => {
     if (res?.statusCode === 200 && res.status === "Success") {
       setCookie("token", res.token.token);
       // localStorage.setItem("token", res.token.token);
+      fetchProfile();
       router.push("/dashboard");
       setError(false);
     }
