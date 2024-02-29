@@ -43,7 +43,7 @@ const ProfileSettings: FC<Props> = ({ children }) => {
           <Box
             sx={{
               width: "100%",
-              overflow: "scroll",
+              // overflow: "scroll",
               height: "100wh",
               pl: { md: "5%", lg: "5%", xs: "none" },
               pr: { md: "5%", lg: "5%", xs: "none" },
