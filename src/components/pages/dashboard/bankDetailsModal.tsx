@@ -33,6 +33,7 @@ const style = {
 interface Props {
   open: boolean;
   onClose: () => void;
+  bankAccountTrue: any;
 }
 
 interface ErrorProps {
@@ -42,7 +43,7 @@ interface ErrorProps {
   errors: any;
 }
 
-const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
+const BankDetailsModal: FC<Props> = ({ open, onClose, bankAccountTrue }) => {
   const reload = () => window.location.reload();
   const [loading, setLoading] = useState<boolean>(false);
   const [banks, setBanks] = useState<[]>([]);
@@ -70,6 +71,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
     setLoading(true);
     const res = await addBankAccount(data);
     setLoading(false);
+    bankAccountTrue();
     setError(false);
     setErrs(res);
     setError(true);
@@ -77,7 +79,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose }) => {
     setTimeout(async () => {
       setError(false);
       onClose();
-    }, 2000);
+    }, 1000);
 
     // reload();
   };

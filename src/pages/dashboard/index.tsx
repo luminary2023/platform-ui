@@ -40,12 +40,6 @@ const Index = () => {
     }
   };
 
-  // const bankProgress = () => {
-  //   if (bankAccount.length > 0) {
-  //     setProgress((progress) => progress + 1);
-  //   }
-  // };
-
   const transactionPinSet = () => {
     if (profileData?.isTransactionPinSet === 1) {
       setProgress(+1);
@@ -54,15 +48,12 @@ const Index = () => {
 
   const phoneNumberSet = () => {
     if (profileData?.isPhoneNumberVerified === 1) {
-      setProgress(+2);
+      setProgress((prev) => prev + 1);
     }
   };
   const bankAccountTrue = () => {
-    setLoading(true);
-    if (bankAccount?.length > 0) {
-      setProgress(progress + 1);
-      setLoading(false);
-    }
+    setProgress(+1);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -88,9 +79,9 @@ const Index = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    progressCheck();
-  }, [progressCheck]);
+  // useEffect(() => {
+  //   progressCheck();
+  // }, [progressCheck]);
   return (
     <DashboardContainer
       title="Dashboard"
@@ -103,7 +94,7 @@ const Index = () => {
         {profile ? (
           <>
             <div className={styles.completeProfile}>
-              <h1>Complete your profile</h1>
+              <h1> your profile</h1>
 
               <div className={styles.profile}>
                 <div>
@@ -323,7 +314,11 @@ const Index = () => {
         ) : (
           <Dashboard />
         )}
-        <BankDetailsModal open={open} onClose={() => setOpen(false)} />
+        <BankDetailsModal
+          open={open}
+          onClose={() => setOpen(false)}
+          bankAccountTrue={bankAccountTrue}
+        />
         <PhoneNumberModal
           open={openPhoneModal}
           onClose={() => setOpenPhoneModal(false)}
