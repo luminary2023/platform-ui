@@ -22,7 +22,7 @@ import Loading from "@/components/Loading";
 const Index = () => {
   const { profileData, bankAccount } = useThemeContext();
   // window.location.reload();
-  console.log(bankAccount.length, "bankAccount");
+  // console.log(bankAccount?.length, "bankAccount");
 
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
@@ -41,17 +41,17 @@ const Index = () => {
   //   }
   // };
 
-  const transactionPinSet = () => {
-    if (profileData?.isTransactionPinSet === 1) {
-      setProgress((prev) => prev + 1);
-    }
-  };
+  // const transactionPinSet = () => {
+  //   if (profileData?.isTransactionPinSet === 1) {
+  //     setProgress((prev) => prev + 1);
+  //   }
+  // };
 
-  const phoneNumberSet = () => {
-    if (profileData?.isPhoneNumberVerified === 1) {
-      setProgress((prev) => prev + 1);
-    }
-  };
+  // const phoneNumberSet = () => {
+  //   if (profileData?.isPhoneNumberVerified === 1) {
+  //     setProgress((prev) => prev + 1);
+  //   }
+  // };
   const bankAccountTrue = () => {
     setProgress(+1);
     setLoading(false);
@@ -65,8 +65,8 @@ const Index = () => {
 
   useEffect(() => {
     // handleBankAccount();
-    transactionPinSet();
-    phoneNumberSet();
+    // transactionPinSet();
+    // phoneNumberSet();
   }, []);
 
   return (
