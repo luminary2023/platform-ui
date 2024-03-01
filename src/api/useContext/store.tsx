@@ -24,7 +24,7 @@ type ThemeContext = {
   fetchProfile: any;
   bankInfo: [];
   setBankInfo: any;
-
+  handleBankAccount: any;
   handleDeleteAccount: any;
   setBankId: any;
   openModal: any;
@@ -39,6 +39,7 @@ type ThemeContext = {
   setSelectedBank: any;
   setSelectedBankDetails: any;
   selectedBankDetails: any;
+  bankAccount: any;
 };
 
 interface WithdrawProps {
@@ -52,7 +53,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [bankDetails, setBankDetails] = useState<[]>([]);
   const [profileData, setProfileData] = useState("");
   const [selectedBankDetails, setSelectedBankDetails] = useState<any>({});
-
+  const [bankAccount, setBankAccount] = useState<any>({});
   const [bankInfo, setBankInfo] = useState<any | []>([]);
   const [bankId, setBankId] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -77,14 +78,23 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
     }
   };
 
+  const handleBankAccount = async () => {
+    try {
+      const response = await userAccountDetails();
+      setBankAccount(response);
+    } catch (error: any) {
+      return error?.response?.data;
+    }
+  };
   useEffect(() => {
     fetchProfile();
-  }, []);
+    handleBankAccount();
+  }, [handleBankAccount]);
   const handleDeleteAccount = async () => {
     try {
       const response = await DeleteAccount(bankId);
       setBankInfo(response);
-      // await handleBankInfo();
+
       handleClose();
       handleCloseMenu();
     } catch (error: any) {
@@ -100,6 +110,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
         profileData,
         setProfileData,
         // bankAccount,
+        handleBankAccount,
         bankInfo,
         setBankInfo,
         // handleBankInfo,
@@ -118,6 +129,7 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
         withdrawAmount,
         setWithdrawAmount,
         fetchProfile,
+        bankAccount,
       }}
     >
       {children}

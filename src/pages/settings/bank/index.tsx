@@ -32,7 +32,7 @@ interface Props {
   id: any;
 }
 const BankInformation: FC<Props> = ({ id }) => {
-  const [bankInfo, setBankInfo] = useState<any>({});
+  // const [bankInfo, setBankInfo] = useState<any>({});
   const {
     // bankAccount,
     // bankInfo,
@@ -41,23 +41,25 @@ const BankInformation: FC<Props> = ({ id }) => {
     anchorEl,
     setAnchorEl,
     openModal,
+    bankAccount,
     setOpenModal,
     handleClose,
     handleCloseMenu,
+    handleBankAccount,
   } = useThemeContext();
   const router = useRouter();
-  const handleBankAccount = async () => {
-    try {
-      const response = await userAccountDetails();
-      setBankInfo(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
+  // const handleBankAccount = async () => {
+  //   try {
+  //     const response = await userAccountDetails();
+  //     setBankInfo(response);
+  //   } catch (error: any) {
+  //     return error?.response?.data;
+  //   }
+  // };
 
-  useEffect(() => {
-    handleBankAccount();
-  });
+  // useEffect(() => {
+  //   handleBankAccount();
+  // });
   // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   // const [openModal, setOpenModal] = useState(false);
 
@@ -101,8 +103,8 @@ const BankInformation: FC<Props> = ({ id }) => {
           </Typography>
         </Box>
 
-        {Array.isArray(bankInfo)
-          ? bankInfo.map((bank: any) => (
+        {Array.isArray(bankAccount)
+          ? bankAccount.map((bank: any) => (
               <Box
                 key={bank.id}
                 sx={{

@@ -13,9 +13,10 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PrivacyTipIcon from "@mui/icons-material/PrivacyTip";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { useThemeContext } from "@/api/useContext/store";
 
 const SettingSidebar = () => {
-  //   const pathName = usePathname();
+  const { handleBankAccount } = useThemeContext();
   const router = useRouter();
   const currentRoute = router.pathname;
 
@@ -29,6 +30,7 @@ const SettingSidebar = () => {
       path: "/settings/bank",
       name: "Bank Information",
       icon: <AccountBalanceIcon />,
+      handleBankAccount: { handleBankAccount },
     },
     {
       path: "/settings/security",
@@ -61,7 +63,9 @@ const SettingSidebar = () => {
           <Box key={link.name}>
             <Box
               color={currentRoute === link.path ? "#FD6E6A" : ""}
-              onClick={() => handleClick(link.path)}
+              onClick={() => {
+                handleClick(link.path), handleBankAccount();
+              }}
               sx={{
                 display: "flex",
                 alignItems: "center",

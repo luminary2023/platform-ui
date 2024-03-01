@@ -20,29 +20,30 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import Loading from "@/components/Loading";
 
 const Index = () => {
-  const { profileData } = useThemeContext();
+  const { profileData, bankAccount } = useThemeContext();
   // window.location.reload();
+  console.log(bankAccount.length, "bankAccount");
 
   const [profile, setProfile] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [openPhoneModal, setOpenPhoneModal] = useState<boolean>(false);
   const [openTransactionPin, setOpenTransactionPin] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
-  const [bankAccount, setBankAccount] = useState<any[]>([]);
+  // const [bankAccount, setBankAccount] = useState<any[]>([]);
   const [progress, setProgress] = useState(0);
 
-  const handleBankAccount = async () => {
-    try {
-      const response = await userAccountDetails();
-      setBankAccount(response);
-    } catch (error: any) {
-      return error?.response?.data;
-    }
-  };
+  // const handleBankAccount = async () => {
+  //   try {
+  //     const response = await userAccountDetails();
+  //     setBankAccount(response);
+  //   } catch (error: any) {
+  //     return error?.response?.data;
+  //   }
+  // };
 
   const transactionPinSet = () => {
     if (profileData?.isTransactionPinSet === 1) {
-      setProgress(+1);
+      setProgress((prev) => prev + 1);
     }
   };
 
@@ -56,32 +57,18 @@ const Index = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    // fetchProfile();
-
-    handleBankAccount();
-    transactionPinSet();
-    phoneNumberSet();
-    bankAccountTrue();
-  }, [handleBankAccount]);
-
   const handleBankDetailsModal = () => {
     if (bankAccount.length < 1) {
       setOpen(true);
     } else setOpen(false);
   };
 
-  const progressCheck = () => {
-    if (progress === 3) {
-      setLoading(true);
+  useEffect(() => {
+    // handleBankAccount();
+    transactionPinSet();
+    phoneNumberSet();
+  }, []);
 
-      setProfile(false);
-      setLoading(false);
-    }
-  };
-  // useEffect(() => {
-  //   progressCheck();
-  // }, [progressCheck]);
   return (
     <DashboardContainer
       title="Dashboard"
