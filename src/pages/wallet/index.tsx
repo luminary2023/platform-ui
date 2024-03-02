@@ -431,7 +431,11 @@ const Wallet = () => {
           <AppTable tableHeaderData={tableHeaderData} />
         </div> */}
       </DashboardContainer>
-      <BankDetailsModal open={openModal} onClose={() => setOpenModal(false)} />
+      <BankDetailsModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        bankAccountTrue={undefined}
+      />
     </div>
   );
 };

@@ -14,6 +14,7 @@ import {
 import { cryptoTable } from "@/api/cryptoTable";
 import TradeInfoModal from "@/components/TradeInfoModal";
 import Loading from "@/components/Loading";
+import { useThemeContext } from "@/api/useContext/store";
 
 const Color: Record<string, string> = {
   Transferred: "#F7931A",
@@ -29,9 +30,10 @@ const bgColor: Record<string, string> = {
 };
 
 const TransactionTable = () => {
-  const [cryptoTableData, setCryptoTableData] = useState<any[]>([]);
+  const { cryptoTableData, loading } = useThemeContext();
+
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const closeCardInfo = () => {
     setIsOpen(false);
   };
@@ -58,15 +60,6 @@ const TransactionTable = () => {
   // const npage = Math.ceil(cryptoTableData.length / recordsPerPage)
   // const numbers = [...Array(npage + 1).keys()].slice(1)
 
-  const cryptoTransactions = async () => {
-    setLoading(true);
-    const response = await cryptoTable();
-    setCryptoTableData(response);
-    setLoading(false);
-  };
-  useEffect(() => {
-    cryptoTransactions();
-  }, []);
   return (
     <>
       <Box
@@ -127,7 +120,7 @@ const TransactionTable = () => {
                 </TableHead>
                 <TableBody sx={{ textAlign: "center", cursor: "pointer" }}>
                   {Array.isArray(currentPost || [])
-                    ? (currentPost || [])?.map((crypto) => (
+                    ? (currentPost || [])?.map((crypto: any) => (
                         <TableRow
                           key={crypto.id}
                           onClick={() => handleTransactionDetails(crypto)}

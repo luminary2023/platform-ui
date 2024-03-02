@@ -20,7 +20,7 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import Loading from "@/components/Loading";
 
 const Index = () => {
-  const { profileData, bankAccount } = useThemeContext();
+  const { profileData, bankAccount, fetchProfile } = useThemeContext();
   // window.location.reload();
   // console.log(bankAccount?.length, "bankAccount");
 
@@ -53,8 +53,8 @@ const Index = () => {
   //   }
   // };
   const bankAccountTrue = () => {
-    setProgress(+1);
-    setLoading(false);
+    // setProgress(+1);
+    // setLoading(false);
   };
 
   const handleBankDetailsModal = () => {
@@ -74,9 +74,6 @@ const Index = () => {
       title="Dashboard"
       subtitle="An overview of your assets "
     >
-      {/* {loading ? (
-        <Loading />
-      ) : ( */}
       <>
         {profile ? (
           <>
@@ -308,14 +305,15 @@ const Index = () => {
         />
         <PhoneNumberModal
           open={openPhoneModal}
+          fetchProfile={fetchProfile}
           onClose={() => setOpenPhoneModal(false)}
         />
         <TransactionPinModal
           open={openTransactionPin}
+          fetchProfile={fetchProfile}
           onClose={() => setOpenTransactionPin(false)}
         />
       </>
-      {/* )} */}
     </DashboardContainer>
   );
 };

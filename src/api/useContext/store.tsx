@@ -11,6 +11,8 @@ import {
 import { userAccountDetails } from "../userAccountDetails";
 import { profileRequest } from "../profile";
 import { DeleteAccount } from "../deleteAccount";
+import { CryptoAsset } from "../cryptoAsset";
+import { cryptoTable } from "../cryptoTable";
 
 interface Props {
   children: React.ReactNode;
@@ -40,6 +42,11 @@ type ThemeContext = {
   setSelectedBankDetails: any;
   selectedBankDetails: any;
   bankAccount: any;
+  handleAsset: any;
+  assets: any;
+  cryptoTransactions: any;
+  cryptoTableData: any;
+  loading: any;
 };
 
 interface WithdrawProps {
@@ -60,6 +67,9 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedBank, setSelectedBank] = useState<any>(null);
   const [withdrawAmount, setWithdrawAmount] = useState("");
+  const [assets, setAssets] = useState<any[]>([]);
+  const [cryptoTableData, setCryptoTableData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
     setBankId("");
@@ -77,6 +87,10 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
       error?.response?.data;
     }
   };
+  const handleAsset = async () => {
+    const response = await CryptoAsset();
+    setAssets(response);
+  };
 
   const handleBankAccount = async () => {
     try {
@@ -86,7 +100,17 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
       return error?.response?.data;
     }
   };
+
+  const cryptoTransactions = async () => {
+    // setLoading(true);
+    const response = await cryptoTable();
+    setCryptoTableData(response);
+    // setLoading(false);
+  };
+
   useEffect(() => {
+    handleAsset();
+    cryptoTransactions();
     fetchProfile();
     handleBankAccount();
   }, [handleBankAccount]);
@@ -130,6 +154,11 @@ export const GlobalContextProvider: FC<Props> = ({ children }) => {
         setWithdrawAmount,
         fetchProfile,
         bankAccount,
+        handleAsset,
+        loading,
+        assets,
+        cryptoTableData,
+        cryptoTransactions,
       }}
     >
       {children}
