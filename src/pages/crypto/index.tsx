@@ -30,19 +30,22 @@ import BarcodeModal from "@/components/pages/crypto/cryptoBarcodeModal";
 import UploadImageModal from "@/components/pages/crypto/uploadImageModal";
 import { sellCryptoApi } from "@/api/sellCrypto";
 import axios from "axios";
+import { useThemeContext } from "@/api/useContext/store";
 
 interface Props {
   onClose: () => void;
 }
 
 const Crypto: FC<Props> = ({ onClose }) => {
+  const { assets, handleAsset, cryptoTransactions } = useThemeContext();
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [openBarcodeModal, setOpenBarcodeModal] = useState(false);
   const [openCryptoModal, setOpenCryptoModal] = useState(false);
   const [openUploadImage, setOpenUploadImageModal] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState(null);
-  const [assets, setAssets] = useState<any[]>([]);
+  // const [assets, setAssets] = useState<any[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [errs, setErrs] = useState<ErrorProps>({
@@ -95,7 +98,7 @@ const Crypto: FC<Props> = ({ onClose }) => {
     if (assets?.length < 0) {
       return null;
     }
-    return assets?.find((a) => a.id === assetId);
+    return assets?.find((a: any) => a.id === assetId);
   }, [assets, assetId]);
 
   const network = useMemo(() => {
@@ -125,8 +128,9 @@ const Crypto: FC<Props> = ({ onClose }) => {
         response.message === "Place crypto sell order successfully."
       ) {
         setLoading(false);
+        cryptoTransactions();
         setError(true);
-
+        handleAsset();
         setErrs(response);
         setTimeout(() => {
           // onClose();
@@ -160,14 +164,14 @@ const Crypto: FC<Props> = ({ onClose }) => {
     setOpenUploadImageModal(true);
   };
 
-  const handleAsset = async () => {
-    const response = await CryptoAsset();
-    setAssets(response);
-  };
+  // const handleAsset = async () => {
+  //   const response = await CryptoAsset();
+  //   setAssets(response);
+  // };
 
-  useEffect(() => {
-    handleAsset();
-  }, []);
+  // useEffect(() => {
+  //   handleAsset();
+  // }, []);
 
   return (
     <div style={{ background: "#F6F6F6", height: "100vh" }}>

@@ -97,6 +97,7 @@ const BankDetailsModal: FC<Props> = ({ open, onClose, bankAccountTrue }) => {
   const bankId = watch("bankId");
 
   useEffect(() => {
+    fetchBankDetails();
     const fetchData = async () => {
       try {
         setLoading(true);

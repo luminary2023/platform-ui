@@ -34,6 +34,7 @@ const style = {
 interface Props {
   open: boolean;
   onClose: () => void;
+  fetchProfile: any;
 }
 
 interface ErrorProps {
@@ -43,7 +44,7 @@ interface ErrorProps {
   errors: any;
 }
 
-const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
+const TransactionPinModal: FC<Props> = ({ open, onClose, fetchProfile }) => {
   const reload = () => window.location.reload();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -66,6 +67,7 @@ const TransactionPinModal: FC<Props> = ({ open, onClose }) => {
       setLoading(true);
       const response = await createTransactionPin(data);
       setCreatePin(response);
+      fetchProfile();
       setError(true);
       setLoading(false);
 

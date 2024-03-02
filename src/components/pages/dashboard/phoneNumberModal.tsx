@@ -37,9 +37,10 @@ const style = {
 interface Props {
   open: boolean;
   onClose: () => void;
+  fetchProfile: any;
 }
 
-const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
+const PhoneNumberModal: FC<Props> = ({ open, onClose, fetchProfile }) => {
   const router = useRouter();
   const reload = () => window.location.reload();
   const [loading, setLoading] = useState<boolean>(false);
@@ -101,6 +102,7 @@ const PhoneNumberModal: FC<Props> = ({ open, onClose }) => {
       verificationCode: otp,
     });
     setPhoneNumber(res);
+    fetchProfile();
     setError(true);
     setLoading(false);
     setTimeout(async () => {
