@@ -7,7 +7,7 @@ export const PhoneNumberVerification = async (data: {
 }) => {
   try {
     const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/verify/phone-number`,
+      `https://luminary-3m9s.onrender.com/api/v1/auth/verify/phone-number`,
       data,
       { headers: { Authorization: `Bearer ${getCookie("token")}` } }
     );
@@ -16,3 +16,4 @@ export const PhoneNumberVerification = async (data: {
     return error?.response?.data;
   }
 };
+

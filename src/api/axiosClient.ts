@@ -3,7 +3,7 @@ import { getCookie } from "cookies-next";
 // import { NEXT_PUBLIC_API_BASE_URL } from "../../";
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL: "https://luminary-3m9s.onrender.com/api/v1",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${getCookie("token")}`,

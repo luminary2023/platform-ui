@@ -4,7 +4,7 @@ import { getCookie } from "cookies-next";
 export const DeleteAccount = async (id: any) => {
   try {
     const res = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/banks/account/${id}`,
+      `https://luminary-3m9s.onrender.com/api/v1/banks/account/${id}`,
       { headers: { Authorization: `Bearer ${getCookie("token")}` } }
     );
     return res.data?.results || [];
