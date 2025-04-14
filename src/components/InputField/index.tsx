@@ -64,7 +64,7 @@ const Input: React.FC<InputProps> = ({
           onKeyPress={onKeyPress}
           readOnly={readOnly}
           maxLength={maxLength}
-          defaultCountry={defaultCountry}
+          // defaultCountry={defaultCountry}
           value={value}
           style={{
             marginBottom: marginBottom,

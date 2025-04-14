@@ -3,7 +3,7 @@ import axios from "axios";
 export const forgotPasswordRequest = async (data: any) => {
   try{
     const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/password/forgot`, 
+      `https://luminary-3m9s.onrender.com/api/v1/password/forgot`, 
       data
     );
     return res.data;
@@ -15,7 +15,7 @@ export const forgotPasswordRequest = async (data: any) => {
 export const verifyPasswordCodeRequest = async (data: any) => {
   try {
     const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/password/verify-code`,
+      `https://luminary-3m9s.onrender.com/api/v1/password/verify-code`,
       data
     );
     return res.data;
@@ -27,7 +27,7 @@ export const verifyPasswordCodeRequest = async (data: any) => {
 export const resetPasswordCodeRequest = async (data: any) => {
   try {
     const res = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/password/reset`,
+      `https://luminary-3m9s.onrender.com/api/v1/password/reset`,
       data
     );
     return res.data;
